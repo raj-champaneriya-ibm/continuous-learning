@@ -9,12 +9,10 @@ tags: [dsa, backtracking, recursion, neetcode, interview, medium]
 
 # Subsets
 
-| | |
-|---|---|
-| Topic | [[Backtracking (Neetcode)]] |
-| Difficulty | Medium |
-| LeetCode | https://leetcode.com/problems/subsets/ |
-| Status in video | Not yet covered |
+| Topic      | [[Backtracking (Neetcode)]]            |
+| ---------- | -------------------------------------- |
+| Difficulty | Medium                                 |
+| LeetCode   | https://leetcode.com/problems/subsets/ |
 
 ## Problem
 
@@ -40,17 +38,10 @@ Output: [[],[0]]
 - `-10 <= nums[i] <= 10`
 - All values in `nums` differ.
 
-## Greg Tang Explains
+## Greg Tang Explains Visually
 
-Packing a lunchbox from three snacks? Don't list lunches — walk the snacks and answer yes or no.
-
-1. Snack 1 asks: "In or out?" Two answers, two piles.
-2. Snack 2 asks every pile the same question. Four piles.
-3. Snack 3 asks again. Eight piles.
-4. Out of snacks? Each pile now names one lunch. Write it down.
-
-Three yes-or-no questions, 2 × 2 × 2 = 8 lunches. Nobody gets forgotten, nobody gets counted twice — the questions guarantee it.
-
+Packing a lunchbox from three snacks? 
+Don't list lunches — walk the snacks and answer yes or no.
 ## Visual
 
 <svg width="640" height="290" viewBox="0 0 640 290" xmlns="http://www.w3.org/2000/svg" style="background:#fafafa">
@@ -93,18 +84,78 @@ Three yes-or-no questions, 2 × 2 × 2 = 8 lunches. Nobody gets forgotten, nobod
   </g>
 </svg>
 
+1. Snack 1 asks: "In or out?" Two answers, two piles.
+2. Snack 2 asks every pile the same question. Four piles.
+3. Snack 3 asks again. Eight piles.
+4. Out of snacks? Each pile now names one lunch. Write it down.
+
+Three yes-or-no questions, 2 × 2 × 2 = 8 lunches. 
+
 ## E-Prime Pseudocode
+
+If you think, this is related to tree traversal but we need to build and write leaf node together so we can back track and build result on top of previously calculated result.
+
+If want to use nested for loop approach, input length will dictate how many nested loops will be required or may need frequent code change per input variance.
 
 ```
 CREATE an empty path and an empty result list.
+
 DEFINE dfs(i):
   IF i reaches the end of nums:
     RECORD a copy of path. RETURN.
+
   PUSH nums[i] onto path.      — take it
+  
   CALL dfs(i + 1).
+  
   POP nums[i] off path.        — undo the take
+
   CALL dfs(i + 1).             — skip it
+
 CALL dfs(0). RETURN result.
+```
+
+```
+def subsets(nums):
+    path = []
+    result = []
+
+    def dfs(i):
+
+        if i == len(nums):
+            result.append(path.copy())
+            return
+
+        # TAKE
+        path.append(nums[i])
+        dfs(i + 1)
+
+        # UNDO TAKE
+        path.pop()
+
+        # SKIP
+        dfs(i + 1)
+
+    dfs(0)
+
+    return result
+```
+
+Output
+
+```
+
+[
+    [1,2,3],
+    [1,2],
+    [1,3],
+    [1],
+    [2,3],
+    [2],
+    [3],
+    []
+]
+
 ```
 
 ## Solutions

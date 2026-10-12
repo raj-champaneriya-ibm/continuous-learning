@@ -1,6 +1,7 @@
 # Backtracking
 
 Topic map for the Backtracking section of the Neetcode 150 course. Notes are drafted for all nine problems.
+Use Obsidian to read notes. Github may not be able to render properly.
 
 ## Covered
 
