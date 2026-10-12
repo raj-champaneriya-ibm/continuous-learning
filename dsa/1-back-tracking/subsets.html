@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subsets — see the recursion</title>
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#17324d;--blue:#2458c6;--take:#087568;--skip:#925600;--paper:#f2f6fc;--line:#ccd8e8}
+*{box-sizing:border-box}.layout>* , .aside>*{min-width:0}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 'Avenir Next',Verdana,sans-serif}main{max-width:1400px;margin:auto;padding:32px}h1{font-size:clamp(28px,4vw,44px);letter-spacing:-1.5px;margin:0}h2{font-size:18px;margin:0 0 12px}p{margin:6px 0 16px;max-width:78ch}header{margin-bottom:22px}a{color:var(--blue)}button,select{font:inherit;padding:9px 14px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}button{cursor:pointer}button:hover:not(:disabled){background:#e6eefc}button:disabled{opacity:.45;cursor:default}button.primary{background:var(--blue);color:white;border-color:var(--blue)}button.primary:hover:not(:disabled){background:#1848ad}:focus-visible{outline:3px solid var(--blue);outline-offset:3px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}.toolbar label{font-weight:600}.progress{margin-left:auto;font-variant-numeric:tabular-nums}.explanation{background:#e2ecff;border-left:5px solid var(--blue);padding:16px 20px;margin-bottom:20px;min-height:112px}.explanation h2{margin:0 0 4px}.explanation p{margin:0}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px}.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:20px}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}.take{color:var(--take)}.skip{color:var(--skip)}.tree-scroll{overflow:auto}svg{width:100%;min-width:620px;display:block}svg text{font-family:'SFMono-Regular',Consolas,monospace;font-size:14px}svg .edge{fill:none;stroke-width:2}svg .node rect{fill:white;stroke:#a6b9d0;stroke-width:1.5}svg .node.seen rect{fill:#edf3fc}svg .node.active rect{fill:#dfeaff;stroke:var(--blue);stroke-width:3}svg .node.saved rect{fill:#def3ee}svg .node.active.saved rect{stroke:var(--blue)}svg .node.unseen{opacity:.42}.caption{font-size:14px;color:#465d77;margin:10px 0 0}.lower{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}.chips{display:flex;gap:8px;flex-wrap:wrap;min-height:40px;align-items:flex-start}.chip{font-family:Consolas,monospace;background:#e8f4f0;border:1px solid #add4c9;padding:5px 10px;border-radius:5px}.path .chip{background:#e2ecff;border-color:#a6bfec;font-size:22px}.empty{color:#52667b}.stack{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}.stack li{padding:10px;background:#f2f6fc;border-left:3px solid #a6b9d0}.stack li:first-child{border-color:var(--blue);background:#e2ecff}.stack small{display:block;color:#465d77}.code{margin-top:20px}.code pre{font:13px/1.8 Consolas,monospace;margin:0;overflow:auto}.code-line{display:block;padding:0 6px;border-left:3px solid transparent}.code-line.current{background:#e2ecff;border-color:var(--blue)}details{margin-top:22px}summary{cursor:pointer;font-weight:600}details p{margin-top:10px}kbd{font:13px Consolas,monospace;background:white;border:1px solid var(--line);padding:1px 5px;border-radius:3px}footer{margin-top:20px;color:#465d77;font-size:14px}@media(max-width:950px){.layout{grid-template-columns:1fr}.aside{display:grid;grid-template-columns:1fr 1fr;gap:20px}.code{margin:0}}@media(max-width:600px){main{padding:18px}.lower,.aside{grid-template-columns:1fr}.panel{padding:14px}.progress{margin-left:0;width:100%}.explanation{min-height:150px}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>See the recursion.</h1><p>One number. Two choices. Follow how <strong>take → undo → skip</strong> builds every subset.</p></header>
+<div class="toolbar">
+<label for="input">Input <code>nums</code></label><select id="input"><option value="2">nums = [1, 2]</option><option value="3">nums = [1, 2, 3]</option></select>
+<button id="reset">Reset</button><button id="back">Back</button><button id="next" class="primary">Next step</button><button id="play">Play</button><button id="skip">Jump to skip 1</button><span class="progress" id="progress"></span>
+</div>
+<section class="explanation" aria-live="polite" aria-atomic="true"><h2 id="event-title"></h2><p id="explain"></p></section>
+<div class="layout">
+<div>
+<section class="panel"><h2>The decision tree</h2><div class="legend"><span class="take">━━ Take the number</span><span class="skip">┄┄ Skip the number</span><span>Blue outline = current call</span></div><div class="tree-scroll"><svg id="tree" viewBox="0 0 900 400" role="img" aria-labelledby="tree-title tree-description"><title id="tree-title">Subset recursion tree</title><desc id="tree-description">Each left branch takes a number. Each dashed right branch skips it. Node labels show the path when that call begins.</desc><g id="branches"></g><g id="nodes"></g></svg></div><p class="caption">Node labels are snapshots at entry. The live <code>path</code> variable below changes as calls take and undo numbers. Faded nodes have not been visited.</p></section>
+<div class="lower"><section class="panel path"><h2><code>path</code></h2><div id="path" class="chips"></div><p class="caption">One mutable list, shared by every call.</p></section><section class="panel"><h2>Saved subsets <span id="count"></span></h2><div id="results" class="chips"></div><p class="caption">Each saved result is a copy. Undo cannot erase it.</p></section></div>
+</div>
+<aside class="aside"><section class="panel"><h2>Call stack</h2><ol class="stack" id="stack"></ol><p class="caption">Top = running call. Each frame keeps its own <code>i</code>; callers wait until their child returns.</p></section><section class="panel code"><h2>Python, step by step</h2><pre id="code" aria-label="Python algorithm; highlighted line corresponds to current step"></pre></section></aside>
+</div>
+<details open><summary>Why does the second call mean “skip”?</summary><p>Both calls use <code>dfs(i + 1)</code>. The difference is the path: the first runs <strong>after append</strong>; the second runs <strong>after pop</strong>. Skip does not stop recursion. It explores all remaining numbers without the current number.</p><p>Try <strong>Jump to skip 1</strong>: subsets containing 1 have already been saved. The path is now empty. Next, the algorithm explores subsets without 1.</p></details>
+<footer>Use <kbd>←</kbd> / <kbd>→</kbd> to step. Start with two numbers, then try three. Based on <a href="subsets.py">subsets.py</a>; <a href="Subsets.md">read the notes</a>. No network or installation needed.</footer>
+</main>
+<script>
+// Snapshot each meaningful action so Back restores the entire execution state.
+function buildTrace(nums) {
+  const events = [], nodes = [], path = [], result = [], stack = [];
+  const seen = new Set(), saved = new Set();
+  function emit(kind, title, text, line, active) {
+    events.push({kind,title,text,line,active,path:[...path],result:result.map(x=>[...x]),stack:stack.map(x=>({...x})),seen:[...seen],saved:[...saved]});
+  }
+  emit('start','Start with an empty path','Nothing has been chosen yet. Next step calls dfs(0), which decides whether to take or skip 1.',0,null);
+  function dfs(i,id,parent,choice,slot) {
+    nodes.push({id,parent,choice,i,slot,path:[...path]});
+    seen.add(id); stack.push({id,i,status:'Running'});
+    emit('enter',`Enter dfs(${i})`,i===nums.length?'All numbers have a decision. Save a copy of the path next.':`This call decides about ${nums[i]}. Its own i is ${i}. First, explore taking ${nums[i]}.`,1,id);
+    if(i===nums.length) {
+      result.push([...path]); saved.add(id);
+      emit('save',`Save [${path.join(', ')}]`,'This is a complete subset. Copy it into the results before returning to the waiting caller.',2,id);
+    } else {
+      path.push(nums[i]);
+      emit('take',`Take ${nums[i]}`,`Append ${nums[i]} to path. Next, enter dfs(${i+1}) with this number included.`,4,id);
+      stack[stack.length-1].status=`Waiting for take ${nums[i]}`;
+      dfs(i+1,id+'T',id,'take',slot*2);
+      stack[stack.length-1].status='Running';
+      emit('resume',`Back in dfs(${i})`,`The take branch finished all its choices. This caller resumes with i = ${i}; ${nums[i]} is still in the path. Undo it next.`,6,id);
+      path.pop();
+      emit('undo',`Undo take ${nums[i]}`,`Pop ${nums[i]} off path. Earlier choices stay. Saved copies stay. Now the path is [${path.join(', ')}].`,6,id);
+      emit('skip',`Skip ${nums[i]}`,`Do not append ${nums[i]}. Call dfs(${i+1}) with path [${path.join(', ')}] to explore the remaining numbers WITHOUT ${nums[i]}.`,7,id);
+      stack[stack.length-1].status=`Waiting for skip ${nums[i]}`;
+      dfs(i+1,id+'S',id,'skip',slot*2+1);
+      stack[stack.length-1].status='Running';
+    }
+    stack.pop();
+    if(stack.length) stack[stack.length-1].status='Resuming';
+    emit('return',`Return from dfs(${i})`,i===nums.length?'The leaf is finished. Remove its frame and return to the caller. Returning does not pop the path; the caller handles undo.':'Both take and skip branches are finished. Remove this frame and return to its caller.',i===nums.length?3:8,stack.length?stack[stack.length-1].id:null);
+  }
+  dfs(0,'root',null,null,0);
+  emit('done','Every subset is saved',`Finished: ${result.length} subsets from ${nums.length} numbers. The path is empty after all choices have been undone.`,9,null);
+  return {events,nodes};
+}
+const $=id=>document.getElementById(id);
+const code=['path, result = [], []','def dfs(i):','    if i == len(nums): result.append(path.copy())','    # return here if at the end','    path.append(nums[i])  # TAKE','    dfs(i + 1)','    path.pop()            # UNDO','    dfs(i + 1)            # SKIP','    # return to caller','dfs(0)'];
+// Display a faithful multiline base case while retaining event-to-line mapping.
+code[2]='    if i == len(nums):\n        result.append(path.copy())';
+code[3]='        return';
+$('code').textContent='';
+code.forEach((line,i)=>{const span=document.createElement('span');span.className='code-line';span.id='line-'+i;span.textContent=line;$('code').append(span);});
+let trace,step=0,timer=null;
+function stop(){clearInterval(timer);timer=null;$('play').textContent='Play';}
+function drawTree(){
+  const n=Number($('input').value), height=85+n*100;
+  $('tree').setAttribute('viewBox',`0 0 900 ${height}`);
+  const positions=new Map(trace.nodes.map(node=>[node.id,{x:900*(node.slot+.5)/2**node.i,y:40+node.i*100}]));
+  $('branches').innerHTML=trace.nodes.filter(node=>node.parent).map(node=>{
+    const a=positions.get(node.parent),b=positions.get(node.id),color=node.choice==='take'?'#087568':'#925600';
+    return `<path class="edge" stroke="${color}" ${node.choice==='skip'?'stroke-dasharray="6 5"':''} d="M${a.x},${a.y+23} L${b.x},${b.y-23}"/><text x="${(a.x+b.x)/2}" y="${(a.y+b.y)/2-4}" text-anchor="middle" fill="${color}">${node.choice} ${node.i}</text>`;
+  }).join('');
+  $('nodes').innerHTML=trace.nodes.map(node=>{const p=positions.get(node.id);return `<g id="node-${node.id}" class="node" transform="translate(${p.x},${p.y})"><rect x="-49" y="-23" width="98" height="46" rx="8"/><text text-anchor="middle" y="-3">[${node.path.join(',')}]</text><text text-anchor="middle" y="15" fill="#465d77">i = ${node.i}</text></g>`;}).join('');
+}
+function render(){
+  const e=trace.events[step];
+  $('event-title').textContent=e.title;$('explain').textContent=e.text;
+  $('progress').textContent=`Step ${step+1} / ${trace.events.length}`;
+  $('back').disabled=step===0;$('next').disabled=step===trace.events.length-1;$('play').disabled=step===trace.events.length-1;
+  $('path').innerHTML=e.path.length?e.path.map(x=>`<span class="chip">${x}</span>`).join(''):'<span class="chip">[]</span>';
+  $('results').innerHTML=e.result.length?e.result.map(x=>`<span class="chip">[${x.join(', ')}]</span>`).join(''):'<span class="empty">No saved subsets yet.</span>';
+  $('count').textContent=`(${e.result.length} / ${2**Number($('input').value)})`;
+  $('stack').innerHTML=e.stack.length?[...e.stack].reverse().map(f=>`<li><strong>dfs(${f.i})</strong><small>${f.status}</small></li>`).join(''):'<li>No active calls.</li>';
+  trace.nodes.forEach(n=>{$('node-'+n.id).setAttribute('class','node '+(e.seen.includes(n.id)?'seen':'unseen')+(e.saved.includes(n.id)?' saved':'')+(e.active===n.id?' active':''));});
+  code.forEach((_,i)=>$('line-'+i).classList.toggle('current',i===e.line));
+}
+function move(delta){stop();step=Math.max(0,Math.min(trace.events.length-1,step+delta));render();}
+function reset(){stop();step=0;trace=buildTrace(Array.from({length:Number($('input').value)},(_,i)=>i+1));drawTree();render();}
+$('input').addEventListener('change',reset);$('reset').addEventListener('click',reset);
+$('back').addEventListener('click',()=>move(-1));$('next').addEventListener('click',()=>move(1));
+$('skip').addEventListener('click',()=>{stop();step=trace.events.findIndex(e=>e.kind==='skip'&&e.active==='root');render();});
+$('play').addEventListener('click',()=>{if(timer){stop();return;}$('play').textContent='Pause';timer=setInterval(()=>{step++;render();if(step===trace.events.length-1)stop();},1600);});
+document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName)||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}});
+reset();
+</script>
+</body>
+</html>

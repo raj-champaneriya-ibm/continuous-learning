@@ -288,6 +288,5 @@ Output
 ## Related
 
 - [[Backtracking (Neetcode)]]
-- [[Backtracking Template]] — the same tree in loop form, plus the four knobs
 - [[Subsets II]] — same tree; duplicate values force "skip all copies at once"
 - [[Combination Sum]] — same push/pop, stops at a target instead of the array end

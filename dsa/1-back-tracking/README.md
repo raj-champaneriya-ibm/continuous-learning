@@ -17,6 +17,17 @@ Use Obsidian to read notes. Github may not be able to render properly.
 | 8 | [Letter Combinations of a Phone Number](Letter%20Combinations%20of%20a%20Phone%20Number.md) | Medium | Choose one mapped letter per digit; each recursion level handles the next digit. |
 | 9 | [N-Queens](N-Queens.md) | Hard | Place one queen per row; track occupied columns and diagonals (`r - c`, `r + c`). |
 
+## Understand recursion visually
+
+Open [the Subsets visual debugger](subsets.html) in your browser to step through **take → undo → skip**. If reading on GitHub, download the HTML file first, then open it locally; no installation is needed.
+
+- Start with `nums = [1, 2]`, then try `nums = [1, 2, 3]`.
+- Use **Next step / Back** or **Right / Left arrow keys** to follow the highlighted recursion tree, call stack, Python code, `path`, and saved subsets. Arrow keys retain their normal behavior when the input dropdown has focus.
+- Choose **Jump to skip 1** to see how undo removes `1` from `path` before recursion explores subsets without it. Previously saved subsets remain unchanged.
+- Use **Play / Pause** for automatic stepping, or **Reset** to start again.
+
+For debugging the algorithm directly in Python, use [subsets.py](subsets.py); debugger instructions are included at the top of the script.
+
 ## Source
 
 - Video: Neetcode 150 Course — All Coding Interview Questions Solved — https://youtu.be/T0u5nwSA0w0
