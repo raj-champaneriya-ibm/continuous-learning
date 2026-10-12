@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boosted Trees at the Chai Stall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;600&family=Kalam:wght@400;700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap">
+<style>
+body{margin:0}
+/* Layout: one notebook column on engineer's grid paper. Figures are taped-in sheets, margin notes are handwritten, and every chart uses the same four pen colours. */
+:root{
+  --paper:#edf3ef; --grid:#dae6df; --grid-strong:#c7d8ce;
+  --sheet:#fcfdfc; --ink:#1a2830; --ink-soft:#52646c; --rule:#b8cbc0;
+  --blue:#2153c4; --blue-wash:#e3eafb;
+  --red:#c4362c; --red-wash:#fbe6e3;
+  --green:#127a50; --green-wash:#dcf1e5;
+  --hi:#ffe45e; --tape:rgba(255,226,90,.6);
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Kalam","Segoe Print","Comic Sans MS",cursive;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111916; --grid:#1a2521; --grid-strong:#28362f;
+    --sheet:#17211d; --ink:#e3ebe6; --ink-soft:#9db0a6; --rule:#32443b;
+    --blue:#8eacff; --blue-wash:#1b2746;
+    --red:#ff8c7e; --red-wash:#3b1d1a;
+    --green:#5fd59e; --green-wash:#14342a;
+    --hi:#5c5113; --tape:rgba(255,226,90,.2);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111916; --grid:#1a2521; --grid-strong:#28362f;
+  --sheet:#17211d; --ink:#e3ebe6; --ink-soft:#9db0a6; --rule:#32443b;
+  --blue:#8eacff; --blue-wash:#1b2746;
+  --red:#ff8c7e; --red-wash:#3b1d1a;
+  --green:#5fd59e; --green-wash:#14342a;
+  --hi:#5c5113; --tape:rgba(255,226,90,.2);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px; line-height:1.62;
+}
+.wrap{max-width:760px; margin:0 auto; padding-inline:16px; padding-block:28px 72px}
+
+h1,h2,h3,h4{font-family:var(--display); color:var(--ink); text-wrap:balance; margin:0}
+h1{font-weight:800; font-size:clamp(3.4rem,15vw,6.4rem); line-height:.86; letter-spacing:-.035em; font-variation-settings:"opsz" 96}
+h2{font-weight:800; font-size:clamp(1.75rem,6.4vw,2.6rem); line-height:1.04; letter-spacing:-.02em}
+h3{font-weight:700; font-size:1.2rem; line-height:1.25}
+h4{font-weight:700; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft)}
+p{margin:0; max-width:65ch}
+a{color:var(--blue); text-underline-offset:3px}
+b,strong{font-weight:700}
+mark{background:linear-gradient(transparent 38%,var(--hi) 38%,var(--hi) 92%,transparent 92%); color:inherit; padding-inline:2px}
+.hand{font-family:var(--hand)}
+.r{color:var(--red)} .g{color:var(--green)} .bl{color:var(--blue)}
+.stack{display:flex; flex-direction:column; gap:14px}
+
+/* hero */
+.hero{display:flex; flex-direction:column; gap:16px; padding-block:12px 8px}
+.eyebrow{font-family:var(--hand); color:var(--blue); font-size:1.2rem; line-height:1.2; display:inline-block; transform:rotate(-2deg); transform-origin:left}
+.hero .lede{font-size:1.15rem}
+.toc{display:flex; gap:8px; overflow-x:auto; padding-block:4px 10px; margin-top:6px; scrollbar-width:thin}
+.chip{white-space:nowrap; font-family:var(--display); font-weight:600; font-size:.85rem; color:var(--ink); border:1.5px solid var(--ink); border-radius:999px; padding:3px 12px; text-decoration:none; background:var(--sheet)}
+.chip:hover{background:var(--hi)}
+
+/* chapters */
+section.ch{padding-block:44px 6px; border-top:2px dotted var(--rule); margin-top:28px; display:flex; flex-direction:column; gap:16px}
+section.ch > header{display:flex; flex-direction:column; gap:6px}
+
+/* taped figure sheets */
+.sheet{position:relative; background:var(--sheet); border:1px solid var(--rule); border-radius:4px; padding:18px 16px 16px; box-shadow:0 12px 26px -20px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:12px; min-width:0}
+.sheet.taped::before{content:""; position:absolute; top:-11px; left:50%; width:92px; height:22px; transform:translateX(-50%) rotate(-2.5deg); background:var(--tape)}
+.cap{font-family:var(--hand); color:var(--ink-soft); font-size:1.02rem; line-height:1.35}
+svg.chart{width:100%; height:auto; display:block; overflow:visible}
+
+/* svg styling */
+.gridline{stroke:var(--grid-strong); stroke-width:1}
+.axis{stroke:var(--ink-soft); stroke-width:1.2}
+.tick{fill:var(--ink-soft); font:11px var(--mono)}
+.axlabel{fill:var(--ink-soft); font:13px var(--hand)}
+.dot{fill:var(--ink)}
+.dot-test{fill:var(--sheet); stroke:var(--ink); stroke-width:1.6}
+.pred{fill:none; stroke:var(--blue); stroke-width:2.6; stroke-linejoin:round}
+.pred-old{fill:none; stroke:var(--ink-soft); stroke-width:1.5; stroke-dasharray:4 4; opacity:.75}
+.resid{stroke:var(--red); stroke-width:2.2}
+.resid-label{fill:var(--red); font:700 13px var(--hand)}
+.ann{fill:var(--blue); font:14px var(--hand)}
+.ann-ink{fill:var(--ink-soft); font:13px var(--hand)}
+.ann-g{fill:var(--green); font:700 13px var(--hand)}
+.ann-r{fill:var(--red); font:13px var(--hand)}
+.cut{stroke:var(--green); stroke-width:1.5; stroke-dasharray:3 4}
+.node{fill:var(--sheet); stroke:var(--ink); stroke-width:1.6}
+.node-text{fill:var(--ink); font:600 14px var(--display)}
+.leaf{fill:var(--green-wash); stroke:var(--green); stroke-width:1.6}
+.leaf-text{fill:var(--green); font:700 16px var(--mono)}
+.leaf-sub{fill:var(--ink-soft); font:13px var(--hand)}
+.branch{stroke:var(--ink); stroke-width:1.6; fill:none}
+.ghost{fill:none; stroke:var(--rule); stroke-width:1.6; stroke-dasharray:5 5}
+.frame{fill:var(--sheet); stroke:var(--rule); stroke-width:1.2}
+.stroke-g{stroke:var(--green); fill:none; stroke-width:2.2}
+.stroke-b{stroke:var(--blue); fill:none; stroke-width:2.4}
+.stroke-r{stroke:var(--red); fill:none; stroke-width:1.8}
+.stroke-ink{stroke:var(--ink); fill:none; stroke-width:1.6}
+.fill-g{fill:var(--green)} .fill-r{fill:var(--red)} .fill-ink{fill:var(--ink)} .fill-sheet{fill:var(--sheet)} .fill-bwash{fill:var(--blue-wash)} .fill-gwash{fill:var(--green-wash)}
+.op{fill:var(--ink); font:800 26px var(--display)}
+.bar{fill:var(--blue)} .bar-best{fill:var(--green)} .bar-future{fill:none; stroke:var(--rule); stroke-width:1.4; stroke-dasharray:4 4}
+.barval{fill:var(--ink); font:600 11px var(--mono)}
+
+/* legend */
+.legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px 16px}
+.legend div{display:flex; align-items:center; gap:10px; font-size:.95rem; line-height:1.3; min-width:0}
+.legend svg{flex:none; width:34px; height:22px}
+
+/* callouts */
+.box{background:var(--sheet); padding:20px 16px 16px; position:relative; display:flex; flex-direction:column; gap:10px; margin-top:8px}
+.tag{position:absolute; top:-13px; left:14px; font-family:var(--display); font-weight:800; font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; padding:3px 10px; transform:rotate(-2deg)}
+.think{border:2px solid var(--ink); border-radius:18px 6px 16px 8px / 8px 16px 6px 18px}
+.think .tag{background:var(--ink); color:var(--paper)}
+.pencil{border:2px dashed var(--blue); border-radius:6px}
+.pencil .tag{background:var(--blue); color:var(--sheet)}
+.careful{border:2px solid var(--red); border-radius:6px}
+.careful .tag{background:var(--sheet); color:var(--red); border:2px solid var(--red); transform:rotate(-4deg)}
+details.reveal{border-top:1px dashed var(--rule); padding-top:10px}
+details.reveal summary{cursor:pointer; font-family:var(--display); font-weight:700; color:var(--blue); list-style:none; display:inline-flex; align-items:center; gap:6px}
+details.reveal summary::-webkit-details-marker{display:none}
+details.reveal summary::before{content:"+"; display:inline-grid; place-items:center; width:20px; height:20px; border:1.5px solid var(--blue); border-radius:50%; font-size:.9rem; line-height:1}
+details.reveal[open] summary::before{content:"−"}
+details.reveal > div{padding-top:10px; display:flex; flex-direction:column; gap:10px}
+
+/* steps list */
+ol.steps{margin:0; padding:0; list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:10px}
+ol.steps li{counter-increment:s; display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:start}
+ol.steps li::before{content:counter(s); font-family:var(--display); font-weight:800; font-size:1.05rem; width:30px; height:30px; display:grid; place-items:center; border:2px solid var(--ink); border-radius:50%; background:var(--sheet)}
+.formula{font-family:var(--mono); font-size:clamp(.82rem,3.4vw,1rem); background:var(--sheet); border:1.5px solid var(--ink); border-radius:6px; padding:12px 14px; text-align:center; line-height:1.7; overflow-x:auto}
+
+/* small multiples */
+.multiples{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.multiples figure{margin:0; display:flex; flex-direction:column; gap:2px; min-width:0}
+.multiples figcaption{font-family:var(--display); font-weight:700; font-size:.9rem}
+@media (min-width:700px){.multiples{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto; min-width:0}
+table.num{border-collapse:collapse; font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums; width:100%; min-width:330px}
+table.num th{font-family:var(--display); font-weight:700; font-size:12px; text-align:right; color:var(--ink-soft); padding:6px 7px; border-bottom:1.6px solid var(--ink); white-space:nowrap}
+table.num td{text-align:right; padding:5px 7px; border-bottom:1px solid var(--rule); white-space:nowrap}
+table.num th:first-child, table.num td:first-child{text-align:left}
+table.num td.b{color:var(--blue); font-weight:600}
+table.num td.r{color:var(--red)}
+table.num td.g{color:var(--green); font-weight:600}
+table.days{min-width:0}
+table.compact{min-width:0; font-size:12px}
+table.compact th{white-space:normal; padding:6px 4px; line-height:1.2; vertical-align:bottom; font-size:11.5px}
+table.compact td{padding:5px 4px}
+@media (max-width:420px){.sheet{padding-inline:12px}}
+table.days td{text-align:center} table.days th{text-align:center}
+
+/* buttons */
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--blue); outline-offset:2px}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{font-family:var(--display); font-weight:700; font-size:.92rem; border:2px solid var(--ink); background:var(--sheet); border-radius:6px; padding:6px 12px; line-height:1.2}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--sheet)}
+.btn:hover,.seg button:hover{background:var(--hi); color:var(--ink)}
+.seg button[aria-pressed="true"]:hover{background:var(--ink); color:var(--sheet)}
+.btn:disabled{opacity:.4; cursor:default; background:var(--sheet)}
+.step-nav{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+.story{min-height:5.2em}
+
+/* playground */
+.stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+.stat{border:1.5px solid var(--rule); border-radius:6px; padding:8px 10px; display:flex; flex-direction:column; gap:2px; min-width:0}
+.stat span{font-family:var(--hand); color:var(--ink-soft); font-size:.92rem; line-height:1.2}
+.stat output{font-family:var(--mono); font-weight:600; font-size:1.2rem; font-variant-numeric:tabular-nums}
+.stat.train output{color:var(--blue)} .stat.test output{color:var(--red)}
+.controls{display:grid; grid-template-columns:1fr; gap:12px}
+@media (min-width:640px){.controls{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ctl{display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:baseline; min-width:0}
+.ctl label{font-family:var(--display); font-weight:700; font-size:.92rem}
+.ctl output{font-family:var(--mono); font-weight:600; font-variant-numeric:tabular-nums}
+.ctl input{grid-column:1 / -1; width:100%; accent-color:var(--blue)}
+.ctl small{grid-column:1 / -1; color:var(--ink-soft); font-size:.85rem; line-height:1.3}
+
+/* Q&A */
+.qa{display:flex; flex-direction:column; gap:18px}
+.qa-item{display:grid; grid-template-columns:34px 1fr; gap:4px 10px}
+.qa-item .q,.qa-item .a{font-family:var(--display); font-weight:800; font-size:1.25rem; line-height:1.3}
+.qa-item .q{color:var(--blue)} .qa-item .a{color:var(--ink-soft)}
+.qa-item .qt{font-family:var(--display); font-weight:700; font-size:1.05rem; line-height:1.35}
+
+/* chat */
+.chat{display:flex; flex-direction:column; gap:12px}
+.line{display:grid; grid-template-columns:78px 1fr; gap:10px; align-items:start}
+.who{font-family:var(--hand); font-weight:700; font-size:1.05rem; line-height:1.5; padding-top:6px}
+.says{background:var(--sheet); border:1.5px solid var(--rule); border-radius:12px; padding:8px 12px; min-width:0}
+.line.f .who{color:var(--green)} .line.b .who{color:var(--blue)}
+.line.b .says{border-color:var(--blue); background:var(--blue-wash)}
+.line.f .says{border-color:var(--green); background:var(--green-wash)}
+
+/* knobs */
+.knobs{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:12px}
+.knob{background:var(--sheet); border:1.5px solid var(--rule); border-radius:6px; padding:12px 14px; display:flex; flex-direction:column; gap:4px; min-width:0}
+.knob code{font-family:var(--mono); font-weight:600; font-size:.95rem; color:var(--blue)}
+.knob .what{font-family:var(--display); font-weight:700}
+.knob .up,.knob .start{font-size:.95rem; line-height:1.45}
+.knob .start{font-family:var(--hand); color:var(--ink-soft)}
+
+pre.code{margin:0; background:var(--sheet); border:1.5px solid var(--rule); border-radius:6px; padding:14px; overflow-x:auto; font-family:var(--mono); font-size:13px; line-height:1.6; min-width:0}
+pre.code .c{color:var(--green)} pre.code .k{color:var(--blue); font-weight:600}
+
+/* takeaways */
+ul.ticks{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px}
+ul.ticks li{display:grid; grid-template-columns:24px 1fr; gap:10px}
+ul.ticks li::before{content:""; width:8px; height:15px; margin:3px 0 0 7px; border:solid var(--green); border-width:0 3px 3px 0; transform:rotate(40deg)}
+
+.card{background:var(--sheet); border:2px solid var(--ink); border-radius:6px; padding:16px; font-family:var(--mono); font-size:14px; line-height:1.75; overflow-x:auto}
+.card .c{color:var(--ink-soft); font-family:var(--hand); font-size:15px}
+
+/* quiz */
+.quiz{display:flex; flex-direction:column; gap:22px}
+.qz{display:flex; flex-direction:column; gap:8px; border:0; margin:0; padding:0; min-width:0}
+.qz legend{font-family:var(--display); font-weight:700; font-size:1.05rem; line-height:1.35; padding:0; margin-bottom:6px}
+.qz .opt{display:block; width:100%; text-align:left; background:var(--sheet); border:1.5px solid var(--rule); border-radius:8px; padding:9px 12px; font-family:var(--body); font-size:.98rem; line-height:1.4}
+.qz .opt:hover:not(:disabled){border-color:var(--ink)}
+.qz .opt:disabled{cursor:default}
+.qz .opt.right{border-color:var(--green); background:var(--green-wash)}
+.qz .opt.wrong{border-color:var(--red); background:var(--red-wash)}
+.qz .why{font-size:.95rem; color:var(--ink-soft)}
+.score{font-family:var(--display); font-weight:800; font-size:1.3rem}
+
+footer.end{margin-top:40px; padding-top:22px; border-top:2px dotted var(--rule); display:flex; flex-direction:column; gap:10px; font-size:.95rem}
+footer.end ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:6px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important; scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">A study guide, told at Ravi's chai stall</span>
+  <h1>Boosted<br>Trees</h1>
+  <p class="lede">Gradient boosting is one of the most-used tools in machine learning. The idea fits in one sentence: <mark>build lots of tiny trees, each one fixing the mistakes of the trees before it.</mark> This guide shows you that idea in pictures, then lets you run it with your own hands.</p>
+
+  <div class="sheet taped" style="margin-top:10px">
+    <svg class="chart" viewBox="0 0 360 100" role="img" aria-label="Three crude step-shaped trees added together make one smooth boosted curve.">
+      <g transform="translate(4,8)"><rect class="frame" width="60" height="56" rx="4"/><path class="stroke-g" d="M5,12 H30 V42 H55"/></g>
+      <text class="op" x="77" y="45" text-anchor="middle">+</text>
+      <g transform="translate(90,8)"><rect class="frame" width="60" height="56" rx="4"/><path class="stroke-g" d="M5,22 H42 V34 H55"/></g>
+      <text class="op" x="163" y="45" text-anchor="middle">+</text>
+      <g transform="translate(176,8)"><rect class="frame" width="60" height="56" rx="4"/><path class="stroke-g" d="M5,20 H17 V29 H55"/></g>
+      <text class="op" x="249" y="45" text-anchor="middle">=</text>
+      <g transform="translate(262,8)"><rect class="frame" width="94" height="56" rx="4"/><path class="stroke-b" d="M5,9 H17 V13 H30 V20 H42 V32 H54 V40 H67 V45 H89"/></g>
+      <text class="ann-g" x="34" y="84" text-anchor="middle">tree 1</text>
+      <text class="ann-g" x="120" y="84" text-anchor="middle">tree 2</text>
+      <text class="ann-g" x="206" y="84" text-anchor="middle">tree 3</text>
+      <text class="ann" x="309" y="84" text-anchor="middle">boosted model</text>
+    </svg>
+    <p class="cap">Each tree on its own is a crude staircase. Added together, they draw the shape of the data.</p>
+  </div>
+
+  <h3 style="margin-top:8px">How to read the pictures</h3>
+  <div class="legend">
+    <div><svg viewBox="0 0 34 22" aria-hidden="true"><circle class="dot" cx="17" cy="11" r="5"/></svg>One day of chai sales</div>
+    <div><svg viewBox="0 0 34 22" aria-hidden="true"><path class="pred" d="M2,6 H16 V16 H32"/></svg>The model's prediction</div>
+    <div><svg viewBox="0 0 34 22" aria-hidden="true"><line class="resid" x1="17" y1="2" x2="17" y2="20"/><circle class="dot" cx="17" cy="4" r="3.5"/></svg>An error (a <b>residual</b>): actual minus predicted</div>
+    <div><svg viewBox="0 0 34 22" aria-hidden="true"><rect class="leaf" x="4" y="3" width="26" height="16" rx="3"/></svg>What a tree adds</div>
+  </div>
+
+  <nav class="toc" aria-label="Chapters">
+    <a class="chip" href="#ch1">1 · The problem</a>
+    <a class="chip" href="#ch2">2 · One tree</a>
+    <a class="chip" href="#ch3">3 · The big idea</a>
+    <a class="chip" href="#ch4">4 · Round by round</a>
+    <a class="chip" href="#ch5">5 · Why "gradient"</a>
+    <a class="chip" href="#ch6">6 · Questions</a>
+    <a class="chip" href="#ch7">7 · Playground</a>
+    <a class="chip" href="#ch8">8 · vs Random Forest</a>
+    <a class="chip" href="#ch9">9 · Knobs & code</a>
+    <a class="chip" href="#ch10">10 · Recap</a>
+    <a class="chip" href="#ch11">11 · Quiz</a>
+  </nav>
+</header>
+
+<!-- 1 -->
+<section class="ch" id="ch1">
+  <header><span class="eyebrow">Chapter 1</span><h2>Ravi's milk problem</h2></header>
+  <p>Ravi runs a chai stall by the college gate. Every morning he decides how much milk to buy. Buy too much and it spoils. Buy too little and he turns customers away.</p>
+  <p>He kept a notebook for a month. One pattern jumps out: <mark>hot days sell less chai.</mark></p>
+  <div class="sheet taped">
+    <svg id="month-chart" class="chart" role="img" aria-label="Scatter plot of 30 days: cups sold fall from about 95 on cold days to about 35 on hot days."></svg>
+    <p class="cap">30 days from Ravi's notebook. The drop is steepest around 22 to 28 °C.</p>
+  </div>
+  <p>Our job: given tomorrow's temperature, predict how many cups Ravi will sell. Temperature is the <b>feature</b>. Cups sold is the <b>target</b>. The target is a number, so this is a <b>regression</b> problem.</p>
+  <p>To learn the mechanics by hand, we'll zoom in on just six days:</p>
+  <div class="tbl-wrap">
+    <table class="num days" aria-label="Six example days">
+      <tr><th>°C</th><td>15</td><td>18</td><td>22</td><td>27</td><td>31</td><td>35</td></tr>
+      <tr><th>Cups</th><td>98</td><td>92</td><td>77</td><td>63</td><td>42</td><td>30</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="ch" id="ch2">
+  <header><span class="eyebrow">Chapter 2</span><h2>One small tree can only say a few numbers</h2></header>
+  <p>A decision tree is a flowchart of yes/no questions. Each question splits the days into two groups. For every group, the tree predicts the group's average.</p>
+  <p>The smallest possible tree asks <b>one</b> question. It's called a <b>stump</b>. Here is the best stump for our six days:</p>
+  <div class="sheet taped">
+    <svg id="stump-tree" class="chart" role="img" aria-label="A stump: colder than 24.5 °C? Yes predicts 89 cups, no predicts 45 cups."></svg>
+    <svg id="stump-chart" class="chart" role="img" aria-label="The stump's prediction is a two-step line: 89 cups below 24.5 °C, 45 above."></svg>
+    <p class="cap">Only two possible answers. Every day under 24.5 °C gets 89 cups, whether it's 15 °C or 24 °C.</p>
+  </div>
+  <h3>How did it pick 24.5 °C?</h3>
+  <p>It tried every cut between neighbouring temperatures. For each cut it measured the <b>squared error</b>: how far each day is from its group's average, squared and added up. The cut with the smallest error wins.</p>
+  <div class="sheet">
+    <svg id="split-bars" class="chart" role="img" aria-label="Squared error for each of the five possible cuts. The cut at 24.5 °C has the smallest error, 792."></svg>
+    <p class="cap">Shorter bar = the two groups are more alike inside. 24.5 °C just beats 29 °C.</p>
+  </div>
+  <div class="box think">
+    <span class="tag">Think about it</span>
+    <p>A stump is a blunt tool. Why not grow a deep tree with enough questions to hit every single day exactly? Write down your guess. Chapter 6 answers it.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="ch" id="ch3">
+  <header><span class="eyebrow">Chapter 3</span><h2>The big idea: fix the mistakes, one small tree at a time</h2></header>
+  <p>A golfer doesn't sink a long hole in one swing. The first shot gets close. Every shot after that only has to cover the distance that's left.</p>
+  <div class="sheet taped">
+    <svg class="chart" viewBox="0 0 360 160" role="img" aria-label="A golf ball travels to the hole in three shots, labelled tree 1, tree 2 and tree 3. Each shot is shorter. The distance still to go is the residual.">
+      <defs>
+        <marker id="ah-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="fill-g" d="M0,0 L10,5 L0,10 z"/></marker>
+        <marker id="ah-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="fill-r" d="M0,0 L10,5 L0,10 z"/></marker>
+      </defs>
+      <rect class="fill-gwash" x="8" y="112" width="344" height="7"/>
+      <line class="stroke-ink" x1="8" y1="112" x2="352" y2="112"/>
+      <path class="stroke-g" d="M24,106 Q130,18 234,106" marker-end="url(#ah-g)"/>
+      <path class="stroke-g" d="M238,106 Q271,64 302,106" marker-end="url(#ah-g)"/>
+      <path class="stroke-g" d="M306,106 Q317,90 327,106" marker-end="url(#ah-g)"/>
+      <circle class="fill-sheet stroke-ink" cx="24" cy="107" r="4.5"/>
+      <circle class="fill-sheet stroke-ink" cx="236" cy="107" r="4.5"/>
+      <circle class="fill-sheet stroke-ink" cx="304" cy="107" r="4.5"/>
+      <circle class="fill-sheet stroke-ink" cx="329" cy="107" r="4.5"/>
+      <ellipse class="fill-ink" cx="339" cy="113" rx="7" ry="2.5"/>
+      <line class="stroke-ink" x1="339" y1="112" x2="339" y2="56"/>
+      <path class="fill-r" d="M339,56 L313,62 L339,68 z"/>
+      <text class="ann-g" x="130" y="56" text-anchor="middle">tree 1</text>
+      <text class="ann-g" x="268" y="78" text-anchor="middle">tree 2</text>
+      <text class="ann-g" x="316" y="93" text-anchor="middle">3</text>
+      <text class="ann-ink" x="352" y="46" text-anchor="end">the true answer</text>
+      <text class="ann-ink" x="10" y="136">start: the average</text>
+      <path class="stroke-r" d="M236,124 V131 H339 V124"/>
+      <text class="ann-r" x="288" y="150" text-anchor="middle">what's left = the residual</text>
+    </svg>
+    <p class="cap">Each new tree only has to learn what's still missing.</p>
+  </div>
+  <p>Boosting is exactly that, written as a loop:</p>
+  <ol class="steps">
+    <li><span>Start with a simple guess for every day: <b>the average</b>.</span></li>
+    <li><span>Measure what's left. For each day, <span class="r">actual − predicted</span>. These leftovers are the <b>residuals</b>.</span></li>
+    <li><span>Train a <b>small</b> tree to predict those residuals.</span></li>
+    <li><span>Add a <b>fraction</b> of that tree's answer to the model. Go back to step 2.</span></li>
+  </ol>
+  <div class="formula">new prediction = old prediction + <span class="g">learning rate × tree's answer</span></div>
+  <p>The fraction is called the <b>learning rate</b>. Small learning rate, small careful steps. Here's the loop running on Ravi's whole month, using stumps:</p>
+  <div class="sheet taped">
+    <div class="multiples" id="multiples"></div>
+    <p class="cap">1 stump is a single step. 50 stumps, added up, trace the curve.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="ch" id="ch4">
+  <header><span class="eyebrow">Chapter 4</span><h2>Watch it, round by round</h2></header>
+  <p>Back to our six days. We'll use stumps and a learning rate of <b>0.5</b>. That's big (real models often use 0.1 or less), but it makes every step easy to see. Tap through the rounds.</p>
+  <div class="sheet taped" id="stepper">
+    <div class="seg" role="group" aria-label="Choose a round" id="st-seg">
+      <button type="button" data-k="0" aria-pressed="true">Start</button>
+      <button type="button" data-k="1" aria-pressed="false">Tree 1</button>
+      <button type="button" data-k="2" aria-pressed="false">Tree 2</button>
+      <button type="button" data-k="3" aria-pressed="false">Tree 3</button>
+    </div>
+    <svg id="st-chart" class="chart" role="img" aria-label="Six days, the current prediction and its residuals."></svg>
+    <svg id="st-tree" class="chart" role="img" aria-label="The tree added in this round."></svg>
+    <p class="story" id="st-text" aria-live="polite"></p>
+    <div class="tbl-wrap"><table class="num compact" id="st-table"></table></div>
+    <h4>Total squared error</h4>
+    <svg id="st-err" class="chart" role="img" aria-label="Total squared error after each round."></svg>
+    <div class="step-nav">
+      <button type="button" class="btn" id="st-prev">← Back</button>
+      <button type="button" class="btn" id="st-next">Next round →</button>
+    </div>
+  </div>
+
+  <div class="box think">
+    <span class="tag">Think about it</span>
+    <p>Look at the 27 °C day. At the start its error was <b class="r">−4</b>. After tree 1 it's <b class="r">+7</b>. Tree 1 made that day <em>worse</em>. Why is that OK?</p>
+    <details class="reveal"><summary>Show answer</summary>
+      <div><p>A stump can ask only one question, so it lumps 27 °C in with the very hot days and pushes it down too far. But total error still fell a lot (3,696 → 1,518). Tree 2 sees the new +7 and fixes most of it (+2). Boosting improves the whole picture with rough corrections. Single days can wobble along the way.</p></div>
+    </details>
+  </div>
+
+  <div class="box pencil">
+    <span class="tag">Grab a pencil</span>
+    <p>The finished model is just the average plus half of each tree. Use the three trees to predict two new days: <b>21 °C</b> and <b>33 °C</b>.</p>
+    <div class="card" aria-label="The three trees">
+      Start: <b>67</b><br>
+      Tree 1: colder than 24.5 °C? yes <span class="g">+22</span> · no <span class="g">−22</span><br>
+      Tree 2: colder than 29 °C? &nbsp;&nbsp;yes <span class="g">+10</span> · no <span class="g">−20</span><br>
+      Tree 3: colder than 20 °C? &nbsp;&nbsp;yes <span class="g">+12</span> · no <span class="g">−6</span><br>
+      <span class="c">prediction = 67 + 0.5 × (tree 1 + tree 2 + tree 3)</span>
+    </div>
+    <details class="reveal"><summary>Show answer</summary>
+      <div>
+        <div class="formula">21 °C: 67 + 0.5 × (<span class="g">+22 + 10 − 6</span>) = 67 + 13 = <b class="bl">80 cups</b></div>
+        <div class="formula">33 °C: 67 + 0.5 × (<span class="g">−22 − 20 − 6</span>) = 67 − 24 = <b class="bl">43 cups</b></div>
+        <p>Notice what a boosted model really is: <mark>a starting number plus a long sum of small tree answers.</mark> Prediction is just "walk down each tree, add up the leaves".</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="ch" id="ch5">
+  <header><span class="eyebrow">Chapter 5</span><h2>Why is it called <em>gradient</em> boosting?</h2></header>
+  <p>Picture the error for one day (the 15 °C day, which sold 98 cups) as a bowl. The bottom of the bowl is the perfect prediction. Our first guess, 67, sits up on the side.</p>
+  <div class="sheet taped">
+    <svg class="chart" viewBox="0 0 360 232" role="img" aria-label="A U-shaped loss curve. The current prediction of 67 sits on the left slope. Downhill points right, toward 98. The gap of 31 is the residual.">
+      <defs>
+        <marker id="ah-g2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="fill-g" d="M0,0 L10,5 L0,10 z"/></marker>
+        <marker id="ah-r2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="fill-r" d="M0,0 L10,5 L0,10 z"/></marker>
+      </defs>
+      <line class="axis" x1="20" y1="180" x2="344" y2="180"/>
+      <text class="axlabel" x="22" y="20">error (loss)</text>
+      <text class="axlabel" x="344" y="198" text-anchor="end">prediction →</text>
+      <path class="stroke-ink" d="M30,30 Q180,310 330,30" style="stroke-width:2.2"/>
+      <line class="pred-old" x1="102.5" y1="138" x2="102.5" y2="180"/>
+      <line class="pred-old" x1="180" y1="170" x2="180" y2="180"/>
+      <path class="stroke-g" d="M114,128 Q142,150 166,160" marker-end="url(#ah-g2)"/>
+      <circle cx="101" cy="127" r="7" style="fill:var(--blue)"/>
+      <circle cx="180" cy="170" r="3.5" class="fill-ink"/>
+      <text class="ann-g" x="182" y="100" text-anchor="middle">downhill means:</text>
+      <text class="ann-g" x="182" y="118" text-anchor="middle">predict MORE</text>
+      <text class="tick" x="102.5" y="196" text-anchor="middle">67</text>
+      <text class="tick" x="180" y="196" text-anchor="middle">98</text>
+      <line class="stroke-r" x1="105" y1="206" x2="176" y2="206" marker-end="url(#ah-r2)"/>
+      <text class="ann-r" x="141" y="226" text-anchor="middle">residual = +31</text>
+    </svg>
+    <p class="cap">The blue ball is our guess. The way downhill points straight at the residual.</p>
+  </div>
+  <p>For squared error, the loss for one day is <b>½ (actual − prediction)²</b>. Its slope (the <b>gradient</b>) is <b>−(actual − prediction)</b>. The downhill direction is the negative of the slope:</p>
+  <div class="formula">downhill direction = actual − prediction = <span class="r">the residual</span></div>
+  <p>So "train a tree on the residuals" secretly means <mark>"take a step downhill on the error"</mark>. That's gradient descent, done with trees. Each tree is one step.</p>
+  <p>Swap in a different loss and the loop stays the same. Only what the trees chase changes. People call these <b>pseudo-residuals</b>:</p>
+  <div class="tbl-wrap">
+    <table class="num" style="font-family:var(--body); font-size:14px">
+      <tr><th>Loss</th><th style="text-align:left">Each tree chases…</th><th style="text-align:left">Good for</th></tr>
+      <tr><td>Squared error</td><td style="text-align:left; white-space:normal">actual − predicted</td><td style="text-align:left; white-space:normal">Ordinary numbers</td></tr>
+      <tr><td>Absolute error</td><td style="text-align:left; white-space:normal">just the sign: +1 or −1</td><td style="text-align:left; white-space:normal">Data with outliers</td></tr>
+      <tr><td>Log-loss</td><td style="text-align:left; white-space:normal">actual (0 or 1) − predicted probability</td><td style="text-align:left; white-space:normal">Yes/no questions</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="ch" id="ch6">
+  <header><span class="eyebrow">Chapter 6</span><h2>There are no silly questions</h2></header>
+  <div class="qa">
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Why start with the average?</span><span class="a">A</span><p>Of all single numbers, the average has the smallest squared error. Any start would work, but the average saves the first few trees some effort.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Why add only a fraction of each tree?</span><span class="a">A</span><p>Each tree is fitted to a handful of noisy residuals, so its advice is rough. Taking a fraction means no single tree can push the model too far. Many small steps average out the noise. The price is that you need more trees.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">So why not one deep tree that fits every day exactly?</span><span class="a">A</span><p>It would fit the noise too: the random ups and downs that won't repeat tomorrow. Its predictions on new days would be poor. Boosting adds detail slowly, and you can stop as soon as error on fresh data stops improving.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Why are the trees so small?</span><span class="a">A</span><p>Each tree only has to point roughly the right way. Small trees are called <b>weak learners</b>: cheap to train and hard to overfit. Hundreds of them added together can draw almost any shape.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Real data has many features. What changes?</span><span class="a">A</span><p>At every split the tree tries every feature and every cut, then picks the one that most reduces error on the residuals. A depth-3 tree can then capture combinations like "hot <em>and</em> weekend". We used one feature so you could see the whole picture.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Can it answer yes/no questions (classification)?</span><span class="a">A</span><p>Yes. The model adds up a score, and a sigmoid turns the score into a probability. The residual becomes actual (0 or 1) minus predicted probability. Same loop.</p></div>
+    <div class="qa-item"><span class="q">Q</span><span class="qt">Where do XGBoost, LightGBM and CatBoost fit in?</span><span class="a">A</span><p>They are fast, well-tested versions of this same loop. On top, they add penalties that keep leaf values small, use the curvature of the loss to choose leaf values, bucket features into histograms for speed, and handle missing values. The core idea is the one on this page.</p></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="ch" id="ch7">
+  <header><span class="eyebrow">Chapter 7</span><h2>Playground: turn the knobs yourself</h2></header>
+  <p>Ravi's full month again. The model learns from the <b>30 filled dots</b>. The <b>15 hollow dots</b> are days it never sees. They tell you how good the model really is on new days.</p>
+  <div class="sheet taped" id="lab">
+    <div class="stats">
+      <div class="stat"><span>trees</span><output id="pg-trees">35</output></div>
+      <div class="stat train"><span>off by, training days</span><output id="pg-train">±0</output></div>
+      <div class="stat test"><span>off by, new days</span><output id="pg-test">±0</output></div>
+    </div>
+    <svg id="pg-chart" class="chart" role="img" aria-label="Training days, unseen days, and the boosted model's prediction curve."></svg>
+    <div class="controls">
+      <div class="ctl"><label for="pg-n">Number of trees</label><output id="pg-n-out" for="pg-n">35</output><input type="range" id="pg-n" min="0" max="200" step="1" value="35"><small>How many correction rounds.</small></div>
+      <div class="ctl"><label for="pg-lr">Learning rate</label><output id="pg-lr-out" for="pg-lr">0.10</output><input type="range" id="pg-lr" min="0.01" max="1" step="0.01" value="0.1"><small>How much of each tree to add.</small></div>
+      <div class="ctl"><label for="pg-d">Tree depth</label><output id="pg-d-out" for="pg-d">1</output><input type="range" id="pg-d" min="1" max="4" step="1" value="1"><small>Questions per tree. 1 = stump.</small></div>
+    </div>
+    <div class="seg" role="group" aria-label="Presets">
+      <button type="button" class="btn" data-preset="careful">Careful learner</button>
+      <button type="button" class="btn" data-preset="hasty">Too few trees</button>
+      <button type="button" class="btn" data-preset="eager">Overeager</button>
+      <button type="button" class="btn" id="pg-play">▶ Play from 0 trees</button>
+    </div>
+    <h4>Error as trees are added</h4>
+    <svg id="pg-loss" class="chart" role="img" aria-label="Typical error on training days and on new days as the number of trees grows."></svg>
+    <p class="cap">Blue: error on days it learned from. Red: error on days it never saw. The dot marks where new-day error was lowest.</p>
+  </div>
+
+  <div class="box think">
+    <span class="tag">Think about it</span>
+    <p>Press <b>Overeager</b>. In the error chart, the blue line keeps falling toward zero, but the red line bottoms out early and then climbs. What is the model doing after that low point?</p>
+    <details class="reveal"><summary>Show answer</summary>
+      <div><p>It's <b>overfitting</b>: memorizing the random wiggles of the 30 training days. Training error keeps improving while error on new days gets worse. Look at the prediction curve, too. It zig-zags to touch individual dots.</p></div>
+    </details>
+  </div>
+
+  <div class="box careful">
+    <span class="tag">Careful!</span>
+    <p><b>More trees is not always better.</b> A random forest barely suffers from extra trees, but a boosted model eventually starts memorizing. Always keep a validation set and use <b>early stopping</b>: keep adding trees only while validation error improves.</p>
+    <p>Learning rate and number of trees trade off. Halve the learning rate and you'll need roughly twice the trees. Small rates with many trees usually generalize best.</p>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="ch" id="ch8">
+  <header><span class="eyebrow">Chapter 8</span><h2>Tea-break debate: Random Forest vs Boosting</h2></header>
+  <p class="cap" style="font-size:1.1rem">Tonight's guests, both made of trees.</p>
+  <div class="chat">
+    <div class="line f"><span class="who">Forest</span><p class="says">I grow hundreds of deep trees, each on a random sample of the data, all at the same time. Then they vote.</p></div>
+    <div class="line b"><span class="who">Booster</span><p class="says">I grow small trees one after another. Each one studies the mistakes of everything before it.</p></div>
+    <div class="line f"><span class="who">Forest</span><p class="says">So you're stuck in a queue. I can train all my trees in parallel.</p></div>
+    <div class="line b"><span class="who">Booster</span><p class="says">My libraries parallelize the work inside each tree. And on tables of data I'm usually the more accurate one.</p></div>
+    <div class="line f"><span class="who">Forest</span><p class="says">You need tuning, though. Learning rate, depth, number of trees. My defaults just work.</p></div>
+    <div class="line b"><span class="who">Booster</span><p class="says">Fair. Leave me running too long and I start memorizing noise. That's why I use early stopping.</p></div>
+    <div class="line f"><span class="who">Forest</span><p class="says">I average away randomness. My trees are deep and wild, and the crowd calms them down.</p></div>
+    <div class="line b"><span class="who">Booster</span><p class="says">And I chip away at bias. My trees are simple, and the sequence makes them sharp. Different jobs.</p></div>
+    <div class="line f"><span class="who">Forest</span><p class="says">Truce?</p></div>
+    <div class="line b"><span class="who">Booster</span><p class="says">Truce. Pass the chai.</p></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="ch" id="ch9">
+  <header><span class="eyebrow">Chapter 9</span><h2>The knobs you'll actually turn</h2></header>
+  <p>Names are scikit-learn's, with XGBoost's in brackets where they differ.</p>
+  <div class="knobs">
+    <div class="knob"><code>n_estimators</code><span class="what">How many trees</span><span class="up">Up: fits more detail. Too many overfits.</span><span class="start">Try: set it high and let early stopping pick.</span></div>
+    <div class="knob"><code>learning_rate</code> <span class="what">Size of each correction</span><span class="up">Up: learns faster with fewer trees, but riskier.</span><span class="start">Try: 0.05 to 0.1</span></div>
+    <div class="knob"><code>max_depth</code><span class="what">Questions per tree</span><span class="up">Up: captures feature combinations, overfits sooner.</span><span class="start">Try: 3 to 6</span></div>
+    <div class="knob"><code>subsample</code><span class="what">Share of rows each tree sees</span><span class="up">Below 1 adds randomness that fights overfitting.</span><span class="start">Try: 0.7 to 0.9</span></div>
+    <div class="knob"><code>min_samples_leaf</code> <span class="what">Smallest allowed leaf (≈ min_child_weight)</span><span class="up">Up: smoother, more cautious model.</span><span class="start">Try: 5 to 20 rows</span></div>
+    <div class="knob"><code>early stopping</code><span class="what">When to quit adding trees</span><span class="up">Stops once validation error hasn't improved for a while.</span><span class="start">Try: patience of 50 rounds</span></div>
+  </div>
+
+  <h3>The whole algorithm, from scratch</h3>
+  <p>Ten lines of real code. It reproduces the six-day example exactly (run it with <code>n_trees=3, lr=0.5, depth=1</code>).</p>
+<pre class="code"><span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> sklearn.tree <span class="k">import</span> DecisionTreeRegressor
+
+<span class="k">def</span> boost(X, y, n_trees=100, lr=0.1, depth=2):
+    f0 = y.mean()                     <span class="c"># step 1: the plain average</span>
+    pred = np.full(len(y), f0)
+    trees = []
+    <span class="k">for</span> _ <span class="k">in</span> range(n_trees):
+        residual = y - pred           <span class="c"># step 2: what's still wrong?</span>
+        tree = DecisionTreeRegressor(max_depth=depth).fit(X, residual)
+        pred += lr * tree.predict(X)  <span class="c"># steps 3-4: nudge, don't jump</span>
+        trees.append(tree)
+    <span class="k">return</span> f0, trees
+
+<span class="k">def</span> predict(f0, trees, X, lr=0.1):
+    <span class="k">return</span> f0 + lr * sum(t.predict(X) <span class="k">for</span> t <span class="k">in</span> trees)</pre>
+
+  <h3>The same thing, the way you'd write it at work</h3>
+<pre class="code"><span class="k">from</span> sklearn.ensemble <span class="k">import</span> GradientBoostingRegressor
+
+model = GradientBoostingRegressor(
+    n_estimators=500,
+    learning_rate=0.05,
+    max_depth=3,
+    subsample=0.8,
+    n_iter_no_change=50,     <span class="c"># early stopping...</span>
+    validation_fraction=0.2, <span class="c"># ...judged on 20% held-out rows</span>
+)
+model.fit(X_train, y_train)
+print(model.n_estimators_)   <span class="c"># how many trees it actually kept</span>
+print(model.predict(X_test))</pre>
+  <p>For big tables, <b>XGBoost</b>, <b>LightGBM</b> and scikit-learn's <code>HistGradientBoostingRegressor</code> run the same loop much faster.</p>
+</section>
+
+<!-- 10 -->
+<section class="ch" id="ch10">
+  <header><span class="eyebrow">Chapter 10</span><h2>The whole thing on one card</h2></header>
+  <div class="card">
+    F₀ = average(y)&nbsp;&nbsp;<span class="c">start simple</span><br>
+    for m = 1 … M:<br>
+    &nbsp;&nbsp;rᵢ = yᵢ − Fₘ₋₁(xᵢ)&nbsp;&nbsp;<span class="c">what's left</span><br>
+    &nbsp;&nbsp;hₘ = small tree fitted to (xᵢ, rᵢ)<br>
+    &nbsp;&nbsp;Fₘ = Fₘ₋₁ + η · hₘ&nbsp;&nbsp;<span class="c">η = learning rate</span><br>
+    predict(x) = F₀ + η · (h₁(x) + … + h_M(x))
+  </div>
+  <h3>Key takeaways</h3>
+  <ul class="ticks">
+    <li><span>A boosted model is <b>a starting guess plus a sum of many small trees</b>.</span></li>
+    <li><span>Trees are built <b>one after another</b>. Each is trained on the <b>residuals</b> the model is still getting wrong.</span></li>
+    <li><span>Residuals are the <b>downhill direction</b> of the loss. That's where "gradient" comes from. Other losses give other pseudo-residuals.</span></li>
+    <li><span>The <b>learning rate</b> shrinks each tree's say. Smaller rates need more trees but usually generalize better.</span></li>
+    <li><span>Trees stay <b>small</b> (stumps up to depth 6). They're weak alone and strong together.</span></li>
+    <li><span>Boosting <b>can overfit</b>. Watch validation error and use <b>early stopping</b>.</span></li>
+  </ul>
+</section>
+
+<!-- 11 -->
+<section class="ch" id="ch11">
+  <header><span class="eyebrow">Chapter 11</span><h2>Quick quiz</h2></header>
+  <p>Six questions. Tap an answer to see why.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="step-nav" style="align-items:center">
+    <span class="score" id="qz-score" aria-live="polite">0 of 6 answered</span>
+    <button type="button" class="btn" id="qz-reset">Start over</button>
+  </div>
+</section>
+
+<footer class="end">
+  <h3>Where to go next</h3>
+  <ul>
+    <li>Try the scikit-learn code above on a real dataset, such as <code>fetch_california_housing</code>, and plot validation error against trees.</li>
+    <li><a href="https://xgboost.readthedocs.io/en/stable/tutorials/model.html">XGBoost's "Introduction to Boosted Trees"</a> shows the same idea with the maths written out, including regularization.</li>
+    <li><a href="https://scikit-learn.org/stable/modules/ensemble.html">scikit-learn's ensemble guide</a> covers both gradient boosting and random forests.</li>
+  </ul>
+</footer>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+var NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent){
+  var e = document.createElementNS(NS, tag);
+  if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function txt(parent, x, y, s, cls, anchor){
+  var t = el('text', {x:x, y:y, 'class':cls}, parent);
+  if (anchor) t.setAttribute('text-anchor', anchor);
+  t.textContent = s;
+  return t;
+}
+function signed(v){ v = Math.round(v*100)/100; if (v === 0) return '0'; return (v > 0 ? '+' : '−') + Math.abs(v); }
+function num(v){ v = Math.round(v*100)/100; return (v < 0 ? '−' : '') + Math.abs(v); }
+function mean(a){ var s = 0; for (var i=0;i<a.length;i++) s += a[i]; return s / a.length; }
+function rmse(y, p){ var s = 0; for (var i=0;i<y.length;i++){ var d = y[i]-p[i]; s += d*d; } return Math.sqrt(s / y.length); }
+
+/* ---------- regression tree on one feature ---------- */
+function fitTree(xs, rs, maxDepth, minLeaf){
+  minLeaf = minLeaf || 1;
+  var idx = xs.map(function(_, i){ return i; }).sort(function(a, b){ return xs[a] - xs[b]; });
+  function grow(ids, d){
+    var n = ids.length, sum = 0, sq = 0, i;
+    for (i=0;i<n;i++){ sum += rs[ids[i]]; sq += rs[ids[i]]*rs[ids[i]]; }
+    var m = sum / n;
+    if (d >= maxDepth || n < 2*minLeaf) return {v:m};
+    var best = -1, bestSSE = Infinity, sumL = 0, sqL = 0;
+    for (var k=0;k<n-1;k++){
+      var r = rs[ids[k]]; sumL += r; sqL += r*r;
+      var nL = k+1, nR = n-nL;
+      if (nL < minLeaf || nR < minLeaf) continue;
+      if (xs[ids[k]] === xs[ids[k+1]]) continue;
+      var sumR = sum-sumL, sqR = sq-sqL;
+      var sse = (sqL - sumL*sumL/nL) + (sqR - sumR*sumR/nR);
+      if (sse < bestSSE - 1e-9){ bestSSE = sse; best = k; }
+    }
+    var parent = sq - sum*sum/n;
+    if (best < 0 || parent - bestSSE < 1e-9) return {v:m};
+    return { t:(xs[ids[best]] + xs[ids[best+1]])/2, l:grow(ids.slice(0, best+1), d+1), r:grow(ids.slice(best+1), d+1) };
+  }
+  return grow(idx, 0);
+}
+function predTree(node, x){ while (node.t !== undefined) node = x < node.t ? node.l : node.r; return node.v; }
+
+/* ---------- gradient boosting ---------- */
+function boost(xs, ys, nTrees, lr, depth, evalSets){
+  evalSets = evalSets || [];
+  var f0 = mean(ys), pred = ys.map(function(){ return f0; }), trees = [];
+  var curves = evalSets.map(function(){ return []; });
+  var ep = evalSets.map(function(s){ return s.x.map(function(){ return f0; }); });
+  function record(){ evalSets.forEach(function(s, j){ curves[j].push(rmse(s.y, ep[j])); }); }
+  record();
+  for (var m=0;m<nTrees;m++){
+    var r = ys.map(function(y, i){ return y - pred[i]; });
+    var tree = fitTree(xs, r, depth, 1);
+    trees.push(tree);
+    for (var i=0;i<xs.length;i++) pred[i] += lr * predTree(tree, xs[i]);
+    evalSets.forEach(function(s, j){ for (var q=0;q<s.x.length;q++) ep[j][q] += lr * predTree(tree, s.x[q]); });
+    record();
+  }
+  return {f0:f0, lr:lr, trees:trees, curves:curves};
+}
+function predModel(model, x, n){
+  if (n === undefined) n = model.trees.length;
+  var s = model.f0;
+  for (var m=0;m<n;m++) s += model.lr * predTree(model.trees[m], x);
+  return s;
+}
+
+/* ---------- chart frame ---------- */
+function frame(svg, o){
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox', '0 0 ' + o.W + ' ' + o.H);
+  var p = o.pad;
+  var sx = function(v){ return p.l + (v - o.xd[0]) / (o.xd[1] - o.xd[0]) * (o.W - p.l - p.r); };
+  var sy = function(v){ return o.H - p.b - (v - o.yd[0]) / (o.yd[1] - o.yd[0]) * (o.H - p.t - p.b); };
+  var g = el('g', null, svg);
+  (o.yt || []).forEach(function(t){
+    el('line', {x1:p.l, x2:o.W - p.r, y1:sy(t), y2:sy(t), 'class':'gridline'}, g);
+    if (!o.noYLabels) txt(g, p.l - 6, sy(t) + 4, t, 'tick', 'end');
+  });
+  el('line', {x1:p.l, x2:o.W - p.r, y1:o.H - p.b, y2:o.H - p.b, 'class':'axis'}, g);
+  (o.xt || []).forEach(function(t){
+    el('line', {x1:sx(t), x2:sx(t), y1:o.H - p.b, y2:o.H - p.b + 4, 'class':'axis'}, g);
+    txt(g, sx(t), o.H - p.b + 16, t, 'tick', 'middle');
+  });
+  if (o.xl) txt(g, o.W - p.r, o.H - 4, o.xl, 'axlabel', 'end');
+  if (o.yl) txt(g, p.l - 30 < 2 ? 2 : p.l - 30, p.t - 8, o.yl, 'axlabel');
+  return {sx:sx, sy:sy, g:g};
+}
+function stepPath(fn, xd, breaks, sx, sy){
+  var bs = breaks.filter(function(b){ return b > xd[0] && b < xd[1]; }).sort(function(a, b){ return a - b; });
+  var edges = [xd[0]].concat(bs, [xd[1]]), d = '';
+  for (var i=0;i<edges.length-1;i++){
+    var v = fn((edges[i] + edges[i+1]) / 2);
+    d += (i === 0 ? 'M' + sx(edges[i]).toFixed(1) + ',' + sy(v).toFixed(1) : 'V' + sy(v).toFixed(1)) + 'H' + sx(edges[i+1]).toFixed(1);
+  }
+  return d;
+}
+function midpoints(xs){
+  var u = xs.slice().sort(function(a, b){ return a - b; }).filter(function(v, i, a){ return i === 0 || v !== a[i-1]; });
+  var m = []; for (var i=0;i<u.length-1;i++) m.push((u[i] + u[i+1]) / 2); return m;
+}
+
+/* ---------- tree diagram ---------- */
+function drawTree(svg, o){
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  var H = o.sub ? 172 : 150;
+  svg.setAttribute('viewBox', '0 0 360 ' + H);
+  if (o.empty){
+    el('rect', {x:30, y:20, width:300, height:H - 40, rx:10, 'class':'ghost'}, svg);
+    txt(svg, 180, H/2 - 4, o.empty[0], 'ann-ink', 'middle');
+    txt(svg, 180, H/2 + 18, o.empty[1], 'ann-ink', 'middle');
+    return;
+  }
+  if (o.label) txt(svg, 8, 16, o.label, 'ann-g');
+  el('rect', {x:75, y:24, width:210, height:38, rx:8, 'class':'node'}, svg);
+  txt(svg, 180, 48, o.q, 'node-text', 'middle');
+  el('path', {d:'M150,62 L90,100', 'class':'branch'}, svg);
+  el('path', {d:'M210,62 L270,100', 'class':'branch'}, svg);
+  txt(svg, 104, 80, 'yes', 'ann-ink', 'end');
+  txt(svg, 256, 80, 'no', 'ann-ink');
+  el('rect', {x:35, y:100, width:110, height:40, rx:6, 'class':'leaf'}, svg);
+  el('rect', {x:215, y:100, width:110, height:40, rx:6, 'class':'leaf'}, svg);
+  txt(svg, 90, 126, o.yes, 'leaf-text', 'middle');
+  txt(svg, 270, 126, o.no, 'leaf-text', 'middle');
+  if (o.sub){
+    txt(svg, 90, 162, o.sub[0], 'leaf-sub', 'middle');
+    txt(svg, 270, 162, o.sub[1], 'leaf-sub', 'middle');
+  }
+}
+
+/* ---------- data ---------- */
+var HAND = {x:[15, 18, 22, 27, 31, 35], y:[98, 92, 77, 63, 42, 30]};
+var HAND_BREAKS = midpoints(HAND.x);
+
+function mulberry32(a){ return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+var rnd = mulberry32(17);
+function gauss(){ var u = 0; while (u === 0) u = rnd(); var v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+function truth(t){ return 36 + 60 / (1 + Math.exp((t - 25) / 2.6)); }
+function makeDays(n){
+  var x = [], y = [];
+  for (var i=0;i<n;i++){ var t = Math.round((12 + 26 * rnd()) * 10) / 10; x.push(t); y.push(Math.round(truth(t) + 6 * gauss())); }
+  return {x:x, y:y};
+}
+var MONTH = makeDays(30), FRESH = makeDays(15);
+var MONTH_BREAKS = midpoints(MONTH.x);
+
+/* ---------- chapter 1: month scatter ---------- */
+(function(){
+  var svg = document.getElementById('month-chart');
+  var f = frame(svg, {W:360, H:240, pad:{l:40, r:12, t:26, b:38}, xd:[10, 40], yd:[20, 110], xt:[10, 15, 20, 25, 30, 35, 40], yt:[40, 60, 80, 100], xl:'temperature (°C)', yl:'cups sold'});
+  MONTH.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(MONTH.y[i]), r:4.5, 'class':'dot'}, f.g); });
+  txt(f.g, f.sx(21), f.sy(104), 'cold days: lots of chai', 'ann');
+  txt(f.g, f.sx(39.5), f.sy(66), 'hot days:', 'ann', 'end');
+  txt(f.g, f.sx(39.5), f.sy(59), 'fewer cups', 'ann', 'end');
+})();
+
+/* ---------- chapter 2: stump ---------- */
+(function(){
+  var stump = fitTree(HAND.x, HAND.y, 1);
+  drawTree(document.getElementById('stump-tree'), {q:'Colder than ' + stump.t + ' °C?', yes:Math.round(stump.l.v) + ' cups', no:Math.round(stump.r.v) + ' cups'});
+  var svg = document.getElementById('stump-chart');
+  var f = frame(svg, {W:360, H:220, pad:{l:40, r:12, t:26, b:38}, xd:[12, 38], yd:[20, 108], xt:[15, 20, 25, 30, 35], yt:[40, 60, 80, 100], xl:'temperature (°C)', yl:'cups sold'});
+  el('line', {x1:f.sx(stump.t), x2:f.sx(stump.t), y1:26, y2:182, 'class':'cut'}, f.g);
+  txt(f.g, f.sx(stump.t) + 5, 38, 'the one question', 'ann-g');
+  el('path', {d:stepPath(function(x){ return predTree(stump, x); }, [12, 38], HAND_BREAKS, f.sx, f.sy), 'class':'pred'}, f.g);
+  HAND.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(HAND.y[i]), r:5, 'class':'dot'}, f.g); });
+  txt(f.g, f.sx(13), f.sy(stump.l.v) - 8, '89', 'ann');
+  txt(f.g, f.sx(37), f.sy(stump.r.v) - 8, '45', 'ann', 'end');
+
+  // candidate cuts
+  var bars = document.getElementById('split-bars');
+  var cuts = HAND_BREAKS.map(function(c){
+    var L = [], R = [];
+    HAND.x.forEach(function(x, i){ (x < c ? L : R).push(HAND.y[i]); });
+    var sse = 0, mL = mean(L), mR = mean(R);
+    L.forEach(function(v){ sse += (v - mL) * (v - mL); });
+    R.forEach(function(v){ sse += (v - mR) * (v - mR); });
+    return {c:c, sse:sse};
+  });
+  var bestC = cuts.reduce(function(a, b){ return b.sse < a.sse ? b : a; });
+  var H = 22 + cuts.length * 30;
+  bars.setAttribute('viewBox', '0 0 360 ' + H);
+  var maxS = Math.max.apply(null, cuts.map(function(c){ return c.sse; }));
+  var x0 = 104, wMax = 190;
+  cuts.forEach(function(c, i){
+    var y = 10 + i * 30, w = c.sse / maxS * wMax, isBest = c === bestC;
+    txt(bars, x0 - 10, y + 15, 'cut at ' + c.c + ' °C', 'tick', 'end');
+    el('rect', {x:x0, y:y + 2, width:w, height:18, rx:3, 'class':isBest ? 'bar-best' : 'bar'}, bars);
+    txt(bars, x0 + w + 6, y + 15, Math.round(c.sse).toLocaleString('en-US'), 'barval');
+    if (isBest) txt(bars, x0 + w + 46, y + 16, '← winner', 'ann-g');
+  });
+})();
+
+/* ---------- chapter 3: small multiples ---------- */
+(function(){
+  var model = boost(MONTH.x, MONTH.y, 50, 0.3, 1);
+  var host = document.getElementById('multiples');
+  [1, 3, 10, 50].forEach(function(n){
+    var fig = document.createElement('figure');
+    var cap = document.createElement('figcaption');
+    cap.textContent = n + (n === 1 ? ' tree' : ' trees');
+    fig.appendChild(cap);
+    var svg = el('svg', {'class':'chart', role:'img', 'aria-label':'Boosted model after ' + n + ' trees'});
+    fig.appendChild(svg);
+    host.appendChild(fig);
+    var f = frame(svg, {W:200, H:150, pad:{l:26, r:6, t:10, b:24}, xd:[10, 40], yd:[20, 110], xt:[15, 25, 35], yt:[40, 80]});
+    MONTH.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(MONTH.y[i]), r:2.8, 'class':'dot', opacity:.55}, f.g); });
+    el('path', {d:stepPath(function(x){ return predModel(model, x, n); }, [10, 40], MONTH_BREAKS, f.sx, f.sy), 'class':'pred'}, f.g);
+  });
+})();
+
+/* ---------- chapter 4: stepper ---------- */
+(function(){
+  var LR = 0.5;
+  var model = boost(HAND.x, HAND.y, 3, LR, 1);
+  var F = [0, 1, 2, 3].map(function(k){ return HAND.x.map(function(x){ return predModel(model, x, k); }); });
+  var SSE = F.map(function(p){ var s = 0; p.forEach(function(v, i){ s += (HAND.y[i] - v) * (HAND.y[i] - v); }); return s; });
+  var STORY = [
+    'Ravi starts with the simplest guess there is: <mark>the average, ' + num(model.f0) + ' cups</mark>, for every day. The <span class="r">red sticks</span> show how wrong that is. Cold days sold more than 67 (+31, +25). Hot days sold less (−25, −37). Next, a tree will try to predict those red sticks.',
+    'Tree 1 studies the red sticks from the start and finds the question that splits them best: <b>colder than 24.5 °C?</b> Cold days\' errors average <span class="g">+22</span>, warm days\' <span class="g">−22</span>. We add <mark>half</mark> of that (learning rate 0.5): cold days move 67 → 78, warm days 67 → 56.',
+    'Tree 2 is trained on the <em>new</em> red sticks, so it asks a different question: <b>colder than 29 °C?</b> Yes → <span class="g">+10</span>, no → <span class="g">−20</span>. Half of that is +5 and −10. The two hottest days finally get pulled down.',
+    'Tree 3: <b>colder than 20 °C?</b> Yes → <span class="g">+12</span>, no → <span class="g">−6</span>, so +6 and −3. Three tiny trees, and the blue line already bends with the data. Total error is down from 3,696 to 294.'
+  ];
+  var chart = document.getElementById('st-chart'), treeSvg = document.getElementById('st-tree');
+  var story = document.getElementById('st-text'), table = document.getElementById('st-table'), errSvg = document.getElementById('st-err');
+  var seg = document.getElementById('st-seg'), prev = document.getElementById('st-prev'), next = document.getElementById('st-next');
+  var cur = 0;
+
+  function render(k){
+    cur = k;
+    Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){ b.setAttribute('aria-pressed', String(+b.dataset.k === k)); });
+    prev.disabled = k === 0; next.disabled = k === 3;
+
+    // chart
+    var f = frame(chart, {W:360, H:240, pad:{l:40, r:12, t:26, b:38}, xd:[12, 38], yd:[20, 108], xt:[15, 20, 25, 30, 35], yt:[40, 60, 80, 100], xl:'temperature (°C)', yl:'cups sold'});
+    if (k > 0){
+      var t = model.trees[k-1].t;
+      el('line', {x1:f.sx(t), x2:f.sx(t), y1:26, y2:202, 'class':'cut'}, f.g);
+      txt(f.g, f.sx(t) + 5, 38, 'tree ' + k + ' cuts here', 'ann-g');
+      el('path', {d:stepPath(function(x){ return predModel(model, x, k-1); }, [12, 38], HAND_BREAKS, f.sx, f.sy), 'class':'pred-old'}, f.g);
+    }
+    el('path', {d:stepPath(function(x){ return predModel(model, x, k); }, [12, 38], HAND_BREAKS, f.sx, f.sy), 'class':'pred'}, f.g);
+    HAND.x.forEach(function(x, i){
+      var y = HAND.y[i], p = F[k][i], r = y - p, X = f.sx(x);
+      if (Math.abs(r) > 0.01) el('line', {x1:X, x2:X, y1:f.sy(y), y2:f.sy(p), 'class':'resid'}, f.g);
+      txt(f.g, X + 7, (f.sy(y) + f.sy(p)) / 2 + 4 + (Math.abs(f.sy(y) - f.sy(p)) < 12 ? (r > 0 ? -10 : 12) : 0), signed(r), 'resid-label');
+    });
+    HAND.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(HAND.y[i]), r:5, 'class':'dot'}, f.g); });
+    txt(f.g, f.sx(12.4), f.sy(F[k][0]) + 17, k === 0 ? 'prediction: 67 for every day' : 'new prediction', 'ann');
+
+    // tree
+    if (k === 0){
+      drawTree(treeSvg, {empty:['No trees yet.', 'Every day gets the average: ' + num(model.f0) + ' cups.'], sub:true});
+    } else {
+      var tr = model.trees[k-1];
+      drawTree(treeSvg, {label:'Tree ' + k + ', trained on the red sticks from the previous step', q:'Colder than ' + tr.t + ' °C?', yes:signed(tr.l.v), no:signed(tr.r.v), sub:['× 0.5 → ' + signed(LR * tr.l.v), '× 0.5 → ' + signed(LR * tr.r.v)]});
+    }
+
+    story.innerHTML = STORY[k];
+
+    // table
+    var h = '';
+    if (k === 0){
+      h += '<tr><th>°C</th><th>Cups</th><th>Guess</th><th>Error</th></tr>';
+      HAND.x.forEach(function(x, i){ h += '<tr><td>' + x + '</td><td>' + HAND.y[i] + '</td><td class="b">' + num(F[0][i]) + '</td><td class="r">' + signed(HAND.y[i] - F[0][i]) + '</td></tr>'; });
+    } else {
+      h += '<tr><th>°C</th><th>Cups</th><th>Before</th><th>Error</th><th>½ tree</th><th>After</th><th>New error</th></tr>';
+      HAND.x.forEach(function(x, i){
+        var add = F[k][i] - F[k-1][i];
+        h += '<tr><td>' + x + '</td><td>' + HAND.y[i] + '</td><td>' + num(F[k-1][i]) + '</td><td class="r">' + signed(HAND.y[i] - F[k-1][i]) + '</td><td class="g">' + signed(add) + '</td><td class="b">' + num(F[k][i]) + '</td><td class="r">' + signed(HAND.y[i] - F[k][i]) + '</td></tr>';
+      });
+    }
+    table.innerHTML = h;
+
+    // error bars
+    while (errSvg.firstChild) errSvg.removeChild(errSvg.firstChild);
+    errSvg.setAttribute('viewBox', '0 0 360 112');
+    var base = 86, maxH = 62, labels = ['start', 'tree 1', 'tree 2', 'tree 3'];
+    el('line', {x1:20, x2:340, y1:base, y2:base, 'class':'axis'}, errSvg);
+    SSE.forEach(function(s, i){
+      var cx = 60 + i * 80, hgt = s / SSE[0] * maxH;
+      if (i <= k){
+        el('rect', {x:cx - 24, y:base - hgt, width:48, height:hgt, rx:3, 'class':i === k ? 'bar' : 'bar', opacity:i === k ? 1 : .45}, errSvg);
+        txt(errSvg, cx, base - hgt - 6, Math.round(s).toLocaleString('en-US'), 'barval', 'middle');
+      } else {
+        el('rect', {x:cx - 24, y:base - maxH * .5, width:48, height:maxH * .5, rx:3, 'class':'bar-future'}, errSvg);
+        txt(errSvg, cx, base - maxH * .5 - 6, '?', 'barval', 'middle');
+      }
+      txt(errSvg, cx, base + 18, labels[i], i === k ? 'ann' : 'ann-ink', 'middle');
+    });
+  }
+  seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) render(+b.dataset.k); });
+  prev.addEventListener('click', function(){ if (cur > 0) render(cur - 1); });
+  next.addEventListener('click', function(){ if (cur < 3) render(cur + 1); });
+  render(0);
+})();
+
+/* ---------- chapter 7: playground ---------- */
+(function(){
+  var MAXN = 200;
+  var nI = document.getElementById('pg-n'), lrI = document.getElementById('pg-lr'), dI = document.getElementById('pg-d');
+  var nO = document.getElementById('pg-n-out'), lrO = document.getElementById('pg-lr-out'), dO = document.getElementById('pg-d-out');
+  var chart = document.getElementById('pg-chart'), loss = document.getElementById('pg-loss');
+  var oTrees = document.getElementById('pg-trees'), oTrain = document.getElementById('pg-train'), oTest = document.getElementById('pg-test');
+  var play = document.getElementById('pg-play');
+  var model = null, key = '';
+
+  function ensureModel(){
+    var k = lrI.value + '|' + dI.value;
+    if (k !== key){
+      model = boost(MONTH.x, MONTH.y, MAXN, +lrI.value, +dI.value, [MONTH, FRESH]);
+      key = k;
+    }
+  }
+  function draw(){
+    ensureModel();
+    var n = +nI.value;
+    nO.textContent = n; lrO.textContent = (+lrI.value).toFixed(2); dO.textContent = dI.value;
+    oTrees.textContent = n;
+    oTrain.textContent = '±' + model.curves[0][n].toFixed(1);
+    oTest.textContent = '±' + model.curves[1][n].toFixed(1);
+
+    var f = frame(chart, {W:360, H:240, pad:{l:40, r:12, t:26, b:38}, xd:[10, 40], yd:[20, 110], xt:[10, 15, 20, 25, 30, 35, 40], yt:[40, 60, 80, 100], xl:'temperature (°C)', yl:'cups sold'});
+    FRESH.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(FRESH.y[i]), r:4.2, 'class':'dot-test'}, f.g); });
+    MONTH.x.forEach(function(x, i){ el('circle', {cx:f.sx(x), cy:f.sy(MONTH.y[i]), r:4.2, 'class':'dot'}, f.g); });
+    el('path', {d:stepPath(function(x){ return predModel(model, x, n); }, [10, 40], MONTH_BREAKS, f.sx, f.sy), 'class':'pred'}, f.g);
+
+    var c0 = model.curves[0], c1 = model.curves[1];
+    var ymax = Math.ceil(Math.max(c0[0], c1[0]) / 5) * 5;
+    var yt = []; for (var v = 0; v <= ymax; v += 5) yt.push(v);
+    var g = frame(loss, {W:360, H:170, pad:{l:34, r:12, t:22, b:34}, xd:[0, MAXN], yd:[0, ymax], xt:[0, 50, 100, 150, 200], yt:yt, xl:'number of trees', yl:'off by (cups)'});
+    function line(c, cls){ var d = ''; c.forEach(function(v, i){ d += (i ? 'L' : 'M') + g.sx(i).toFixed(1) + ',' + g.sy(v).toFixed(1); }); el('path', {d:d, 'class':cls}, g.g); }
+    line(c0, 'stroke-b');
+    line(c1, 'stroke-r');
+    var bi = 0; c1.forEach(function(v, i){ if (v < c1[bi]) bi = i; });
+    el('line', {x1:g.sx(n), x2:g.sx(n), y1:22, y2:136, 'class':'pred-old'}, g.g);
+    var labelY = 36;
+    el('line', {x1:g.sx(bi), x2:g.sx(bi), y1:labelY + 4, y2:g.sy(c1[bi]) - 6, 'class':'stroke-r', 'stroke-dasharray':'2 3', 'stroke-width':1.2}, g.g);
+    el('circle', {cx:g.sx(bi), cy:g.sy(c1[bi]), r:5, 'class':'fill-r'}, g.g);
+    var lx = g.sx(bi) + 6, anchor = 'start';
+    if (lx > 230){ lx = g.sx(bi) - 6; anchor = 'end'; }
+    txt(g.g, lx, labelY, 'new-day error lowest at ' + bi + (bi === 1 ? ' tree' : ' trees'), 'ann-r', anchor);
+  }
+  [nI, lrI, dI].forEach(function(i){ i.addEventListener('input', function(){ stop(); draw(); }); });
+
+  var PRESETS = {careful:{n:35, lr:.1, d:1}, hasty:{n:6, lr:.1, d:1}, eager:{n:200, lr:.3, d:3}};
+  Array.prototype.forEach.call(document.querySelectorAll('[data-preset]'), function(b){
+    b.addEventListener('click', function(){ var p = PRESETS[b.dataset.preset]; stop(); nI.value = p.n; lrI.value = p.lr; dI.value = p.d; draw(); });
+  });
+
+  var raf = 0, t0 = 0, target = MAXN;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function stop(){ if (raf){ cancelAnimationFrame(raf); raf = 0; } play.textContent = '▶ Play from 0 trees'; }
+  function tick(ts){
+    if (!t0) t0 = ts;
+    var n = Math.min(target, Math.round((ts - t0) / 5000 * target));
+    nI.value = n; draw();
+    if (n < target) raf = requestAnimationFrame(tick); else stop();
+  }
+  play.addEventListener('click', function(){
+    if (raf){ stop(); return; }
+    target = Math.max(+nI.value, 20);
+    if (reduce){ nI.value = target; draw(); return; }
+    t0 = 0; play.textContent = '❚❚ Pause'; raf = requestAnimationFrame(tick);
+  });
+  draw();
+  window.__pg = {model:function(){ return model; }, draw:draw};
+})();
+
+/* ---------- chapter 11: quiz ---------- */
+(function(){
+  var Q = [
+    {q:'In gradient boosting, what does each new tree learn to predict?', o:['The cups sold, from scratch', 'The errors the model is still making', 'A random half of the days', 'The average of the earlier trees'], a:1, w:'Each tree is trained on the residuals: actual minus the current prediction. That is the whole trick.'},
+    {q:'You cut the learning rate from 0.5 to 0.05. What else should you usually change?', o:['Use fewer trees', 'Use more trees', 'Use deeper trees', 'Nothing'], a:1, w:'Smaller steps cover less ground per tree, so you need more of them to reach the same fit.'},
+    {q:'How are the trees in a boosted model built?', o:['All at once, independently', 'One after another, each depending on the ones before', 'Only the first is trained; the rest are copies', 'In a random order'], a:1, w:'Tree m needs the residuals left by trees 1 to m−1, so they are built in sequence. Random forests build theirs independently.'},
+    {q:'Training error keeps falling, but error on new days starts rising after tree 300. What is happening?', o:['Underfitting', 'The learning rate is too small', 'Overfitting, so stop earlier', 'The data is broken'], a:2, w:'The model is memorizing noise. Early stopping keeps the number of trees where validation error was lowest.'},
+    {q:'Why does boosting use small trees (stumps up to about depth 6)?', o:['Each small tree makes a modest correction, so detail builds up gradually', 'The algorithm does not allow big trees', 'Small trees are more accurate on their own', 'It turns the model into a random forest'], a:0, w:'Small trees are weak learners. They are cheap, hard to overfit, and add up to complex shapes.'},
+    {q:'With squared-error loss, the downhill direction (negative gradient) for each day is…', o:['The temperature', 'The residual: actual − predicted', 'Always +1', 'The learning rate'], a:1, w:'The slope of ½(y − F)² is −(y − F), so downhill is y − F: the residual. Hence the name gradient boosting.'}
+  ];
+  var host = document.getElementById('quiz'), scoreEl = document.getElementById('qz-score');
+  var answered = 0, right = 0;
+  function update(){
+    scoreEl.textContent = answered < Q.length ? right + ' right, ' + answered + ' of ' + Q.length + ' answered' : 'You got ' + right + ' of ' + Q.length + (right === Q.length ? '. Chai is on Ravi.' : right >= 4 ? '. Solid. Revisit the ones you missed.' : '. Try chapters 3 to 5 again, then retake it.');
+  }
+  function build(){
+    host.innerHTML = ''; answered = 0; right = 0;
+    Q.forEach(function(item, qi){
+      var fs = document.createElement('fieldset'); fs.className = 'qz';
+      var lg = document.createElement('legend'); lg.textContent = (qi + 1) + '. ' + item.q; fs.appendChild(lg);
+      var why = document.createElement('p'); why.className = 'why'; why.hidden = true; why.setAttribute('aria-live', 'polite');
+      item.o.forEach(function(opt, oi){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.id = 'qz-' + qi + '-' + oi; b.textContent = opt;
+        b.addEventListener('click', function(){
+          var btns = fs.querySelectorAll('.opt');
+          Array.prototype.forEach.call(btns, function(x){ x.disabled = true; });
+          btns[item.a].classList.add('right');
+          if (oi !== item.a) b.classList.add('wrong'); else right++;
+          answered++;
+          why.textContent = (oi === item.a ? 'Right. ' : 'Not quite. ') + item.w;
+          why.hidden = false;
+          update();
+        });
+        fs.appendChild(b);
+      });
+      fs.appendChild(why);
+      host.appendChild(fs);
+    });
+    update();
+  }
+  document.getElementById('qz-reset').addEventListener('click', build);
+  build();
+})();
+
+})();
+</script>
+
+</body>
+</html>
