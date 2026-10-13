@@ -1,0 +1,13 @@
+[project]
+name = "fde-first-principles"
+version = "0.1.0"
+description = "Daily first-principles AI learning notebooks"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "requests",
+    "ipykernel",
+    "jupyterlab",
+]

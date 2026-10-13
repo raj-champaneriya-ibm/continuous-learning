@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+data/cache/
+data/downloads/
+*.executed.ipynb
+*.mov
+*.mp4
+*.m4a
+.env
+.DS_Store
