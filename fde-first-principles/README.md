@@ -15,6 +15,7 @@ The daily drop, deadlines and this table are managed by
 <!-- learn:progress -->
 | Day | Date | Topic | Video | Status |
 |---|---|---|---|---|
+| 1 | 2026-10-13 | [An LLM call is just an HTTP request](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) |  | ⏳ open |
 
 **0 of 59 topics shipped.**
 <!-- /learn:progress -->
