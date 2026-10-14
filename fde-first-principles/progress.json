@@ -10,7 +10,10 @@
     "attempt": 2,
     "starter_hashes": {
       "notebook.ipynb": "c3088ddf59622a5b1016ce560111dd993f08f9250f33bed277994ca1359226e0"
-    }
+    },
+    "shipped_at": "2026-10-14T17:30",
+    "status": "shipped",
+    "video": "https://youtu.be/vc5h1lX4Rwo"
   },
   "log": [
     {
@@ -18,6 +21,14 @@
       "dropped_on": "2026-10-13",
       "attempt": 1,
       "status": "missed"
+    },
+    {
+      "topic_id": "p1-01",
+      "dropped_on": "2026-10-14",
+      "attempt": 2,
+      "status": "shipped",
+      "shipped_at": "2026-10-14T17:30",
+      "video": "https://youtu.be/vc5h1lX4Rwo"
     }
   ]
 }
