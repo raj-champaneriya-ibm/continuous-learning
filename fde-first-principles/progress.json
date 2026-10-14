@@ -3,17 +3,18 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-01",
-    "folder": "1-measure-before-you-believe/01-an-llm-call-is-http",
-    "dropped_on": "2026-10-14",
-    "deadline": "2026-10-15T05:50",
-    "attempt": 2,
+    "topic_id": "p1-02",
+    "folder": "1-measure-before-you-believe/02-workflow-or-agent",
+    "dropped_on": "2026-10-15",
+    "deadline": "2026-10-16T05:00",
+    "attempt": 1,
     "starter_hashes": {
-      "notebook.ipynb": "c3088ddf59622a5b1016ce560111dd993f08f9250f33bed277994ca1359226e0"
-    },
-    "shipped_at": "2026-10-14T17:30",
-    "status": "shipped",
-    "video": "https://youtu.be/vc5h1lX4Rwo"
+      "/data/acme/README.md": "a3d266eec89084ab3f5a6ac4022a063cb96fc00ff58f62516358a2b0bb4e8155",
+      "/data/acme/customers.json": "62cb5cc39f7317f4dce26e5db17ff6660e138162459eddb1d67b8b959bdd4267",
+      "/data/acme/kb.md": "14ef0565a71bc0d3b93da3dda2a0788775c3c965e28f5c612f741ae4760309e0",
+      "/data/acme/outages.json": "4a305e0a8b432a343c498529d86c8be4bb6ef6126b413874d92b517b98369ae7",
+      "/data/acme/policy.md": "1b695b94c59fedc25444fca4e1364593e44b383673329ddba2626ea3744da718"
+    }
   },
   "log": [
     {
