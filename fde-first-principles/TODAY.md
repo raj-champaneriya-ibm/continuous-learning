@@ -1,10 +1,12 @@
 # Today · Day 1 of 59: An LLM call is just an HTTP request
 
-**Ship by Wed 14 Oct, 05:50** · folder: [1-measure-before-you-believe/01-an-llm-call-is-http](1-measure-before-you-believe/01-an-llm-call-is-http/README.md)
+**Ship by Thu 15 Oct, 05:50** · folder: [1-measure-before-you-believe/01-an-llm-call-is-http](1-measure-before-you-believe/01-an-llm-call-is-http/README.md)
 
 > **First-principles question:** What exactly travels over the wire when you 'call an LLM'?
 
 **Why it matters for an FDE:** Every agent framework hides this one request. When a customer's agent misbehaves, this is the level you debug at.
+
+**Attempt 2: minimum scope.** Ship at least this: One raw HTTP call with tokens and seconds printed.
 
 ### Set up
 - Ollama is already on your Mac. Pull a small model: `ollama pull qwen3:4b` (8 GB Mac: `ollama pull llama3.2:3b` and change MODEL in the notebook).

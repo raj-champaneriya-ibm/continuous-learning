@@ -1,7 +1,7 @@
 # Day 1 · An LLM call is just an HTTP request
 
 <!-- learn:status -->
-**Status:** ⏳ open · dropped 2026-10-13 · ship by Wed 14 Oct, 05:50 · project 1, step 1
+**Status:** ⏳ open · attempt 2 · dropped 2026-10-14 · ship by Thu 15 Oct, 05:50 · project 1, step 1
 <!-- /learn:status -->
 
 > **First-principles question:** What exactly travels over the wire when you 'call an LLM'?
