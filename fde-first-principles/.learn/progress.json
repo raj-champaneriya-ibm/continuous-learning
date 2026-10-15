@@ -14,7 +14,10 @@
       "/data/acme/kb.md": "14ef0565a71bc0d3b93da3dda2a0788775c3c965e28f5c612f741ae4760309e0",
       "/data/acme/outages.json": "4a305e0a8b432a343c498529d86c8be4bb6ef6126b413874d92b517b98369ae7",
       "/data/acme/policy.md": "1b695b94c59fedc25444fca4e1364593e44b383673329ddba2626ea3744da718"
-    }
+    },
+    "shipped_at": "2026-10-16T04:25",
+    "status": "shipped",
+    "video": "https://youtu.be/i51y2NiYdDo"
   },
   "log": [
     {
@@ -30,6 +33,15 @@
       "status": "shipped",
       "shipped_at": "2026-10-14T17:30",
       "video": "https://youtu.be/vc5h1lX4Rwo"
+    },
+    {
+      "topic_id": "p1-02",
+      "dropped_on": "2026-10-15",
+      "attempt": 1,
+      "mornings": 1,
+      "status": "shipped",
+      "shipped_at": "2026-10-16T04:25",
+      "video": "https://youtu.be/i51y2NiYdDo"
     }
   ]
 }

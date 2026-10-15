@@ -1,7 +1,7 @@
 # Day 2 · Workflow or agent? Map the decisions first
 
 <!-- learn:status -->
-**Status:** ⏳ open · dropped 2026-10-15 · ship by Fri 16 Oct, 05:00 · project 1, step 2
+**Status:** ✅ shipped · dropped 2026-10-15 · ship by Fri 16 Oct, 05:00 · shipped 2026-10-16 04:25 · project 1, step 2
 <!-- /learn:status -->
 
 > **First-principles question:** Which steps in this process truly need a model, and what does a wrong answer cost?
@@ -37,19 +37,19 @@ _Tempted to do more? Park it in `later.md`: Draw the same map for your real comm
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** Not every task needs AI. We should first understand the problem, identify which steps require judgment, and use AI only where traditional software is not sufficient.
 
-**For an engineer:** …
+**For an engineer:** I would start with a deterministic workflow and introduce LLM calls only for tasks involving language ambiguity or contextual generation. I would evaluate their accuracy, cost, and failure modes before considering more autonomous execution.
 
-**For a customer:** …
+**For a customer:** My goal is not to introduce AI everywhere. I want to understand your existing process, identify the most valuable improvement opportunities, and work with your team to choose a reliable and measurable solution.
 
 ## What surprised me
-…
+A customer-support process may involve many steps, but only a few might benefit significantly from an LLM. The difficult part is identifying where model intelligence adds enough value to justify its risks.
 
 ## How I used AI
 …
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/i51y2NiYdDo)
 <!-- /learn:video -->

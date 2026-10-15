@@ -13,11 +13,11 @@ The daily drop, deadlines and this table are managed by
 
 ## Progress
 <!-- learn:progress -->
-| Day | Date | Topic | Video | Status |
+| Day | Date | Topic | Proof | Status |
 |---|---|---|---|---|
-| 1 | 2026-10-13 | [An LLM call is just an HTTP request](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) |  | ❌ missed |
-| 1 | 2026-10-14 | [An LLM call is just an HTTP request](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) (attempt 2) | [▶](https://youtu.be/vc5h1lX4Rwo) | ✅ shipped |
-| 2 | 2026-10-15 | [Workflow or agent? Map the decisions first](1-measure-before-you-believe/02-workflow-or-agent/README.md) |  | ⏳ open |
+| 1 | 2026-10-13 | [One model call: tokens, time and randomness](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) |  | ❌ missed |
+| 1 | 2026-10-14 | [One model call: tokens, time and randomness](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) (attempt 2) | [▶](https://youtu.be/vc5h1lX4Rwo) | ✅ shipped |
+| 2 | 2026-10-15 | [Workflow or agent? Map the decisions first](1-measure-before-you-believe/02-workflow-or-agent/README.md) | [▶](https://youtu.be/i51y2NiYdDo) | ✅ shipped |
 
-**1 of 59 topics shipped.**
+**2 of 66 topics shipped.**
 <!-- /learn:progress -->
