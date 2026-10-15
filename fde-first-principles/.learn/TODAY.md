@@ -1,6 +1,6 @@
 # Today · Day 2 of 59: Workflow or agent? Map the decisions first
 
-**Ship by Fri 16 Oct, 05:00** · folder: [1-measure-before-you-believe/02-workflow-or-agent](1-measure-before-you-believe/02-workflow-or-agent/README.md)
+**Ship by Fri 16 Oct, 05:00** · folder: [1-measure-before-you-believe/02-workflow-or-agent](../1-measure-before-you-believe/02-workflow-or-agent/README.md)
 
 > **First-principles question:** Which steps in this process truly need a model, and what does a wrong answer cost?
 
