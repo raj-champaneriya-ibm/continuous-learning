@@ -47,7 +47,7 @@ _Tempted to do more? Park it in `later.md`: Draw the same map for your real comm
 A customer-support process may involve many steps, but only a few might benefit significantly from an LLM. The difficult part is identifying where model intelligence adds enough value to justify its risks.
 
 ## How I used AI
-…
+I used AI to challenge my initial assumptions, discuss architectural alternatives, and practice explaining my ideas to a CTO. I reviewed the recommendations and made the final design decisions myself.
 
 ## Video
 <!-- learn:video -->
