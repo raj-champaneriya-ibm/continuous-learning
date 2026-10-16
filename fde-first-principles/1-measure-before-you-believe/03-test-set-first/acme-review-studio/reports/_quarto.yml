@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: _site
+  pre-render: scripts/copy_plotly.py      # puts plotly.min.js next to the pages (works offline)
+  resources:
+    - plotly.min.js
+  render:
+    - index.qmd
+    - evaluation-report.qmd
+    - dataset-card.qmd
+    - review-dashboard.qmd
+
+website:
+  title: "Acme · evaluation evidence"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: evaluation-report.qmd
+        text: Evaluation report
+      - href: dataset-card.qmd
+        text: Dataset card
+      - href: review-dashboard.qmd
+        text: Review dashboard
+  page-footer:
+    left: "Reads saved results only. Never calls a model or changes a review."
+    right: "Acme Review Studio"
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    toc: true
+    toc-depth: 2
+    page-layout: article
+
+execute:
+  echo: false
+  warning: false
+  # Data lives outside the documents (runs/reviews.json, the workbook), which freeze can't see.
+  # Always re-execute: rendering only reads files, so it is cheap.
+  freeze: false

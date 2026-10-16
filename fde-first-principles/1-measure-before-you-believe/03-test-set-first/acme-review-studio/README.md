@@ -106,6 +106,20 @@ scripted model, so they take under a second and never call Claude:
 pytest
 ```
 
+`tests/features/report_metrics.feature` does the same for the numbers in the reports below.
+
+## Reports (Quarto)
+
+`reports/` is a small Quarto website built from the workbook and `runs/reviews.json`: an **evaluation
+report** for the release decision, a **dataset card** describing the test set, and a **review dashboard**
+showing when and why the workflow involves a person. Rendering only reads files.
+
+```bash
+quarto render reports          # → reports/_site/index.html
+```
+
+Set-up, parameters, demo data and what each page answers: [`reports/README.md`](reports/README.md).
+
 ## Project layout
 
 ```
@@ -116,7 +130,8 @@ acme/providers.py    Claude Code (claude -p) and the offline stand-in
 acme/lab.py          load the workbook; export edits and reviews back into it
 acme/store.py        runs/reviews.json and runs/settings.json
 acme/ui_bits.py      CSS, keyboard shortcuts, the pipeline diagram
-tests/               pytest-bdd feature + step definitions
+tests/               pytest-bdd features + step definitions
+reports/             Quarto site: evaluation report, dataset card, review dashboard
 ```
 
 ## UI update · Raj Champaneriya
@@ -130,8 +145,8 @@ The footer carries Raj Champaneriya branding. Navigation has 24px side insets,
 padding. Case and workflow controls support native keyboard activation; workflow
 steps stack in reading order on mobile. Existing navigation IDs remain unchanged.
 
-Run `pytest` for 13 tests. See `REVIEW.md` for architecture/UX findings and
-`reports/` for a parameterized Quarto reporting starter. `requirements-tested.txt`
+Run `pytest` for the tests. See `REVIEW.md` for architecture/UX findings and
+`reports/` for the Quarto evaluation site. `requirements-tested.txt`
 records the resolved environment used during this review (Python 3.12.12).
 
 ## Reference Review layout

@@ -1,0 +1,151 @@
+---
+title: "Dataset card"
+subtitle: "What the test cases cover, where they come from, and what they can't tell you"
+author: "Raj Champaneriya"
+date: today
+---
+
+```{python}
+#| include: false
+import pandas as pd
+import plotly.graph_objects as go
+from IPython.display import HTML, display
+
+import acme_metrics as m
+
+ev = m.load()
+f = ev.frame
+rules = m.workbook_sheet("Escalation_Rules")
+refs = m.workbook_sheet("Kaggle_Refs")
+proposed = set(rules[rules.Status.astype(str).str.startswith("Proposed")].Rule)
+human = f[f.expected_human]
+on_proposed = human[human.rule.isin(proposed)]
+
+
+def show(html):
+    display(HTML(html))
+
+
+def split(col, order=None):
+    values = order or sorted(f[col].unique())
+    rows = [{col: v, "human": int((f[col].eq(v) & f.expected_human).sum()),
+             "send": int((f[col].eq(v) & ~f.expected_human).sum())} for v in values]
+    t = pd.DataFrame(rows)
+    t["total"] = t.human + t.send
+    return t
+```
+
+## At a glance
+
+```{python}
+show(m.tiles([
+    ("Cases", str(len(f)), f"{f.intent.nunique()} intents · {f.customer_id.nunique()} CRM customers"),
+    ("Should go to a human", f"{f.expected_human.mean():.0%}", f"{int(f.expected_human.sum())} of {len(f)}, balanced on purpose"),
+    ("Hinglish", str(int((f.language == 'Hinglish').sum())), "on both sides of the label"),
+    ("Escalations on proposed rules", f"{len(on_proposed)} of {len(human)}", "rules the policy doesn't state yet"),
+]))
+```
+
+The set tests one thing: the grounded draft (step 5) and the routing decision after it (step 7). Each case is an incoming email from one of the CRM customers, labelled with the intent, whether a person must see the reply, facts a good reply contains and phrases it must never contain. Escalation is 50% on purpose so the judge can be measured on both outcomes; real traffic escalates far less.
+
+## Composition
+
+```{python}
+t = split("intent", m.INTENTS)
+show(m.html_table(t, {"intent": "Intent", "human": "Should go to a human", "send": "Can be sent", "total": "Cases"}))
+```
+
+```{python}
+parts = []
+for col, order in [("language", None), ("tone", ["Neutral", "Polite", "Urgent", "Angry", "Manipulative"]),
+                   ("difficulty", ["Easy", "Medium", "Hard"])]:
+    t = split(col, order)
+    parts.append(f'<div style="flex:1 1 230px;min-width:230px">' + m.html_table(
+        t, {col: col.capitalize(), "human": "Human", "send": "Send", "total": "Cases"}) + "</div>")
+show('<div style="display:flex;gap:28px;flex-wrap:wrap">' + "".join(parts) + "</div>")
+```
+
+## Escalation rules
+
+`E` rules say when a person must see the reply; `N` rules mark look-alike cases that should **not** escalate. Rules marked *Proposed* aren't in Acme's policy yet; they are the expert's call.
+
+```{python}
+counts = f.rule.value_counts()
+r = rules[["Rule", "Decision", "Trigger", "Status"]].copy()
+r["Cases"] = r.Rule.map(counts).fillna(0).astype(int)
+fig = go.Figure()
+for decision, colour in [("Escalate", m.BLUE), ("Don't escalate", m.ORANGE)]:
+    part = r[r.Decision == decision]
+    _ = fig.add_bar(y=part.Rule, x=part.Cases, orientation="h", name=decision, marker=dict(color=colour, cornerradius=4),
+                customdata=part[["Trigger", "Status"]],
+                hovertemplate="<b>%{y}</b> · %{x} cases<br>%{customdata[0]}<br>%{customdata[1]}<extra></extra>")
+_ = fig.update_yaxes(categoryorder="array", categoryarray=list(reversed(r.Rule)))
+_ = m.plotly_layout(fig, 420)
+_ = fig.update_layout(showlegend=True, legend=dict(orientation="h", y=1.08, x=0), bargap=0.25)
+show(m.fig_html(fig))
+```
+
+<details><summary>Table view</summary>
+
+```{python}
+show(m.html_table(r, {"Rule": "Rule", "Decision": "Decision", "Trigger": "Trigger", "Status": "Status", "Cases": "Cases"}))
+```
+
+</details>
+
+## Where the cases come from
+
+No customer text is copied from any source. Each email is synthetic, written for Acme's Pune customers against Acme's own help articles, and borrows a *pattern* (who escalates, why, in what tone) from public support datasets.
+
+```{python}
+k = refs[["Ref", "Dataset", "What it contributed to the Acme set"]].copy()
+k["Cases"] = k.Ref.map(lambda ref: int(f.kaggle.str.contains(str(ref), regex=False).sum()))
+show(m.html_table(k, {"Ref": "Ref", "Dataset": "Source", "What it contributed to the Acme set": "What it contributed",
+                      "Cases": "Cases"}))
+```
+
+## Label review
+
+```{python}
+checked = f[f.expert_check.str.len() > 0]
+changes = checked[checked.expert_check != "Agree"]
+show(f"<p>The expert has checked <b>{len(checked)}</b> of {len(f)} labels"
+     f"{'' if not len(checked) else f'; {len(changes)} need a change'}.</p>")
+if len(changes):
+    show(m.html_table(changes, {"id": "Case", "expert_check": "Change", "expert_note": "Note", "rule": "Rule"}))
+```
+
+**Open decisions.** These cases were built to sit on a boundary, so their labels deserve the expert's attention first.
+
+```{python}
+open_tags = {"policy-conflict", "boundary", "crm-contradiction"}
+o = f[f.tags.map(lambda ts: bool(open_tags & set(ts)))].copy()
+o["tag"] = o.tags.map(lambda ts: ", ".join(sorted(open_tags & set(ts))))
+o["label"] = o.expected_human.map({True: "human", False: "send"})
+show(m.html_table(o, {"id": "Case", "tag": "Why it's open", "label": "Current label", "rationale": "Reasoning to check"}))
+```
+
+## What this set can't tell you
+
+```{python}
+#| output: asis
+words = f.message.str.split().map(len)
+easy = f[f.difficulty == "Easy"]
+items = [
+    f"**{len(on_proposed)} of {len(human)} escalations** rest on proposed rules. If the expert rejects one, its cases flip label and the 50/50 balance shifts.",
+    f"**Difficulty is tangled with the label**: {int((~easy.expected_human).sum())} of {len(easy)} *Easy* cases are don't-escalate, so pass rate by difficulty partly re-measures escalation.",
+    f"**The emails are short and clean**: median {int(words.median())} words. Real support email has quoted threads, signatures, typos and several issues at once.",
+    "**One annotator.** Every label and verdict comes from one expert, so there is no inter-rater agreement yet.",
+    "**Outage times are relative** (\"today 06:40\"), so answers about the 24-hour outage credit depend on when a case is run.",
+    "**No unknown-customer case** in the set, so step 3 (verify account) failing is only covered by the BDD tests.",
+]
+print("\n".join(f"- {i}" for i in items))
+```
+
+## Provenance
+
+```{python}
+p = ev.provenance()
+show(m.html_table(pd.DataFrame({"input": ["workbook", "workbook sha256", "cases"],
+                                "value": [p["workbook"], p["workbook sha256"], len(f)]})))
+```

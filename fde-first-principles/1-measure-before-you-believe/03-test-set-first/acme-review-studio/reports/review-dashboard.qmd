@@ -1,0 +1,158 @@
+---
+title: "Review dashboard"
+author: "Raj Champaneriya"
+format:
+  dashboard:
+    scrolling: true
+    theme: [cosmo, theme.scss]
+---
+
+```{python}
+#| tags: [parameters]
+review_round = 0          # 0 = the latest round in the runs file
+```
+
+```{python}
+#| include: false
+import pandas as pd
+import plotly.graph_objects as go
+from IPython.display import HTML, display
+
+import acme_metrics as m
+
+ev = m.load(review_round or None)
+esc, missed, unneeded, saves = ev.escalation_rate(), ev.missed(), ev.unneeded(), ev.code_saves()
+minutes = ev.thresholds["review_minutes_per_case"]
+ran = len(ev.run) > 0
+
+
+def show(html):
+    display(HTML(html))
+```
+
+## {.sidebar}
+
+```{python}
+#| output: asis
+print(m.banner(ev))
+```
+
+```{python}
+p = ev.provenance()
+show(m.html_table(pd.DataFrame({"input": ["round", "drafting model", "cases run", "reviewed", "runs sha256"],
+                                "value": [p["round"] or "—", p["drafting model"], f"{len(ev.run)}/{len(ev.frame)}",
+                                          f"{len(ev.reviewed)}/{len(ev.frame)}", p["runs sha256"][:8]]})))
+```
+
+**How to read it**
+
+- **Escalated**: cases the workflow routed to a person.
+- **Missed**: needed a person, sent automatically. The costliest error.
+- **Code saves**: escalations the model's own flag missed and the code layer caught.
+- **Agent hours**: escalation rate × `{python} minutes` minutes per case, per 1,000 emails, *at this test set's 50/50 mix*. Production will be lower.
+
+## Column
+
+### Row {height=14%}
+
+```{python}
+#| content: valuebox
+#| title: "Escalated to a human"
+dict(icon="person-check", color="light", value=esc.short if ran else "—")
+```
+
+```{python}
+#| content: valuebox
+#| title: "Missed escalations"
+dict(icon="exclamation-triangle", color="danger" if len(missed) else "light", value=len(missed) if ran else "—")
+```
+
+```{python}
+#| content: valuebox
+#| title: "Code saves"
+dict(icon="shield-check", color="light", value=len(saves) if ran else "—")
+```
+
+```{python}
+#| content: valuebox
+#| title: "Agent hours per 1,000 emails"
+dict(icon="clock", color="light", value=f"{esc.p * 1000 * minutes / 60:.0f} h" if ran else "—")
+```
+
+### Row {height=42%}
+
+```{python}
+#| title: "What triggered the escalations"
+lay = ev.layers()
+if ran and lay.fired.sum():
+    fig = go.Figure(go.Bar(
+        y=lay.layer, x=lay.fired, orientation="h", marker=dict(color=m.BLUE, cornerradius=4),
+        customdata=lay[["only_layer", "fired_and_needed"]],
+        hovertemplate="<b>%{y}</b> fired on %{x} escalations<br>the only layer on %{customdata[0]}"
+                      "<br>%{customdata[1]} of them needed a human<extra></extra>"))
+    _ = fig.update_yaxes(categoryorder="array", categoryarray=list(reversed(m.LAYERS)))
+    show(m.fig_html(m.plotly_layout(fig, 220)) + m.html_table(
+        lay, {"layer": "Layer", "fired": "Fired", "only_layer": "Only layer", "fired_and_needed": "Needed a human"}))
+else:
+    show('<p class="muted">No escalations recorded yet.</p>')
+```
+
+```{python}
+#| title: "Where every case went"
+r = ev.run
+if ran:
+    n = lambda e, d: int(((r.expected_human == e) & (r.decision == d)).sum())  # noqa: E731
+    sent, escd = int((r.decision == "send").sum()), int((r.decision == "escalate").sum())
+    right = n(True, "escalate") + n(False, "send")
+    labels = [f"Run ({len(r)})", f"Escalated ({escd})", f"Sent ({sent})", f"Right call ({right})",
+              f"Missed escalation ({n(True, 'send')})", f"Unneeded escalation ({n(False, 'escalate')})"]
+    fig = go.Figure(go.Sankey(
+        arrangement="snap",
+        node=dict(label=labels, pad=18, thickness=14, line=dict(width=0),
+                  color=[m.GRAY, m.BLUE, m.ORANGE, m.GOOD, m.CRITICAL, m.GRAY]),
+        link=dict(source=[0, 0, 1, 1, 2, 2], target=[1, 2, 3, 5, 3, 4],
+                  value=[escd, sent, n(True, "escalate"), n(False, "escalate"), n(False, "send"), n(True, "send")],
+                  color="rgba(180,178,169,0.35)")))
+    _ = m.plotly_layout(fig, 280)
+    show(m.fig_html(fig))
+else:
+    show('<p class="muted">No runs yet.</p>')
+```
+
+### Row {height=720px}
+
+```{python}
+#| title: "Disagreement rates"
+d = ev.disagreements()
+d["what"] = [f'<b>{m.esc(c)}</b><br><span class="muted" style="font-size:.85em">{m.esc(w)}</span>'
+             for c, w in zip(d.comparison, d["what disagrees"])]
+d["rate_n"] = [f'<span style="white-space:nowrap"><b>{r}</b> <span class="muted">{k}/{n}</span></span>' if n
+               else '<span class="muted" style="white-space:nowrap">no data yet</span>' for r, k, n in zip(d.rate, d.k, d.n)]
+show(m.html_table(d, {"what": "Comparison", "rate_n": "Rate"}, escape=False))
+```
+
+```{python}
+#| title: "Failure categories (expert)"
+fm = ev.failure_modes()
+if len(fm):
+    fig = go.Figure(go.Bar(y=fm["failure mode"], x=fm.cases, orientation="h", marker=dict(color=m.BLUE, cornerradius=4),
+                           hovertemplate="<b>%{y}</b>: %{x} failed cases<extra></extra>"))
+    _ = fig.update_yaxes(autorange="reversed")
+    show(m.fig_html(m.plotly_layout(fig, 40 + 34 * len(fm))))
+else:
+    show('<p class="muted">No Fail verdicts yet.</p>')
+```
+
+```{python}
+#| title: "Routing by escalation rule"
+rr = ev.run
+if ran:
+    t = rr.groupby("rule").agg(cases=("id", "size"), right=("routing_ok", "sum")).reset_index()
+    t["routed right"] = [f"{int(k)}/{n}" for k, n in zip(t.right, t.cases)]
+    t["result"] = [f'<span style="color:{m.GOOD};font-weight:600">✓ all right</span>' if k == n else
+                   f'<span style="color:{m.CRITICAL};font-weight:600">✗ {n - int(k)} wrong</span>'
+                   for k, n in zip(t.right, t.cases)]
+    show(m.html_table(t, {"rule": "Rule", "routed right": "Routed right", "result": ""}, escape=False))
+else:
+    show('<p class="muted">No runs yet.</p>')
+```
