@@ -1,7 +1,7 @@
 # Day 3 · Write the test set before the system
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-16 · ship by Sun 18 Oct, 05:00 · project 1, step 3
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-16 · ship by Sun 18 Oct, 05:00 · project 1, step 3
 <!-- /learn:status -->
 
 > **First-principles question:** How will you know the system works, before you build it?

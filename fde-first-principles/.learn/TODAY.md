@@ -1,6 +1,6 @@
 # Today · Day 3 of 66: Write the test set before the system
 
-**Ship by Sun 18 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/03-test-set-first](../1-measure-before-you-believe/03-test-set-first/README.md)
+**Ship by Sun 18 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/03-test-set-first](../1-measure-before-you-believe/03-test-set-first/README.md)
 
 > **First-principles question:** How will you know the system works, before you build it?
 
