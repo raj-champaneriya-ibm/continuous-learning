@@ -1,0 +1,86 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: A
+        - text: Acme Review Studio
+      - tablist [ref=e8]:
+        - tab "Review" [selected] [ref=e9] [cursor=pointer]
+        - tab "Simulator" [ref=e13] [cursor=pointer]
+        - tab "Cases" [ref=e17] [cursor=pointer]
+        - tab "Knowledge" [ref=e21] [cursor=pointer]
+        - tab "Scoreboard" [ref=e32] [cursor=pointer]
+        - listitem
+        - listitem [ref=e41]:
+          - button "Model" [ref=e43] [cursor=pointer]
+        - listitem [ref=e49]:
+          - button "Save to Excel" [ref=e50] [cursor=pointer]
+        - listitem [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]: RC
+            - generic [ref=e58]: Raj Champaneriya
+  - generic [ref=e59]:
+    - tabpanel [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e65]:
+            - generic [ref=e66]: Customer email
+            - generic [ref=e71]: What good looks like
+          - generic [ref=e80]:
+            - generic [ref=e81]: Draft reply
+            - generic [ref=e88]:
+              - generic [ref=e89]: Your verdict
+              - generic [ref=e91]:
+                - generic [ref=e92]:
+                  - button "Pass Press P" [ref=e93] [cursor=pointer]:
+                    - generic [ref=e99]:
+                      - text: Pass
+                      - generic [ref=e100]: Press P
+                  - button "Fail Press F" [ref=e101] [cursor=pointer]:
+                    - generic [ref=e107]:
+                      - text: Fail
+                      - generic [ref=e108]: Press F
+                - generic [ref=e109]:
+                  - generic [ref=e110]: Failure mode (for Fail)
+                  - combobox "Failure mode (for Fail)" [ref=e112]:
+                    - option "—" [selected]
+                - generic [ref=e113]:
+                  - generic [ref=e114]: "Critique: what a new agent should learn from this reply"
+                  - 'textbox "Critique: what a new agent should learn from this reply" [ref=e115]':
+                    - /placeholder: e.g. Grounded on the ticket, but promises a fix time the record doesn't have. A passing reply shares OUT-KOTH-1021 and the app updates.
+                - generic [ref=e116]: P pass F fail J/K next/prev Ctrl+Enter save fail
+        - complementary [ref=e117]:
+          - generic [ref=e118]:
+            - radiogroup [ref=e120]:
+              - generic [ref=e121]:
+                - generic [ref=e122] [cursor=pointer]:
+                  - radio "To review" [checked] [ref=e123]
+                  - text: To review
+                - generic [ref=e124] [cursor=pointer]:
+                  - radio "All" [ref=e125]
+                  - text: All
+                - generic [ref=e126] [cursor=pointer]:
+                  - radio "Failed" [ref=e127]
+                  - text: Failed
+                - generic [ref=e128] [cursor=pointer]:
+                  - radio "Wrong routing" [ref=e129]
+                  - text: Wrong routing
+            - combobox [ref=e132]:
+              - option "All intents" [selected]
+              - option "outage"
+              - option "billing"
+              - option "speed"
+              - option "cancel"
+              - option "upgrade"
+              - option "relocation"
+              - option "other"
+            - button "Run all cases not yet run" [ref=e134] [cursor=pointer]
+        - separator "Resize sidebar":
+          - generic: Use arrow keys to resize the sidebar, Shift for larger steps, Home/End for min/max width.
+    - contentinfo [ref=e141]:
+      - generic [ref=e142]:
+        - generic [aria-hidden] [ref=e143]: RC
+        - generic [ref=e144]:
+          - generic [ref=e145]: Raj Champaneriya
+          - generic [ref=e146]: Acme Review Studio
+      - generic [ref=e147]: Grounded drafts. Thoughtful review.

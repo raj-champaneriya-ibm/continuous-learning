@@ -24,6 +24,16 @@
 
 Your starter notebook is `notebook.ipynb` in this folder: fill in the **TODO** cells and run the ✅ self-check at the end.
 
+### Tool · Acme Review Studio
+
+`acme-review-studio/` is a Shiny app that shows what "capture data and prepare the set" looks like past the notebook: review one case at a time, fix its label (intent, must-include, must-not-say, should-go-to-human), run drafts, judge them, and read the scoreboard — with the Excel workbook as the system of record. It starts on an offline stand-in drafter, so no model calls are needed to click through it.
+
+```bash
+cd acme-review-studio && pip install -r requirements.txt && shiny run app.py --launch-browser
+```
+
+See its `README.md` for the expert's loop and `REVIEW.md` for known limits.
+
 ### Done when
 - [ ] data/acme/cases.jsonl has at least 50 cases (100 is better).
 - [ ] Every drafted case was reviewed by hand: no "reviewed": false is left.

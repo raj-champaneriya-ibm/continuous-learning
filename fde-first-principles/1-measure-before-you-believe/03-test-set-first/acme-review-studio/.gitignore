@@ -1,0 +1,7 @@
+runs/*
+!runs/.gitkeep
+data/*.backup-*.xlsx
+data/*.studio-*.xlsx
+__pycache__/
+.pytest_cache/
+.venv/
