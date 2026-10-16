@@ -212,7 +212,7 @@ settings_popover = ui.popover(
                            selected=SETTINGS.provider),
     ui.input_select("model", "Claude model", {"sonnet": "Sonnet", "opus": "Opus", "haiku": "Haiku"}, selected=SETTINGS.model),
     ui.input_numeric("round", "Review round", SETTINGS.round, min=1, step=1),
-    ui.input_slider("concurrency", "Parallel drafts", 1, 6, SETTINGS.concurrency),
+    ui.input_slider("concurrency", "Parallel drafts", 1, 10, SETTINGS.concurrency),
     ui.output_ui("provider_status"),
     title="Settings", placement="bottom",
 )
