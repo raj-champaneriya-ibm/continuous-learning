@@ -1,0 +1,212 @@
+---
+title: "Evaluation report"
+subtitle: "How good are the grounded drafts (step 5), and does the workflow route them to the right place (step 7)?"
+author: "Raj Champaneriya"
+date: today
+---
+
+```{python}
+#| tags: [parameters]
+review_round = 0          # 0 = the latest round in the runs file; render another with -P review_round:2
+```
+
+```{python}
+#| include: false
+import pandas as pd
+import plotly.graph_objects as go
+from IPython.display import HTML, display
+
+import acme_metrics as m
+
+ev = m.load(review_round or None)
+pr, ra, esc = ev.pass_rate(), ev.routing_accuracy(), ev.escalation_rate()
+missed, unsafe, unneeded, saves = ev.missed(), ev.unsafe_sends(), ev.unneeded(), ev.code_saves()
+gates = ev.thresholds["gates"]
+ran = len(ev.run) > 0
+
+
+def show(html):
+    display(HTML(html))
+```
+
+```{python}
+#| output: asis
+print(m.banner(ev))
+```
+
+## Summary
+
+Round **`{python} ev.round or "—"`** · `{python} len(ev.run)` of `{python} len(ev.frame)` cases run · `{python} len(ev.reviewed)` reviewed by the domain expert · drafted by `{python} ev.provenance()["drafting model"]`.
+
+```{python}
+show(m.tiles([
+    ("Expert pass rate", pr.short, f"{pr.k}/{pr.n} reviewed · 95% CI {pr.ci[0]:.0%}–{pr.ci[1]:.0%}" if pr.n else "no verdicts yet"),
+    ("Routing accuracy", ra.short, f"{ra.k}/{ra.n} routed as labelled" if ra.n else "no runs yet"),
+    ("Missed escalations", str(len(missed)) if ran else "—", "needed a human, sent automatically"),
+    ("Unsafe auto-sends", str(len(unsafe)) if ran else "—", "sent with a banned phrase or blocking flag"),
+]))
+```
+
+### Release gates
+
+The gates come from `thresholds.yml`. They are proposals: the domain expert sets the numbers.
+
+```{python}
+g = ev.gates()
+g["result"] = [m.status(met) if actual != "—" else '<span class="muted">no data yet</span>'
+               for met, actual in zip(g.met, g.actual)]
+show(m.html_table(g, {"gate": "Gate", "target": "Target", "actual": "Actual", "result": "Result"}, escape=False))
+```
+
+## Where drafts pass and fail
+
+Each dot is the expert pass rate for one intent; the line is its 95% interval. With 10–12 cases per intent the intervals are wide, so treat a gap between two intents as real only when their lines barely overlap.
+
+```{python}
+d = ev.by("intent", m.INTENTS)
+d = d[d.reviewed > 0]
+if len(d):
+    fig = go.Figure(go.Scatter(
+        x=d.pass_rate, y=d.intent, mode="markers",
+        marker=dict(size=12, color=m.BLUE, line=dict(color="#fcfcfb", width=2)),
+        error_x=dict(type="data", symmetric=False, array=d.pass_hi - d.pass_rate,
+                     arrayminus=d.pass_rate - d.pass_lo, color=m.BLUE, thickness=2, width=0),
+        customdata=d[["pass", "reviewed", "pass_lo", "pass_hi"]],
+        hovertemplate="<b>%{y}</b>: %{x:.0%} pass<br>%{customdata[0]}/%{customdata[1]} reviewed"
+                      "<br>95% CI %{customdata[2]:.0%}–%{customdata[3]:.0%}<extra></extra>"))
+    _ = fig.add_vline(x=gates["pass_rate_ci_low"], line=dict(color=m.GRAY, width=1))
+    _ = fig.add_annotation(x=gates["pass_rate_ci_low"], y=1.02, yref="paper", showarrow=False, xanchor="left",
+                       text=f" gate {gates['pass_rate_ci_low']:.0%}", font=dict(size=11, color=m.MUTED))
+    _ = fig.update_xaxes(range=[0, 1.02], tickformat=".0%")
+    _ = fig.update_yaxes(categoryorder="array", categoryarray=list(reversed(m.INTENTS)))
+    show(m.fig_html(m.plotly_layout(fig, 300)))
+else:
+    show('<p class="muted">No expert verdicts yet.</p>')
+```
+
+<details><summary>Table view</summary>
+
+```{python}
+t = ev.by("intent", m.INTENTS)
+t["pass_rate"] = [m.Rate(k, n).text for k, n in zip(t["pass"], t.reviewed)]
+t["routing_accuracy"] = [m.Rate(k, n).text for k, n in zip(t.routing_ok, t.run)]
+show(m.html_table(t, {"intent": "Intent", "cases": "Cases", "pass_rate": "Expert pass rate",
+                      "routing_accuracy": "Routing accuracy"}))
+```
+
+</details>
+
+## Routing: human or send?
+
+Every case is labelled *should go to a human* or *can be sent*. The table compares that label with what the workflow did.
+
+```{python}
+r = ev.run
+def n(expected, decision):
+    return int(((r.expected_human == expected) & (r.decision == decision)).sum())
+show(f"""<table class="table table-sm compact" style="max-width:560px">
+<thead><tr><th></th><th>Routed to a human</th><th>Sent automatically</th></tr></thead>
+<tbody><tr><th>Should go to a human</th><td>{n(True, 'escalate')} right</td><td><b>{n(True, 'send')} missed</b></td></tr>
+<tr><th>Can be sent</th><td>{n(False, 'escalate')} unneeded</td><td>{n(False, 'send')} right</td></tr></tbody></table>""")
+```
+
+The model's own *needs human* flag caught `{python} ev.model_flag_recall().text` of the cases that needed a person. Code around the model (guards and step-6 checks) caught **`{python} len(saves)`** more that the model would have sent.
+
+```{python}
+#| output: asis
+if len(missed):
+    print("### Missed escalations\n\nThese cost the most: the customer gets a reply no person checked.\n")
+```
+
+```{python}
+if len(missed):
+    t = missed.copy()
+    t["model"] = t.model_human.map({True: "asked for a human", False: "said send"}).fillna("—")
+    show(m.html_table(t, {"id": "Case", "intent": "Intent", "rule": "Rule", "rationale": "Why it needs a human",
+                          "model": "Model's flag"}))
+```
+
+## Grounding
+
+Step 6 checks the claims in each draft against the data fetched in step 4: outage ticket IDs, ₹ amounts, fix-time promises, refunds over ₹500, other customers' details and requests for secrets. These are heuristics. When no check fires, it doesn't prove the reply is grounded; that is what the expert's verdict is for.
+
+```{python}
+missing_any = ev.run[m.nonempty(ev.run, "missing")]
+show(m.tiles([
+    ("Check hits", str(int(ev.check_hits().cases.sum())) if ran else "—", "flags raised by step 6, all cases"),
+    ("Banned phrases in auto-sent replies", str(len(unsafe)) if ran else "—", "a must-not phrase reached the customer"),
+    ("Replies missing a required fact", str(len(missing_any)) if ran else "—", f"of {len(ev.run)} run" if ran else ""),
+]))
+hits = ev.check_hits()
+if len(hits):
+    show(m.html_table(hits, {"check": "Step-6 check", "cases": "Cases", "auto_sent": "Auto-sent", "escalated": "Escalated"}))
+```
+
+```{python}
+if len(unsafe):
+    t = unsafe.copy()
+    t["problem"] = [", ".join(b + f) for b, f in zip(t.banned, t.high_flags)]
+    t["reply_start"] = t.reply.str.slice(0, 140) + "…"
+    show("<h4>Unsafe auto-sends</h4>" + m.html_table(t, {"id": "Case", "problem": "Problem", "reply_start": "Reply (start)"}))
+```
+
+## What the errors cost
+
+Each error type is weighted by a placeholder cost from `thresholds.yml`, so one missed escalation isn't counted the same as one unneeded escalation. *Per 1,000 emails* assumes production looks like this test set, which it doesn't: the set is balanced 50/50 on escalation on purpose. Use the column to compare rounds, not to forecast.
+
+```{python}
+c = ev.error_cost()
+c["cost_each_inr"] = c.cost_each_inr.map("₹{:,.0f}".format)
+c["cost_inr"] = c.cost_inr.map("₹{:,.0f}".format)
+c["per_1000_emails_inr"] = c.per_1000_emails_inr.map(lambda v: "—" if v != v else f"₹{v:,.0f}")
+show(m.html_table(c, {"error": "Error", "cases": "Cases", "cost_each_inr": "Cost each", "cost_inr": "Total",
+                      "per_1000_emails_inr": "Per 1,000 emails"}))
+```
+
+## Examples from the expert's review
+
+```{python}
+order = ["Missed escalation", "Financial promise > ₹500", "Followed injected instruction", "Privacy leak",
+         "Asked for a secret", "Promised fix time", "Unsupported claim", "Wrong offer eligibility"]
+rev = ev.reviewed
+fails = rev[rev.verdict == "Fail"].copy()
+fails["rank"] = fails.failure_mode.map(lambda f: order.index(f) if f in order else len(order))
+worst = fails.sort_values(["rank", "id"]).head(3)
+best = rev[(rev.verdict == "Pass") & (rev.critique.str.len() > 0)].head(2)
+
+
+def card(row, label):
+    return (f'<div class="example"><h4>{row.id} · {m.esc(row.intent)} · {label}</h4>'
+            f'<div class="email">{m.esc(row.message)}</div><div class="reply">{m.esc(row.reply)}</div>'
+            f'<div class="critique"><b>Expert:</b> {m.esc(row.critique) or "<i>no critique written</i>"}</div></div>')
+
+
+html = ""
+if len(worst):
+    html += "<h3>Where it failed</h3>" + "".join(card(r, f"Fail · {m.esc(r.failure_mode)}") for r in worst.itertuples())
+if len(best):
+    html += "<h3>What good looks like</h3>" + "".join(card(r, "Pass") for r in best.itertuples())
+show(html or '<p class="muted">No verdicts with critiques yet.</p>')
+```
+
+## Method and provenance
+
+- **Expert pass rate**: Pass verdicts ÷ cases with a Pass or Fail verdict in this round.
+- **Routing accuracy**: cases where the workflow's decision (human or send) matches the label ÷ cases run in the app.
+- **Missed escalation**: labelled *should go to a human*, sent automatically. **Unneeded escalation**: the reverse.
+- **Unsafe auto-send**: sent automatically with a must-not phrase from the case, or a blocking step-6 flag.
+- **95% intervals**: Wilson score intervals, which stay sensible with small counts.
+- Drafts imported from the workbook without a workflow run count as reviewed but not as run.
+
+```{python}
+p = ev.provenance()
+show(m.html_table(pd.DataFrame({"input": list(p), "value": list(p.values())})))
+repro = f"quarto render reports/evaluation-report.qmd -P review_round:{ev.round or 1}"
+show(f'<p>To reproduce, run from <code>acme-review-studio/</code> against the same workbook and runs file: '
+     f'<code>{repro}</code>. The hashes above show whether those inputs have changed since.</p>')
+```
+
+
+## Reviewer decision
+
+Record the release decision, known gaps and owners here before sharing. Redact customer details first. A clean routing result is not proof of factual correctness.

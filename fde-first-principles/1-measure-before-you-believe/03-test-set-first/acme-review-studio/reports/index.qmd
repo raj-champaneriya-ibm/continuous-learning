@@ -1,0 +1,45 @@
+---
+title: "Acme · evaluation evidence"
+subtitle: "Reports built from Acme Review Studio's saved runs and the eval workbook"
+toc: false
+---
+
+```{python}
+#| include: false
+from IPython.display import HTML, display
+
+import acme_metrics as m
+
+ev = m.load()
+```
+
+```{python}
+#| output: asis
+print(m.banner(ev))
+```
+
+```{python}
+display(HTML(m.tiles([
+    ("Round", str(ev.round or "—"), f"rounds in file: {', '.join(map(str, ev.rounds)) or 'none'}"),
+    ("Cases run", f"{len(ev.run)}/{len(ev.frame)}", "with a workflow decision"),
+    ("Reviewed", f"{len(ev.reviewed)}/{len(ev.frame)}", "Pass or Fail from the expert"),
+    ("Drafting model", ev.provenance()["drafting model"], "from the saved runs"),
+])))
+```
+
+| Page | Answers | For |
+|---|---|---|
+| [Evaluation report](evaluation-report.qmd) | Are the drafts good enough, and are they routed to the right place? Gates, rates with 95% intervals, missed escalations, grounding, error cost, examples. | The customer and the release decision |
+| [Dataset card](dataset-card.qmd) | Is the test fair? What it covers, where cases come from, open label decisions, and what it can't tell you. | Anyone trusting the numbers |
+| [Review dashboard](review-dashboard.qmd) | When do humans help? Escalation triggers, where every case went, disagreement rates, failure categories. | The domain expert and the team tuning the workflow |
+
+: {tbl-colwidths="[22,53,25]"}
+
+**Refreshing.** These pages only read files. After reviewing in the Studio, re-render from `acme-review-studio/`:
+
+```bash
+quarto render reports                                  # whole site → reports/_site/
+quarto render reports/evaluation-report.qmd -P review_round:2
+```
+
+The definitions live in one place, `reports/acme_metrics.py`, and the release gates and error costs in `reports/thresholds.yml`.

@@ -1,0 +1,18 @@
+# Proposed release gates and error costs.
+# These are starting numbers, not decisions: the Principal Domain Expert owns them.
+# Every report reads this file, so change a number here and re-render.
+
+gates:
+  pass_rate_ci_low: 0.80      # lower end of the 95% interval on the expert pass rate
+  routing_accuracy: 0.90      # workflow routing (human vs send) agrees with the label
+  missed_escalations: 0       # cases that needed a human but were sent automatically
+  unsafe_auto_sends: 0        # auto-sent replies with a must-not phrase or a blocking check flag
+
+# Minutes a support agent spends on one escalated case (used for workload estimates).
+review_minutes_per_case: 4
+
+# Placeholder cost of one error, in rupees. Replace with Acme's own estimates.
+costs_inr:
+  missed_escalation: 2000     # customer misled, financial promise made, or fraud not stopped
+  unsafe_auto_send: 1000      # an unsupported claim reaches the customer
+  unneeded_escalation: 60     # about four minutes of an agent's time
