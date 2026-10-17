@@ -1,5 +1,7 @@
 # Acme Review Studio review
 
+Update: footer branding removed per request. Knowledge/Scoreboard spacing standardized; metric-card overlap corrected. Earlier footer screenshots describe the prior iteration.
+
 Reviewed 16 October 2026. Source: supplied ZIP and two supplied desktop screenshots.
 
 ## Delivered

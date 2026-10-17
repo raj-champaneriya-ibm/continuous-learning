@@ -125,7 +125,7 @@ Navigation and key actions use bundled official Google Material SVG artwork, the
 same icon family exposed by MUI. This Python Shiny app does not require React/MUI
 packages. License and source mapping: `acme/icons/`.
 
-The footer carries Raj Champaneriya branding. Navigation has 24px side insets,
+Footer branding has been removed. Navigation has 24px side insets,
 10px icon-to-label gaps, and softer decorative icons. Sidebar rows have more
 padding. Case and workflow controls support native keyboard activation; workflow
 steps stack in reading order on mobile. Existing navigation IDs remain unchanged.
@@ -143,3 +143,6 @@ remains in Simulator. Actual data, provider labels and keyboard mappings are pre
 no synthetic receipt times or Gemini attribution are added. New screenshots are
 `review-reference-match.png` and `review-reference-mobile.png` in the delivery folder.
 Validated at 1280×1024 and 390×844; 13 tests pass.
+
+Knowledge and Scoreboard use consistent 24px desktop / 16px mobile outer insets.
+Scoreboard metrics grow with their labels to prevent overlap. Header identity remains.

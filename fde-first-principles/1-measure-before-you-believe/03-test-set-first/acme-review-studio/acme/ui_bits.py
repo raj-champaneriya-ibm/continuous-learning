@@ -174,6 +174,18 @@ body:has(#tab-nav-0.active)>.container-fluid{padding-left:0;padding-right:0}
 #tab-nav-0 .verdict-card .verdict{margin-bottom:6px!important}
 #tab-nav-0 .review-workflow .card-header:after{display:none}
 @media(min-width:1200px){#nav{flex-wrap:nowrap}.profile-signature{padding-left:10px;margin-left:6px;font-size:11px}#nav .nav-link{padding-left:10px!important;padding-right:10px!important}}
+/* Match workspace insets while keeping Review's full-width case rail. */
+#tab-nav-3,#tab-nav-4{margin-top:0;padding:24px 12px}
+#tab-nav-3 .hint{margin:0 0 16px}
+#tab-nav-3 .card-header,#tab-nav-4 .card-header{padding:14px 16px}
+#tab-nav-3 .card-body,#tab-nav-4 .card-body{padding:16px}
+#tab-nav-4 .bslib-value-box .card-body{padding:20px}
+#tab-nav-4 .value-box-area{display:flex;flex-direction:column;gap:8px;padding:0}
+#tab-nav-4 .value-box-title,#tab-nav-4 .value-box-value{flex:0 0 auto;margin:0}
+#tab-nav-4 .value-box-title p,#tab-nav-4 .value-box-value p{margin:0;line-height:1.25}
+#tab-nav-4 .value-box-title{font-size:14px;min-height:2.5em}
+#tab-nav-4 .value-box-value{font-size:32px}
+@media(max-width:767px){#tab-nav-4 .card-body:has(#score_plot){overflow-x:auto}#score_plot{min-width:520px}#tab-nav-3,#tab-nav-4{padding:16px 4px}#tab-nav-3 .nav{gap:4px;flex-wrap:wrap}}
 """
 
 JS = """

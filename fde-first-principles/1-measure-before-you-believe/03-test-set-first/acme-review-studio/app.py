@@ -912,11 +912,11 @@ def server(input, output, session):
         pass_rate = f"{(rev.verdict == 'Pass').mean():.0%}" if len(rev) else "—"
         routing = f"{routed.routing_ok.mean():.0%}" if len(routed) else "—"
         return ui.layout_columns(
-            ui.value_box("Drafted", f"{int(df.drafted.sum())}/{len(df)}", max_height="105px"),
-            ui.value_box("Reviewed", f"{len(rev)}/{len(df)}", max_height="105px"),
-            ui.value_box("Pass rate", pass_rate, max_height="105px"),
-            ui.value_box("Routing correct", routing, max_height="105px"),
-            ui.value_box("Missed escalations", str(missed), max_height="105px"),
+            ui.value_box("Drafted", f"{int(df.drafted.sum())}/{len(df)}"),
+            ui.value_box("Reviewed", f"{len(rev)}/{len(df)}"),
+            ui.value_box("Pass rate", pass_rate),
+            ui.value_box("Routing correct", routing),
+            ui.value_box("Missed escalations", str(missed)),
             col_widths=(2, 2, 3, 3, 2))
 
     @render.plot
