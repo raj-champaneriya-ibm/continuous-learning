@@ -1,7 +1,7 @@
 # Day 4 · Version A: rules and templates (the honest baseline)
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-18 · ship by Tue 20 Oct, 05:00 · project 1, step 4
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-18 · ship by Tue 20 Oct, 05:00 · project 1, step 4
 <!-- /learn:status -->
 
 > **First-principles question:** How far can plain code go before you need a model?

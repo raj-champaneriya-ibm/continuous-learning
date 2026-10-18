@@ -1,6 +1,6 @@
 # Today · Day 4 of 66: Version A: rules and templates (the honest baseline)
 
-**Ship by Tue 20 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/04-rules-baseline](../1-measure-before-you-believe/04-rules-baseline/README.md)
+**Ship by Tue 20 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/04-rules-baseline](../1-measure-before-you-believe/04-rules-baseline/README.md)
 
 > **First-principles question:** How far can plain code go before you need a model?
 
