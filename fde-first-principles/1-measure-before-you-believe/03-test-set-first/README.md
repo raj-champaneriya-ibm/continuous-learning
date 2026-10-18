@@ -1,7 +1,7 @@
 # Day 3 · Write the test set before the system
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-16 · ship by Sun 18 Oct, 05:00 · project 1, step 3
+**Status:** 🕒 late · dropped 2026-10-16 · ship by Sun 18 Oct, 05:00 · shipped 2026-10-18 05:35 · project 1, step 3
 <!-- /learn:status -->
 
 > **First-principles question:** How will you know the system works, before you build it?
@@ -54,19 +54,21 @@ _Tempted to do more? Park it in `later.md`: Grow the set to 100 cases, then chec
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** A test set (or eval) is the scenario plus the expected output. But be aware: checking the output needs more than just a plain text comparison.
 
-**For an engineer:** …
+**For an engineer:** Writing the tests first gives you a crucial input to validate assumptions, system expectations and expected behavior — and it exposes how complex the business rules really are.
 
-**For a customer:** …
+**For a customer:** The tests help stakeholders get familiar with the system, set expectations from the system for end users, and define the success criteria.
 
 ## What surprised me
 …
 
 ## How I used AI
-…
+- I built the 84 test cases in the Excel workbook (`acme-review-studio/data/Acme_Fibre_Grounded_Draft_Eval.xlsx`) using a Claude Code iterative-critique workflow, then reviewed every case by hand in the workbook's Review_Log (round 1) and fixed labels there.
+- Claude Code converted that workbook's Dataset sheet into `data/acme/cases.jsonl` (the format the notebook validates), filled the notebook's two TODO cells (case loader and `problems()` validation), and executed the notebook for me — the self-check now passes.
+- Claude Code also patched the notebook's `find_root()` because `progress.json` moved into `.learn/`.
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/9N7xmktXyYg)
 <!-- /learn:video -->

@@ -18,7 +18,7 @@ The daily drop, deadlines and this table are managed by
 | 1 | 2026-10-13 | [One model call: tokens, time and randomness](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) |  | ❌ missed |
 | 1 | 2026-10-14 | [One model call: tokens, time and randomness](1-measure-before-you-believe/01-an-llm-call-is-http/README.md) (attempt 2) | [▶](https://youtu.be/vc5h1lX4Rwo) | ✅ shipped |
 | 2 | 2026-10-15 | [Workflow or agent? Map the decisions first](1-measure-before-you-believe/02-workflow-or-agent/README.md) | [▶](https://youtu.be/i51y2NiYdDo) | ✅ shipped |
-| 3 | 2026-10-16 | [Write the test set before the system](1-measure-before-you-believe/03-test-set-first/README.md) |  | ⏳ open |
+| 3 | 2026-10-16 | [Write the test set before the system](1-measure-before-you-believe/03-test-set-first/README.md) | [▶](https://youtu.be/9N7xmktXyYg) | 🕒 late |
 
-**2 of 66 topics shipped.**
+**3 of 66 topics shipped.**
 <!-- /learn:progress -->
