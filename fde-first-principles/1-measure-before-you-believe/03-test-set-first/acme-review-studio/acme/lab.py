@@ -173,10 +173,13 @@ def export_to_excel(lab: Lab, reviews: list[dict], path: str | Path | None = Non
     ds = wb["Dataset"]
     col = {c.value: c.column for c in ds[1]}
     row_of = {ds.cell(row=r, column=1).value: r for r in range(2, ds.max_row + 1)}
+    next_row = ds.max_row + 1
     for case in lab.cases:
         r = row_of.get(case["id"])
-        if r is None:
-            continue
+        if r is None:                      # case created in the app: append a row
+            r = next_row
+            next_row += 1
+            ds.cell(row=r, column=1, value=case["id"])
         values = {
             "customer_id": case["customer_id"], "message": case["message"],
             "expected_intent": case["expected_intent"], "needs_human": bool(case["needs_human"]),

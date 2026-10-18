@@ -151,8 +151,13 @@ def simulator_page():
 
 def cases_page():
     return ui.div(
-        ui.div("Ground truth for each case. Select a row to change its label; changes save to Excel with "
-               "'Save to Excel'.", class_="hint"),
+        ui.layout_columns(
+            ui.div("Ground truth for each case. Select a row to change its label; changes save to Excel with "
+                   "'Save to Excel'.", class_="hint"),
+            ui.div(ui.input_action_button("new_case", "New case", class_="btn-outline-primary btn-sm"),
+                   class_="text-end"),
+            col_widths=(9, 3),
+        ),
         ui.card(ui.output_data_frame("cases_grid")),
         ui.output_ui("case_editor"),
     )
@@ -747,7 +752,8 @@ def server(input, output, session):
         data_rev()
         df = pd.DataFrame([{"id": c["id"], "intent": c["expected_intent"], "human?": "yes" if c["needs_human"] else "no",
                             "ground truth": c["ground_truth"], "rule": c["rule"], "customer": c["customer_id"],
-                            "message": c["message"][:90],
+                            "message": c["message"][:90], "must include": " | ".join(c["must_include"]),
+                            "must not say": " | ".join(c["must_not"]),
                             "tags": ", ".join(c["tags"]), "expert check": c["expert_check"]} for c in LAB.cases])
         return render.DataGrid(df, selection_mode="row", filters=True, height="360px", width="100%")
 
@@ -755,6 +761,18 @@ def server(input, output, session):
     def edit_case():
         sel = cases_grid.data_view(selected=True)
         return case_of(sel.iloc[0]["id"]) if len(sel) else None
+
+    @reactive.effect
+    @reactive.event(input.new_case)
+    def _new_case():
+        n = max((int(c["id"][1:]) for c in LAB.cases if c["id"][1:].isdigit()), default=0) + 1
+        cid = f"c{n:02d}"
+        LAB.cases.append({"id": cid, "customer_id": "AC1001", "message": "", "expected_intent": "other",
+                          "needs_human": False, "rule": "", "must_include": [], "must_not": [], "kb": "",
+                          "tags": [], "language": "", "tone": "", "difficulty": "", "kaggle": "",
+                          "rationale": "", "expert_check": "", "expert_note": "", "ground_truth": ""})
+        data_rev.set(data_rev() + 1)
+        ui.notification_show(f"{cid} added below. Click its row to edit, then 'Save to Excel' to keep it.")
 
     @render.ui
     def case_editor():
