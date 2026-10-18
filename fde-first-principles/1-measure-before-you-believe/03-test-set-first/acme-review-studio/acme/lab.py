@@ -76,7 +76,7 @@ def load_lab(path: str | Path) -> Lab:
             "tags": _split(r.get("tags"), ","), "language": r.get("language") or "", "tone": r.get("tone") or "",
             "difficulty": r.get("difficulty") or "", "kaggle": r.get("kaggle_ref") or "",
             "rationale": r.get("rationale") or "", "expert_check": r.get("Expert check") or "",
-            "expert_note": r.get("Expert note") or "",
+            "expert_note": r.get("Expert note") or "", "ground_truth": r.get("Ground truth") or "",
         })
 
     customers = {}
@@ -183,6 +183,7 @@ def export_to_excel(lab: Lab, reviews: list[dict], path: str | Path | None = Non
             "escalation_rule": case["rule"], "must_include": " | ".join(case["must_include"]),
             "must_not": " | ".join(case["must_not"]), "tags": ", ".join(case["tags"]),
             "Expert check": case.get("expert_check") or None, "Expert note": case.get("expert_note") or None,
+            "Ground truth": case.get("ground_truth") or None,
         }
         for name, value in values.items():
             if name in col:

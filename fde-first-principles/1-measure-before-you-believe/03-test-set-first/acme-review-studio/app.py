@@ -746,7 +746,8 @@ def server(input, output, session):
     def cases_grid():
         data_rev()
         df = pd.DataFrame([{"id": c["id"], "intent": c["expected_intent"], "human?": "yes" if c["needs_human"] else "no",
-                            "rule": c["rule"], "customer": c["customer_id"], "message": c["message"][:90],
+                            "ground truth": c["ground_truth"], "rule": c["rule"], "customer": c["customer_id"],
+                            "message": c["message"][:90],
                             "tags": ", ".join(c["tags"]), "expert check": c["expert_check"]} for c in LAB.cases])
         return render.DataGrid(df, selection_mode="row", filters=True, height="360px", width="100%")
 
@@ -768,6 +769,9 @@ def server(input, output, session):
                 ui.div(ui.input_select("ed_intent", "Expected intent", INTENTS, selected=c["expected_intent"]),
                        ui.input_switch("ed_human", "Should go to a human", c["needs_human"]),
                        ui.input_text("ed_rule", "Escalation rule", c["rule"]),
+                       ui.input_select("ed_gt", "Ground truth", ["", "straightforward", "ambiguous",
+                                                                "escalation", "unsafe-to-automate"],
+                                       selected=c["ground_truth"]),
                        ui.input_select("ed_check", "Expert check", ["", "Agree", "Change label",
                                                                    "Change must_include/must_not", "Rewrite message", "Drop case"],
                                        selected=c["expert_check"])),
@@ -787,6 +791,7 @@ def server(input, output, session):
             return
         c.update(message=input.ed_message(), expected_intent=input.ed_intent(), needs_human=input.ed_human(),
                  rule=input.ed_rule(), expert_check=input.ed_check(), expert_note=input.ed_note(),
+                 ground_truth=input.ed_gt(),
                  must_include=[t.strip() for t in input.ed_inc().split("|") if t.strip()],
                  must_not=[t.strip() for t in input.ed_not().split("|") if t.strip()],
                  tags=[t.strip() for t in input.ed_tags().split(",") if t.strip()])
