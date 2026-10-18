@@ -3,20 +3,18 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-03",
-    "folder": "1-measure-before-you-believe/03-test-set-first",
-    "dropped_on": "2026-10-16",
-    "seen_on": "2026-10-17",
-    "deadline": "2026-10-18T05:00",
+    "topic_id": "p1-04",
+    "folder": "1-measure-before-you-believe/04-rules-baseline",
+    "dropped_on": "2026-10-18",
+    "seen_on": "2026-10-18",
+    "deadline": "2026-10-20T05:00",
     "attempt": 1,
     "mornings": 2,
     "starter_hashes": {
-      "/data/acme/cases.jsonl": "1d7846ca007b3474a1cf35a48af54a7669b8ee0860dcacf86ef093348ac46411",
-      "notebook.ipynb": "f2d04eb8dfa657b199e226aec383ad4d661a42d2ac561ddfc0da463c8a2e620f"
-    },
-    "shipped_at": "2026-10-18T05:35",
-    "status": "late",
-    "video": "https://youtu.be/9N7xmktXyYg"
+      "/lab/__init__.py": "f675af4a449d3c419dfde86744bfc7d9ad7c6a0d8ccd8259aa64d071d55fc28e",
+      "/lab/acme.py": "065121e54a59469c81beafdaa5afd89c0df91fd11eb6076c3ab92b553e4b7e22",
+      "notebook.ipynb": "6a90d89e2cf10552a5ab4b2b233d2cf50fd3e59d0c6d039e26e1bcd5774c02b3"
+    }
   },
   "log": [
     {
