@@ -6,6 +6,11 @@ A personal engineering lab for exploring first principles, building working exam
 
 The objective is simple: move beyond knowing *how* something works to understanding *why*, *when*, and under what constraints it should be used.
 
+## Watch & Read
+
+- [YouTube — Build to Understand](https://www.youtube.com/@Build2Understand) — video walkthroughs of each exploration
+- [rajc.work](https://rajc.work) — articles and write-ups
+
 ## Areas of Exploration
 
 | Area | Focus |
