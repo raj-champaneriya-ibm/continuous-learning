@@ -5,11 +5,11 @@
   "current": {
     "topic_id": "p1-04",
     "folder": "1-measure-before-you-believe/04-rules-baseline",
-    "dropped_on": "2026-10-18",
-    "seen_on": "2026-10-19",
-    "deadline": "2026-10-20T05:00",
-    "attempt": 1,
-    "mornings": 2,
+    "dropped_on": "2026-10-20",
+    "seen_on": "2026-10-20",
+    "deadline": "2026-10-21T05:00",
+    "attempt": 2,
+    "mornings": 1,
     "starter_hashes": {
       "/lab/__init__.py": "f675af4a449d3c419dfde86744bfc7d9ad7c6a0d8ccd8259aa64d071d55fc28e",
       "/lab/acme.py": "065121e54a59469c81beafdaa5afd89c0df91fd11eb6076c3ab92b553e4b7e22",
@@ -48,6 +48,13 @@
       "status": "late",
       "shipped_at": "2026-10-18T05:35",
       "video": "https://youtu.be/9N7xmktXyYg"
+    },
+    {
+      "topic_id": "p1-04",
+      "dropped_on": "2026-10-18",
+      "attempt": 1,
+      "mornings": 2,
+      "status": "missed"
     }
   ]
 }

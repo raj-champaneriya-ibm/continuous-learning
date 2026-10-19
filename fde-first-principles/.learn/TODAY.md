@@ -1,12 +1,14 @@
 # Today · Day 4 of 66: Version A: rules and templates (the honest baseline)
 
-**Ship by Tue 20 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/04-rules-baseline](../1-measure-before-you-believe/04-rules-baseline/README.md)
+**Ship by Wed 21 Oct, 05:00** · folder: [1-measure-before-you-believe/04-rules-baseline](../1-measure-before-you-believe/04-rules-baseline/README.md)
 
 > **First-principles question:** How far can plain code go before you need a model?
 
 **Why it matters for an FDE:** A baseline tells you what the model has to beat. Many 'AI projects' never measure one.
 
-**Time:** about 115 minutes, over 2 mornings
+**Time:** minimum scope, 1 morning (about 115 minutes for the full topic)
+
+**Attempt 2: minimum scope.** Ship at least this: Intent accuracy printed for all cases.
 
 ### 1 · Learn (about 30 minutes)
 - [Building effective agents: 'Appendix 1, A. Customer support'](https://www.anthropic.com/engineering/building-effective-agents) · 5 min. Short: why support is a good fit for AI, and how to measure it.
