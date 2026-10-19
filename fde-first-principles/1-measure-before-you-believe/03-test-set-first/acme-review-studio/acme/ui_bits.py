@@ -172,6 +172,15 @@ body:has(#tab-nav-0.active)>.container-fluid{padding-left:0;padding-right:0}
 #tab-nav-0 .verdict-card .card-body{gap:10px}
 #tab-nav-0 .verdict-card .form-group{margin-bottom:0}
 #tab-nav-0 .verdict-card .verdict{margin-bottom:6px!important}
+/* Knowledge page: even rhythm for the four reference sub-tabs (grid -> switch -> try box). */
+#tab-nav-3 .hint{margin:0 0 14px}
+#tab-nav-3 .tab-content{padding-top:20px}
+#tab-nav-3 .muted.mb-2{margin-bottom:12px!important}
+#tab-nav-3 .form-group{margin-bottom:16px}
+#tab-nav-3 .form-group:has(.form-switch){margin:22px 0 14px}
+#tab-nav-3 .form-switch{display:flex;align-items:center;gap:10px;padding-left:0}
+#tab-nav-3 .form-switch .form-check-input{float:none;margin:0;flex:none}
+#tab-nav-3 .form-switch .form-check-label{margin-left:0}
 #tab-nav-0 .review-workflow .card-header:after{display:none}
 @media(min-width:1200px){#nav{flex-wrap:nowrap}.profile-signature{padding-left:10px;margin-left:6px;font-size:11px}#nav .nav-link{padding-left:10px!important;padding-right:10px!important}}
 /* Match workspace insets while keeping Review's full-width case rail. */
