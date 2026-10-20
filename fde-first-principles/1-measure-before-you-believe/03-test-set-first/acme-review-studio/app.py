@@ -23,6 +23,7 @@ from shiny import App, reactive, render, ui  # noqa: E402
 from acme.checks import eval_checks, guard_hits  # noqa: E402
 from acme.lab import INTENTS, export_to_excel, load_lab, read_review_log  # noqa: E402
 from acme.providers import make_provider  # noqa: E402
+from acme.review import initial_mode, suggest_mode, validate_verdict  # noqa: E402
 from acme.store import AppSettings, ReviewStore  # noqa: E402
 from acme.ui_bits import CSS, JS, chip, highlight, icon, pipeline  # noqa: E402
 from acme.workflow import PORTALS, Deps, Workflow, to_record  # noqa: E402
@@ -49,27 +50,6 @@ def run_case(case: dict, rnd: int, portal: str = "email") -> dict:
     rec = to_record(view)
     STORE.save_run(rnd, case["id"], rec)
     return view
-
-
-def suggest_mode(case: dict, rec: dict) -> str:
-    ev = eval_checks(case, rec)
-    flags = {f["check"] for f in rec.get("flags", [])}
-    if ev["routing_ok"] is False and case["needs_human"]:
-        return "Missed escalation"                      # the costliest failure comes first
-    for flag, mode in [("time promise", "Promised fix time"), ("financial promise", "Financial promise > ₹500"),
-                       ("other customer's data", "Privacy leak"), ("asks for a secret", "Asked for a secret"),
-                       ("unsupported ticket", "Unsupported claim"), ("unsupported amount", "Unsupported claim")]:
-        if flag in flags:
-            return mode
-    if ev["banned"]:
-        return "Unsupported claim"
-    if ev["missing"]:
-        return "Missing required fact"
-    if ev["routing_ok"] is False:
-        return "Unneeded escalation"
-    if ev["intent_ok"] is False:
-        return "Wrong intent"
-    return ""
 
 
 def customer_chips(cust: dict | None) -> str:
@@ -217,6 +197,7 @@ settings_popover = ui.popover(
                            selected=SETTINGS.provider),
     ui.input_select("model", "Claude model", {"sonnet": "Sonnet", "opus": "Opus", "haiku": "Haiku"}, selected=SETTINGS.model),
     ui.input_numeric("round", "Review round", SETTINGS.round, min=1, step=1),
+    ui.input_switch("critique_first", "Critique-first review (mode optional on Fail)", SETTINGS.critique_first),
     ui.input_slider("concurrency", "Parallel drafts", 1, 10, SETTINGS.concurrency),
     ui.output_ui("provider_status"),
     title="Settings", placement="bottom",
@@ -273,11 +254,13 @@ def server(input, output, session):
 
     # ------------------------------------------------ settings
     @reactive.effect
-    @reactive.event(input.provider, input.model, input.round, input.concurrency, ignore_init=True)
+    @reactive.event(input.provider, input.model, input.round, input.concurrency, input.critique_first,
+                    ignore_init=True)
     def _settings():
         SETTINGS.provider, SETTINGS.model = input.provider(), input.model()
         SETTINGS.round = int(input.round() or 1)
         SETTINGS.concurrency = int(input.concurrency())
+        SETTINGS.critique_first = input.critique_first()
         DEPS.provider = make_provider(SETTINGS.provider, SETTINGS.model)
         SETTINGS.save()
         settings_rev.set(settings_rev() + 1)
@@ -331,7 +314,9 @@ def server(input, output, session):
             await save_verdict("Pass")
         elif key == "fail":
             await session.send_custom_message("focus", "critique")
-            ui.notification_show("Pick a failure mode, write the critique, then Ctrl+Enter.", duration=3)
+            hint = "Write the critique, then Ctrl+Enter." if SETTINGS.critique_first else \
+                   "Pick a failure mode, write the critique, then Ctrl+Enter."
+            ui.notification_show(hint, duration=3)
         elif key == "save":
             await save_verdict("Fail")
 
@@ -568,12 +553,11 @@ def server(input, output, session):
         with reactive.isolate():
             c, rec = cur()
         modes = {"": "—", **{m: m for m in LAB.failure_modes}}
-        mode = rec.get("failure_mode") or ""
+        mode = rec.get("failure_mode") or initial_mode(c, rec, SETTINGS.critique_first)
         if not rec.get("verdict") and (rec.get("reply") or rec.get("decision")):
             suggestion = suggest_mode(c, rec)
             if suggestion:
-                modes[suggestion] = f"{suggestion} (suggested)"
-                mode = suggestion
+                modes[suggestion] = f"{suggestion} (suggested)" if not SETTINGS.critique_first else f"{suggestion} · hint"
         with reactive.isolate():
             ui.update_select("failure_mode", choices=modes, selected=mode)
             ui.update_text_area("critique", value=rec.get("critique") or "")
@@ -592,8 +576,9 @@ def server(input, output, session):
             return
         critique = (input.critique() or "").strip()
         mode = input.failure_mode() or ""
-        if verdict == "Fail" and (not mode or not critique):
-            ui.notification_show("For a Fail, pick a failure mode and write a short critique.", type="warning")
+        refusal = validate_verdict(verdict, mode, critique, SETTINGS.critique_first)
+        if refusal:
+            ui.notification_show(f"For a Fail, {refusal}.", type="warning")
             await session.send_custom_message("focus", "critique")
             return
         ids = visible_ids()

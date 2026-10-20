@@ -73,6 +73,7 @@ class AppSettings:
         self.model = raw.get("model", "sonnet")
         self.round = int(raw.get("round", 1))
         self.concurrency = int(raw.get("concurrency", 3))
+        self.critique_first = bool(raw.get("critique_first", True))
         defaults = Settings()
         self.workflow = Settings(guards=raw.get("guards", defaults.guards),
                                  block_on_high_flags=raw.get("block_on_high_flags", True))
@@ -81,4 +82,5 @@ class AppSettings:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(json.dumps({
             "provider": self.provider, "model": self.model, "round": self.round, "concurrency": self.concurrency,
+            "critique_first": self.critique_first,
             **asdict(self.workflow)}, ensure_ascii=False, indent=1), "utf-8")
