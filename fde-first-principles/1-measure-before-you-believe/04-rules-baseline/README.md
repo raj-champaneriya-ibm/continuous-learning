@@ -1,7 +1,7 @@
 # Day 4 · Version A: rules and templates (the honest baseline)
 
 <!-- learn:status -->
-**Status:** ⏳ open · attempt 2 · dropped 2026-10-20 · ship by Wed 21 Oct, 05:00 · project 1, step 4
+**Status:** ✅ shipped · attempt 2 · dropped 2026-10-20 · ship by Wed 21 Oct, 05:00 · shipped 2026-10-20 11:41 · project 1, step 4
 <!-- /learn:status -->
 
 > **First-principles question:** How far can plain code go before you need a model?
@@ -43,11 +43,11 @@ _Tempted to do more? Park it in `later.md`: Try regular expressions for customer
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** Simple keyword-based classification struggles with synonyms, multilingual expressions, ambiguous words, and multiple intents. It needs contextual understanding and explicit rules for intent prioritization.
 
-**For an engineer:** …
+**For an engineer:** Version A scored 67% accuracy on the 84 test cases. That is just round 1 — generally we need 3 to 5 iterations on the rules before reaching the UAT phase.
 
-**For a customer:** …
+**For a customer:** Wrong replies mean customer support has more work and lots of angry customers to deal with. Soon many of them start using a competitor's product, which eventually results in job losses.
 
 ## What surprised me
 …
@@ -57,5 +57,5 @@ _Tempted to do more? Park it in `later.md`: Try regular expressions for customer
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/_oQJGEakSrY)
 <!-- /learn:video -->

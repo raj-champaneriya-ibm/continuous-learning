@@ -14,7 +14,10 @@
       "/lab/__init__.py": "f675af4a449d3c419dfde86744bfc7d9ad7c6a0d8ccd8259aa64d071d55fc28e",
       "/lab/acme.py": "065121e54a59469c81beafdaa5afd89c0df91fd11eb6076c3ab92b553e4b7e22",
       "notebook.ipynb": "6a90d89e2cf10552a5ab4b2b233d2cf50fd3e59d0c6d039e26e1bcd5774c02b3"
-    }
+    },
+    "shipped_at": "2026-10-20T11:41",
+    "status": "shipped",
+    "video": "https://youtu.be/_oQJGEakSrY"
   },
   "log": [
     {
@@ -55,6 +58,15 @@
       "attempt": 1,
       "mornings": 2,
       "status": "missed"
+    },
+    {
+      "topic_id": "p1-04",
+      "dropped_on": "2026-10-20",
+      "attempt": 2,
+      "mornings": 1,
+      "status": "shipped",
+      "shipped_at": "2026-10-20T11:41",
+      "video": "https://youtu.be/_oQJGEakSrY"
     }
   ]
 }
