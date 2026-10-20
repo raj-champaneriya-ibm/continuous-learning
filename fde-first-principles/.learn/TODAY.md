@@ -1,6 +1,6 @@
 # Today · Day 5 of 66: A grader you can trust
 
-**Ship by Thu 22 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/05-a-grader-you-can-trust](../1-measure-before-you-believe/05-a-grader-you-can-trust/README.md)
+**Ship by Thu 22 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/05-a-grader-you-can-trust](../1-measure-before-you-believe/05-a-grader-you-can-trust/README.md)
 
 > **First-principles question:** What exactly makes a reply 'correct' for this customer?
 

@@ -1,7 +1,7 @@
 # Day 5 · A grader you can trust
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-20 · ship by Thu 22 Oct, 05:00 · project 1, step 5
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-20 · ship by Thu 22 Oct, 05:00 · project 1, step 5
 <!-- /learn:status -->
 
 > **First-principles question:** What exactly makes a reply 'correct' for this customer?
