@@ -3,21 +3,17 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-04",
-    "folder": "1-measure-before-you-believe/04-rules-baseline",
+    "topic_id": "p1-05",
+    "folder": "1-measure-before-you-believe/05-a-grader-you-can-trust",
     "dropped_on": "2026-10-20",
     "seen_on": "2026-10-20",
-    "deadline": "2026-10-21T05:00",
-    "attempt": 2,
-    "mornings": 1,
+    "deadline": "2026-10-22T05:00",
+    "attempt": 1,
+    "mornings": 2,
     "starter_hashes": {
-      "/lab/__init__.py": "f675af4a449d3c419dfde86744bfc7d9ad7c6a0d8ccd8259aa64d071d55fc28e",
-      "/lab/acme.py": "065121e54a59469c81beafdaa5afd89c0df91fd11eb6076c3ab92b553e4b7e22",
-      "notebook.ipynb": "6a90d89e2cf10552a5ab4b2b233d2cf50fd3e59d0c6d039e26e1bcd5774c02b3"
-    },
-    "shipped_at": "2026-10-20T11:41",
-    "status": "shipped",
-    "video": "https://youtu.be/_oQJGEakSrY"
+      "/lab/evals.py": "872d92f20d51712bd72ce23d18d545a3d6b7a52dd6b7e574a10cfae2566bf0fb",
+      "notebook.ipynb": "9865f137643b6f7bc0c0eb9ecca0c007e4f0ca548738e1e44fd9322c508bad45"
+    }
   },
   "log": [
     {
