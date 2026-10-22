@@ -22,7 +22,8 @@ The daily drop, deadlines and this table are managed by
 | 4 | 2026-10-18 | [Version A: rules and templates (the honest baseline)](1-measure-before-you-believe/04-rules-baseline/README.md) |  | ❌ missed |
 | 4 | 2026-10-20 | [Version A: rules and templates (the honest baseline)](1-measure-before-you-believe/04-rules-baseline/README.md) (attempt 2) | [▶](https://youtu.be/_oQJGEakSrY) | ✅ shipped |
 | 5 | 2026-10-20 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) |  | ❌ missed |
-| 5 | 2026-10-22 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) (attempt 2) |  | ⏳ open |
+| 5 | 2026-10-22 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) (attempt 2) |  | ❌ missed |
+| 5 | 2026-10-23 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) (attempt 3) |  | ⏳ open |
 
 **4 of 66 topics shipped.**
 <!-- /learn:progress -->

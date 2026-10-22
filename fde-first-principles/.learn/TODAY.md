@@ -1,6 +1,6 @@
 # Today · Day 5 of 66: A grader you can trust
 
-**Ship by Fri 23 Oct, 05:00** · folder: [1-measure-before-you-believe/05-a-grader-you-can-trust](../1-measure-before-you-believe/05-a-grader-you-can-trust/README.md)
+**Ship by Sat 24 Oct, 05:00** · folder: [1-measure-before-you-believe/05-a-grader-you-can-trust](../1-measure-before-you-believe/05-a-grader-you-can-trust/README.md)
 
 > **First-principles question:** What exactly makes a reply 'correct' for this customer?
 
@@ -8,7 +8,7 @@
 
 **Time:** minimum scope, 1 morning (about 100 minutes for the full topic)
 
-**Attempt 2: minimum scope.** Ship at least this: score() works and the tests pass.
+**Attempt 3: minimum scope.** Ship at least this: score() works and the tests pass.
 
 ### 1 · Learn (about 25 minutes)
 - [Define success criteria and build evaluations (Claude docs)](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests) · 15 min. Read the eval design principles and the code-based grading examples. Skip model-based grading for now.
