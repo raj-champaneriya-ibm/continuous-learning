@@ -3,20 +3,17 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-05",
-    "folder": "1-measure-before-you-believe/05-a-grader-you-can-trust",
+    "topic_id": "p1-06",
+    "folder": "1-measure-before-you-believe/06-one-llm-call",
     "dropped_on": "2026-10-23",
     "seen_on": "2026-10-23",
-    "deadline": "2026-10-24T05:00",
-    "attempt": 3,
-    "mornings": 1,
+    "deadline": "2026-10-25T05:00",
+    "attempt": 1,
+    "mornings": 2,
     "starter_hashes": {
-      "/lab/evals.py": "872d92f20d51712bd72ce23d18d545a3d6b7a52dd6b7e574a10cfae2566bf0fb",
-      "notebook.ipynb": "9865f137643b6f7bc0c0eb9ecca0c007e4f0ca548738e1e44fd9322c508bad45"
-    },
-    "shipped_at": "2026-10-23T05:14",
-    "status": "shipped",
-    "video": "https://youtu.be/ec4bJ2_Jb-Y"
+      "/lab/llm.py": "40583881074be96e8ba9e887fc3885ad17ef9092cda3fb11d615c1f069cedae4",
+      "notebook.ipynb": "9c62f72ba4b8fd7c09cb24a21d50b095ef583cc563d6e7c4d57e58483f57a1f3"
+    }
   },
   "log": [
     {

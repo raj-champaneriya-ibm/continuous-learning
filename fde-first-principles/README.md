@@ -24,6 +24,7 @@ The daily drop, deadlines and this table are managed by
 | 5 | 2026-10-20 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) |  | ❌ missed |
 | 5 | 2026-10-22 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) (attempt 2) |  | ❌ missed |
 | 5 | 2026-10-23 | [A grader you can trust](1-measure-before-you-believe/05-a-grader-you-can-trust/README.md) (attempt 3) | [▶](https://youtu.be/ec4bJ2_Jb-Y) | ✅ shipped |
+| 6 | 2026-10-23 | [Version B: one model call with the right context](1-measure-before-you-believe/06-one-llm-call/README.md) |  | ⏳ open |
 
 **5 of 66 topics shipped.**
 <!-- /learn:progress -->
