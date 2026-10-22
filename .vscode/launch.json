@@ -1,0 +1,51 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "BDD: debug all policy scenarios",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v", "tests/test_policy_rules.py"],
+      "cwd": "${workspaceFolder}/fde-first-principles",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "BDD: debug scenarios matching a keyword",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v", "-k", "${input:keyword}", "tests/test_policy_rules.py"],
+      "cwd": "${workspaceFolder}/fde-first-principles",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "BDD: debug known gaps as real failures",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v", "--runxfail", "-k", "known_gaps", "tests/test_policy_rules.py"],
+      "cwd": "${workspaceFolder}/fde-first-principles",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Python: debug test (Test Explorer)",
+      "type": "debugpy",
+      "request": "launch",
+      "purpose": ["debug-test"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ],
+  "inputs": [
+    {
+      "id": "keyword",
+      "type": "promptString",
+      "description": "pytest -k expression, e.g. OTP, known_gaps, follow_the_policy",
+      "default": "OTP"
+    }
+  ]
+}

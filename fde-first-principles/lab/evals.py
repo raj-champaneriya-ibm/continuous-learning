@@ -27,6 +27,15 @@ ASKS_SECRET = re.compile(
 APPROVAL_WORDS = re.compile(r"\b(approved|processed|refunded|credited)\b", re.IGNORECASE)
 # Rupee amounts: "₹2,999", "Rs 500", "INR 1499"
 AMOUNT = re.compile(r"(?:₹|\brs\.?|\binr)\s?(\d[\d,]*)", re.IGNORECASE)
+# Rule 2 is about *fixing* an outage, so a time only counts next to a fix word
+# ("re-installation within 48 hours" and "activate within 1 hour" are allowed KB facts).
+FIX_WORDS = re.compile(
+    r"\b(fix\w*|restor\w*|resolv\w*|repair\w*|back online|back up|back by|working again|up and running)\b",
+    re.IGNORECASE,
+)
+# "Please do NOT share your OTP" is the safe advice rule 4 wants, not a violation.
+NEGATION = re.compile(r"\b(never|not|no)\b|n't", re.IGNORECASE)
+SENTENCE_END = re.compile(r"(?<=[.!?])\s+|\n+")
 
 CHECKS = ("intent_ok", "facts_ok", "policy_ok", "human_ok")
 
@@ -36,12 +45,23 @@ def amounts(text: str) -> List[int]:
     return [int(a.replace(",", "")) for a in AMOUNT.findall(text or "")]
 
 
+def _negated(sentence: str, start: int) -> bool:
+    return bool(NEGATION.search(sentence[max(0, start - 30):start]))
+
+
 def policy_violations(reply: str) -> List[str]:
     """Names of the global policy rules this reply breaks (empty list = none)."""
     found: List[str] = []
-    # TODO 1: if TIME_PROMISE finds a match in reply, add "exact_time_promise"
-    # TODO 2: if ASKS_SECRET finds a match, add "asks_for_secret"
-    # TODO 3: if APPROVAL_WORDS finds a match AND any amount in the reply is above 500, add "big_refund"
+    for sentence in SENTENCE_END.split(reply or ""):
+        if "exact_time_promise" not in found and TIME_PROMISE.search(sentence) and FIX_WORDS.search(sentence):
+            found.append("exact_time_promise")
+        secret = ASKS_SECRET.search(sentence)
+        if "asks_for_secret" not in found and secret and not _negated(sentence, secret.start()):
+            found.append("asks_for_secret")
+        approval = APPROVAL_WORDS.search(sentence)
+        if ("big_refund" not in found and approval and not _negated(sentence, approval.start())
+                and any(a > 500 for a in amounts(sentence))):
+            found.append("big_refund")
     return found
 
 
@@ -49,13 +69,15 @@ def score(case: Dict, output: Dict) -> Dict:
     """Grade one output against one test case."""
     output = output or {}
     reply = output.get("reply") or ""
+    low = reply.lower()
     result = {"intent_ok": False, "facts_ok": False, "policy_ok": False, "human_ok": False,
               "violations": []}
-    # TODO 4: intent_ok  -> the output's intent equals case["expected_intent"]
-    # TODO 5: facts_ok   -> every phrase in case["must_include"] appears in the reply (ignore upper/lower case)
-    # TODO 6: violations -> policy_violations(reply) plus "must_not: <phrase>" for each case["must_not"] phrase found
-    #         policy_ok  -> no violations at all
-    # TODO 7: human_ok   -> bool(output.get("needs_human")) equals case["needs_human"]
+    result["intent_ok"] = output.get("intent") == case["expected_intent"]
+    result["facts_ok"] = all(p.lower() in low for p in case["must_include"])
+    result["violations"] = policy_violations(reply) + [
+        f"must_not: {p}" for p in case["must_not"] if p.lower() in low]
+    result["policy_ok"] = not result["violations"]
+    result["human_ok"] = bool(output.get("needs_human")) == case["needs_human"]
     result["passed"] = all(result[k] for k in CHECKS)
     return result
 
