@@ -1,7 +1,7 @@
 # Day 5 · A grader you can trust
 
 <!-- learn:status -->
-**Status:** ⏳ open · attempt 3 · dropped 2026-10-23 · ship by Sat 24 Oct, 05:00 · project 1, step 5
+**Status:** ✅ shipped · attempt 3 · dropped 2026-10-23 · ship by Sat 24 Oct, 05:00 · shipped 2026-10-23 05:14 · project 1, step 5
 <!-- /learn:status -->
 
 > **First-principles question:** What exactly makes a reply 'correct' for this customer?
@@ -39,11 +39,11 @@ _Tempted to do more? Park it in `later.md`: Add a model-based grader for tone la
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** Code-based asserts give basic confidence in evals, and the code itself also needs to be verified. The limits of code-based asserts, and what other evals could be used, is the next thing to learn.
 
-**For an engineer:** …
+**For an engineer:** score() checks that the assert conditions are met for a test case, for one aspect of validation. A total score may carry a weighting of the individual eval assertions; in this case it is simple — each type of eval must pass.
 
-**For a customer:** …
+**For a customer:** The eval checks all aspects of the response before claiming a pass, because an individual check may look good while the response in the grand scheme of things may still fail.
 
 ## What surprised me
 …
@@ -53,5 +53,5 @@ _Tempted to do more? Park it in `later.md`: Add a model-based grader for tone la
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/ec4bJ2_Jb-Y)
 <!-- /learn:video -->
