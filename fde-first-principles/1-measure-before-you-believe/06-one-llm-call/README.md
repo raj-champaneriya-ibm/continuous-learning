@@ -1,7 +1,7 @@
 # Day 6 · Version B: one model call with the right context
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-23 · ship by Sun 25 Oct, 05:00 · project 1, step 6
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-23 · ship by Sun 25 Oct, 05:00 · project 1, step 6
 <!-- /learn:status -->
 
 > **First-principles question:** What does the model need to see to answer like a trained support agent?

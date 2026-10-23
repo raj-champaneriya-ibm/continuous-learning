@@ -1,6 +1,6 @@
 # Today · Day 6 of 66: Version B: one model call with the right context
 
-**Ship by Sun 25 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/06-one-llm-call](../1-measure-before-you-believe/06-one-llm-call/README.md)
+**Ship by Sun 25 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/06-one-llm-call](../1-measure-before-you-believe/06-one-llm-call/README.md)
 
 > **First-principles question:** What does the model need to see to answer like a trained support agent?
 
