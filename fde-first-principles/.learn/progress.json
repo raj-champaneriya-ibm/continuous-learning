@@ -13,7 +13,10 @@
     "starter_hashes": {
       "/lab/llm.py": "40583881074be96e8ba9e887fc3885ad17ef9092cda3fb11d615c1f069cedae4",
       "notebook.ipynb": "9c62f72ba4b8fd7c09cb24a21d50b095ef583cc563d6e7c4d57e58483f57a1f3"
-    }
+    },
+    "shipped_at": "2026-10-24T21:28",
+    "status": "shipped",
+    "video": "https://youtu.be/Sc_RauiP3xw"
   },
   "log": [
     {
@@ -86,6 +89,15 @@
       "status": "shipped",
       "shipped_at": "2026-10-23T05:14",
       "video": "https://youtu.be/ec4bJ2_Jb-Y"
+    },
+    {
+      "topic_id": "p1-06",
+      "dropped_on": "2026-10-23",
+      "attempt": 1,
+      "mornings": 2,
+      "status": "shipped",
+      "shipped_at": "2026-10-24T21:28",
+      "video": "https://youtu.be/Sc_RauiP3xw"
     }
   ]
 }

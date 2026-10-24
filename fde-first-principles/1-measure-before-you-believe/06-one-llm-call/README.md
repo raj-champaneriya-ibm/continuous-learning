@@ -1,7 +1,7 @@
 # Day 6 · Version B: one model call with the right context
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-23 · ship by Sun 25 Oct, 05:00 · project 1, step 6
+**Status:** ✅ shipped · dropped 2026-10-23 · ship by Sun 25 Oct, 05:00 · shipped 2026-10-24 21:28 · project 1, step 6
 <!-- /learn:status -->
 
 > **First-principles question:** What does the model need to see to answer like a trained support agent?
@@ -44,11 +44,11 @@ _Tempted to do more? Park it in `later.md`: Try a bigger model (qwen3:8b) on the
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** I showed how changing the customer-support workflow improves answer quality overall, and which areas still need work.
 
-**For an engineer:** …
+**For an engineer:** Evals give a structured mechanism to measure improvement in result quality between the keyword-classifier version (A) and the one-model-call version (B) of our customer-support workflow. This feedback is crucial for the development team and stakeholders: it shows the status of improvement and its direction.
 
-**For a customer:** …
+**For a customer:** Earlier, improvement was judged only by qualitative feedback from subject-matter experts. Now the automated eval gives quantifiable evidence of improvement, which supports the business-case justification for development spend to stakeholders.
 
 ## What surprised me
 …
@@ -58,5 +58,5 @@ _Tempted to do more? Park it in `later.md`: Try a bigger model (qwen3:8b) on the
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/Sc_RauiP3xw)
 <!-- /learn:video -->
