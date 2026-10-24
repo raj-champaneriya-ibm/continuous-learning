@@ -3,20 +3,16 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-06",
-    "folder": "1-measure-before-you-believe/06-one-llm-call",
-    "dropped_on": "2026-10-23",
+    "topic_id": "p1-07",
+    "folder": "1-measure-before-you-believe/07-error-bars",
+    "dropped_on": "2026-10-24",
     "seen_on": "2026-10-24",
-    "deadline": "2026-10-25T05:00",
+    "deadline": "2026-10-27T05:00",
     "attempt": 1,
     "mornings": 2,
     "starter_hashes": {
-      "/lab/llm.py": "40583881074be96e8ba9e887fc3885ad17ef9092cda3fb11d615c1f069cedae4",
-      "notebook.ipynb": "9c62f72ba4b8fd7c09cb24a21d50b095ef583cc563d6e7c4d57e58483f57a1f3"
-    },
-    "shipped_at": "2026-10-24T21:28",
-    "status": "shipped",
-    "video": "https://youtu.be/Sc_RauiP3xw"
+      "notebook.ipynb": "48d859408e7b8c26264702fbb01a5b24f654c3eed6f88e7c373d18bc4067b729"
+    }
   },
   "log": [
     {
