@@ -1,0 +1,412 @@
+<mxfile host="app.diagrams.net">
+    <diagram id="point-estimation" name="01 Point Estimation">
+        <mxGraphModel dx="893" dy="423" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="e_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Point Estimation: one best guess at a hidden number" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 1: Observation -->
+                <mxCell id="e_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="The true expectancy is hidden" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_bag" parent="1" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#F3E5D0;strokeColor=#8D6E63;strokeWidth=3;fontSize=36;fontStyle=1;fontColor=#8D6E63;" value="?" vertex="1">
+                    <mxGeometry height="80" width="160" x="130" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_bagLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="your system's true expectancy: never seen directly" vertex="1">
+                    <mxGeometry height="18" width="354" x="33" y="248" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t1b" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Three numbers from the same system:" vertex="1">
+                    <mxGeometry height="22" width="354" x="33" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=12;align=left;spacingLeft=10;" value="Average R of all 100 trades: &lt;b&gt;+0.31R&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="32" width="340" x="40" y="302" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;align=left;spacingLeft=10;" value="Average R of the last 10 trades: &lt;b&gt;+0.90R&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="32" width="340" x="40" y="342" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;align=left;spacingLeft=10;" value="Best of 20 backtest settings: &lt;b&gt;+0.62R&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="32" width="340" x="40" y="382" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Which number should I believe?" vertex="1">
+                    <mxGeometry height="125" width="300" x="60" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we judge a guess when we can never see the truth?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 2: Intuition -->
+                <mxCell id="e_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: the dartboard" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Bullseye = the hidden true value. Each dart = the estimate from one sample." vertex="1">
+                    <mxGeometry height="22" width="340" x="460" y="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_colL" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="LOW SCATTER" vertex="1">
+                    <mxGeometry height="18" width="120" x="475" y="153" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_colH" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="HIGH SCATTER" vertex="1">
+                    <mxGeometry height="18" width="120" x="645" y="153" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rowOn" parent="1" style="text;html=1;horizontal=0;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="ON TARGET" vertex="1">
+                    <mxGeometry height="120" width="20" x="450" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rowOff" parent="1" style="text;html=1;horizontal=0;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="OFF TARGET" vertex="1">
+                    <mxGeometry height="120" width="20" x="450" y="345" as="geometry"/>
+                </mxCell>
+                <!-- Board A -->
+                <mxCell id="e_A1" parent="1" style="ellipse;html=1;fillColor=#FFFFFF;strokeColor=#999999;" value="" vertex="1">
+                    <mxGeometry height="120" width="120" x="475" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_A2" parent="1" style="ellipse;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="70" width="70" x="500" y="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_A3" parent="1" style="ellipse;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="24" width="24" x="523" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ad1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="525" y="228" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ad2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="535" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ad3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="536" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ad4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="528" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ad5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="531" y="231" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Acap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="on target, tight (the goal)" vertex="1">
+                    <mxGeometry height="16" width="150" x="460" y="298" as="geometry"/>
+                </mxCell>
+                <!-- Board B -->
+                <mxCell id="e_B1" parent="1" style="ellipse;html=1;fillColor=#FFFFFF;strokeColor=#999999;" value="" vertex="1">
+                    <mxGeometry height="120" width="120" x="645" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_B2" parent="1" style="ellipse;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="70" width="70" x="670" y="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_B3" parent="1" style="ellipse;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="24" width="24" x="693" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bd1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="666" y="211" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bd2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="731" y="201" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bd3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="726" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bd4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="671" y="259" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bd5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="706" y="226" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Bcap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#E65100;" value="on target, scattered" vertex="1">
+                    <mxGeometry height="16" width="150" x="630" y="298" as="geometry"/>
+                </mxCell>
+                <!-- Board C -->
+                <mxCell id="e_C1" parent="1" style="ellipse;html=1;fillColor=#FFFFFF;strokeColor=#999999;" value="" vertex="1">
+                    <mxGeometry height="120" width="120" x="475" y="345" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_C2" parent="1" style="ellipse;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="70" width="70" x="500" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_C3" parent="1" style="ellipse;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="24" width="24" x="523" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Cd1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="555" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Cd2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="564" y="375" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Cd3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="561" y="379" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Cd4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="556" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Cd5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="560" y="369" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Ccap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="off target, tight (biased)" vertex="1">
+                    <mxGeometry height="16" width="150" x="460" y="468" as="geometry"/>
+                </mxCell>
+                <!-- Board D -->
+                <mxCell id="e_D1" parent="1" style="ellipse;html=1;fillColor=#FFFFFF;strokeColor=#999999;" value="" vertex="1">
+                    <mxGeometry height="120" width="120" x="645" y="345" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_D2" parent="1" style="ellipse;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="70" width="70" x="670" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_D3" parent="1" style="ellipse;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="24" width="24" x="693" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dd1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="696" y="351" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dd2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="741" y="363" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dd3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="741" y="406" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dd4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="706" y="391" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dd5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="721" y="366" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_Dcap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="off target, scattered (the worst)" vertex="1">
+                    <mxGeometry height="16" width="170" x="620" y="468" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;" value="Judge a recipe by where its darts land over many samples: &lt;b&gt;bias&lt;/b&gt; (how far off target) and &lt;b&gt;variance&lt;/b&gt; (how scattered)." vertex="1">
+                    <mxGeometry height="70" width="340" x="460" y="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="You only ever throw one dart: your one journal. That's why the recipe matters more than any single result." vertex="1">
+                    <mxGeometry height="120" width="340" x="460" y="585" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 3: Experiment -->
+                <mxCell id="e_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: four recipes, one system" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t3sub" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" value="True expectancy +0.25R. Where each recipe's guess lands (19 times in 20)" vertex="1">
+                    <mxGeometry height="32" width="350" x="875" y="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rAL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="A · average of 100 trades" vertex="1">
+                    <mxGeometry height="18" width="220" x="880" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rAR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="on target, tight" vertex="1">
+                    <mxGeometry height="18" width="120" x="1100" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rAB" parent="1" style="rounded=1;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="20" width="71" x="988" y="185" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rAD" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="1019" y="191" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="B · average of last 10 trades" vertex="1">
+                    <mxGeometry height="18" width="220" x="880" y="217" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#E65100;" value="on target, scattered" vertex="1">
+                    <mxGeometry height="18" width="120" x="1100" y="217" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBB" parent="1" style="rounded=1;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="20" width="222" x="912" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBD" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="1019" y="243" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rCL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="C · best of 20 backtests (100 each)" vertex="1">
+                    <mxGeometry height="18" width="220" x="880" y="269" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rCR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="off target, tight" vertex="1">
+                    <mxGeometry height="18" width="120" x="1100" y="269" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rCB" parent="1" style="rounded=1;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="" vertex="1">
+                    <mxGeometry height="20" width="30" x="1042" y="289" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rCD" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="1052" y="295" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rDL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="D · best of 20 backtests (10 each)" vertex="1">
+                    <mxGeometry height="18" width="220" x="880" y="321" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rDR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="off target, scattered" vertex="1">
+                    <mxGeometry height="18" width="120" x="1100" y="321" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rDB" parent="1" style="rounded=1;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="" vertex="1">
+                    <mxGeometry height="20" width="96" x="1083" y="341" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rDD" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="1122" y="347" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_truth" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#E65100;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1023" y="182" as="sourcePoint"/>
+                        <mxPoint x="1023" y="366" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_ax1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="−1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="875" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_ax2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="true +0.25R" vertex="1">
+                    <mxGeometry height="14" width="60" x="993" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_ax3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1088" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_ax4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+2R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1195" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="More trades shrink the scatter (B → A). Picking the best of many tries pushes the guess up (C, D), even when every setting is truly +0.25R." vertex="1">
+                    <mxGeometry height="55" width="340" x="880" y="388" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_mT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Typical miss (bias and scatter combined)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_m1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" value="A ≈ 0.16R (best)" vertex="1">
+                    <mxGeometry height="22" width="160" x="880" y="476" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_m2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="C ≈ 0.32R" vertex="1">
+                    <mxGeometry height="22" width="160" x="1050" y="476" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_m3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="B ≈ 0.52R" vertex="1">
+                    <mxGeometry height="22" width="160" x="880" y="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_m4" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="D ≈ 1.01R (worst)" vertex="1">
+                    <mxGeometry height="22" width="160" x="1050" y="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Your +0.31R came from recipe A. Your +0.62R came from recipe C: flattering, but biased." vertex="1">
+                    <mxGeometry height="60" width="350" x="875" y="538" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Pick the recipe &lt;b&gt;before&lt;/b&gt; you look at the result. Choosing the recipe that gives the nicest number is itself a biased recipe." vertex="1">
+                    <mxGeometry height="95" width="350" x="875" y="610" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 4: Insight -->
+                <mxCell id="e_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="A &lt;b&gt;point estimate&lt;/b&gt; is one best guess at a hidden number, made by a recipe (an &lt;b&gt;estimator&lt;/b&gt;) from your sample." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Two ways a recipe can miss" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBias" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="BIAS" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rBiasT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Off target on average. Built into the recipe." vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rScat" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SCATTER" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rScatT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Jumps around between samples. Shrinks like 1/√n." vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rMiss" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="MISS" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_rMissT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Typical miss combines both: √(bias² + scatter²)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Biased recipes common in trading" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="best of many backtests · trades you remember · dropping 'outlier' losses · counting only since the last tweak" vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp: estimate expectancy from all trades, out of sample, with enough trades." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Judge the recipe, not the result: an honest guess from enough trades beats a flattering one." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Confidence intervals" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="e_e12" edge="1" parent="1" source="e_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="e_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_e23" edge="1" parent="1" source="e_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="e_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_e34" edge="1" parent="1" source="e_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="e_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Lesson notes -->
+                <mxCell id="e_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A &lt;b&gt;point estimate&lt;/b&gt; is a single best guess at a hidden number (like a system's true expectancy), computed from a sample by a recipe called an &lt;b&gt;estimator&lt;/b&gt;.&lt;br&gt;&lt;br&gt;A good recipe is right on average (low bias) and doesn't jump around much (low scatter)." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="You never see inside the bag; you only see trades. Yet you need numbers: the true win rate, the true expectancy.&lt;br&gt;&lt;br&gt;A recipe turns your trades into a guess. Different recipes give different guesses from the same trades.&lt;br&gt;&lt;br&gt;Since you can't check a guess against the truth, you judge the &lt;i&gt;recipe&lt;/i&gt;: how its guesses would land across many possible samples." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the dartboard" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The bullseye is the hidden true value. Each dart is the estimate from one sample of trades.&lt;br&gt;&lt;br&gt;Greg Tang move: &lt;b&gt;sort the boards into a 2 × 2&lt;/b&gt;:&lt;br&gt;• on target and tight (the goal)&lt;br&gt;• on target but scattered (unbiased, noisy)&lt;br&gt;• off target but tight (biased, confident)&lt;br&gt;• off target and scattered (the worst)&lt;br&gt;&lt;br&gt;Bias = how far the cluster's center is from the bullseye. Variance = how spread out the cluster is." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: guessing a die's average" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A die's true average is 3.5. Four recipes using 5 rolls:&lt;br&gt;&lt;br&gt;&lt;b&gt;average of the 5 rolls:&lt;/b&gt; on target, fairly tight&lt;br&gt;&lt;b&gt;first roll only:&lt;/b&gt; on target, very scattered&lt;br&gt;&lt;b&gt;highest of the 5 rolls:&lt;/b&gt; always too high (biased)&lt;br&gt;&lt;b&gt;always say 3:&lt;/b&gt; zero scatter, but always off by 0.5&lt;br&gt;&lt;br&gt;Zero scatter is not the same as accurate." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="True expectancy +0.25R (SD 1.64R). Four recipes:&lt;br&gt;&lt;b&gt;A · average of 100 trades:&lt;/b&gt; on target; −0.08R to +0.58R&lt;br&gt;&lt;b&gt;B · average of last 10:&lt;/b&gt; on target; −0.79R to +1.29R&lt;br&gt;&lt;b&gt;C · best of 20 backtest settings (100 trades each, all truly +0.25R):&lt;/b&gt; lands around +0.56R&lt;br&gt;&lt;b&gt;D · best of 20 settings (10 trades each):&lt;/b&gt; around +1.22R&lt;br&gt;&lt;br&gt;Van Tharp warns about exactly this: optimizing over many settings flatters the backtest." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you change the recipe?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades:&lt;/b&gt; scatter shrinks like 1/√n. From B to A (10 → 100 trades), the range narrows from 2.08R wide to 0.66R wide.&lt;br&gt;&lt;br&gt;&lt;b&gt;More settings tried:&lt;/b&gt; the 'best' result drifts further above the truth. More trades per test reduce this bias, but never to zero while you keep picking the best.&lt;br&gt;&lt;br&gt;&lt;b&gt;Typical miss&lt;/b&gt; (bias and scatter combined): A ≈ 0.16R, C ≈ 0.32R, B ≈ 0.52R, D ≈ 1.01R." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: 'my estimate is the truth'" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;'My estimate is the truth.'&lt;/b&gt; It is one dart. Another sample would give another number.&lt;br&gt;&lt;br&gt;&lt;b&gt;'Unbiased means right.'&lt;/b&gt; Unbiased means right &lt;i&gt;on average&lt;/i&gt; across samples. Recipe B is unbiased and still often misses by 0.5R or more.&lt;br&gt;&lt;br&gt;&lt;b&gt;'More data fixes everything.'&lt;/b&gt; More data shrinks scatter. A biased recipe (dropping 'outlier' losses, counting only remembered trades) stays biased no matter how many trades you add." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="θ = true value (hidden); θ̂ = estimate from a sample&lt;br&gt;&lt;br&gt;&lt;b&gt;Bias = E[θ̂] − θ&lt;/b&gt; (the average miss)&lt;br&gt;&lt;b&gt;Variance&lt;/b&gt; = spread of θ̂ across samples&lt;br&gt;&lt;b&gt;MSE = E[(θ̂ − θ)²] = bias² + variance&lt;/b&gt;&lt;br&gt;&lt;br&gt;Sample mean: X̄ is unbiased, with SD = σ ÷ √n&lt;br&gt;&lt;br&gt;Sample variance: divide by n − 1, not n. The sample sits closer to its own average than to the true one, so dividing by n comes out too small." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; the true expectancy is hidden; three different numbers from one system.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; four dartboards: on/off target × tight/scattered.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; four estimation recipes on the same system, with their ranges and typical misses.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; bias, scatter, typical miss; biased recipes common in trading; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Judge the recipe, not the result: an honest guess from enough trades beats a flattering one." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
