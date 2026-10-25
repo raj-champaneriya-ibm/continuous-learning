@@ -1,7 +1,7 @@
 # Day 7 · Why 30 test cases can lie: error bars
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-24 · ship by Tue 27 Oct, 05:00 · project 1, step 7
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-24 · ship by Tue 27 Oct, 05:00 · project 1, step 7
 <!-- /learn:status -->
 
 > **First-principles question:** How big must a difference be before you believe it?

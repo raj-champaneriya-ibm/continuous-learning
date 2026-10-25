@@ -1,3 +1,50 @@
-# Today: rest day 🌿
+# Today · Day 7 of 66: Why 30 test cases can lie: error bars
 
-No new topic today. Your open topic, Day 7 · Why 30 test cases can lie: error bars, is due Tue 27 Oct, 05:00: no rush today.
+**Ship by Tue 27 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/07-error-bars](../1-measure-before-you-believe/07-error-bars/README.md)
+
+> **First-principles question:** How big must a difference be before you believe it?
+
+**Why it matters for an FDE:** Customers will ask 'is the new version better?'. With small test sets the honest answer is often 'we can't tell yet'.
+
+**Time:** about 140 minutes, over 2 mornings
+
+### 1 · Learn (about 30 minutes)
+- [A statistical approach to model evaluations (Anthropic)](https://www.anthropic.com/research/statistical-approach-to-model-evals) · 10 min. Read the introduction and Recommendation #1 only. Don't worry about the formulas: today's notebook builds them by simulation.
+- [Seeing Theory: Basic probability (Brown University)](https://seeing-theory.brown.edu/basic-probability/) · 10 min. Play with the coin flips. How often do 10 fair flips give 7 or more heads?
+
+**Maths you need today: Standard error and a 95% range.** If a system is right with probability p, a test of n cases wobbles by about √(p × (1 − p) ÷ n). About 95% of the time the truth is within 2 wobbles of what you measured.
+
+### 2 · Build (about 85 minutes)
+1. Simulate a system that is truly 80% right, tested on 30 cases, 10,000 times. Plot the measured accuracies.
+2. From the simulation: how often does a 30-case test show 70% or less?
+3. Write se(p, n). Check that it matches the spread you simulated.
+4. Draw A and B with ± 2 × se error bars. Do they overlap?
+5. Work out the ± range for 30, 50 and 100 cases and for your own test set. How much does each extra case buy?
+6. How many cases would you need for ± 5%?
+
+Your starter notebook is `notebook.ipynb` in this folder: fill in the **TODO** cells and run the ✅ self-check at the end.
+
+### Done when
+- [ ] Histogram of 10,000 simulated test results.
+- [ ] se() matches the simulation.
+- [ ] Bar chart of A and B with error bars.
+- [ ] The ± range for 30, 50, 100 and your own test set.
+- [ ] One sentence: is B really better than A?
+
+### 3 · Record (5 minutes or less)
+- Explain the histogram like a weather forecast.
+- Show A and B with error bars.
+- Say how many test cases you would ask the customer for, and why.
+- Two takes at most, then upload to YouTube as Unlisted and paste the link.
+
+_Tempted to do more? Park it in `later.md`: Read Recommendation #4 (paired differences) and try it on A and B._
+
+<sub>Project 1 · Measure before you believe: Build one customer-support assistant three ways (rules, one model call, an agent loop), measure all three, and recommend one with evidence.</sub>
+
+### Ship it
+```
+fde-coach learn done --video https://youtu.be/…
+```
+or tell Claude Code: *ship today's topic*. Partial work can ship too (`--partial`).
+
+Upload the video as Unlisted with any title: when you ship, the coach sets its title, description and blue title-card thumbnail on YouTube. Want them while you upload? `fde-coach learn video`.
