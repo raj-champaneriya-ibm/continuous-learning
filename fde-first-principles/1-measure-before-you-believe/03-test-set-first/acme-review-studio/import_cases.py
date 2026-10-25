@@ -27,7 +27,7 @@ CASE_FILES = ["cases_abuse.jsonl", "cases_multiturn.jsonl"]
 CASE_COLUMNS = ["history", "concession_allowed", "pair_id", "twin"]
 LANGUAGES = "English,Hinglish,Hindi (Devanagari),Marathi-English"
 MANIPULATIVE = {"injection", "fake-policy", "fake-offer", "fake-code", "fake-memory", "forged-approval",
-                "insider-claim", "fake-regulation"}
+                "insider-claim"}
 
 
 def _tone(tags: list[str]) -> str:

@@ -54,6 +54,7 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 4    | Hi Imran, do not worry, please share your OTP so we can verify you.   | asks for secret    | misses it: reads "do not" as safe advice |
       | 2    | Hi Priya, within the next 2 hours the line will be fixed.             | exact time promise | misses it: "the next" breaks the pattern |
       | 2    | Hi Priya, your line will be restored by 17:00.                        | exact time promise | misses it: only knows am / pm times      |
+      | 2    | Hi Priya, I can't promise it will be back by 4 pm.                    | nothing            | flags it: ignores the "can't" refusal    |
       | 3    | Hi Aditya, we have credited two thousand rupees to your account.      | big refund         | misses it: only reads amounts in digits  |
       | 3    | Hi Aditya, we'll give you 50% off your Pro plan next month.           | big refund         | misses it: can't price a percentage      |
 
