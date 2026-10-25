@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="set-theory" name="01 Set Theory">
-        <mxGraphModel dx="1300" dy="809" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -443,7 +443,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="counting" name="02 Counting">
-        <mxGraphModel dx="4167" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -913,7 +913,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="conditional-probability" name="03 Conditional Probability">
-        <mxGraphModel dx="1370" dy="499" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
