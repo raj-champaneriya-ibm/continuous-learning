@@ -2,7 +2,7 @@
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
-from lab.evals import policy_violations
+from lab.evals import policy_violations, score
 
 scenarios("features/policy_rules.feature")
 
@@ -20,6 +20,13 @@ def the_reply(world, reply):
 @when("the grader checks it")
 def grader_checks(world):
     world["found"] = policy_violations(world["reply"])
+
+
+@when("the grader scores it for a customer entitled to no concession")
+def grader_scores_no_concession(world):
+    case = {"expected_intent": "other", "must_include": [], "must_not": [], "needs_human": False,
+            "concession_allowed": False}
+    world["found"] = score(case, {"intent": "other", "reply": world["reply"]})["violations"]
 
 
 @then(parsers.parse('the grader flags "{rules}"'))
