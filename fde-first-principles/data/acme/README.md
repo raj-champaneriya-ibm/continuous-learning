@@ -15,7 +15,7 @@ Your job in project 1 is to find out what they really need, build it three ways
 
 | File | What it is |
 |---|---|
-| `customers.json` | 12 sample customers: area, plan, tenure, balance |
+| `customers.json` | 40 sample customers: area, plan, tenure, balance, plus history (credits in the last 30 days, last late-fee waiver, last retention offer, payments this cycle) |
 | `outages.json` | Outages happening right now, by area |
 | `kb.md` | 16 short help articles the support team uses |
 | `policy.md` | Rules every reply must follow |

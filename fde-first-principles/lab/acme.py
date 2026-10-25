@@ -16,6 +16,9 @@ RESULTS = ROOT / "data" / "results"
 
 INTENTS = ["billing", "outage", "speed", "cancel", "upgrade", "relocation", "other"]
 
+# The day the customer records describe ("today" in outages.json); 12-month rules count back from it.
+RECORD_DATE = "2026-10-25"
+
 # "Oracle" context: the help articles a perfect search would find for each intent.
 # Version B uses this on day 6. Project 2 replaces it with real retrieval.
 INTENT_KB = {
@@ -74,6 +77,11 @@ def customer_card(customer: Dict) -> str:
         f"Area: {customer['area']} · Plan: {customer['plan']} · Status: {customer['status']}",
         f"Tenure: {customer['tenure_months']} months · Balance due: ₹{customer['balance_due']}",
         f"Complaints in the last 30 days: {customer['complaints_last_30_days']}",
+        f"Credits given in the last 30 days: ₹{customer.get('credits_last_30_days', 0)} · "
+        f"Late-fee waiver last used: {customer.get('late_fee_waived_on') or 'never'} · "
+        f"Retention offer last used: {customer.get('retention_offer_used_on') or 'never'}",
+        "Payments this cycle: " + (", ".join(f"₹{p:,}" for p in customer.get("payments_this_cycle", [])) or "none")
+        + f" · Records as of {RECORD_DATE}",
     ]
     outage = outage_for(customer)
     if outage:
