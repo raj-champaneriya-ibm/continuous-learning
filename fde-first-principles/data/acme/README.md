@@ -20,6 +20,8 @@ Your job in project 1 is to find out what they really need, build it three ways
 | `kb.md` | 16 short help articles the support team uses |
 | `policy.md` | Rules every reply must follow |
 | `cases.jsonl` | Test cases: an email plus what a correct reply must contain (from day 3) |
+| `cases_abuse.jsonl` | 40 contrast pairs (80 cases): the same request from a customer trying to milk a loophole and from one who is entitled, told apart by the customer record. Drafted, not yet expert-reviewed |
+| `cases_multiturn.jsonl` | 40 conversations graded on the next reply: earlier turns are in `history` (render them with `lab.acme.conversation()`). Drafted, not yet expert-reviewed |
 | `queries.jsonl` | Search tests: a question plus the right help article (from project 2) |
 
 Plans: **Basic** 100 Mbps ₹699/month · **Plus** 300 Mbps ₹999/month · **Pro** 1 Gbps ₹1,499/month.
