@@ -77,6 +77,11 @@ What the Review page shows so you don't have to look it up:
 
 To use a different workbook: `ACME_XLSX=/path/to/file.xlsx shiny run app.py`.
 
+`python import_cases.py` copies new cases, customers and policy rules from the lab's `data/acme/`
+(`cases_abuse.jsonl`, `cases_multiturn.jsonl`, `customers.json`, `policy.md`) into the workbook. It only adds
+what is missing, so re-running it is safe. Multi-turn cases keep their earlier turns in the Dataset's `history`
+column; the Review page shows them above the latest message, and step 5 sees them in its prompt.
+
 ## How the Claude Code call works
 
 `acme/providers.py` runs, for each case:
