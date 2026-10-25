@@ -46,7 +46,8 @@ CASE_IDS = [c["id"] for c in LAB.cases]
 
 
 def run_case(case: dict, rnd: int, portal: str = "email") -> dict:
-    view = WF.start(customer_id=case["customer_id"], message=case["message"], portal=portal, case_id=case["id"])
+    view = WF.start(customer_id=case["customer_id"], message=case["message"], portal=portal, case_id=case["id"],
+                    history=case.get("history"))
     rec = to_record(view)
     STORE.save_run(rnd, case["id"], rec)
     return view
@@ -61,6 +62,15 @@ def customer_chips(cust: dict | None) -> str:
              chip(f"₹{cust['balance_due']} due", "warn" if cust["balance_due"] else "ok"),
              chip(f"{cust['complaints_30d']} complaints/30d", "bad" if cust["complaints_30d"] >= 2 else ""),
              chip(outage["ticket"] if outage else "no area outage", "warn" if outage else "")]
+    if cust.get("credits_30d"):
+        parts.append(chip(f"₹{cust['credits_30d']} credited/30d", "warn"))
+    if cust.get("late_fee_waived_on"):
+        parts.append(chip(f"waiver used {cust['late_fee_waived_on']}"))
+    if cust.get("retention_offer_used_on"):
+        parts.append(chip(f"retention used {cust['retention_offer_used_on']}"))
+    payments = cust.get("payments_this_cycle") or []
+    parts.append(chip("paid " + " + ".join(f"₹{p:,}" for p in payments) if payments else "no payment this cycle",
+                      "warn" if len(payments) > 1 else ""))
     return "".join(parts)
 
 
@@ -422,8 +432,13 @@ def server(input, output, session):
     @render.ui
     def email_card():
         c, _ = cur()
+        earlier = "".join(
+            f'<div class="turn turn-{html.escape(t["role"])}"><span class="muted">{html.escape(t["role"].capitalize())}</span>'
+            f'<div class="email">{html.escape(t["text"])}</div></div>' for t in c.get("history") or [])
+        latest = '<span class="muted">Customer · latest message, the run drafts the reply to this</span>' if earlier else ""
         return ui.div(ui.HTML(customer_chips(LAB.customers.get(c["customer_id"]))),
-                      ui.HTML(f'<div class="email mt-2">{html.escape(c["message"])}</div>'))
+                      ui.HTML(f'<div class="history mt-2">{earlier}</div>' if earlier else ""),
+                      ui.HTML(f'{latest}<div class="email mt-2">{html.escape(c["message"])}</div>'))
 
     @render.ui
     def expected_card():
@@ -737,7 +752,9 @@ def server(input, output, session):
         data_rev()
         df = pd.DataFrame([{"id": c["id"], "intent": c["expected_intent"], "human?": "yes" if c["needs_human"] else "no",
                             "ground truth": c["ground_truth"], "rule": c["rule"], "customer": c["customer_id"],
-                            "message": c["message"][:90], "must include": " | ".join(c["must_include"]),
+                            "message": c["message"][:90], "turns": len(c.get("history") or []) + 1,
+                            "pair": f'{c["pair_id"]} {c["twin"]}'.strip() if c.get("pair_id") else "",
+                            "must include": " | ".join(c["must_include"]),
                             "must not say": " | ".join(c["must_not"]),
                             "tags": ", ".join(c["tags"]), "expert check": c["expert_check"]} for c in LAB.cases])
         return render.DataGrid(df, selection_mode="row", filters=True, height="360px", width="100%")
@@ -802,12 +819,14 @@ def server(input, output, session):
         ui.notification_show(f"{c['id']} updated. 'Save to Excel' writes it to the workbook.")
 
     # ------------------------------------------------ knowledge
-    CUST_COLS = ["id", "name", "area", "plan", "status", "tenure_months", "balance_due", "complaints_30d"]
+    CUST_COLS = ["id", "name", "area", "plan", "status", "tenure_months", "balance_due", "complaints_30d",
+                 "credits_30d", "late_fee_waived_on", "retention_offer_used_on", "payments_this_cycle"]
 
     @render.data_frame
     def customers_grid():
-        return render.DataGrid(pd.DataFrame([{k: c[k] for k in CUST_COLS} for c in LAB.customers.values()]),
-                               editable=True, width="100%")
+        rows = [{k: ", ".join(map(str, c.get(k) or [])) if k == "payments_this_cycle" else c.get(k) for k in CUST_COLS}
+                for c in LAB.customers.values()]
+        return render.DataGrid(pd.DataFrame(rows), editable=True, width="100%")
 
     @customers_grid.set_patch_fn
     def _(*, patch):
@@ -816,8 +835,13 @@ def server(input, output, session):
         if key == "id":
             return cust["id"]
         value = patch["value"]
-        if key in ("tenure_months", "balance_due", "complaints_30d"):
+        if key in ("tenure_months", "balance_due", "complaints_30d", "credits_30d"):
             value = int(float(value or 0))
+        if key in ("late_fee_waived_on", "retention_offer_used_on"):
+            value = str(value or "").strip()[:10] or None
+        if key == "payments_this_cycle":
+            cust[key] = [int(p) for p in str(value or "").replace(",", " ").split() if p.isdigit()]
+            return ", ".join(map(str, cust[key]))
         cust[key] = value
         return value
 

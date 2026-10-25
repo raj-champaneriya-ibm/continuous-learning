@@ -49,7 +49,8 @@ def main():
     OUT.unlink(missing_ok=True)
     store = ReviewStore(OUT)
     for i, case in enumerate(lab.cases):
-        rec = to_record(wf.start(customer_id=case["customer_id"], message=case["message"], case_id=case["id"]))
+        rec = to_record(wf.start(customer_id=case["customer_id"], message=case["message"], case_id=case["id"],
+                                 history=case.get("history")))
         store.save_run(1, case["id"], rec)
         if i % 8 == 7:                       # leave some cases unreviewed, like a real review in progress
             continue
