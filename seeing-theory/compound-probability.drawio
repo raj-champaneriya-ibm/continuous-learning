@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="set-theory" name="01 Set Theory">
-        <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="4167" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -443,7 +443,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="counting" name="02 Counting">
-        <mxGraphModel dx="1923" dy="700" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="4167" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -907,6 +907,434 @@
                     <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="c_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Before calling a streak rare, count how many paths lead to it." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="conditional-probability" name="03 Conditional Probability">
+        <mxGraphModel dx="1370" dy="499" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="k_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Conditional Probability: new information shrinks the box" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="One system, 100 trades, 45% winners overall" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_aLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#3A5F9E;" value="Last 10 trend-day trades" vertex="1">
+                    <mxGeometry height="18" width="354" x="33" y="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="33" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="69" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="105" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="141" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="177" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="213" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="249" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="285" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="321" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_a10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="357" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#555555;" value="Last 10 other-day trades" vertex="1">
+                    <mxGeometry height="18" width="354" x="33" y="236" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="33" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="69" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="105" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="141" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="177" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="213" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="249" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="285" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="321" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_b10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="357" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_tally" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="Trend days: &lt;b&gt;7 of 10&lt;/b&gt; won · Other days: &lt;b&gt;2 of 10&lt;/b&gt; won" vertex="1">
+                    <mxGeometry height="20" width="354" x="33" y="296" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_overall" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=13;fontStyle=1;" value="Overall win rate: 45%" vertex="1">
+                    <mxGeometry height="34" width="340" x="40" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="So is this a 45% system...&lt;br&gt;or does it depend on the day?" vertex="1">
+                    <mxGeometry height="130" width="300" x="60" y="372" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;" value="One overall number can hide two very different systems living in the same journal." vertex="1">
+                    <mxGeometry height="85" width="340" x="40" y="515" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we measure the win rate &lt;b&gt;given&lt;/b&gt; what kind of day it is?" vertex="1">
+                    <mxGeometry height="90" width="340" x="40" y="620" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: spotlight one column" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="New information shrinks the box. Recount inside the smaller box." vertex="1">
+                    <mxGeometry height="26" width="340" x="460" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbC0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;" value="" vertex="1">
+                    <mxGeometry height="24" width="55" x="500" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbCT" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Trend day" vertex="1">
+                    <mxGeometry height="24" width="100" x="560" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbCN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=11;fontColor=#BDBDBD;" value="Not trend" vertex="1">
+                    <mxGeometry height="24" width="100" x="660" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbRW" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Win" vertex="1">
+                    <mxGeometry height="36" width="55" x="500" y="189" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbWT" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#B0B0B0;fontSize=16;fontStyle=1;" value="30" vertex="1">
+                    <mxGeometry height="36" width="100" x="560" y="189" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbWN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=16;fontColor=#BDBDBD;" value="15" vertex="1">
+                    <mxGeometry height="36" width="100" x="660" y="189" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbRL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Loss" vertex="1">
+                    <mxGeometry height="36" width="55" x="500" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbLT" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#B0B0B0;fontSize=16;fontStyle=1;" value="10" vertex="1">
+                    <mxGeometry height="36" width="100" x="560" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbLN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=16;fontColor=#BDBDBD;" value="45" vertex="1">
+                    <mxGeometry height="36" width="100" x="660" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbRT" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;" value="Total" vertex="1">
+                    <mxGeometry height="22" width="55" x="500" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbTT" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="40" vertex="1">
+                    <mxGeometry height="22" width="100" x="560" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fbTN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=12;fontColor=#BDBDBD;" value="60" vertex="1">
+                    <mxGeometry height="22" width="100" x="660" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_spot" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#E65100;strokeWidth=3;" value="" vertex="1">
+                    <mxGeometry height="126" width="108" x="556" y="161" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_spotLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#E65100;" value="spotlight: trend days only" vertex="1">
+                    <mxGeometry height="16" width="200" x="510" y="291" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_strT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="stretch the slice to fill the box" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="315" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar1Lbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="All 100 trades" vertex="1">
+                    <mxGeometry height="18" width="300" x="470" y="343" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar1W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="45" vertex="1">
+                    <mxGeometry height="26" width="135" x="470" y="363" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar1L" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="55" vertex="1">
+                    <mxGeometry height="26" width="165" x="605" y="363" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar1Pct" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="45%" vertex="1">
+                    <mxGeometry height="26" width="45" x="774" y="363" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar2Lbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Trend days only (40 trades)" vertex="1">
+                    <mxGeometry height="18" width="300" x="470" y="398" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar2W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="30" vertex="1">
+                    <mxGeometry height="26" width="90" x="470" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar2L" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="10" vertex="1">
+                    <mxGeometry height="26" width="30" x="560" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar2Ghost" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#BDBDBD;dashed=1;fontSize=10;fontColor=#9E9E9E;" value="60 other-day trades set aside" vertex="1">
+                    <mxGeometry height="26" width="180" x="590" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar3Lbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Stretched to fill the box" vertex="1">
+                    <mxGeometry height="18" width="300" x="470" y="453" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar3W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="75%" vertex="1">
+                    <mxGeometry height="26" width="225" x="470" y="473" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_bar3L" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="25%" vertex="1">
+                    <mxGeometry height="26" width="75" x="695" y="473" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;fontStyle=1;" value="P(win | trend day) = wins inside the box ÷ size of the box&lt;br&gt;= 30 ÷ 40 = 75%" vertex="1">
+                    <mxGeometry height="65" width="340" x="460" y="515" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="Read &#39;|&#39; as &#39;given&#39; or &#39;among&#39;. Same 30 winning trades; only the denominator changed: 40 instead of 100." vertex="1">
+                    <mxGeometry height="110" width="340" x="460" y="595" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: move the spotlight" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Change the condition, recount the win rate" vertex="1">
+                    <mxGeometry height="24" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r1Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;No condition&lt;/b&gt;&lt;br&gt;all 100 trades" vertex="1">
+                    <mxGeometry height="28" width="128" x="878" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r1Bg" parent="1" style="rounded=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="" vertex="1">
+                    <mxGeometry height="28" width="200" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r1W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="45%" vertex="1">
+                    <mxGeometry height="28" width="90" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r2Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Given trend day&lt;/b&gt;&lt;br&gt;40 trades" vertex="1">
+                    <mxGeometry height="28" width="128" x="878" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r2Bg" parent="1" style="rounded=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="" vertex="1">
+                    <mxGeometry height="28" width="200" x="1010" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r2W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=12;" value="75%" vertex="1">
+                    <mxGeometry height="28" width="150" x="1010" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r3Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Given other day&lt;/b&gt;&lt;br&gt;60 trades" vertex="1">
+                    <mxGeometry height="28" width="128" x="878" y="241" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r3Bg" parent="1" style="rounded=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="" vertex="1">
+                    <mxGeometry height="28" width="200" x="1010" y="241" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_r3W" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;fontSize=11;" value="25%" vertex="1">
+                    <mxGeometry height="28" width="50" x="1010" y="241" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_flipT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Flip the question: same overlap, different box" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="292" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mAT" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="T" vertex="1">
+                    <mxGeometry height="14" width="40" x="905" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mAN" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="N" vertex="1">
+                    <mxGeometry height="14" width="40" x="945" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mAW" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="26" width="14" x="889" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mAL" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="26" width="14" x="889" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mATL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="30" vertex="1">
+                    <mxGeometry height="26" width="40" x="905" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mATR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=11;fontColor=#BDBDBD;" value="15" vertex="1">
+                    <mxGeometry height="26" width="40" x="945" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mABL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="10" vertex="1">
+                    <mxGeometry height="26" width="40" x="905" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mABR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=11;fontColor=#BDBDBD;" value="45" vertex="1">
+                    <mxGeometry height="26" width="40" x="945" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mAOut" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#E65100;strokeWidth=3;" value="" vertex="1">
+                    <mxGeometry height="58" width="46" x="902" y="331" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBT" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="T" vertex="1">
+                    <mxGeometry height="14" width="40" x="1085" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBN" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="N" vertex="1">
+                    <mxGeometry height="14" width="40" x="1125" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBW" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="26" width="14" x="1069" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBL" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="26" width="14" x="1069" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBTL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="30" vertex="1">
+                    <mxGeometry height="26" width="40" x="1085" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBTR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="15" vertex="1">
+                    <mxGeometry height="26" width="40" x="1125" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBBL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=11;fontColor=#BDBDBD;" value="10" vertex="1">
+                    <mxGeometry height="26" width="40" x="1085" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBBR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#D0D0D0;fontSize=11;fontColor=#BDBDBD;" value="45" vertex="1">
+                    <mxGeometry height="26" width="40" x="1125" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBOut" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#E65100;strokeWidth=3;" value="" vertex="1">
+                    <mxGeometry height="32" width="86" x="1082" y="331" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mACap" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=11;" value="win &lt;b&gt;given&lt;/b&gt; trend&lt;br&gt;&lt;b&gt;30 ÷ 40 = 75%&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="36" width="170" x="860" y="392" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mBCap" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=11;" value="trend &lt;b&gt;given&lt;/b&gt; win&lt;br&gt;&lt;b&gt;30 ÷ 45 ≈ 67%&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="36" width="170" x="1040" y="392" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_filT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Use it: filter the system (+2R wins, −1R losses)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="440" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fil1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="Every day: 100 trades → +35R (+0.35R each)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="464" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fil2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" value="Trend days only: 40 trades → +50R (+1.25R each)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="486" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_fil3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="Other days only: 60 trades → −15R (−0.25R each)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="508" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Skipping 60 trades earned 15R more. The condition showed where the edge lives." vertex="1">
+                    <mxGeometry height="65" width="350" x="875" y="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Only trust a condition you can know &lt;b&gt;before&lt;/b&gt; the trade, tested on enough trades (concept 1: the wobble)." vertex="1">
+                    <mxGeometry height="90" width="350" x="875" y="617" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Conditional probability&lt;/b&gt; = the chance of A once you know B is true. Zoom into B&#39;s box and recount A inside it." vertex="1">
+                    <mxGeometry height="80" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Three habits" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rZoom" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="ZOOM" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rZoomT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Shrink the box to the cases where the condition holds" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rRec" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="RECOUNT" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="304" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rRecT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="New denominator: the size of the smaller box" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="304" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rFlip" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="DON&#39;T FLIP" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rFlipT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="P(A | B) is not P(B | A): they use different boxes" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="The flip trap, in plain words" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="&#39;90% of blown accounts used high leverage&#39; is &lt;b&gt;not&lt;/b&gt; &#39;90% of high-leverage accounts blow up.&#39;" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="421" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style improvement: find conditions that change P(win) or the R-multiples, then test them on enough trades." vertex="1">
+                    <mxGeometry height="62" width="350" x="1295" y="477" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="New information changes the box. Always ask: &#39;out of which trades?&#39;" vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next chapter: Probability distributions (random variables)" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_e12" edge="1" parent="1" source="k_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="k_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_e23" edge="1" parent="1" source="k_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="k_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_e34" edge="1" parent="1" source="k_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="k_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Conditional probability is the chance of something &lt;b&gt;once you already know something else is true&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Zoom into the cases where the condition holds, and recount there." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Your system wins 45% of the time overall. But you never trade &#39;overall&#39;; you trade today, and today has features: trend or chop, news or quiet.&lt;br&gt;&lt;br&gt;New information shrinks the set of cases that matter. Conditional probability is the bookkeeping for that. It answers: &lt;i&gt;out of the trades like this one, how many won?&lt;/i&gt;" vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the spotlight" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Shine a spotlight on the trend-day column of the four-box and grey out the rest. That column becomes the whole box: 40 trades.&lt;br&gt;&lt;br&gt;&lt;b&gt;stretch the slice to fill the box&lt;/b&gt;. The trend-day bar (30 wins, 10 losses) is stretched to full width, so it reads 75% / 25%.&lt;br&gt;&lt;br&gt;Same 30 winners; new denominator (40 instead of 100)." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a die with a hint" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Roll a die. P(6) = 1 of 6.&lt;br&gt;&lt;br&gt;Told &#39;it&#39;s even&#39;: the box shrinks to {2, 4, 6}, so P(6 | even) = 1 of 3.&lt;br&gt;Told &#39;it&#39;s odd&#39;: the box is {1, 3, 5}, so P(6 | odd) = 0.&lt;br&gt;Told &#39;it&#39;s at least 2&#39;: {2, 3, 4, 5, 6}, so 1 of 5.&lt;br&gt;&lt;br&gt;The 6 never changed. The box around it did." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Wins +2R, losses −1R, 100 trades:&lt;br&gt;• every day: 45 wins → +35R (+0.35R per trade)&lt;br&gt;• trend days only: 30 of 40 win → +50R (+1.25R per trade)&lt;br&gt;• other days: 15 of 60 win → −15R (−0.25R per trade)&lt;br&gt;&lt;br&gt;Skipping 60 trades earns 15R more. That is Van Tharp-style incremental improvement: find a condition that changes the odds, then test it on enough trades." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the condition changes?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Change the condition:&lt;/b&gt; no condition 45%, trend day 75%, other day 25%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Flip the question:&lt;/b&gt; P(win | trend) = 30 ÷ 40 = 75%, but P(trend | win) = 30 ÷ 45 ≈ 67%. Same overlap, different box.&lt;br&gt;&lt;br&gt;&lt;b&gt;If both columns had the same win rate&lt;/b&gt; (say 18 of 40 and 27 of 60, both 45%), the condition would tell you nothing. That is &lt;i&gt;independence&lt;/i&gt;, and the filter would be useless." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;flipping is fine&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;P(A | B) = P(B | A).&#39;&lt;/b&gt; &#39;90% of blown accounts used high leverage&#39; does not mean &#39;90% of high-leverage accounts blow up&#39;. The first divides by blown accounts; the second by leveraged accounts.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;A great slice is a great filter.&#39;&lt;/b&gt; A condition found by slicing past trades many ways may just be luck. The filter must be knowable before the trade and confirmed on fresh trades." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Read &#39;|&#39; as &#39;given&#39; or &#39;among&#39;.&lt;br&gt;&lt;br&gt;&lt;b&gt;P(A | B) = P(A ∩ B) ÷ P(B)&lt;/b&gt;&lt;br&gt;P(W | T) = 0.30 ÷ 0.40 = 0.75&lt;br&gt;P(T | W) = 0.30 ÷ 0.45 ≈ 0.67&lt;br&gt;&lt;br&gt;&lt;b&gt;Multiplication rule:&lt;/b&gt;&lt;br&gt;P(A ∩ B) = P(B) × P(A | B)&lt;br&gt;0.40 × 0.75 = 0.30&lt;br&gt;&lt;br&gt;&lt;b&gt;Independence:&lt;/b&gt; P(A | B) = P(A), so knowing B changes nothing." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; 45% overall, but trend-day and other-day streaks look very different.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; spotlight one column, then stretch the slice to fill the box.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; change the condition, flip the question, and filter the system in R.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; zoom, recount, don&#39;t flip; the leverage trap; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="New information changes the box. Always ask: &#39;out of which trades?&#39;" vertex="1">
                     <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
                 </mxCell>
             </root>
