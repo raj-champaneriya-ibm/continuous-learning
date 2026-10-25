@@ -1,0 +1,307 @@
+<mxfile host="65bd71144e">
+    <diagram id="bayes-theorem" name="01 Bayes&#39; Theorem">
+        <mxGraphModel dx="398" dy="700" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="y_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Bayes&#39; Theorem: evidence updates what you believe, it doesn&#39;t replace it" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Your new strategy just aced its backtest" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_pass" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2E7D32;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#2E7D32;" value="BACKTEST: PASS" vertex="1">
+                    <mxGeometry height="50" width="200" x="110" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_f1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=12;align=left;spacingLeft=10;" value="A real edge passes this test &lt;b&gt;80%&lt;/b&gt; of the time." vertex="1">
+                    <mxGeometry height="30" width="340" x="40" y="228" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_f2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;align=left;spacingLeft=10;" value="An idea with no edge still passes &lt;b&gt;20%&lt;/b&gt; of the time (luck, curve fitting)." vertex="1">
+                    <mxGeometry height="40" width="340" x="40" y="264" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="An 80% test said yes...&lt;br&gt;so I&#39;m 80% sure it&#39;s real?" vertex="1">
+                    <mxGeometry height="125" width="300" x="54" y="317" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_missing" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="The missing fact: only about &lt;b&gt;1 in 10&lt;/b&gt; strategy ideas has a real edge." vertex="1">
+                    <mxGeometry height="55" width="340" x="40" y="455" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="How rare real edges are changes everything, but it isn&#39;t in the backtest report." vertex="1">
+                    <mxGeometry height="60" width="340" x="40" y="518" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how should one piece of evidence change what I believe?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: count 1,000 ideas" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_root" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=12;fontStyle=1;" value="1,000 ideas" vertex="1">
+                    <mxGeometry height="34" width="110" x="575" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_real" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" value="100 real edges" vertex="1">
+                    <mxGeometry height="34" width="130" x="470" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_none" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" value="900 no edge" vertex="1">
+                    <mxGeometry height="34" width="130" x="660" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="80 pass" vertex="1">
+                    <mxGeometry height="34" width="70" x="460" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#9E9E9E;fontSize=12;" value="20 fail" vertex="1">
+                    <mxGeometry height="34" width="70" x="540" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_np" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="180 pass" vertex="1">
+                    <mxGeometry height="34" width="70" x="650" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_nf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#9E9E9E;fontSize=12;" value="720 fail" vertex="1">
+                    <mxGeometry height="34" width="70" x="730" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e1" edge="1" parent="1" source="y_root" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_real" value="10%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e2" edge="1" parent="1" source="y_root" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_none" value="90%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e3" edge="1" parent="1" source="y_real" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_rp" value="80%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e4" edge="1" parent="1" source="y_real" style="endArrow=block;endFill=1;html=1;strokeColor=#BDBDBD;fontSize=10;labelBackgroundColor=#FFFCF0;" target="y_rf" value="20%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e5" edge="1" parent="1" source="y_none" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_np" value="20%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e6" edge="1" parent="1" source="y_none" style="endArrow=block;endFill=1;html=1;strokeColor=#BDBDBD;fontSize=10;labelBackgroundColor=#FFFCF0;" target="y_nf" value="80%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_spotT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Greg Tang move: spotlight only the passes" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="80 real" vertex="1">
+                    <mxGeometry height="30" width="98" x="470" y="355" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="180 lucky (no edge)" vertex="1">
+                    <mxGeometry height="30" width="222" x="568" y="355" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barCap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="all 260 ideas that passed" vertex="1">
+                    <mxGeometry height="16" width="320" x="470" y="389" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=14;" value="P(real | passed) = 80 ÷ 260 ≈ &lt;b&gt;31%&lt;/b&gt;&lt;br&gt;not 80%" vertex="1">
+                    <mxGeometry height="62" width="340" x="460" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="No-edge ideas are so common that even their 20% lucky pass rate (180) swamps the 80 real winners." vertex="1">
+                    <mxGeometry height="50" width="340" x="460" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="Bayes&#39; theorem is just this count: start from how common each kind is, then keep only the cases that match the evidence." vertex="1">
+                    <mxGeometry height="150" width="340" x="460" y="555" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: keep testing, turn the dials" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Each independent pass updates the belief again" vertex="1">
+                    <mxGeometry height="22" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;before any test&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0B" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="26" width="20" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0V" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="10%" vertex="1">
+                    <mxGeometry height="26" width="40" x="1034" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;1 pass&lt;/b&gt; (backtest)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="31%" vertex="1">
+                    <mxGeometry height="26" width="62" x="1010" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;2 passes&lt;/b&gt; (+ out-of-sample)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="64%" vertex="1">
+                    <mxGeometry height="26" width="128" x="1010" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;3 passes&lt;/b&gt; (+ small live)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="88%" vertex="1">
+                    <mxGeometry height="26" width="176" x="1010" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_odds" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="odds 1 : 9 → 4 : 9 → 16 : 9 → 64 : 9 (each pass × 4)" vertex="1">
+                    <mxGeometry height="26" width="340" x="880" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dPT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 1: how common are real edges? (prior)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="1 in 100 ideas real → a pass means ≈ 4% real" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="352" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="1 in 10 → ≈ 31%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="374" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="1 in 2 → ≈ 80%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dTT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 2: how often does a no-edge idea pass?" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="428" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="40% (heavy optimizing) → ≈ 18% real" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="20% → ≈ 31%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="472" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="5% (strict out-of-sample test) → ≈ 64%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="494" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="A great backtest moves you from 10% to 31%, not to certainty. Strict, repeated tests do the heavy lifting." vertex="1">
+                    <mxGeometry height="65" width="350" x="875" y="528" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Passes only multiply the odds if the tests are independent. Re-running the same backtest data is not a new test." vertex="1">
+                    <mxGeometry height="100" width="350" x="875" y="605" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Bayes&#39; theorem&lt;/b&gt;: new belief = old belief, re-weighted by how well each possibility explains the evidence." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Three ingredients" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="PRIOR" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPrT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="How common it is before the evidence (1 in 10)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rLk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="LIKELIHOOD" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rLkT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="How well each possibility fits the evidence (80% vs 20%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="POSTERIOR" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPoT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="The updated belief after the evidence (31%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="The odds shortcut" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="New odds = old odds × (fit if true ÷ fit if false).&lt;br&gt;Here: 1 : 9 × (80% ÷ 20% = 4) = 4 : 9 ≈ 31%" vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style improvement: stack independent tests (backtest, out-of-sample, small live) before trusting an edge." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Evidence doesn&#39;t replace what you knew; it updates it. Start from the base rate, then multiply." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Likelihood function" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e12" edge="1" parent="1" source="y_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e23" edge="1" parent="1" source="y_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e34" edge="1" parent="1" source="y_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Bayes&#39; theorem&lt;/b&gt; updates a belief with evidence.&lt;br&gt;&lt;br&gt;Start from how common something is (the &lt;b&gt;prior&lt;/b&gt;), weigh it by how well it explains the evidence (the &lt;b&gt;likelihood&lt;/b&gt;), and get the updated belief (the &lt;b&gt;posterior&lt;/b&gt;)." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The test answers &lt;i&gt;how often does a real edge pass?&lt;/i&gt; (80%). You want the flip: &lt;i&gt;given it passed, how likely is it real?&lt;/i&gt;&lt;br&gt;&lt;br&gt;Conditional probability warned that flipping needs care. Bayes is the correct way to flip, and it needs one extra ingredient: how common real edges were to begin with.&lt;br&gt;&lt;br&gt;When the thing you&#39;re looking for is rare, lucky passes from the common case can outnumber true ones." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: count 1,000 ideas" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="100 real → 80 pass, 20 fail&lt;br&gt;900 no edge → 180 pass, 720 fail&lt;br&gt;&lt;br&gt;&lt;b&gt;spotlight only the passes&lt;/b&gt;: 80 + 180 = 260. Of those, 80 are real: 80 ÷ 260 ≈ 31%.&lt;br&gt;&lt;br&gt;Counting strategies (or people) instead of juggling percentages makes Bayes obvious. It is the same spotlight move as conditional probability." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a medical test" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A condition affects 1 in 100 people. A test catches 90% of cases but also flags 10% of healthy people.&lt;br&gt;&lt;br&gt;1,000 people:&lt;br&gt;10 sick → 9 test positive&lt;br&gt;990 healthy → 99 test positive&lt;br&gt;Positives: 9 + 99 = 108&lt;br&gt;P(sick | positive) = 9 ÷ 108 ≈ &lt;b&gt;8%&lt;/b&gt;&lt;br&gt;&lt;br&gt;A &#39;90% accurate&#39; test, yet a positive means only 8%." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="1 in 10 ideas has a real edge. A real edge passes the backtest 80% of the time; a no-edge idea passes 20% of the time.&lt;br&gt;&lt;br&gt;After a backtest pass: ≈ 31% real&lt;br&gt;+ independent out-of-sample pass: ≈ 64%&lt;br&gt;+ small-size live pass: ≈ 88%&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: don&#39;t bet big on one good backtest. Stack independent tests; each one multiplies the odds." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Prior&lt;/b&gt; (how common real edges are):&lt;br&gt;1 in 100 → a pass means ≈ 4%&lt;br&gt;1 in 10 → ≈ 31%&lt;br&gt;1 in 2 → ≈ 80%&lt;br&gt;&lt;br&gt;&lt;b&gt;Test strictness&lt;/b&gt; (how often no-edge ideas pass):&lt;br&gt;40% → ≈ 18% · 20% → ≈ 31% · 5% → ≈ 64%&lt;br&gt;&lt;br&gt;&lt;b&gt;More independent passes:&lt;/b&gt;&lt;br&gt;10% → 31% → 64% → 88%" vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;an 80% test means 80% sure&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;An 80% test that says yes means 80% sure.&#39;&lt;/b&gt; That ignores the base rate. When real edges are rare, most passes are lucky no-edge ideas.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;P(pass | real) = P(real | pass).&#39;&lt;/b&gt; The flip trap from conditional probability: 80% vs 31%.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Rerunning the backtest is another test.&#39;&lt;/b&gt; Only independent evidence (new data, a new period, live trading) should update the odds again." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;P(H | E) = P(E | H) × P(H) ÷ P(E)&lt;/b&gt;&lt;br&gt;P(E) = P(E | H) × P(H) + P(E | not H) × P(not H)&lt;br&gt;&lt;br&gt;0.8 × 0.1 ÷ (0.8 × 0.1 + 0.2 × 0.9)&lt;br&gt;= 0.08 ÷ 0.26 ≈ 0.31&lt;br&gt;&lt;br&gt;&lt;b&gt;Odds form:&lt;/b&gt;&lt;br&gt;posterior odds = prior odds × likelihood ratio&lt;br&gt;1 : 9 × (0.8 ÷ 0.2 = 4) = 4 : 9 → 4 ÷ 13 ≈ 31%&lt;br&gt;Each independent pass multiplies the odds by 4 again." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; a backtest pass, an &#39;80% test&#39;, and the missing base rate.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; 1,000 ideas split into real or no edge, then pass or fail; spotlight the 260 passes.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; belief after 1, 2 and 3 passes; the prior dial; the test-strictness dial.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; prior, likelihood, posterior; the odds shortcut; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Evidence doesn&#39;t replace what you knew; it updates it. Start from the base rate, then multiply." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
