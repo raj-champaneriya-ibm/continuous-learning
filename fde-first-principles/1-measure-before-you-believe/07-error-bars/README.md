@@ -44,13 +44,17 @@ _Tempted to do more? Park it in `later.md`: Read Recommendation #4 (paired diffe
 <sub>Project 1 · Measure before you believe: Build one customer-support assistant three ways (rules, one model call, an agent loop), measure all three, and recommend one with evidence.</sub>
 
 ## In my words
-<!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
-     in your video into text, but keep your own words. -->
-**For a beginner:** …
+We tested the assistant on 30 real customer cases and it got 80% right. With only 30 cases, that number is like a restaurant rating from five reviews. The real performance could be anywhere from about 65% to 95%.
 
-**For an engineer:** …
+To narrow it to 75–85%, we need about 250 test cases. That lets us make go/no-go and 'is the new version better?' decisions with confidence.
 
-**For a customer:** …
+Until then, if version B scores a few points higher than version A, treat it as a hint, not proof. 
+
+**For a beginner:** Testing an AI on a few cases is like flipping a coin 10 times: a fair coin can still land heads 7 times. A score from a small test set is a rough guess, and more cases make the guess sharper.
+
+**For an engineer:** Accuracy measured on n cases has a standard error of √(p(1−p)/n), and the 95% range is ±2 SE: ±15% at 30 cases, ±9% for our 84 cases, and about 256 cases for ±5%. Only call B better than A when the gap is bigger than the error bars, and remember that halving the range costs 4× the cases.
+
+**For a customer:** Our 80% score on 30 cases is like a restaurant rating from five reviews: the real figure could be anywhere from 65% to 95%. With around 250 real cases we can tell you, within ±5%, whether the new version is actually better before you pay to roll it out.
 
 ## What surprised me
 …
