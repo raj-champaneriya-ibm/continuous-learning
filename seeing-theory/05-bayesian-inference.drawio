@@ -1,0 +1,1184 @@
+<mxfile host="65bd71144e">
+    <diagram id="bayes-theorem" name="01 Bayes&#39; Theorem">
+        <mxGraphModel dx="1618" dy="3309" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="y_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Bayes&#39; Theorem: evidence updates what you believe, it doesn&#39;t replace it" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Your new strategy just aced its backtest" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_pass" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2E7D32;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#2E7D32;" value="BACKTEST: PASS" vertex="1">
+                    <mxGeometry height="50" width="200" x="110" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_f1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=12;align=left;spacingLeft=10;" value="A real edge passes this test &lt;b&gt;80%&lt;/b&gt; of the time." vertex="1">
+                    <mxGeometry height="30" width="340" x="40" y="228" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_f2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;align=left;spacingLeft=10;" value="An idea with no edge still passes &lt;b&gt;20%&lt;/b&gt; of the time (luck, curve fitting)." vertex="1">
+                    <mxGeometry height="40" width="340" x="40" y="264" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="An 80% test said yes...&lt;br&gt;so I&#39;m 80% sure it&#39;s real?" vertex="1">
+                    <mxGeometry height="125" width="300" x="54" y="317" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_missing" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="The missing fact: only about &lt;b&gt;1 in 10&lt;/b&gt; strategy ideas has a real edge." vertex="1">
+                    <mxGeometry height="55" width="340" x="40" y="455" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="How rare real edges are changes everything, but it isn&#39;t in the backtest report." vertex="1">
+                    <mxGeometry height="60" width="340" x="40" y="518" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how should one piece of evidence change what I believe?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: count 1,000 ideas" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_root" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=12;fontStyle=1;" value="1,000 ideas" vertex="1">
+                    <mxGeometry height="34" width="110" x="575" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_real" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" value="100 real edges" vertex="1">
+                    <mxGeometry height="34" width="130" x="470" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_none" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" value="900 no edge" vertex="1">
+                    <mxGeometry height="34" width="130" x="660" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="80 pass" vertex="1">
+                    <mxGeometry height="34" width="70" x="460" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#9E9E9E;fontSize=12;" value="20 fail" vertex="1">
+                    <mxGeometry height="34" width="70" x="540" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_np" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="180 pass" vertex="1">
+                    <mxGeometry height="34" width="70" x="650" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_nf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#9E9E9E;fontSize=12;" value="720 fail" vertex="1">
+                    <mxGeometry height="34" width="70" x="730" y="275" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e1" edge="1" parent="1" source="y_root" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_real" value="10%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e2" edge="1" parent="1" source="y_root" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_none" value="90%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e3" edge="1" parent="1" source="y_real" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_rp" value="80%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e4" edge="1" parent="1" source="y_real" style="endArrow=block;endFill=1;html=1;strokeColor=#BDBDBD;fontSize=10;labelBackgroundColor=#FFFCF0;" target="y_rf" value="20%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e5" edge="1" parent="1" source="y_none" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFCF0;" target="y_np" value="20%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e6" edge="1" parent="1" source="y_none" style="endArrow=block;endFill=1;html=1;strokeColor=#BDBDBD;fontSize=10;labelBackgroundColor=#FFFCF0;" target="y_nf" value="80%">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_spotT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="spotlight only the passes" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="80 real" vertex="1">
+                    <mxGeometry height="30" width="98" x="470" y="355" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barN" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="180 lucky (no edge)" vertex="1">
+                    <mxGeometry height="30" width="222" x="568" y="355" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_barCap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="all 260 ideas that passed" vertex="1">
+                    <mxGeometry height="16" width="320" x="470" y="389" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=14;" value="P(real | passed) = 80 ÷ 260 ≈ &lt;b&gt;31%&lt;/b&gt;&lt;br&gt;not 80%" vertex="1">
+                    <mxGeometry height="62" width="340" x="460" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="No-edge ideas are so common that even their 20% lucky pass rate (180) swamps the 80 real winners." vertex="1">
+                    <mxGeometry height="50" width="340" x="460" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="Bayes&#39; theorem is just this count: start from how common each kind is, then keep only the cases that match the evidence." vertex="1">
+                    <mxGeometry height="150" width="340" x="460" y="555" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: keep testing, turn the dials" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Each independent pass updates the belief again" vertex="1">
+                    <mxGeometry height="22" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;before any test&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0B" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="26" width="20" x="1010" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u0V" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="10%" vertex="1">
+                    <mxGeometry height="26" width="40" x="1034" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;1 pass&lt;/b&gt; (backtest)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u1B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="31%" vertex="1">
+                    <mxGeometry height="26" width="62" x="1010" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;2 passes&lt;/b&gt; (+ out-of-sample)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u2B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="64%" vertex="1">
+                    <mxGeometry height="26" width="128" x="1010" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;3 passes&lt;/b&gt; (+ small live)" vertex="1">
+                    <mxGeometry height="26" width="128" x="878" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3Bg" parent="1" style="rounded=0;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="26" width="200" x="1010" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_u3B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="88%" vertex="1">
+                    <mxGeometry height="26" width="176" x="1010" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_odds" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="odds 1 : 9 → 4 : 9 → 16 : 9 → 64 : 9 (each pass × 4)" vertex="1">
+                    <mxGeometry height="26" width="340" x="880" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dPT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 1: how common are real edges? (prior)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="1 in 100 ideas real → a pass means ≈ 4% real" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="352" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="1 in 10 → ≈ 31%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="374" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dP3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="1 in 2 → ≈ 80%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dTT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 2: how often does a no-edge idea pass?" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="428" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="40% (heavy optimizing) → ≈ 18% real" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="20% → ≈ 31%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="472" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_dT3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="5% (strict out-of-sample test) → ≈ 64%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="494" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="A great backtest moves you from 10% to 31%, not to certainty. Strict, repeated tests do the heavy lifting." vertex="1">
+                    <mxGeometry height="65" width="350" x="875" y="528" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Passes only multiply the odds if the tests are independent. Re-running the same backtest data is not a new test." vertex="1">
+                    <mxGeometry height="100" width="350" x="875" y="605" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Bayes&#39; theorem&lt;/b&gt;: new belief = old belief, re-weighted by how well each possibility explains the evidence." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Three ingredients" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="PRIOR" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPrT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="How common it is before the evidence (1 in 10)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rLk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="LIKELIHOOD" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rLkT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="How well each possibility fits the evidence (80% vs 20%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="POSTERIOR" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_rPoT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="The updated belief after the evidence (31%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="The odds shortcut" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="New odds = old odds × (fit if true ÷ fit if false).&lt;br&gt;Here: 1 : 9 × (80% ÷ 20% = 4) = 4 : 9 ≈ 31%" vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style improvement: stack independent tests (backtest, out-of-sample, small live) before trusting an edge." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Evidence doesn&#39;t replace what you knew; it updates it. Start from the base rate, then multiply." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Likelihood function" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e12" edge="1" parent="1" source="y_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e23" edge="1" parent="1" source="y_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_e34" edge="1" parent="1" source="y_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="y_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Bayes&#39; theorem&lt;/b&gt; updates a belief with evidence.&lt;br&gt;&lt;br&gt;Start from how common something is (the &lt;b&gt;prior&lt;/b&gt;), weigh it by how well it explains the evidence (the &lt;b&gt;likelihood&lt;/b&gt;), and get the updated belief (the &lt;b&gt;posterior&lt;/b&gt;)." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The test answers &lt;i&gt;how often does a real edge pass?&lt;/i&gt; (80%). You want the flip: &lt;i&gt;given it passed, how likely is it real?&lt;/i&gt;&lt;br&gt;&lt;br&gt;Conditional probability warned that flipping needs care. Bayes is the correct way to flip, and it needs one extra ingredient: how common real edges were to begin with.&lt;br&gt;&lt;br&gt;When the thing you&#39;re looking for is rare, lucky passes from the common case can outnumber true ones." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: count 1,000 ideas" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="100 real → 80 pass, 20 fail&lt;br&gt;900 no edge → 180 pass, 720 fail&lt;br&gt;&lt;br&gt;&lt;b&gt;spotlight only the passes&lt;/b&gt;: 80 + 180 = 260. Of those, 80 are real: 80 ÷ 260 ≈ 31%.&lt;br&gt;&lt;br&gt;Counting strategies (or people) instead of juggling percentages makes Bayes obvious. It is the same spotlight move as conditional probability." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a medical test" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A condition affects 1 in 100 people. A test catches 90% of cases but also flags 10% of healthy people.&lt;br&gt;&lt;br&gt;1,000 people:&lt;br&gt;10 sick → 9 test positive&lt;br&gt;990 healthy → 99 test positive&lt;br&gt;Positives: 9 + 99 = 108&lt;br&gt;P(sick | positive) = 9 ÷ 108 ≈ &lt;b&gt;8%&lt;/b&gt;&lt;br&gt;&lt;br&gt;A &#39;90% accurate&#39; test, yet a positive means only 8%." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="1 in 10 ideas has a real edge. A real edge passes the backtest 80% of the time; a no-edge idea passes 20% of the time.&lt;br&gt;&lt;br&gt;After a backtest pass: ≈ 31% real&lt;br&gt;+ independent out-of-sample pass: ≈ 64%&lt;br&gt;+ small-size live pass: ≈ 88%&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: don&#39;t bet big on one good backtest. Stack independent tests; each one multiplies the odds." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Prior&lt;/b&gt; (how common real edges are):&lt;br&gt;1 in 100 → a pass means ≈ 4%&lt;br&gt;1 in 10 → ≈ 31%&lt;br&gt;1 in 2 → ≈ 80%&lt;br&gt;&lt;br&gt;&lt;b&gt;Test strictness&lt;/b&gt; (how often no-edge ideas pass):&lt;br&gt;40% → ≈ 18% · 20% → ≈ 31% · 5% → ≈ 64%&lt;br&gt;&lt;br&gt;&lt;b&gt;More independent passes:&lt;/b&gt;&lt;br&gt;10% → 31% → 64% → 88%" vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;an 80% test means 80% sure&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;An 80% test that says yes means 80% sure.&#39;&lt;/b&gt; That ignores the base rate. When real edges are rare, most passes are lucky no-edge ideas.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;P(pass | real) = P(real | pass).&#39;&lt;/b&gt; The flip trap from conditional probability: 80% vs 31%.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Rerunning the backtest is another test.&#39;&lt;/b&gt; Only independent evidence (new data, a new period, live trading) should update the odds again." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;P(H | E) = P(E | H) × P(H) ÷ P(E)&lt;/b&gt;&lt;br&gt;P(E) = P(E | H) × P(H) + P(E | not H) × P(not H)&lt;br&gt;&lt;br&gt;0.8 × 0.1 ÷ (0.8 × 0.1 + 0.2 × 0.9)&lt;br&gt;= 0.08 ÷ 0.26 ≈ 0.31&lt;br&gt;&lt;br&gt;&lt;b&gt;Odds form:&lt;/b&gt;&lt;br&gt;posterior odds = prior odds × likelihood ratio&lt;br&gt;1 : 9 × (0.8 ÷ 0.2 = 4) = 4 : 9 → 4 ÷ 13 ≈ 31%&lt;br&gt;Each independent pass multiplies the odds by 4 again." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; a backtest pass, an &#39;80% test&#39;, and the missing base rate.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; 1,000 ideas split into real or no edge, then pass or fail; spotlight the 260 passes.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; belief after 1, 2 and 3 passes; the prior dial; the test-strictness dial.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; prior, likelihood, posterior; the odds shortcut; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="y_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Evidence doesn&#39;t replace what you knew; it updates it. Start from the base rate, then multiply." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="likelihood-function" name="02 Likelihood Function">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="l_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Likelihood Function: hold the data fixed, let the truth slide" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Your last 10 trades" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="33" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="69" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="105" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="141" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="177" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="213" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="249" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="285" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="321" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_s10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="357" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_tally" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="6 wins, 4 losses" vertex="1">
+                    <mxGeometry height="20" width="354" x="33" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="The data is fixed. The true win rate is unknown. Candidates:" vertex="1">
+                    <mxGeometry height="40" width="340" x="40" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=13;fontStyle=1;" value="40%?" vertex="1">
+                    <mxGeometry height="34" width="74" x="40" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=13;fontStyle=1;" value="50%?" vertex="1">
+                    <mxGeometry height="34" width="74" x="128" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=13;fontStyle=1;" value="60%?" vertex="1">
+                    <mxGeometry height="34" width="74" x="216" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=13;fontStyle=1;" value="70%?" vertex="1">
+                    <mxGeometry height="34" width="74" x="304" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Which true win rate best explains&lt;div&gt;&amp;nbsp;what I saw?&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="130" width="300" x="60" y="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="Usually we ask what data a known truth will produce. Here it&#39;s backwards: we have the data and must judge the possible truths." vertex="1">
+                    <mxGeometry height="110" width="340" x="40" y="472" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we score every possible truth against the data we actually have?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: let every truth audition" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="If this were the true win rate, how likely is &lt;b&gt;exactly 6 wins in 10&lt;/b&gt;?" vertex="1">
+                    <mxGeometry height="36" width="340" x="460" y="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="470" y="329" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="3" width="26" x="504" y="327" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="18" width="26" x="538" y="312" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="53" width="26" x="572" y="277" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b5" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="98" width="26" x="606" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b6" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="120" width="26" x="640" y="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b7" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="96" width="26" x="674" y="234" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b8" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="42" width="26" x="708" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_b9" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="5" width="26" x="742" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="0%" vertex="1">
+                    <mxGeometry height="12" width="34" x="466" y="315" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="0.6%" vertex="1">
+                    <mxGeometry height="12" width="34" x="500" y="313" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="4%" vertex="1">
+                    <mxGeometry height="12" width="34" x="534" y="298" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="11%" vertex="1">
+                    <mxGeometry height="12" width="34" x="568" y="263" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="21%" vertex="1">
+                    <mxGeometry height="12" width="34" x="602" y="218" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="25%" vertex="1">
+                    <mxGeometry height="12" width="34" x="636" y="196" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="20%" vertex="1">
+                    <mxGeometry height="12" width="34" x="670" y="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v8" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="9%" vertex="1">
+                    <mxGeometry height="12" width="34" x="704" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_v9" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="1%" vertex="1">
+                    <mxGeometry height="12" width="34" x="738" y="311" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_base2" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="465" y="330" as="sourcePoint"/>
+                        <mxPoint x="775" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="l_x1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="10%" vertex="1">
+                    <mxGeometry height="12" width="34" x="466" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="20%" vertex="1">
+                    <mxGeometry height="12" width="34" x="500" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="30%" vertex="1">
+                    <mxGeometry height="12" width="34" x="534" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="40%" vertex="1">
+                    <mxGeometry height="12" width="34" x="568" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="50%" vertex="1">
+                    <mxGeometry height="12" width="34" x="602" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="60%" vertex="1">
+                    <mxGeometry height="12" width="34" x="636" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="70%" vertex="1">
+                    <mxGeometry height="12" width="34" x="670" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x8" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="80%" vertex="1">
+                    <mxGeometry height="12" width="34" x="704" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_x9" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="90%" vertex="1">
+                    <mxGeometry height="12" width="34" x="738" y="333" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_xAx" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=2;" value="candidate true win rate" vertex="1">
+                    <mxGeometry height="14" width="340" x="460" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;" value="This curve is the &lt;b&gt;likelihood function&lt;/b&gt;: your data stays fixed while the candidate truth slides along." vertex="1">
+                    <mxGeometry height="66" width="340" x="460" y="374" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;line up the suspects and score them&lt;/b&gt;. The highest bar (60%) is the best explanation, but 50% and 70% score almost as well." vertex="1">
+                    <mxGeometry height="60" width="340" x="460" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="The peak is the best guess. The width is how many truths could have produced your data." vertex="1">
+                    <mxGeometry height="180" width="340" x="460" y="525" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: more trades, sharper curve" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_aT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="10 trades, 6 wins" vertex="1">
+                    <mxGeometry height="18" width="340" x="880" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="895" y="214" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="929" y="214" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="9" width="26" x="963" y="206" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="27" width="26" x="997" y="188" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a5" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="49" width="26" x="1031" y="166" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a6" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="60" width="26" x="1065" y="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a7" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="48" width="26" x="1099" y="167" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a8" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="21" width="26" x="1133" y="194" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_a9" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="3" width="26" x="1167" y="212" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_aBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="215" as="sourcePoint"/>
+                        <mxPoint x="1200" y="215" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="l_bT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="100 trades, 60 wins" vertex="1">
+                    <mxGeometry height="18" width="340" x="880" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c5" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="8" width="26" x="1031" y="307" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c6" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="60" width="26" x="1065" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_c7" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="6" width="26" x="1099" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="315" as="sourcePoint"/>
+                        <mxPoint x="1200" y="315" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="l_cx1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="10%" vertex="1">
+                    <mxGeometry height="12" width="34" x="891" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cx3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="30%" vertex="1">
+                    <mxGeometry height="12" width="34" x="959" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cx5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="50%" vertex="1">
+                    <mxGeometry height="12" width="34" x="1027" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cx6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="60%" vertex="1">
+                    <mxGeometry height="12" width="34" x="1061" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cx7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="70%" vertex="1">
+                    <mxGeometry height="12" width="34" x="1095" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_cx9" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="90%" vertex="1">
+                    <mxGeometry height="12" width="34" x="1163" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_scale" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=2;" value="bars scaled so each peak = 100%; 50% falls from 82% of the peak to 13%" vertex="1">
+                    <mxGeometry height="18" width="350" x="875" y="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_lrT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="60% vs 50% (no better than a coin flip)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="362" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_lr1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#E65100;" value="10 trades: 60% explains the data 1.2× better (weak)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="384" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_lr2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" value="100 trades: about 7.5× better (much stronger)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="406" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_dT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Different data, different peak" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="438" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_d1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="3 wins in 10 → the peak moves to 30%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="More trades don&#39;t move the peak much; they squeeze out the truths that can&#39;t explain your data." vertex="1">
+                    <mxGeometry height="65" width="350" x="875" y="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="After 10 trades, a 60% system and a coin-flip system are nearly indistinguishable. Don&#39;t size up on a likelihood that flat." vertex="1">
+                    <mxGeometry height="128" width="350" x="875" y="577" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="The &lt;b&gt;likelihood function&lt;/b&gt; scores every possible true value by how probable it makes the data you actually saw." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Read it three ways" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rPk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="PEAK" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rPkT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Best single explanation (maximum likelihood: 6 ÷ 10 = 60%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rWd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="WIDTH" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rWdT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="How many truths still fit. More data → narrower" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rRt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="RATIO" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_rRtT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Compare two truths: 60% vs 50% is 1.2× after 10 trades, ≈ 7.5× after 100" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Not a probability of the truth" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="Each bar is the chance of the &lt;i&gt;data&lt;/i&gt;, given one truth. The nine bars add to about 0.91, not 1." vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Bayes link: the likelihood ratio is the odds multiplier from the last tab. Prior × likelihood → posterior." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Hold the data fixed and let the truth slide: the peak is the best explanation, the width is the honesty." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: From prior to posterior" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_e12" edge="1" parent="1" source="l_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="l_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_e23" edge="1" parent="1" source="l_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="l_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_e34" edge="1" parent="1" source="l_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="l_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The &lt;b&gt;likelihood function&lt;/b&gt; holds your data fixed and scores every possible true value by how probable it would make that exact data.&lt;br&gt;&lt;br&gt;The highest score is the best explanation." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Usually we ask: &lt;i&gt;given the truth, what data will we see?&lt;/i&gt; After trading, you have the data and want the truth.&lt;br&gt;&lt;br&gt;So try every candidate truth: if the win rate were 40%, how likely is 6 wins in 10? If 60%? If 80%? Each answer is a score.&lt;br&gt;&lt;br&gt;The scores for all candidates form a curve. Its peak is the best explanation; its width shows how many truths still fit." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the suspect line-up" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Each candidate win rate (10%, 20%, …, 90%) steps forward and is scored on how well it would have produced your 6 wins in 10.&lt;br&gt;&lt;br&gt;&lt;b&gt;line them up as bars&lt;/b&gt;. 60% scores highest (25%), but 50% (21%) and 70% (20%) are close behind; 10% and 90% score nearly zero." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a mystery coin" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Flip a mystery coin 3 times: H H H.&lt;br&gt;&lt;br&gt;Fair coin (50% heads): 0.5³ = 12.5%&lt;br&gt;75%-heads coin: 0.75³ ≈ 42%&lt;br&gt;Two-headed coin (100%): 1³ = 100%&lt;br&gt;&lt;br&gt;The two-headed coin explains HHH best. But two-headed coins are rare, so it isn&#39;t the most &lt;i&gt;probable&lt;/i&gt; coin. That&#39;s why Bayes multiplies the likelihood by the prior." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Journal: 6 wins in 10 trades. Likelihood of that result:&lt;br&gt;40%: 11% · 50%: 21% · &lt;b&gt;60%: 25%&lt;/b&gt; · 70%: 20% · 80%: 9%&lt;br&gt;&lt;br&gt;Anything from about 40% to 80% explains your data reasonably. 60% beats &#39;coin flip&#39; (50%) by only 1.2×.&lt;br&gt;&lt;br&gt;After 100 trades with 60 wins, 60% beats 50% by about 7.5×, and the plausible range shrinks to roughly 50% to 70%.&lt;br&gt;&lt;br&gt;Van Tharp&#39;s point again: small samples can&#39;t tell a mediocre system from a good one." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you add data?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades, same win share:&lt;/b&gt; the peak stays at 60% and the curve narrows. At 10 trades, 50% scores 82% of the peak; at 100 trades, only 13%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Different data:&lt;/b&gt; 3 wins in 10 moves the peak to 30%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Comparing two truths:&lt;/b&gt; the likelihood ratio of 60% vs 50% grows from 1.2× (10 trades) to about 7.5× (100 trades)." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;likelihood = chance it&#39;s true&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;L(60%) = 25% means a 25% chance the win rate is 60%.&#39;&lt;/b&gt; No. It&#39;s the chance of &lt;i&gt;your data&lt;/i&gt; if the win rate were 60%. The nine bars add to about 0.91, not 1.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;The peak is the truth.&#39;&lt;/b&gt; The peak is the best explanation of this sample; the width says how far the truth might be.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Best explanation = most probable.&#39;&lt;/b&gt; Only if every candidate was equally likely to begin with (see the mystery coin)." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Data fixed, parameter varies:&lt;br&gt;&lt;b&gt;L(p | data) = P(data | p)&lt;/b&gt;&lt;br&gt;&lt;br&gt;k wins in n trades:&lt;br&gt;L(p) = C(n, k) × p&lt;sup&gt;k&lt;/sup&gt; × (1 − p)&lt;sup&gt;n − k&lt;/sup&gt;&lt;br&gt;L(0.6) = 210 × 0.6⁶ × 0.4⁴ ≈ 0.25&lt;br&gt;&lt;br&gt;Maximum likelihood estimate: p̂ = k ÷ n = 0.6&lt;br&gt;&lt;br&gt;Likelihood ratio: L(0.6) ÷ L(0.5) ≈ 1.22 (n = 10), ≈ 7.5 (n = 100)&lt;br&gt;&lt;br&gt;Bayes: posterior ∝ likelihood × prior" vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; 6 wins in 10 trades and several candidate win rates.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; each candidate auditions; the bars form the likelihood function.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; 10 vs 100 trades; the 60% vs 50% ratio; different data moves the peak.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; peak, width, ratio; not a probability of the truth; the Bayes link; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="l_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Hold the data fixed and let the truth slide: the peak is the best explanation, the width is the honesty." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="prior-to-posterior" name="03 Prior to Posterior">
+        <mxGraphModel dx="824" dy="418" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="q_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="From Prior to Posterior: start honest, multiply by the evidence" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Same 10 trades, two traders" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="33" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="69" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="105" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="141" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="177" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="213" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="249" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="285" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;" value="L" vertex="1">
+                    <mxGeometry height="30" width="30" x="321" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_s10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontStyle=1;" value="W" vertex="1">
+                    <mxGeometry height="30" width="30" x="357" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_tally" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="6 wins, 4 losses" vertex="1">
+                    <mxGeometry height="20" width="354" x="33" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_bA" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;align=left;spacingLeft=10;" value="&lt;b&gt;Skeptic:&lt;/b&gt; &#39;Most systems I&#39;ve built land near 50%. This is probably luck.&#39;" vertex="1">
+                    <mxGeometry height="62" width="340" x="40" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_bB" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=12;align=left;spacingLeft=10;" value="&lt;b&gt;Optimist:&lt;/b&gt; &#39;My research says this should win about 70%. 6 of 10 confirms it.&#39;" vertex="1">
+                    <mxGeometry height="62" width="340" x="40" y="307" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Same data.&lt;br&gt;Who is right?" vertex="1">
+                    <mxGeometry height="115" width="300" x="60" y="395" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="Both start somewhere. The real question is how far the data should move each of them." vertex="1">
+                    <mxGeometry height="60" width="340" x="40" y="525" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how should a prior belief and new data combine into one updated belief?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: multiply, then rescale" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="One bar per candidate win rate. Multiply bar by bar, then rescale so the bars add to 100%." vertex="1">
+                    <mxGeometry height="32" width="340" x="460" y="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rPL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#E65100;" value="PRIOR (skeptic: most systems land near 50%)" vertex="1">
+                    <mxGeometry height="16" width="340" x="460" y="164" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr1" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="470" y="221" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr2" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="26" x="504" y="219" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr3" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="8" width="26" x="538" y="214" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr4" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="18" width="26" x="572" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr5" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="40" width="26" x="606" y="182" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr6" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="18" width="26" x="640" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr7" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="8" width="26" x="674" y="214" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr8" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="26" x="708" y="219" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_pr9" parent="1" style="rounded=0;html=1;fillColor=#FFE0B2;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="742" y="221" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_prBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="465" y="222" as="sourcePoint"/>
+                        <mxPoint x="775" y="222" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="q_rLL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#3A5F9E;" value="× LIKELIHOOD (6 wins in 10, from the last tab)" vertex="1">
+                    <mxGeometry height="16" width="340" x="460" y="228" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="470" y="289" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="504" y="289" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="7" width="26" x="538" y="283" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="21" width="26" x="572" y="269" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk5" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="39" width="26" x="606" y="251" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk6" parent="1" style="rounded=0;html=1;fillColor=#3A5F9E;strokeColor=#3A5F9E;" value="" vertex="1">
+                    <mxGeometry height="48" width="26" x="640" y="242" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk7" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="38" width="26" x="674" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk8" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="17" width="26" x="708" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lk9" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="2" width="26" x="742" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_lkBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="465" y="290" as="sourcePoint"/>
+                        <mxPoint x="775" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="q_rQL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="= POSTERIOR (rescaled to add to 100%)" vertex="1">
+                    <mxGeometry height="16" width="340" x="460" y="292" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po1" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="470" y="366" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po2" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="504" y="366" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po3" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="2" width="26" x="538" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po4" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="12" width="26" x="572" y="355" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po5" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="49" width="26" x="606" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po6" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="27" width="26" x="640" y="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po7" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="10" width="26" x="674" y="357" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po8" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="2" width="26" x="708" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po9" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="1" width="26" x="742" y="366" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po5v" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="49%" vertex="1">
+                    <mxGeometry height="12" width="34" x="602" y="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po6v" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="27%" vertex="1">
+                    <mxGeometry height="12" width="34" x="636" y="327" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_po7v" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="10%" vertex="1">
+                    <mxGeometry height="12" width="34" x="670" y="344" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_poBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="465" y="367" as="sourcePoint"/>
+                        <mxPoint x="775" y="367" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="q_x1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="10%" vertex="1">
+                    <mxGeometry height="12" width="34" x="466" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_x3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="30%" vertex="1">
+                    <mxGeometry height="12" width="34" x="534" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_x5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="50%" vertex="1">
+                    <mxGeometry height="12" width="34" x="602" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_x6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="60%" vertex="1">
+                    <mxGeometry height="12" width="34" x="636" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_x7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="70%" vertex="1">
+                    <mxGeometry height="12" width="34" x="670" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_x9" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="90%" vertex="1">
+                    <mxGeometry height="12" width="34" x="738" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;" value="After 10 trades the skeptic&#39;s posterior still peaks at 50%. Chance the system is 60% or better: &lt;b&gt;38%&lt;/b&gt; (up from 30%)." vertex="1">
+                    <mxGeometry height="66" width="340" x="460" y="390" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;multiply, then rescale&lt;/b&gt;. A candidate survives only if it had a decent prior &lt;i&gt;and&lt;/i&gt; fits the data." vertex="1">
+                    <mxGeometry height="50" width="340" x="460" y="466" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="Ten trades nudge the skeptic toward 60%, but not past 50%. With little data, the prior still has the louder voice." vertex="1">
+                    <mxGeometry height="175" width="340" x="460" y="530" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: three traders, more data" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Belief that the win rate is 60% or better" vertex="1">
+                    <mxGeometry height="22" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_th0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Trader" vertex="1">
+                    <mxGeometry height="34" width="100" x="875" y="158" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_th1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Prior" vertex="1">
+                    <mxGeometry height="34" width="80" x="975" y="158" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_th2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="After 10 trades&lt;br&gt;(6 wins)" vertex="1">
+                    <mxGeometry height="34" width="85" x="1055" y="158" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_th3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="After 100 trades&lt;br&gt;(60 wins)" vertex="1">
+                    <mxGeometry height="34" width="85" x="1140" y="158" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_ra0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Skeptic" vertex="1">
+                    <mxGeometry height="30" width="100" x="875" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_ra1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="30%" vertex="1">
+                    <mxGeometry height="30" width="80" x="975" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_ra2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="38%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1055" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_ra3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="78%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1140" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rb0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Flat (no opinion)" vertex="1">
+                    <mxGeometry height="30" width="100" x="875" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rb1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="44%" vertex="1">
+                    <mxGeometry height="30" width="80" x="975" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rb2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="61%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1055" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rb3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="89%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1140" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rc0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Optimist" vertex="1">
+                    <mxGeometry height="30" width="100" x="875" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rc1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="85%" vertex="1">
+                    <mxGeometry height="30" width="80" x="975" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rc2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="87%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1055" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rc3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="95%" vertex="1">
+                    <mxGeometry height="30" width="85" x="1140" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rgap" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="Disagreement" vertex="1">
+                    <mxGeometry height="26" width="100" x="875" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rgap1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" value="55 pts" vertex="1">
+                    <mxGeometry height="26" width="80" x="975" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rgap2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" value="49 pts" vertex="1">
+                    <mxGeometry height="26" width="85" x="1055" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rgap3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" value="17 pts" vertex="1">
+                    <mxGeometry height="26" width="85" x="1140" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="10 trades barely change anyone&#39;s mind. 100 trades pull all three toward the same answer." vertex="1">
+                    <mxGeometry height="36" width="340" x="880" y="312" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="Posteriors after 100 trades (bars at 50%, 60%, 70%)" vertex="1">
+                    <mxGeometry height="16" width="340" x="880" y="352" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mA1" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="13" width="20" x="900" y="407" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mA2" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="45" width="20" x="925" y="375" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mA3" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="2" width="20" x="950" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mB1" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="6" width="20" x="1015" y="414" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mB2" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="48" width="20" x="1040" y="372" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mB3" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="5" width="20" x="1065" y="415" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mC1" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="3" width="20" x="1130" y="417" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mC2" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="46" width="20" x="1155" y="374" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mC3" parent="1" style="rounded=0;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="11" width="20" x="1180" y="409" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="885" y="420" as="sourcePoint"/>
+                        <mxPoint x="1215" y="420" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="q_mAl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="Skeptic" vertex="1">
+                    <mxGeometry height="14" width="100" x="885" y="424" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mBl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="Flat" vertex="1">
+                    <mxGeometry height="14" width="100" x="1000" y="424" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_mCl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="Optimist" vertex="1">
+                    <mxGeometry height="14" width="100" x="1115" y="424" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_dT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Dial: how stubborn is the prior?" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_d1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="Open-minded prior → the data takes over quickly" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_d2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="Stubborn prior → needs many more trades to move" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="496" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_d3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#B71C1C;" value="Prior of 0% on a value → no data can ever revive it" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="518" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="The prior is a starting point, not a verdict. Enough trades outvote any honest opinion." vertex="1">
+                    <mxGeometry height="58" width="350" x="875" y="552" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Choose the prior &lt;b&gt;before&lt;/b&gt; seeing the results. Picking it afterwards to get the answer you want is just cherry-picking." vertex="1">
+                    <mxGeometry height="85" width="350" x="875" y="620" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Posterior ∝ prior × likelihood&lt;/b&gt;: start from what you believed, multiply by how well each possibility fits the data, then rescale to 100%." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Three lessons" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rFew" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="FEW TRADES" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rFewT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="The prior dominates (the skeptic still peaks at 50%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rMany" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="MANY TRADES" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rManyT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="The data dominates; different priors converge" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rNever" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="NEVER 0%" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_rNeverT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Rule nothing out completely, or no evidence can change your mind" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Today&#39;s posterior is tomorrow&#39;s prior" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="Update after each block of trades. Your belief keeps learning without starting over." vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style: keep a running, honest belief about each system, and let every new batch of trades move it." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Start with an honest prior, multiply by the evidence, and let enough trades overrule your opinion." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next chapter: Regression analysis (least squares)" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_e12" edge="1" parent="1" source="q_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="q_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_e23" edge="1" parent="1" source="q_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="q_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_e34" edge="1" parent="1" source="q_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="q_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The &lt;b&gt;posterior&lt;/b&gt; is your prior belief multiplied by the likelihood of the data, then rescaled to add to 100%.&lt;br&gt;&lt;br&gt;With little data the prior dominates; with lots of data the evidence takes over." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The Bayes&#39; Theorem tab had two possibilities (real edge or not). Usually there is a whole range: the true win rate could be 40%, 50%, 60%, and so on.&lt;br&gt;&lt;br&gt;You start with a belief spread across that range (the prior). The data scores each value (the likelihood). Multiply the two and you get an updated spread (the posterior).&lt;br&gt;&lt;br&gt;Two people with different priors can see the same data and still disagree, but less and less as data piles up." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: three rows of bars" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Prior × likelihood = posterior, with one bar per candidate win rate.&lt;br&gt;&lt;br&gt;&lt;b&gt;multiply bar by bar, then rescale&lt;/b&gt; so the posterior adds to 100%. A candidate survives only if it had a decent prior &lt;i&gt;and&lt;/i&gt; fits the data.&lt;br&gt;&lt;br&gt;50% had the biggest prior and fits fairly well, so it still leads after 10 trades (49%), with 60% second (27%)." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: the mystery coin, finished" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Data: H H H. Two candidates: fair coin (prior 99%) or two-headed coin (prior 1%).&lt;br&gt;&lt;br&gt;Likelihood: fair 0.125, two-headed 1&lt;br&gt;Prior × likelihood: 0.99 × 0.125 ≈ 0.124 vs 0.01 × 1 = 0.01&lt;br&gt;Rescale: fair ≈ 93%, two-headed ≈ 7%&lt;br&gt;&lt;br&gt;The best explanation (two-headed) is not the most probable coin (fair), because the prior matters." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Data: 6 wins in 10, then 60 in 100. Belief that the win rate is 60% or better:&lt;br&gt;&lt;b&gt;Skeptic&lt;/b&gt; (centered on 50%): 30% → 38% → 78%&lt;br&gt;&lt;b&gt;Flat&lt;/b&gt; (no opinion): 44% → 61% → 89%&lt;br&gt;&lt;b&gt;Optimist&lt;/b&gt; (centered on 70%): 85% → 87% → 95%&lt;br&gt;&lt;br&gt;After 100 trades all three put the win rate most likely at 60% (posterior averages 58%, 60%, 61%).&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: let enough trades overrule both hope and fear." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More data:&lt;/b&gt; posteriors from different priors converge (disagreement 55 points → 49 → 17).&lt;br&gt;&lt;br&gt;&lt;b&gt;Stronger prior:&lt;/b&gt; moves more slowly and needs more trades to shift.&lt;br&gt;&lt;br&gt;&lt;b&gt;Prior of 0% on a value:&lt;/b&gt; that value stays at 0% forever, whatever the data.&lt;br&gt;&lt;br&gt;&lt;b&gt;Updating in steps:&lt;/b&gt; today&#39;s posterior becomes tomorrow&#39;s prior. Updating batch by batch gives the same answer as updating all at once." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;priors make it useless&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Priors make Bayes subjective, so it&#39;s useless.&#39;&lt;/b&gt; Priors are stated openly, and with enough data they wash out. Ignoring prior knowledge is also a choice (a flat prior).&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Pick whatever prior gives the answer you want.&#39;&lt;/b&gt; That&#39;s cherry-picking. Fix the prior before looking at results.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Being certain is safe.&#39;&lt;/b&gt; A 0% or 100% prior can never be corrected by evidence." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;posterior(p) ∝ prior(p) × L(p | data)&lt;/b&gt;&lt;br&gt;Rescale so the posterior adds (or integrates) to 1.&lt;br&gt;&lt;br&gt;Skeptic at p = 0.5: 0.40 × 0.205 = 0.082&lt;br&gt;Skeptic at p = 0.6: 0.18 × 0.251 = 0.045&lt;br&gt;After rescaling: 49% and 27%&lt;br&gt;&lt;br&gt;Continuous version (Beta prior, win/loss data):&lt;br&gt;Beta(a, b) + k wins and n − k losses → Beta(a + k, b + n − k)&lt;br&gt;The prior acts like a + b &#39;imaginary trades&#39;." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; a skeptic and an optimist read the same 10 trades differently.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; prior × likelihood = posterior, bar by bar.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; three priors after 10 and 100 trades; they converge; the stubbornness dial.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; few trades vs many trades, never 0%, today&#39;s posterior is tomorrow&#39;s prior; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="q_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Start with an honest prior, multiply by the evidence, and let enough trades overrule your opinion." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

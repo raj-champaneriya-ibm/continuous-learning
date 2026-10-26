@@ -141,6 +141,8 @@ body:has(#tab-nav-0.active)>.container-fluid{padding-left:0;padding-right:0}
 #tab-nav-0 .card-body{padding:12px 16px 18px}
 .customer-card,.expected-card{min-height:284px}.customer-card .card-header,.expected-card .card-header{text-transform:uppercase;letter-spacing:.6px;font-size:12px!important;color:#536986}
 #email_card .email{font-size:14px;line-height:1.65;background:#f8fafc;border:1px solid #edf2f8;border-radius:8px;padding:14px;margin-top:8px!important}
+#email_card .history .turn{margin-bottom:8px}#email_card .history .email{font-size:13px;opacity:.8}
+#email_card .history .turn-assistant .email{background:#eef4fb;margin-left:24px}
 .kv{margin-bottom:0;font-size:12px}.kv dt{font-size:10px;text-transform:uppercase;color:#8498b5;font-weight:600;margin-bottom:4px}.kv dd{margin-bottom:12px;line-height:1.5}.kv .muted{font-size:12px}
 .routing-spec.safe{color:#007958;background:#effcf6;border-color:#a6e9cd}
 .routing-spec{padding:6px 8px;background:#fff5f6;color:#d80039;border:1px solid #ffc7d0;border-radius:4px}

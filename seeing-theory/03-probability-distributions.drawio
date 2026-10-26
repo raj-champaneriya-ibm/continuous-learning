@@ -1,0 +1,1339 @@
+<mxfile host="65bd71144e">
+    <diagram id="random-variables" name="01 Random Variables">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="r_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Random Variables: put a number on every outcome" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Your journal, written in words" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_jh1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="#" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="162" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_jh2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=12;fontStyle=1;" value="What happened" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="162" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j1a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="1" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="186" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="stopped out" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="186" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j2a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="2" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="hit target" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j3a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="3" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="234" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="scratched (closed at breakeven)" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="234" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j4a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="4" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="stopped out" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j5a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="5" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="trailed out big" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j6a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="6" vertex="1">
+                    <mxGeometry height="24" width="50" x="40" y="306" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_j6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=12;align=left;spacingLeft=8;" value="stopped out" vertex="1">
+                    <mxGeometry height="24" width="290" x="90" y="306" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_jMore" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" value="… 94 more trades" vertex="1">
+                    <mxGeometry height="18" width="340" x="40" y="332" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;" value="Words describe a trade well. But you can&#39;t add, average, or chart them." vertex="1">
+                    <mxGeometry height="55" width="340" x="40" y="358" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="What is the average of&lt;br&gt;&#39;stopped out&#39; and &#39;hit target&#39;?" vertex="1">
+                    <mxGeometry height="125" width="300" x="60" y="422" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="And &#39;hit target&#39; with 1 lot or 3 lots: same words, very different money." vertex="1">
+                    <mxGeometry height="55" width="340" x="40" y="557" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we turn outcomes into numbers we can calculate with?" vertex="1">
+                    <mxGeometry height="90" width="340" x="40" y="620" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: the price-tag machine" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="A random variable is a rule that puts a number on every outcome." vertex="1">
+                    <mxGeometry height="24" width="340" x="460" y="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_ruleLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=3;fontColor=#8D6E00;" value="rule X = R-multiple" vertex="1">
+                    <mxGeometry height="16" width="120" x="580" y="154" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_o1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="stopped out" vertex="1">
+                    <mxGeometry height="30" width="120" x="460" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_o2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BDBDBD;strokeColor=#757575;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="scratched" vertex="1">
+                    <mxGeometry height="30" width="120" x="460" y="215" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_o3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="hit target" vertex="1">
+                    <mxGeometry height="30" width="120" x="460" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_o4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="trailed out big" vertex="1">
+                    <mxGeometry height="30" width="120" x="460" y="295" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_v1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B71C1C;fontSize=14;fontStyle=1;" value="−1R" vertex="1">
+                    <mxGeometry height="30" width="90" x="700" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_v2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#757575;fontSize=14;fontStyle=1;" value="0R" vertex="1">
+                    <mxGeometry height="30" width="90" x="700" y="215" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_v3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;fontSize=14;fontStyle=1;" value="+2R" vertex="1">
+                    <mxGeometry height="30" width="90" x="700" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_v4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;fontSize=14;fontStyle=1;" value="+5R" vertex="1">
+                    <mxGeometry height="30" width="90" x="700" y="295" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e1" edge="1" parent="1" source="r_o1" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;" target="r_v1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e2" edge="1" parent="1" source="r_o2" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;" target="r_v2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e3" edge="1" parent="1" source="r_o3" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;" target="r_v3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e4" edge="1" parent="1" source="r_o4" style="endArrow=block;endFill=1;html=1;strokeColor=#666666;" target="r_v4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_stackT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="stack 100 trades on their numbers" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="337" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar1" parent="1" style="rounded=0;html=1;fillColor=#E57373;strokeColor=#B71C1C;" value="" vertex="1">
+                    <mxGeometry height="100" width="30" x="465" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar2" parent="1" style="rounded=0;html=1;fillColor=#BDBDBD;strokeColor=#757575;" value="" vertex="1">
+                    <mxGeometry height="40" width="30" x="515" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar3" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="50" width="30" x="615" y="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar4" parent="1" style="rounded=0;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;" value="" vertex="1">
+                    <mxGeometry height="10" width="30" x="765" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar1n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="50" vertex="1">
+                    <mxGeometry height="16" width="30" x="465" y="354" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar2n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="20" vertex="1">
+                    <mxGeometry height="16" width="30" x="515" y="414" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar3n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="25" vertex="1">
+                    <mxGeometry height="16" width="30" x="615" y="404" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_bar4n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="5" vertex="1">
+                    <mxGeometry height="16" width="30" x="765" y="444" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_axis" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="460" y="470" as="sourcePoint"/>
+                        <mxPoint x="800" y="470" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="r_tk1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="−1" vertex="1">
+                    <mxGeometry height="16" width="30" x="465" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="0" vertex="1">
+                    <mxGeometry height="16" width="30" x="515" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+1" vertex="1">
+                    <mxGeometry height="16" width="30" x="565" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+2" vertex="1">
+                    <mxGeometry height="16" width="30" x="615" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+3" vertex="1">
+                    <mxGeometry height="16" width="30" x="665" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+4" vertex="1">
+                    <mxGeometry height="16" width="30" x="715" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tk7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+5" vertex="1">
+                    <mxGeometry height="16" width="30" x="765" y="474" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_axisLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=2;" value="R-multiple" vertex="1">
+                    <mxGeometry height="14" width="340" x="460" y="489" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;fontStyle=1;" value="This stacked picture is the &lt;b&gt;distribution&lt;/b&gt; of X: every value it can take, and how often." vertex="1">
+                    <mxGeometry height="65" width="340" x="460" y="512" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="The rule is fixed. The randomness is only in which outcome the market hands you." vertex="1">
+                    <mxGeometry height="115" width="340" x="460" y="590" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: same trades, new rules" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_th0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Outcome (chance)" vertex="1">
+                    <mxGeometry height="36" width="95" x="875" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_th1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="R-multiple" vertex="1">
+                    <mxGeometry height="36" width="80" x="970" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_th2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="$ profit&lt;br&gt;(1R = $500)" vertex="1">
+                    <mxGeometry height="36" width="95" x="1050" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_th3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Win?&lt;br&gt;(1 or 0)" vertex="1">
+                    <mxGeometry height="36" width="80" x="1145" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_ta0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=10;" value="stopped out (50%)" vertex="1">
+                    <mxGeometry height="28" width="95" x="875" y="176" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_ta1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="−1R" vertex="1">
+                    <mxGeometry height="28" width="80" x="970" y="176" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_ta2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="−$500" vertex="1">
+                    <mxGeometry height="28" width="95" x="1050" y="176" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_ta3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="0" vertex="1">
+                    <mxGeometry height="28" width="80" x="1145" y="176" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tb0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#B0B0B0;fontSize=10;" value="scratched (20%)" vertex="1">
+                    <mxGeometry height="28" width="95" x="875" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tb1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="0R" vertex="1">
+                    <mxGeometry height="28" width="80" x="970" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tb2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="$0" vertex="1">
+                    <mxGeometry height="28" width="95" x="1050" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tb3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="0" vertex="1">
+                    <mxGeometry height="28" width="80" x="1145" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tc0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=10;" value="hit target (25%)" vertex="1">
+                    <mxGeometry height="28" width="95" x="875" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tc1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="+2R" vertex="1">
+                    <mxGeometry height="28" width="80" x="970" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tc2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="+$1,000" vertex="1">
+                    <mxGeometry height="28" width="95" x="1050" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tc3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="1" vertex="1">
+                    <mxGeometry height="28" width="80" x="1145" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_td0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#B0B0B0;fontSize=10;" value="trailed big (5%)" vertex="1">
+                    <mxGeometry height="28" width="95" x="875" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_td1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="+5R" vertex="1">
+                    <mxGeometry height="28" width="80" x="970" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_td2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="+$2,500" vertex="1">
+                    <mxGeometry height="28" width="95" x="1050" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_td3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=12;" value="1" vertex="1">
+                    <mxGeometry height="28" width="80" x="1145" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tavg0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" value="Average" vertex="1">
+                    <mxGeometry height="30" width="95" x="875" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tavg1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" value="+0.25R" vertex="1">
+                    <mxGeometry height="30" width="80" x="970" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tavg2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" value="+$125" vertex="1">
+                    <mxGeometry height="30" width="95" x="1050" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_tavg3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" value="0.30" vertex="1">
+                    <mxGeometry height="30" width="80" x="1145" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Same outcomes, three rules, three random variables. The win rate is just the average of the 1/0 rule." vertex="1">
+                    <mxGeometry height="46" width="340" x="880" y="326" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d1T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 1: double the size (1R = $1,000)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="average per trade: +$125 → +$250" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="404" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d1b" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="typical swing (SD): ≈ $820 → ≈ $1,640" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="426" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d1c" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#7B1FA2;" value="edge in R: +0.25R → +0.25R (unchanged)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="448" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d2T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Dial 2: shift 5% of trades from −1R to +5R" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_d2a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" value="average: +0.25R → +0.55R" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="504" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="The rule decides what you measure. The probabilities decide its shape." vertex="1">
+                    <mxGeometry height="65" width="350" x="875" y="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Pick the rule that answers your question. A 1/0 win flag alone hides how big the wins and losses are." vertex="1">
+                    <mxGeometry height="90" width="350" x="875" y="617" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="A &lt;b&gt;random variable&lt;/b&gt; is a rule that turns each outcome into a number. Its &lt;b&gt;distribution&lt;/b&gt; lists the values and how often each happens." vertex="1">
+                    <mxGeometry height="80" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Chapter 1&#39;s toolbox works on it" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="232" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rAvg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="AVERAGE" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rAvgT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Expectation = balance point of the distribution (+0.25R)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rSpr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SPREAD" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="304" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rSprT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Variance / SD = how wide it is (SD ≈ 1.64R)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="304" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rShr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SHARE" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_rShrT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Probability = average of a 1/0 rule (win rate 30%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Van Tharp&#39;s R is a random variable" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="Measuring in R strips out position size, so you can compare systems and improve the edge separately from sizing." vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="421" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Improve a system by reshaping its distribution: fewer −1R tags, more +5R tags." vertex="1">
+                    <mxGeometry height="62" width="350" x="1295" y="477" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Put a number on every outcome, and the whole toolbox (average, spread, odds) starts working on your trades." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Discrete and continuous distributions" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e12" edge="1" parent="1" source="r_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="r_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e23" edge="1" parent="1" source="r_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="r_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_e34" edge="1" parent="1" source="r_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="r_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A &lt;b&gt;random variable&lt;/b&gt; is a rule that turns each random outcome into a number.&lt;br&gt;&lt;br&gt;That lets you do arithmetic on chance." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Outcomes are often words: heads, stopped out, trend day. You can&#39;t average words.&lt;br&gt;&lt;br&gt;A random variable attaches a number to every outcome. Once outcomes are numbers, you can average them (expectation), measure their spread (variance), and chart them (distribution).&lt;br&gt;&lt;br&gt;Different questions call for different rules on the same outcomes." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the price-tag machine" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Every outcome walks through the machine and comes out wearing a number:&lt;br&gt;stopped out → −1R&lt;br&gt;scratched → 0R&lt;br&gt;hit target → +2R&lt;br&gt;trailed out big → +5R&lt;br&gt;&lt;br&gt;&lt;b&gt;stack the outcomes on their numbers&lt;/b&gt;. 100 trades pile up as 50 · 20 · 25 · 5 above −1, 0, +2, +5. That stacked picture is the &lt;b&gt;distribution&lt;/b&gt;." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: two coins" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Flip two coins: HH, HT, TH, TT (each 1 in 4).&lt;br&gt;&lt;br&gt;&lt;b&gt;Rule X = number of heads:&lt;/b&gt;&lt;br&gt;HH → 2, HT → 1, TH → 1, TT → 0&lt;br&gt;Distribution: 0 → 1/4, 1 → 2/4, 2 → 1/4&lt;br&gt;&lt;br&gt;&lt;b&gt;Rule Y = 1 if the coins match, else 0:&lt;/b&gt;&lt;br&gt;HH → 1, TT → 1, HT → 0, TH → 0&lt;br&gt;Distribution: 0 → 1/2, 1 → 1/2&lt;br&gt;&lt;br&gt;Same outcomes, different questions, different random variables." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Van Tharp&#39;s R-multiple is a random variable: result ÷ initial risk.&lt;br&gt;&lt;br&gt;stopped out (50%) → −1R&lt;br&gt;scratched (20%) → 0R&lt;br&gt;hit target (25%) → +2R&lt;br&gt;trailed out big (5%) → +5R&lt;br&gt;&lt;br&gt;Average: 0.5 × (−1) + 0.25 × 2 + 0.05 × 5 = &lt;b&gt;+0.25R&lt;/b&gt;&lt;br&gt;&lt;br&gt;Because R ignores position size, it measures the system itself." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you change the rule?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Change the rule:&lt;/b&gt; R-multiple (average +0.25R), $ profit at 1R = $500 (average +$125), win flag 1/0 (average 0.30 = the win rate).&lt;br&gt;&lt;br&gt;&lt;b&gt;Change the size:&lt;/b&gt; at 1R = $1,000, the average becomes +$250 and the SD ≈ $1,640 (both double; variance ×4). The edge in R stays +0.25R.&lt;br&gt;&lt;br&gt;&lt;b&gt;Change the odds:&lt;/b&gt; move 5% of trades from −1R to +5R and the average rises from +0.25R to +0.55R." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;it&#39;s a random number&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;A random variable is a random number.&#39;&lt;/b&gt; The rule itself is fixed and boring. The randomness is in which outcome happens.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;The number is the outcome.&#39;&lt;/b&gt; The outcome is what the market did. The number is one chosen way to measure it; another rule gives another number.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Win rate is a different kind of thing.&#39;&lt;/b&gt; It is just the average of the 1/0 rule." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Ω = all outcomes&lt;br&gt;&lt;b&gt;X: Ω → numbers&lt;/b&gt; (a rule, that is, a function)&lt;br&gt;&lt;br&gt;P(X = x) = total chance of the outcomes tagged x&lt;br&gt;Distribution: all pairs (x, P(X = x)); the chances add to 1.&lt;br&gt;&lt;br&gt;E[X] = Σ x × P(X = x) = +0.25R&lt;br&gt;Indicator: E[1&lt;sub&gt;W&lt;/sub&gt;] = P(W) = 0.30&lt;br&gt;&lt;br&gt;Scaling: E[aX] = a × E[X], SD(aX) = |a| × SD(X)" vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; a journal written in words; words can&#39;t be averaged.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; the price-tag machine, then outcomes stacked into a distribution.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; three rules on the same trades; double the size; shift the odds.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; average, spread and share all live on a random variable; R as a random variable; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Put a number on every outcome, and the whole toolbox (average, spread, odds) starts working on your trades." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="discrete-continuous" name="02 Discrete and Continuous">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="d_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Discrete and Continuous: count the bars, or measure the area" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Two kinds of numbers in your journal" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_hC" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" value="COUNTED · whole numbers" vertex="1">
+                    <mxGeometry height="24" width="165" x="40" y="168" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_hM" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" value="MEASURED · any value" vertex="1">
+                    <mxGeometry height="24" width="165" x="215" y="168" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" value="wins this week: 3" vertex="1">
+                    <mxGeometry height="32" width="165" x="40" y="198" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" value="trades today: 2" vertex="1">
+                    <mxGeometry height="32" width="165" x="40" y="236" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" value="losses in a row: 4" vertex="1">
+                    <mxGeometry height="32" width="165" x="40" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;" value="R-multiple: +2.37R" vertex="1">
+                    <mxGeometry height="32" width="165" x="215" y="198" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;" value="hold time: 41 min 12 s" vertex="1">
+                    <mxGeometry height="32" width="165" x="215" y="236" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_m3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;" value="slippage: 0.013%" vertex="1">
+                    <mxGeometry height="32" width="165" x="215" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="What is the chance my next trade makes&amp;nbsp;&lt;div&gt;&lt;b&gt;exactly&lt;/b&gt; +2.37R?&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="149" width="340" x="36" y="319" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=14;" value="&#39;Exactly 3 wins&#39; has a clear chance. &#39;Exactly +2.37R&#39; seems to have a chance of... zero?" vertex="1">
+                    <mxGeometry height="80" width="340" x="40" y="462" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;" value="Two kinds of numbers need two kinds of pictures." vertex="1">
+                    <mxGeometry height="55" width="340" x="40" y="548" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do probabilities work for things we measure instead of count?" vertex="1">
+                    <mxGeometry height="90" width="340" x="40" y="620" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: bricks vs sand" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#3A5F9E;" value="COUNTED → bricks on spots" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cSub" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=2;" value="wins in 4 trades of a 50/50 system" vertex="1">
+                    <mxGeometry height="16" width="340" x="460" y="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k0" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="12" width="40" x="480" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="48" width="40" x="540" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="72" width="40" x="600" y="198" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="48" width="40" x="660" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="12" width="40" x="720" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k0n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="1/16" vertex="1">
+                    <mxGeometry height="14" width="40" x="480" y="243" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k1n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="4/16" vertex="1">
+                    <mxGeometry height="14" width="40" x="540" y="207" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k2n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="6/16" vertex="1">
+                    <mxGeometry height="14" width="40" x="600" y="183" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k3n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="4/16" vertex="1">
+                    <mxGeometry height="14" width="40" x="660" y="207" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_k4n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;" value="1/16" vertex="1">
+                    <mxGeometry height="14" width="40" x="720" y="243" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="470" y="270" as="sourcePoint"/>
+                        <mxPoint x="770" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_kt0" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="0" vertex="1">
+                    <mxGeometry height="14" width="40" x="480" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kt1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="1" vertex="1">
+                    <mxGeometry height="14" width="40" x="540" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kt2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="2" vertex="1">
+                    <mxGeometry height="14" width="40" x="600" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kt3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="3" vertex="1">
+                    <mxGeometry height="14" width="40" x="660" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kt4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="4" vertex="1">
+                    <mxGeometry height="14" width="40" x="720" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_kNote" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="Add the bricks: P(2 or 3 wins) = 6/16 + 4/16 = &lt;b&gt;10/16&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="22" width="340" x="460" y="292" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_sT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#7B1FA2;" value="MEASURED → sand along a line" vertex="1">
+                    <mxGeometry height="20" width="340" x="460" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_sSub" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=2;" value="hold time, equally likely anywhere from 0 to 60 minutes" vertex="1">
+                    <mxGeometry height="16" width="340" x="460" y="345" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_hLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=2;" value="height = 1/60 per minute" vertex="1">
+                    <mxGeometry height="16" width="150" x="480" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_ptLbl" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="exactly 40 min → area 0" vertex="1">
+                    <mxGeometry height="16" width="140" x="635" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_sand" parent="1" style="rounded=0;html=1;fillColor=#E1D5E7;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="60" width="280" x="480" y="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_sandShade" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=12;fontStyle=1;" value="25%" vertex="1">
+                    <mxGeometry height="60" width="70" x="527" y="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_point" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="667" y="396" as="sourcePoint"/>
+                        <mxPoint x="667" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_sBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="470" y="460" as="sourcePoint"/>
+                        <mxPoint x="780" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_st0" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="0" vertex="1">
+                    <mxGeometry height="14" width="30" x="465" y="463" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_st10" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="10" vertex="1">
+                    <mxGeometry height="14" width="30" x="512" y="463" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_st25" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="25" vertex="1">
+                    <mxGeometry height="14" width="30" x="582" y="463" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_st40" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#B71C1C;" value="40" vertex="1">
+                    <mxGeometry height="14" width="30" x="652" y="463" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_st60" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="60" vertex="1">
+                    <mxGeometry height="14" width="30" x="745" y="463" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_sAxis" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=2;" value="minutes" vertex="1">
+                    <mxGeometry height="14" width="340" x="460" y="479" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;fontStyle=1;" value="Discrete: add the bars. Continuous: measure the area.&lt;br&gt;P(10 to 25 min) = 15 × 1/60 = 25%" vertex="1">
+                    <mxGeometry height="65" width="340" x="460" y="508" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="A single point has no width, so it holds no sand. For measured things, always ask about a range." vertex="1">
+                    <mxGeometry height="115" width="340" x="460" y="590" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: shrink the bins" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_aLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="R-multiples of trailing-stop trades · 1R bins (6 bars)" vertex="1">
+                    <mxGeometry height="18" width="340" x="880" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a0" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="45" width="50" x="895" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a1" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="25" width="50" x="945" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a2" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="14" width="50" x="995" y="191" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a3" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="8" width="50" x="1045" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a4" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="5" width="50" x="1095" y="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_a5" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="50" x="1145" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_aBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="205" as="sourcePoint"/>
+                        <mxPoint x="1200" y="205" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_bLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="½R bins (12 bars)" vertex="1">
+                    <mxGeometry height="18" width="340" x="880" y="218" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b0" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="50" width="25" x="895" y="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b1" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="40" width="25" x="920" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b2" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="28" width="25" x="945" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b3" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="22" width="25" x="970" y="268" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b4" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="16" width="25" x="995" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b5" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="12" width="25" x="1020" y="278" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b6" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="9" width="25" x="1045" y="281" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b7" parent="1" style="rounded=0;html=1;fillColor=#C3B1E1;strokeColor=#9673a6;" value="" vertex="1">
+                    <mxGeometry height="7" width="25" x="1070" y="283" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b8" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="6" width="25" x="1095" y="284" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b9" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="4" width="25" x="1120" y="286" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b10" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="25" x="1145" y="287" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_b11" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="25" x="1170" y="287" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_bBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="290" as="sourcePoint"/>
+                        <mxPoint x="1200" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_cLbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="bins → 0: a smooth curve" vertex="1">
+                    <mxGeometry height="18" width="200" x="880" y="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_wall" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#7B1FA2;strokeWidth=3;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="895" y="375" as="sourcePoint"/>
+                        <mxPoint x="895" y="322" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_curve" edge="1" parent="1" style="endArrow=none;html=1;curved=1;strokeColor=#7B1FA2;strokeWidth=3;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="908" y="325"/>
+                            <mxPoint x="933" y="335"/>
+                            <mxPoint x="958" y="347"/>
+                            <mxPoint x="983" y="353"/>
+                            <mxPoint x="1008" y="359"/>
+                            <mxPoint x="1033" y="363"/>
+                            <mxPoint x="1058" y="366"/>
+                            <mxPoint x="1083" y="368"/>
+                            <mxPoint x="1108" y="369"/>
+                            <mxPoint x="1133" y="371"/>
+                            <mxPoint x="1158" y="372"/>
+                            <mxPoint x="1183" y="372"/>
+                        </Array>
+                        <mxPoint x="895" y="322" as="sourcePoint"/>
+                        <mxPoint x="1195" y="373" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_tail" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#E65100;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1095" y="318" as="sourcePoint"/>
+                        <mxPoint x="1095" y="375" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_tailLbl" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#E65100;" value="area right of +3R = 8%" vertex="1">
+                    <mxGeometry height="28" width="100" x="1100" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="375" as="sourcePoint"/>
+                        <mxPoint x="1200" y="375" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_rt0" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="−1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="880" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="0" vertex="1">
+                    <mxGeometry height="14" width="30" x="930" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="980" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+2R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1030" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#E65100;fontStyle=1;" value="+3R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1080" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+4R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1130" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rt6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+5R" vertex="1">
+                    <mxGeometry height="14" width="30" x="1180" y="377" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Narrower bins → shorter bars, but the orange area stays 8%. In the limit, bars become a curve and probability becomes area." vertex="1">
+                    <mxGeometry height="50" width="340" x="880" y="398" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rgT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Ask about ranges, not points" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="458" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rg1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" value="P(between +1R and +3R) = 14% + 8% = 22%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rg2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#E65100;" value="P(above +3R) = 5% + 3% = 8%" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="504" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_rg3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="P(exactly +2.37R) = 0 (a line has no area)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="526" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Same data, three pictures. Only area survives as the bins shrink." vertex="1">
+                    <mxGeometry height="55" width="350" x="875" y="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Trailing-stop systems produce continuous R. Judge them by areas (especially the tail), not by single values." vertex="1">
+                    <mxGeometry height="82" width="350" x="875" y="625" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Discrete&lt;/b&gt;: values you count; chance sits on each value as a bar.&lt;br&gt;&lt;b&gt;Continuous&lt;/b&gt;: values you measure; chance is area over a range." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Side by side" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpH0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;" value="" vertex="1">
+                    <mxGeometry height="26" width="110" x="1295" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpH1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="COUNTED" vertex="1">
+                    <mxGeometry height="26" width="120" x="1405" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpH2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="MEASURED" vertex="1">
+                    <mxGeometry height="26" width="120" x="1525" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpA0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Picture" vertex="1">
+                    <mxGeometry height="30" width="110" x="1295" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpA1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="bars (bricks)" vertex="1">
+                    <mxGeometry height="30" width="120" x="1405" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpA2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="curve (sand)" vertex="1">
+                    <mxGeometry height="30" width="120" x="1525" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpB0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Chance of one value" vertex="1">
+                    <mxGeometry height="30" width="110" x="1295" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpB1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="the bar&#39;s height" vertex="1">
+                    <mxGeometry height="30" width="120" x="1405" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpB2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="zero" vertex="1">
+                    <mxGeometry height="30" width="120" x="1525" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpC0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Chance of a range" vertex="1">
+                    <mxGeometry height="30" width="110" x="1295" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpC1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="add the bars" vertex="1">
+                    <mxGeometry height="30" width="120" x="1405" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpC2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="area under the curve" vertex="1">
+                    <mxGeometry height="30" width="120" x="1525" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpD0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=10;fontStyle=1;" value="Trading example" vertex="1">
+                    <mxGeometry height="30" width="110" x="1295" y="378" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpD1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="wins in 10 trades" vertex="1">
+                    <mxGeometry height="30" width="120" x="1405" y="378" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_cmpD2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="R with a trailing stop" vertex="1">
+                    <mxGeometry height="30" width="120" x="1525" y="378" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_i3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="The height of a curve is &lt;b&gt;density&lt;/b&gt; (chance per unit), not chance. Only area is probability." vertex="1">
+                    <mxGeometry height="55" width="350" x="1295" y="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp: study your R-multiple distribution, especially the area in the big-winner tail." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Count it? Add the bars.&lt;br&gt;Measure it? Measure the area." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Central limit theorem" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_e12" edge="1" parent="1" source="d_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_e23" edge="1" parent="1" source="d_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_e34" edge="1" parent="1" source="d_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Discrete&lt;/b&gt; random variables take countable values; probability sits on each value.&lt;br&gt;&lt;br&gt;&lt;b&gt;Continuous&lt;/b&gt; random variables can take any value in a range; probability is the area over an interval, never at a single point." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Some trading numbers are counted: wins this week, trades today, losses in a row. Others are measured: hold time, slippage, the exact R of a trailing-stop exit.&lt;br&gt;&lt;br&gt;For counted things you can ask &lt;i&gt;what&#39;s the chance of exactly 3?&lt;/i&gt; For measured things, the chance of any exact value (say +2.37000…R) is zero, so the useful question becomes &lt;i&gt;what&#39;s the chance of landing in this range?&lt;/i&gt;" vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: bricks vs sand" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Discrete:&lt;/b&gt; bricks stacked on specific spots. A brick&#39;s height is the chance of that spot.&lt;br&gt;&lt;br&gt;&lt;b&gt;Continuous:&lt;/b&gt; sand spread along a line. The amount of sand over a stretch is the chance of that stretch. A single point has no width, so it holds no sand.&lt;br&gt;&lt;br&gt;&lt;b&gt;shrink the bins&lt;/b&gt;. Narrow bars become a smooth curve, and probability becomes the area under it." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: wins vs hold time" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Discrete:&lt;/b&gt; wins in 4 trades of a 50/50 system: 0, 1, 2, 3, 4 with chances 1, 4, 6, 4, 1 out of 16.&lt;br&gt;P(2 or 3 wins) = 10/16&lt;br&gt;&lt;br&gt;&lt;b&gt;Continuous:&lt;/b&gt; hold time, equally likely anywhere from 0 to 60 minutes. Height = 1/60 per minute.&lt;br&gt;P(10 to 25 min) = 15 × 1/60 = 25%&lt;br&gt;P(exactly 40:00.000) = 0" vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Fixed stop and fixed target: R takes only a few values (−1R, +2R), so it is discrete.&lt;br&gt;&lt;br&gt;Trailing stops: R can be anything (+0.4R, +2.37R, +6.1R), so treat it as continuous. Chart it as a histogram and read areas:&lt;br&gt;• above +3R: 8%&lt;br&gt;• between +1R and +3R: 22%&lt;br&gt;&lt;br&gt;Van Tharp: the big-winner tail often pays for the whole system. Measure its area, and protect it." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the bins shrink?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Shrink the bins&lt;/b&gt; (1R → ½R → smooth): each bar gets narrower and holds less probability, but the area over any range stays the same (8% above +3R).&lt;br&gt;&lt;br&gt;&lt;b&gt;Widen the range:&lt;/b&gt; more area, more probability (above +3R: 8%; above +1R: 30%).&lt;br&gt;&lt;br&gt;&lt;b&gt;Shrink the range to a point:&lt;/b&gt; the area goes to 0." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;height = probability&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The height of the curve is the probability.&#39;&lt;/b&gt; Height is &lt;i&gt;density&lt;/i&gt;: chance per unit. It can even exceed 1: hold time spread evenly over 0 to ½ hour has a height of 2 per hour. Only area is probability.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Probability 0 means impossible.&#39;&lt;/b&gt; Every exact value of a continuous variable has probability 0, yet some value always happens. Zero here means &#39;too thin to hold any area&#39;." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Discrete&lt;/b&gt; (probability mass function):&lt;br&gt;p(x) = P(X = x), and Σ p(x) = 1&lt;br&gt;P(a ≤ X ≤ b) = sum of the bars from a to b&lt;br&gt;&lt;br&gt;&lt;b&gt;Continuous&lt;/b&gt; (probability density function):&lt;br&gt;f(x) ≥ 0, total area = 1&lt;br&gt;P(a ≤ X ≤ b) = ∫ from a to b of f(x) dx (∫ just means &#39;area&#39;)&lt;br&gt;P(X = a) = 0&lt;br&gt;&lt;br&gt;Uniform hold time: f = 1/60 per minute on [0, 60]&lt;br&gt;P(10 ≤ T ≤ 25) = 15 × 1/60 = 0.25" vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; counted vs measured numbers in a journal, and the &#39;exactly +2.37R&#39; puzzle.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; bricks on spots vs sand along a line; a point holds no sand.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; shrink the bins from 1R to ½R to a curve; the tail area stays 8%.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; side-by-side comparison, density vs probability, and the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Count it? Add the bars.&lt;br&gt;Measure it? Measure the area." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="central-limit-theorem" name="03 Central Limit Theorem">
+        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="t_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Central Limit Theorem: averages of lumpy things become a bell" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="One trade: a lumpy, lopsided shape" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb1" parent="1" style="rounded=0;html=1;fillColor=#E57373;strokeColor=#B71C1C;" value="" vertex="1">
+                    <mxGeometry height="100" width="30" x="60" y="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb2" parent="1" style="rounded=0;html=1;fillColor=#BDBDBD;strokeColor=#757575;" value="" vertex="1">
+                    <mxGeometry height="40" width="30" x="110" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb3" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="50" width="30" x="210" y="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb4" parent="1" style="rounded=0;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;" value="" vertex="1">
+                    <mxGeometry height="10" width="30" x="360" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb1n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="50%" vertex="1">
+                    <mxGeometry height="14" width="40" x="55" y="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb2n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="20%" vertex="1">
+                    <mxGeometry height="14" width="40" x="105" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb3n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="25%" vertex="1">
+                    <mxGeometry height="14" width="40" x="205" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sb4n" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;" value="5%" vertex="1">
+                    <mxGeometry height="14" width="40" x="355" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sBase" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="50" y="290" as="sourcePoint"/>
+                        <mxPoint x="395" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="t_stk1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="−1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="60" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_stk2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="0R" vertex="1">
+                    <mxGeometry height="14" width="30" x="110" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_stk3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+2R" vertex="1">
+                    <mxGeometry height="14" width="30" x="210" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_stk4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="+5R" vertex="1">
+                    <mxGeometry height="14" width="30" x="360" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_sCap" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="−1R half the time, +5R only 1 time in 20 (average +0.25R)" vertex="1">
+                    <mxGeometry height="18" width="354" x="33" y="312" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t1b" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Average R of each block of 100 trades:" vertex="1">
+                    <mxGeometry height="22" width="354" x="33" y="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_blk1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="+0.31R" vertex="1">
+                    <mxGeometry height="30" width="62" x="40" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_blk2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="+0.18R" vertex="1">
+                    <mxGeometry height="30" width="62" x="109" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_blk3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="+0.27R" vertex="1">
+                    <mxGeometry height="30" width="62" x="178" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_blk4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="+0.22R" vertex="1">
+                    <mxGeometry height="30" width="62" x="247" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_blk5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2DA;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="+0.35R" vertex="1">
+                    <mxGeometry height="30" width="62" x="316" y="368" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t1c" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="tame, and all near +0.25R" vertex="1">
+                    <mxGeometry height="20" width="354" x="33" y="404" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Single trades are wild.&lt;br&gt;Why are the averages so tame?" vertex="1">
+                    <mxGeometry height="125" width="300" x="60" y="435" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: what shape do averages take, even when single results are lopsided?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: add more dice" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="1 die: flat" vertex="1">
+                    <mxGeometry height="18" width="340" x="460" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1a" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="470" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1b" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="520" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1c" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="570" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1d" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="620" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1e" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="670" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1f" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="40" x="720" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;" value="&amp;nbsp; &amp;nbsp; 1 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 2 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 3 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 4 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 5 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 6" vertex="1">
+                    <mxGeometry height="12" width="300" x="470" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="sum of 2 dice: a triangle" vertex="1">
+                    <mxGeometry height="18" width="340" x="460" y="222" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_0" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="9" width="24" x="470" y="291" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="18" width="24" x="497" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="27" width="24" x="524" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="36" width="24" x="551" y="264" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="45" width="24" x="578" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_5" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="54" width="24" x="605" y="246" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_6" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="45" width="24" x="632" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_7" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="36" width="24" x="659" y="264" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_8" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="27" width="24" x="686" y="273" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_9" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="18" width="24" x="713" y="282" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2_10" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="9" width="24" x="740" y="291" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2l2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="2" vertex="1">
+                    <mxGeometry height="12" width="24" x="470" y="302" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2l7" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="7 (6 ways)" vertex="1">
+                    <mxGeometry height="12" width="60" x="587" y="302" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d2l12" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="12" vertex="1">
+                    <mxGeometry height="12" width="24" x="740" y="302" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="sum of 3 dice: already a bell" vertex="1">
+                    <mxGeometry height="18" width="340" x="460" y="322" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_0" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="2" width="16" x="471" y="398" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_1" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="6" width="16" x="489" y="394" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_2" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="12" width="16" x="507" y="388" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_3" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="16" x="525" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_4" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="30" width="16" x="543" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_5" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="42" width="16" x="561" y="358" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_6" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="50" width="16" x="579" y="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_7" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="54" width="16" x="597" y="346" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_8" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="54" width="16" x="615" y="346" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_9" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="50" width="16" x="633" y="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_10" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="42" width="16" x="651" y="358" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_11" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="30" width="16" x="669" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_12" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="20" width="16" x="687" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_13" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="12" width="16" x="705" y="388" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_14" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="6" width="16" x="723" y="394" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3_15" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="2" width="16" x="741" y="398" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3l3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="3" vertex="1">
+                    <mxGeometry height="12" width="16" x="471" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3lm" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#E65100;" value="10 · 11" vertex="1">
+                    <mxGeometry height="12" width="40" x="586" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d3l18" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="18" vertex="1">
+                    <mxGeometry height="12" width="16" x="741" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;count the paths&lt;/b&gt;. Extremes need every die to agree; the middle can be reached many ways. So sums pile up in the middle." vertex="1">
+                    <mxGeometry height="52" width="340" x="460" y="418" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;fontStyle=1;" value="Add or average many random pieces → a bell, whatever the shape of one piece." vertex="1">
+                    <mxGeometry height="66" width="340" x="460" y="478" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="Flat in, triangle out, bell after that. Each extra die adds more mixing, and the lumps of a single piece cancel out." vertex="1">
+                    <mxGeometry height="150" width="340" x="460" y="555" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: average more trades" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Average R over n trades (19 times out of 20)" vertex="1">
+                    <mxGeometry height="24" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;1 trade:&lt;/b&gt; −1R, 0R, +2R or +5R (lumpy, off this chart)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r10L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="10 trades" vertex="1">
+                    <mxGeometry height="18" width="150" x="890" y="188" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r10R" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" value="−0.79R to +1.29R" vertex="1">
+                    <mxGeometry height="18" width="150" x="1060" y="188" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r10B" parent="1" style="rounded=1;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="22" width="266" x="917" y="208" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r30L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="30 trades" vertex="1">
+                    <mxGeometry height="18" width="150" x="890" y="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r30R" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" value="−0.35R to +0.85R" vertex="1">
+                    <mxGeometry height="18" width="150" x="1060" y="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r30B" parent="1" style="rounded=1;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="22" width="154" x="973" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r100L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="100 trades" vertex="1">
+                    <mxGeometry height="18" width="150" x="890" y="292" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r100R" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" value="−0.08R to +0.58R" vertex="1">
+                    <mxGeometry height="18" width="150" x="1060" y="292" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r100B" parent="1" style="rounded=1;html=1;fillColor=#FFB74D;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="22" width="84" x="1008" y="312" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r400L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="400 trades" vertex="1">
+                    <mxGeometry height="18" width="150" x="890" y="344" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r400R" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="+0.09R to +0.41R" vertex="1">
+                    <mxGeometry height="18" width="150" x="1060" y="344" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_r400B" parent="1" style="rounded=1;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="22" width="40" x="1030" y="364" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_zero" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#666666;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1018" y="205" as="sourcePoint"/>
+                        <mxPoint x="1018" y="392" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="t_mean" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#7B1FA2;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1050" y="205" as="sourcePoint"/>
+                        <mxPoint x="1050" y="392" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="t_ax1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="−1R" vertex="1">
+                    <mxGeometry height="14" width="30" x="875" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_ax2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="0" vertex="1">
+                    <mxGeometry height="14" width="20" x="1008" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_ax3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#7B1FA2;" value="+0.25R" vertex="1">
+                    <mxGeometry height="14" width="40" x="1040" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_ax4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="+1.5R" vertex="1">
+                    <mxGeometry height="14" width="35" x="1192" y="393" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Same system, more trades: the range shrinks like 1/√n. 4× the trades → half the width." vertex="1">
+                    <mxGeometry height="46" width="340" x="880" y="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_ntT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Trades until the range clears zero" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="466" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_nt1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="Steady (+0.5R, SD 1.5R): ≈ 40 trades" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_nt2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="This system (+0.25R, SD 1.64R): ≈ 170 trades" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="512" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_nt3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="Wild (+0.5R, SD 4.5R): ≈ 330 trades" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="534" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="The bell lets you put error bars on a system&#39;s expectancy." vertex="1">
+                    <mxGeometry height="55" width="350" x="875" y="566" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="The bell is for averages, not single trades. It assumes independent trades; lumpy systems need more trades." vertex="1">
+                    <mxGeometry height="77" width="350" x="875" y="630" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Central limit theorem&lt;/b&gt;: averages (and sums) of many independent results pile up into a bell, whatever the shape of a single result." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Three facts about the bell" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rCtr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="CENTER" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rCtrT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Sits at the expectancy (+0.25R per trade)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rWid" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="WIDTH" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rWidT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="SD ÷ √n: 4× the trades → ½ the width" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rShp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SHAPE" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_rShpT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="A bell, even though single trades are lopsided" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="The rule of 2" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="About 19 times in 20, the average lands within 2 × SD ÷ √n of the expectancy." vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp: judge expectancy on a big sample. The bell tells you how big is big enough." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="One trade is chaos; the average of many trades is a bell you can predict." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next chapter: Frequentist inference (point estimation)" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_e12" edge="1" parent="1" source="t_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="t_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_e23" edge="1" parent="1" source="t_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="t_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_e34" edge="1" parent="1" source="t_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="t_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Average (or add up) many independent random results, and the averages pile up into a &lt;b&gt;bell shape&lt;/b&gt;, whatever the shape of a single result.&lt;br&gt;&lt;br&gt;The bell is centered on the expectation and gets narrower as you average more." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A single trade&#39;s R is lumpy: −1R half the time, +5R rarely. You can&#39;t predict it.&lt;br&gt;&lt;br&gt;But nobody lives on one trade. The average of 100 trades is predictable: it lands near the expectancy, in a bell-shaped spread whose width you can calculate.&lt;br&gt;&lt;br&gt;That is what lets you put error bars on a system&#39;s expectancy, and why the &#39;wobble&#39; in Chance Events had a predictable size." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: add more dice" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="One die: flat (each face 1 in 6).&lt;br&gt;Sum of two dice: a triangle (7 can be made 6 ways, 2 only 1 way).&lt;br&gt;Sum of three dice: already a bell.&lt;br&gt;&lt;br&gt;Greg Tang move: &lt;b&gt;count the paths to the middle&lt;/b&gt;. Extremes need every piece to agree; the middle can be reached many ways. So sums pile up in the middle, and the lumps of a single piece cancel out." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: two dice" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Two dice, 36 equally likely pairs. Ways to make each sum:&lt;br&gt;2: 1 · 3: 2 · 4: 3 · 5: 4 · 6: 5 · &lt;b&gt;7: 6&lt;/b&gt; · 8: 5 · 9: 4 · 10: 3 · 11: 2 · 12: 1&lt;br&gt;&lt;br&gt;Average of the two dice: 3.5 is the most likely (6 of 36). An average of 1 or 6 needs both dice to agree (1 of 36 each).&lt;br&gt;&lt;br&gt;Flat in, triangle out. Add a third die and the triangle rounds into a bell." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="System from the Random Variables tab: −1R (50%), 0R (20%), +2R (25%), +5R (5%). Expectancy +0.25R, SD ≈ 1.64R.&lt;br&gt;&lt;br&gt;Average R over n trades, 19 times in 20:&lt;br&gt;10 trades: −0.79R to +1.29R&lt;br&gt;30 trades: −0.35R to +0.85R&lt;br&gt;100 trades: −0.08R to +0.58R&lt;br&gt;400 trades: +0.09R to +0.41R&lt;br&gt;&lt;br&gt;Van Tharp: you need a big sample before trusting an expectancy. The bell tells you how big." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you add trades?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades:&lt;/b&gt; the center stays at +0.25R; the width shrinks like 1/√n (4× the trades → half the width).&lt;br&gt;&lt;br&gt;&lt;b&gt;Lumpier system:&lt;/b&gt; bigger SD → wider bell → more trades needed. Trades until the 95% range clears zero:&lt;br&gt;Steady (+0.5R, SD 1.5R): ≈ 40&lt;br&gt;This system (+0.25R, SD 1.64R): ≈ 170&lt;br&gt;Wild (+0.5R, SD 4.5R): ≈ 330&lt;br&gt;&lt;br&gt;&lt;b&gt;Totals:&lt;/b&gt; over 100 trades, about +25R; 19 times in 20 between −8R and +58R." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;returns are normal&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The CLT means trade returns are normal.&#39;&lt;/b&gt; No. Single trades keep their lumpy shape. Only averages and sums become bell-shaped.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;30 trades is always enough.&#39;&lt;/b&gt; A rule of thumb that fails for lopsided systems: rare big winners need many more trades before the bell can be trusted.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;It always applies.&#39;&lt;/b&gt; It assumes trades are roughly independent and the spread is finite. Correlated trades (same move, same day) count as fewer real samples." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Average of n trades: X̄ = (X₁ + … + Xₙ) ÷ n&lt;br&gt;&lt;br&gt;For large n:&lt;br&gt;&lt;b&gt;X̄ ≈ Normal(μ, σ ÷ √n)&lt;/b&gt;&lt;br&gt;Sum ≈ Normal(n × μ, σ × √n)&lt;br&gt;&lt;br&gt;Rule of 2: about 95% of the time, X̄ is within μ ± 2σ ÷ √n.&lt;br&gt;&lt;br&gt;This system: μ = 0.25R, σ ≈ 1.64R&lt;br&gt;n = 100: 0.25 ± 2 × 0.164 = 0.25 ± 0.33&lt;br&gt;Clears 0 when 2σ ÷ √n &amp;lt; μ, that is, n &amp;gt; (2σ ÷ μ)² ≈ 172" vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; a lumpy single-trade shape, yet tame 100-trade averages.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; one die (flat) → two dice (triangle) → three dice (bell).&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; the average R&#39;s range for 10, 30, 100 and 400 trades; trades needed for three systems.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; center, width, shape; the rule of 2; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="One trade is chaos; the average of many trades is a bell you can predict." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

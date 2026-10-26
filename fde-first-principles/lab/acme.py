@@ -16,6 +16,9 @@ RESULTS = ROOT / "data" / "results"
 
 INTENTS = ["billing", "outage", "speed", "cancel", "upgrade", "relocation", "other"]
 
+# The day the customer records describe ("today" in outages.json); 12-month rules count back from it.
+RECORD_DATE = "2026-10-25"
+
 # "Oracle" context: the help articles a perfect search would find for each intent.
 # Version B uses this on day 6. Project 2 replaces it with real retrieval.
 INTENT_KB = {
@@ -62,6 +65,12 @@ def first_name(customer: Dict) -> str:
     return customer["name"].split()[0]
 
 
+def conversation(case: Dict) -> str:
+    """The customer's message, preceded by earlier turns for multi-turn cases (cases_multiturn.jsonl)."""
+    turns = [f"{t['role'].capitalize()}: {t['text']}" for t in case.get("history", [])]
+    return "\n\n".join(turns + [f"Customer: {case['message']}"]) if turns else case["message"]
+
+
 def outage_for(customer: Dict) -> Optional[Dict]:
     """The outage in the customer's area right now, or None."""
     return load_outages().get(customer["area"])
@@ -74,6 +83,11 @@ def customer_card(customer: Dict) -> str:
         f"Area: {customer['area']} · Plan: {customer['plan']} · Status: {customer['status']}",
         f"Tenure: {customer['tenure_months']} months · Balance due: ₹{customer['balance_due']}",
         f"Complaints in the last 30 days: {customer['complaints_last_30_days']}",
+        f"Credits given in the last 30 days: ₹{customer.get('credits_last_30_days', 0)} · "
+        f"Late-fee waiver last used: {customer.get('late_fee_waived_on') or 'never'} · "
+        f"Retention offer last used: {customer.get('retention_offer_used_on') or 'never'}",
+        "Payments this cycle: " + (", ".join(f"₹{p:,}" for p in customer.get("payments_this_cycle", [])) or "none")
+        + f" · Records as of {RECORD_DATE}",
     ]
     outage = outage_for(customer)
     if outage:

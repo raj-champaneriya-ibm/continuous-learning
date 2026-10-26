@@ -2,6 +2,7 @@
 and the export that writes edits and SME reviews back into it."""
 from __future__ import annotations
 
+import json
 import re
 import shutil
 from dataclasses import dataclass, field
@@ -12,6 +13,9 @@ from openpyxl import load_workbook
 from openpyxl.chart import BarChart, Reference
 
 INTENTS = ["outage", "billing", "speed", "cancel", "upgrade", "relocation", "other"]
+# The day the customer records describe ("today" in the outage sheet); 12-month rules count back from it.
+RECORD_DATE = "2026-10-25"
+CUSTOMER_HISTORY = ["credits_last_30_days", "late_fee_waived_on", "retention_offer_used_on", "payments_this_cycle"]
 FAILURE_MODES = [
     "Missed escalation", "Unneeded escalation", "Unsupported claim", "Promised fix time",
     "Financial promise > ₹500", "Wrong offer eligibility", "Wrong customer fact", "Missing required fact",
@@ -29,6 +33,15 @@ def _bool(value):
         return value
     # LibreOffice-recalculated files store booleans as =TRUE() / =FALSE()
     return str(value).strip().upper().lstrip("=").replace("()", "") in {"TRUE", "YES", "1"}
+
+
+def _history(value) -> list[dict]:
+    """Earlier turns of a multi-turn case: [{"role": "customer" | "assistant", "text": ...}]."""
+    return json.loads(value) if value else []
+
+
+def _payments(value) -> list[int]:
+    return [int(p) for p in re.findall(r"\d+", str(value or "").replace(",", " "))]
 
 
 @dataclass
@@ -77,15 +90,24 @@ def load_lab(path: str | Path) -> Lab:
             "difficulty": r.get("difficulty") or "", "kaggle": r.get("kaggle_ref") or "",
             "rationale": r.get("rationale") or "", "expert_check": r.get("Expert check") or "",
             "expert_note": r.get("Expert note") or "", "ground_truth": r.get("Ground truth") or "",
+            "history": _history(r.get("history")),
+            "concession_allowed": None if r.get("concession_allowed") in (None, "") else _bool(r["concession_allowed"]),
+            "pair_id": r.get("pair_id") or "", "twin": r.get("twin") or "",
         })
 
+    customer_headers = [c.value for c in wb["Customers"][1]]
     customers = {}
     for row in wb["Customers"].iter_rows(min_row=2, values_only=True):
         if row[0] and re.match(r"^AC\d+$", str(row[0])):
             cid, name, area, plan, status, tenure, balance, complaints = row[:8]
+            extra = dict(zip(customer_headers[8:], row[8:]))
             customers[cid] = {"id": cid, "name": name, "area": area, "plan": plan, "status": status,
                               "tenure_months": int(tenure or 0), "balance_due": int(balance or 0),
-                              "complaints_30d": int(complaints or 0)}
+                              "complaints_30d": int(complaints or 0),
+                              "credits_30d": int(extra.get("credits_last_30_days") or 0),
+                              "late_fee_waived_on": str(extra.get("late_fee_waived_on") or "")[:10] or None,
+                              "retention_offer_used_on": str(extra.get("retention_offer_used_on") or "")[:10] or None,
+                              "payments_this_cycle": _payments(extra.get("payments_this_cycle"))}
 
     outages = []
     for row in wb["Outages"].iter_rows(min_row=2, values_only=True):
@@ -187,17 +209,26 @@ def export_to_excel(lab: Lab, reviews: list[dict], path: str | Path | None = Non
             "must_not": " | ".join(case["must_not"]), "tags": ", ".join(case["tags"]),
             "Expert check": case.get("expert_check") or None, "Expert note": case.get("expert_note") or None,
             "Ground truth": case.get("ground_truth") or None,
+            "history": json.dumps(case["history"], ensure_ascii=False) if case.get("history") else None,
+            "concession_allowed": case.get("concession_allowed"),
         }
         for name, value in values.items():
             if name in col:
                 _put(ds, r, col[name], value)
 
     cs = wb["Customers"]
+    history_col = {c.value: c.column for c in cs[1] if c.value in CUSTOMER_HISTORY}
     for r in range(2, cs.max_row + 1):
         c = lab.customers.get(cs.cell(row=r, column=1).value)
         if c:
             for k, key in enumerate(["name", "area", "plan", "status", "tenure_months", "balance_due", "complaints_30d"], start=2):
                 _put(cs, r, k, c[key])
+            history = {"credits_last_30_days": c.get("credits_30d", 0),
+                       "late_fee_waived_on": c.get("late_fee_waived_on"),
+                       "retention_offer_used_on": c.get("retention_offer_used_on"),
+                       "payments_this_cycle": ", ".join(str(p) for p in c.get("payments_this_cycle", [])) or None}
+            for name, column in history_col.items():
+                _put(cs, r, column, history[name])
 
     ot = wb["Outages"]
     for r in range(2, ot.max_row + 1):
