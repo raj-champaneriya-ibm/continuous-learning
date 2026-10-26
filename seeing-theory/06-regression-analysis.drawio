@@ -1,0 +1,921 @@
+<mxfile host="65bd71144e">
+    <diagram id="least-squares" name="01 Least Squares">
+        <mxGraphModel grid="0" page="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="o_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Least Squares: the one line that misses your trades the least" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Do stronger trends give better trades?" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_jh1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Trade" vertex="1">
+                    <mxGeometry height="24" width="60" x="40" y="162" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_jh2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Trend score at entry" vertex="1">
+                    <mxGeometry height="24" width="140" x="100" y="162" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_jh3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;fontStyle=1;" value="Result (R)" vertex="1">
+                    <mxGeometry height="24" width="140" x="240" y="162" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j1a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="1" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="186" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="1" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="186" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j1c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=11;" value="−1R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="186" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j2a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="2" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="208" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="2" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="208" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j2c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#B0B0B0;fontSize=11;" value="0R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="208" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j3a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="3" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="3" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j3c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;fontSize=11;" value="−1R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j4a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="4" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="4" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j4c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=11;" value="+1R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="252" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j5a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="5" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="5" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j5c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#B0B0B0;fontSize=11;" value="0R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="274" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j6a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="6" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="296" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="6" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="296" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j6c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=11;" value="+2R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="296" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j7a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="7" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="7" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j7c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=11;" value="+1R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j8a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="8" vertex="1">
+                    <mxGeometry height="22" width="60" x="40" y="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;fontSize=11;" value="8" vertex="1">
+                    <mxGeometry height="22" width="140" x="100" y="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_j8c" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;fontSize=11;" value="+3R" vertex="1">
+                    <mxGeometry height="22" width="140" x="240" y="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Higher scores look better...&lt;br&gt;but by how much?" vertex="1">
+                    <mxGeometry height="115" width="300" x="60" y="372" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="Everyone eyeballs a slightly different line. We need a rule that picks one line, the same way every time." vertex="1">
+                    <mxGeometry height="90" width="340" x="40" y="495" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we pick the single best straight line through scattered points?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: sticks become squares" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Hang a stick from each trade to the line. Square each stick. Choose the line with the least total area." vertex="1">
+                    <mxGeometry height="30" width="340" x="460" y="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_axX" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#9E9E9E;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="475" y="285" as="sourcePoint"/>
+                        <mxPoint x="785" y="285" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_axY" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#9E9E9E;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="480" y="165" as="sourcePoint"/>
+                        <mxPoint x="480" y="345" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_yl3" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=9;" value="+3R" vertex="1">
+                    <mxGeometry height="12" width="28" x="448" y="189" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_yl1" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=9;" value="+1R" vertex="1">
+                    <mxGeometry height="12" width="28" x="448" y="249" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_yl0" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=9;fontStyle=1;" value="0R" vertex="1">
+                    <mxGeometry height="12" width="28" x="448" y="279" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_ylm1" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=9;" value="−1R" vertex="1">
+                    <mxGeometry height="12" width="28" x="448" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_fit" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#2E7D32;strokeWidth=3;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="497" y="325" as="sourcePoint"/>
+                        <mxPoint x="763" y="208" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k1" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="513" y="315" as="sourcePoint"/>
+                        <mxPoint x="513" y="318" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k2" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="547" y="285" as="sourcePoint"/>
+                        <mxPoint x="547" y="303" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k3" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="580" y="315" as="sourcePoint"/>
+                        <mxPoint x="580" y="288" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k4" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="613" y="255" as="sourcePoint"/>
+                        <mxPoint x="613" y="274" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k5" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="647" y="285" as="sourcePoint"/>
+                        <mxPoint x="647" y="259" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k6" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="680" y="225" as="sourcePoint"/>
+                        <mxPoint x="680" y="244" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k7" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="713" y="255" as="sourcePoint"/>
+                        <mxPoint x="713" y="230" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_k8" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#B71C1C;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="747" y="195" as="sourcePoint"/>
+                        <mxPoint x="747" y="215" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="o_q1s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="3" width="3" x="516" y="315" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q2s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="18" width="18" x="550" y="285" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q3s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="27" width="27" x="583" y="288" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q4s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="19" width="19" x="616" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q5s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="26" width="26" x="650" y="259" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q6s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="19" width="19" x="683" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q7s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="26" width="26" x="716" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_q8s" parent="1" style="rounded=0;html=1;fillColor=#FFB74D;fillOpacity=55;strokeColor=#E65100;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="750" y="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="508" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="542" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="575" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="608" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="642" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt6" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="675" y="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt7" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="708" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_pt8" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="742" y="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_be" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="8" width="8" x="583" y="281" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_xl1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="1" vertex="1">
+                    <mxGeometry height="12" width="16" x="505" y="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_xl8" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="8" vertex="1">
+                    <mxGeometry height="12" width="16" x="739" y="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_xTitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=2;" value="trend score at entry → (green dot: the line crosses 0R at about 3.2)" vertex="1">
+                    <mxGeometry height="14" width="340" x="460" y="364" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;tilt and slide the line until the orange squares cover the least area&lt;/b&gt;. That position is the least-squares line." vertex="1">
+                    <mxGeometry height="52" width="340" x="460" y="385" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;" value="&lt;b&gt;R ≈ −1.57 + 0.49 × trend score&lt;/b&gt;&lt;br&gt;Each extra point of score adds about +0.5R on average." vertex="1">
+                    <mxGeometry height="62" width="340" x="460" y="445" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="The same &#39;strings into squares&#39; move as the Variance tab. Variance squares the misses around one flat average; least squares squares them around a sloping line." vertex="1">
+                    <mxGeometry height="185" width="340" x="460" y="520" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: try other lines" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Total squared miss for four lines (smaller = better)" vertex="1">
+                    <mxGeometry height="22" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l1L" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Flat&lt;/b&gt; (every trade = average)" vertex="1">
+                    <mxGeometry height="26" width="125" x="878" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l1B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BDBDBD;strokeColor=#757575;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="13.9" vertex="1">
+                    <mxGeometry height="26" width="194" x="1005" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l2L" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Too shallow&lt;/b&gt; (slope 0.25)" vertex="1">
+                    <mxGeometry height="26" width="125" x="878" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l2B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="6.3" vertex="1">
+                    <mxGeometry height="26" width="88" x="1005" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l3L" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Least squares&lt;/b&gt; (slope 0.49)" vertex="1">
+                    <mxGeometry height="26" width="125" x="878" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l3B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="3.9" vertex="1">
+                    <mxGeometry height="26" width="54" x="1005" y="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l4L" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Too steep&lt;/b&gt; (slope 1.0)" vertex="1">
+                    <mxGeometry height="26" width="125" x="878" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_l4B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" value="14.9" vertex="1">
+                    <mxGeometry height="26" width="208" x="1005" y="261" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_lCap" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="All four lines pass through the averages (score 4.5, +0.63R); only the tilt changes." vertex="1">
+                    <mxGeometry height="32" width="340" x="880" y="293" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_oT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Add one +8R trade (an outlier)" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="335" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_o1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="at score 2 → slope 0.49 → 0.09 (trend nearly erased)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="357" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_o2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#B71C1C;" value="at score 8 → slope 0.49 → 0.82 (trend exaggerated)" vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="379" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_oN" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontStyle=2;" value="Squaring makes one big miss count like many small ones." vertex="1">
+                    <mxGeometry height="22" width="340" x="880" y="403" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_fT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Use it as a filter idea" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="435" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_f1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;fontColor=#2E7D32;" value="Line crosses 0R at score ≈ 3.2 → test &#39;only trade scores of 4 or more&#39;" vertex="1">
+                    <mxGeometry height="36" width="340" x="880" y="457" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Best line: total squared miss 3.9, vs 13.9 for &#39;just use the average&#39;. The trend accounts for about 72% of the scatter." vertex="1">
+                    <mxGeometry height="68" width="350" x="875" y="503" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="8 trades is a tiny sample, and the line is an average trend, not a promise. Don&#39;t extend it beyond scores you&#39;ve seen, and check outliers before trusting the slope." vertex="1">
+                    <mxGeometry height="122" width="350" x="875" y="583" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Least squares&lt;/b&gt; picks the straight line with the smallest total of squared vertical misses: the best average trend through the points." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Read the line" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rSl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SLOPE" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rSlT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="+0.49R for each extra point of trend score" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rBe" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=10;fontStyle=1;" value="BREAKEVEN" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rBeT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Crosses 0R at a score of about 3.2: a filter candidate" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rMs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="MISSES" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_rMsT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Leftover scatter (residuals): up to about ±0.9R per trade here" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="It always passes through the averages" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="The line goes through (average score 4.5, average R +0.63R). Least squares only chooses the tilt around that point." vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style improvement: a slope suggests a filter (trade only scores of 4+). Then test it on new trades." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Square every miss and pick the line with the least total: that&#39;s the trend your trades actually show." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Correlation" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_e12" edge="1" parent="1" source="o_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="o_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_e23" edge="1" parent="1" source="o_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="o_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_e34" edge="1" parent="1" source="o_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="o_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Least squares&lt;/b&gt; draws the one straight line through a cloud of points that makes the total of squared vertical misses as small as possible.&lt;br&gt;&lt;br&gt;It is the best average trend: how much y changes, on average, when x goes up by one." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="You suspect stronger trends give better trades. The scatter plot roughly agrees, but every eye draws a slightly different line.&lt;br&gt;&lt;br&gt;Least squares replaces eyeballing with a rule: measure how far each point misses the line, square those misses, add them up, and choose the line with the smallest total.&lt;br&gt;&lt;br&gt;Squaring keeps misses positive and punishes big misses more than small ones." vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: sticks and squares" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Hang a vertical stick from each point to the line. Turn each stick into a square.&lt;br&gt;&lt;br&gt;&lt;b&gt;tilt and slide the line until the total square area is as small as it can be&lt;/b&gt;. That position is the least-squares line.&lt;br&gt;&lt;br&gt;It&#39;s the Variance tab&#39;s &#39;strings into squares&#39;, with a sloping line instead of a flat average." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: three points" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Points: (1, 1), (2, 2), (3, 6).&lt;br&gt;&lt;br&gt;Averages: x̄ = 2, ȳ = 3, so the line must pass through (2, 3).&lt;br&gt;Slope = [(−1)(−2) + (0)(−1) + (1)(3)] ÷ [1 + 0 + 1] = 5 ÷ 2 = 2.5&lt;br&gt;Line: y = −2 + 2.5x&lt;br&gt;&lt;br&gt;Misses: +0.5, −1, +0.5&lt;br&gt;Squares: 0.25 + 1 + 0.25 = 1.5&lt;br&gt;No other straight line does better." vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="8 trades: trend score at entry vs R.&lt;br&gt;Least-squares line: &lt;b&gt;R ≈ −1.57 + 0.49 × score&lt;/b&gt;&lt;br&gt;• each extra point of score adds about +0.5R on average&lt;br&gt;• the line crosses 0R at a score of about 3.2&lt;br&gt;• total squared miss 3.9, vs 13.9 for &#39;every trade is the average +0.63R&#39;&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: the slope suggests a filter (only take scores of 4 or more). Treat it as a hypothesis and test it on new trades; 8 trades is a tiny sample." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you move the line?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Tilt the line&lt;/b&gt; (total squared miss): flat 13.9 · too shallow 6.3 · least squares 3.9 · too steep 14.9.&lt;br&gt;&lt;br&gt;&lt;b&gt;Add one +8R outlier:&lt;/b&gt; at score 2 the slope drops from 0.49 to 0.09; at score 8 it jumps to 0.82. One trade can erase or exaggerate the trend.&lt;br&gt;&lt;br&gt;&lt;b&gt;More trades:&lt;/b&gt; the slope estimate steadies; its wobble shrinks like 1/√n." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;the line predicts each trade&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The line predicts each trade.&#39;&lt;/b&gt; It predicts the average. Individual trades still miss by up to about 0.9R here.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;A slope proves the score causes better trades.&#39;&lt;/b&gt; It shows they move together in this sample. Something else could drive both.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Extend the line anywhere.&#39;&lt;/b&gt; A score of 20 was never seen; the line says nothing reliable there.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Outliers don&#39;t matter.&#39;&lt;/b&gt; Squaring makes them matter a lot." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Line: ŷ = a + b × x&lt;br&gt;Choose a and b to minimize &lt;b&gt;Σ (y − ŷ)²&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;b = Σ(x − x̄)(y − ȳ) ÷ Σ(x − x̄)²&lt;/b&gt;&lt;br&gt;&lt;b&gt;a = ȳ − b × x̄&lt;/b&gt;&lt;br&gt;&lt;br&gt;Here: b = 20.5 ÷ 42 ≈ 0.49&lt;br&gt;a = 0.625 − 0.49 × 4.5 ≈ −1.57&lt;br&gt;&lt;br&gt;The line always passes through (x̄, ȳ) = (4.5, +0.63R).&lt;br&gt;Residual = y − ŷ; the residuals add to zero." vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; 8 trades with a trend score and an R; everyone eyeballs a different line.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; scatter plot, the best line, sticks turned into squares.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; total squared miss for four lines; one outlier tilts the line; a filter idea.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; slope, breakeven, misses; the line passes through the averages; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="o_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Square every miss and pick the line with the least total: that&#39;s the trend your trades actually show." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="correlation" name="02 Correlation">
+        <mxGraphModel dx="566" dy="477" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="cr_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#333333;" value="Correlation: how tightly two things move together" vertex="1">
+                    <mxGeometry height="40" width="1640" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_p1" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F5F9FF;strokeColor=#6c8ebf;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;" value="1 · OBSERVATION" vertex="1">
+                    <mxGeometry height="44" width="380" x="20" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t1a" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;" value="Two journals, same slope (+0.5R per score point)" vertex="1">
+                    <mxGeometry height="24" width="354" x="33" y="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_boxA" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="120" width="160" x="40" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_boxB" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="120" width="160" x="220" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_lnA" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#2E7D32;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="50" y="270" as="sourcePoint"/>
+                        <mxPoint x="190" y="185" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cr_lnB" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#2E7D32;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="230" y="270" as="sourcePoint"/>
+                        <mxPoint x="370" y="185" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cr_a1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="57" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="77" y="244" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="97" y="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="117" y="221" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="137" y="217" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a6" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="157" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_a7" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="177" y="192" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b1" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="237" y="276" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b2" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="257" y="227" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b3" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="277" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b4" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="297" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b5" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="317" y="236" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b6" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="337" y="174" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_b7" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="357" y="204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_lblA" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#3A5F9E;" value="A: points hug the line" vertex="1">
+                    <mxGeometry height="18" width="160" x="40" y="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_lblB" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#B71C1C;" value="B: same line, wide scatter" vertex="1">
+                    <mxGeometry height="18" width="160" x="220" y="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="The slope says how much R changes per point of score. It doesn&#39;t say how reliable that link is." vertex="1">
+                    <mxGeometry height="50" width="340" x="40" y="315" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Same slope.&lt;br&gt;Same trust?" vertex="1">
+                    <mxGeometry height="120" width="300" x="60" y="375" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="The slope also depends on units (score points, R, dollars). We need a unit-free measure of tightness." vertex="1">
+                    <mxGeometry height="80" width="340" x="40" y="505" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: how do we measure how tightly two things move together?" vertex="1">
+                    <mxGeometry height="105" width="340" x="40" y="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_p2" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FFFCF0;strokeColor=#d6b656;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: rectangles from the center" vertex="1">
+                    <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Cross at the averages (score 4.5, +0.63R). Each trade draws a rectangle to the cross." vertex="1">
+                    <mxGeometry height="30" width="340" x="460" y="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r1" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="49" width="117" x="513" y="266" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r2" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="19" width="83" x="547" y="266" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r3" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="49" width="50" x="580" y="266" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r4" parent="1" style="rounded=0;html=1;fillColor=#E57373;fillOpacity=60;strokeColor=#B71C1C;" value="" vertex="1">
+                    <mxGeometry height="11" width="17" x="613" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r5" parent="1" style="rounded=0;html=1;fillColor=#E57373;fillOpacity=60;strokeColor=#B71C1C;" value="" vertex="1">
+                    <mxGeometry height="19" width="17" x="630" y="266" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r6" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="41" width="50" x="630" y="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r7" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="11" width="83" x="630" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_r8" parent="1" style="rounded=0;html=1;fillColor=#4CAF50;fillOpacity=35;strokeColor=#2E7D32;" value="" vertex="1">
+                    <mxGeometry height="71" width="117" x="630" y="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_crossV" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#7B1FA2;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" y="175" as="sourcePoint"/>
+                        <mxPoint x="630" y="335" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cr_crossH" edge="1" parent="1" style="endArrow=none;html=1;dashed=1;strokeColor=#7B1FA2;strokeWidth=2;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="490" y="266" as="sourcePoint"/>
+                        <mxPoint x="775" y="266" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="cr_pt1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="508" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="542" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="575" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="608" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="642" y="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt6" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="675" y="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt7" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="708" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_pt8" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=#FFFFFF;" value="" vertex="1">
+                    <mxGeometry height="10" width="10" x="742" y="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_qTR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="both above: agree (+)" vertex="1">
+                    <mxGeometry height="14" width="130" x="645" y="168" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_qBL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="both below: agree (+)" vertex="1">
+                    <mxGeometry height="14" width="130" x="485" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_qTL" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="disagree (−)" vertex="1">
+                    <mxGeometry height="14" width="80" x="485" y="168" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_qBR" parent="1" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="disagree (−)" vertex="1">
+                    <mxGeometry height="14" width="80" x="695" y="325" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_area" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Green area &lt;b&gt;21.0&lt;/b&gt; vs red area &lt;b&gt;0.5&lt;/b&gt;: the trades overwhelmingly agree." vertex="1">
+                    <mxGeometry height="32" width="340" x="460" y="345" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_key2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=13;" value="Rescale the net area so a perfect line scores ±1:&lt;br&gt;&lt;b&gt;r = +0.85&lt;/b&gt; (strong, positive)" vertex="1">
+                    <mxGeometry height="62" width="340" x="460" y="387" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t2c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="&lt;b&gt;compare the green area with the red area&lt;/b&gt;. Mostly green → positive. Mostly red → negative. Balanced → near zero." vertex="1">
+                    <mxGeometry height="52" width="340" x="460" y="459" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t2d" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#8D6E00;" value="The rescaling removes units: the same r whether you measure results in R or in dollars, scores from 1 to 8 or from 10 to 80." vertex="1">
+                    <mxGeometry height="180" width="340" x="460" y="525" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_p3" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#FBF7FC;strokeColor=#9673a6;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" value="3 · EXPERIMENT: shapes and systems" vertex="1">
+                    <mxGeometry height="44" width="380" x="860" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t3sub" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" value="From +1 to −1: how tightly points hug a line" vertex="1">
+                    <mxGeometry height="22" width="350" x="875" y="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="60" width="60" x="880" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="60" width="60" x="950" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="60" width="60" x="1020" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="60" width="60" x="1090" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#BDBDBD;" value="" vertex="1">
+                    <mxGeometry height="60" width="60" x="1160" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d1" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="885" y="209" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d2" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="894" y="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d3" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="903" y="191" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d4" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="912" y="182" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d5" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="921" y="173" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m1d6" parent="1" style="ellipse;html=1;fillColor=#2E7D32;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="929" y="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d1" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="955" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d2" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="964" y="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d3" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="973" y="201" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d4" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="982" y="183" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d5" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="991" y="187" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m2d6" parent="1" style="ellipse;html=1;fillColor=#3A5F9E;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="999" y="169" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d1" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1027" y="177" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d2" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1035" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d3" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1045" y="169" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d4" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1053" y="197" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d5" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1063" y="181" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m3d6" parent="1" style="ellipse;html=1;fillColor=#757575;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1069" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d1" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1095" y="169" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d2" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1104" y="187" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d3" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1113" y="183" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d4" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1122" y="201" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d5" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1131" y="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m4d6" parent="1" style="ellipse;html=1;fillColor=#B71C1C;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1139" y="205" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d1" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1163" y="167" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d2" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1171" y="187" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d3" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1181" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d4" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1191" y="203" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d5" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1201" y="187" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_m5d6" parent="1" style="ellipse;html=1;fillColor=#E65100;strokeColor=none;" value="" vertex="1">
+                    <mxGeometry height="6" width="6" x="1209" y="167" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_ml1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#2E7D32;" value="r = +1" vertex="1">
+                    <mxGeometry height="28" width="64" x="878" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_ml2" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#3A5F9E;" value="+0.85 (ours)" vertex="1">
+                    <mxGeometry height="28" width="64" x="948" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_ml3" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#757575;" value="≈ 0" vertex="1">
+                    <mxGeometry height="28" width="64" x="1018" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_ml4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#B71C1C;" value="−0.85" vertex="1">
+                    <mxGeometry height="28" width="64" x="1088" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_ml5" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#E65100;" value="U-shape: ≈ 0" vertex="1">
+                    <mxGeometry height="28" width="64" x="1158" y="223" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;" value="The U-shape is a perfect pattern, yet r ≈ 0: correlation only sees straight lines." vertex="1">
+                    <mxGeometry height="32" width="340" x="880" y="254" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_sysT" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Two systems traded half-and-half: combined swing" vertex="1">
+                    <mxGeometry height="20" width="340" x="880" y="298" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s1L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="r = +1" vertex="1">
+                    <mxGeometry height="20" width="120" x="880" y="324" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s1B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E57373;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=10;fontStyle=1;" value="100% (no help)" vertex="1">
+                    <mxGeometry height="20" width="200" x="1005" y="324" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s2L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="r = +0.5" vertex="1">
+                    <mxGeometry height="20" width="120" x="880" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s2B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=10;fontStyle=1;" value="87%" vertex="1">
+                    <mxGeometry height="20" width="173" x="1005" y="348" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s3L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="r = 0" vertex="1">
+                    <mxGeometry height="20" width="120" x="880" y="372" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s3B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=10;fontStyle=1;" value="71%" vertex="1">
+                    <mxGeometry height="20" width="141" x="1005" y="372" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s4L" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" value="r = −0.5" vertex="1">
+                    <mxGeometry height="20" width="120" x="880" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_s4B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=10;fontStyle=1;" value="50%" vertex="1">
+                    <mxGeometry height="20" width="100" x="1005" y="396" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_sysN" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontStyle=2;" value="Both systems have the same edge and the same swing. Lower correlation keeps the edge but smooths the ride." vertex="1">
+                    <mxGeometry height="34" width="340" x="880" y="422" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Trend score vs R: r = +0.85, so r² ≈ 72% of the scatter in R lines up with the score." vertex="1">
+                    <mxGeometry height="62" width="350" x="875" y="466" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Correlation isn&#39;t causation. And correlations between systems often jump toward +1 in market stress, just when you need diversification most." vertex="1">
+                    <mxGeometry height="165" width="350" x="875" y="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
+                    <mxGeometry height="660" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_h4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;" value="4 · INSIGHT" vertex="1">
+                    <mxGeometry height="44" width="380" x="1280" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_i1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Correlation r&lt;/b&gt; is a unit-free number from −1 to +1 for how tightly two things move together along a straight line." vertex="1">
+                    <mxGeometry height="85" width="350" x="1295" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_i2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Read r" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="237" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rSg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SIGN" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rSgT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="+ rise together; − one rises as the other falls" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="265" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rSz" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="SIZE" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rSzT" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Near ±1: tight. Near 0: no straight-line link" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="309" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rR2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#E65100;fontSize=11;fontStyle=1;" value="r²" vertex="1">
+                    <mxGeometry height="38" width="90" x="1295" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_rR2T" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=12;" value="Share of the scatter the line explains (0.85² ≈ 72%)" vertex="1">
+                    <mxGeometry height="38" width="253" x="1392" y="353" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_i3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Not causation, not slope" vertex="1">
+                    <mxGeometry height="22" width="350" x="1295" y="402" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_i3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=12;" value="r says how tight, not how steep, and never why. Slope = r × (spread of y ÷ spread of x)." vertex="1">
+                    <mxGeometry height="48" width="350" x="1295" y="427" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_i4" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=3;fontColor=#2E7D32;" value="Van Tharp-style: combine systems with low correlation to smooth the equity curve without giving up edge." vertex="1">
+                    <mxGeometry height="58" width="350" x="1295" y="482" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_takeaway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" value="Correlation tells you how tightly two things move together, not why, and not by how much." vertex="1">
+                    <mxGeometry height="95" width="350" x="1295" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_next" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#5B8C46;" value="Next concept: Analysis of variance" vertex="1">
+                    <mxGeometry height="50" width="350" x="1295" y="655" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_e12" edge="1" parent="1" source="cr_p1" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="cr_p2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_e23" edge="1" parent="1" source="cr_p2" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="cr_p3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_e34" edge="1" parent="1" source="cr_p3" style="endArrow=block;endFill=1;html=1;strokeWidth=3;strokeColor=#666666;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="cr_p4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_notesTitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=16;fontStyle=1;" value="LESSON NOTES: the full explanation, for future reference" vertex="1">
+                    <mxGeometry height="34" width="1640" x="20" y="760" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n1h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="1 · Core idea" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n1b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Correlation (r)&lt;/b&gt; is a single number from −1 to +1 that measures how tightly two things move together along a straight line." vertex="1">
+                    <mxGeometry height="320" width="320" x="20" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n2h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="2 · Intuition" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The least-squares slope tells you how much R changes per point of trend score. But two journals can share the same slope while one hugs the line and the other scatters wildly.&lt;br&gt;&lt;br&gt;We also want a measure that doesn&#39;t depend on units (score points, R, dollars). Correlation standardizes both variables and asks: do they rise and fall together, and how consistently?" vertex="1">
+                    <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: rectangles from the center" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Draw a cross at the two averages. Each trade forms a rectangle with the center of the cross.&lt;br&gt;• Top-right or bottom-left (both above or both below average): &lt;b&gt;green&lt;/b&gt;, they agree&lt;br&gt;• Top-left or bottom-right: &lt;b&gt;red&lt;/b&gt;, they disagree&lt;br&gt;&lt;br&gt;&lt;b&gt;compare the green area with the red area&lt;/b&gt;. Here: 21.0 green vs 0.5 red, strongly positive. Rescaled so a perfect line scores ±1, that&#39;s r = +0.85." vertex="1">
+                    <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: study hours and scores" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Hours studied vs test score for 4 students:&lt;br&gt;&lt;br&gt;(1, 60), (2, 70), (3, 80), (4, 90): every point on one line, &lt;b&gt;r = +1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Swap two scores: (1, 70), (2, 60), (3, 90), (4, 80): still rising, less tight, &lt;b&gt;r = +0.6&lt;/b&gt;&lt;br&gt;&lt;br&gt;Reverse the original scores: &lt;b&gt;r = −1&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="320" width="320" x="1010" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n5h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="5 · Trading analogy" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="805" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Inside one system:&lt;/b&gt; trend score vs R has r = +0.85, so r² ≈ 72% of the scatter in R lines up with the score.&lt;br&gt;&lt;br&gt;&lt;b&gt;Between systems:&lt;/b&gt; two systems with the same edge and the same swing, traded half-and-half. Combined swing vs one system alone:&lt;br&gt;r = +1 → 100% · r = +0.5 → 87% · r = 0 → 71% · r = −0.5 → 50%&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: the same expectancy with a smoother ride, by combining weakly correlated systems." vertex="1">
+                    <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the cloud changes?" vertex="1">
+                    <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Tighter cloud:&lt;/b&gt; r moves toward ±1.&lt;br&gt;&lt;b&gt;Steeper line, same tightness:&lt;/b&gt; r is unchanged.&lt;br&gt;&lt;b&gt;Change units&lt;/b&gt; (R → dollars): r is unchanged.&lt;br&gt;&lt;b&gt;Curved pattern&lt;/b&gt; (U-shape): r ≈ 0 despite a perfect relationship.&lt;br&gt;&lt;b&gt;One outlier:&lt;/b&gt; can push r up or down a lot in small samples.&lt;br&gt;&lt;b&gt;Lower correlation between systems:&lt;/b&gt; smoother combined equity, same edge." vertex="1">
+                    <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;correlation means causation&#39;" vertex="1">
+                    <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Correlation means causation.&#39;&lt;/b&gt; Ice-cream sales and drownings correlate because summer drives both. A high trend score and good R could both come from the market regime.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;r = 0 means unrelated.&#39;&lt;/b&gt; It only means no &lt;i&gt;straight-line&lt;/i&gt; link (see the U-shape).&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;High r means a big effect.&#39;&lt;/b&gt; r measures tightness, not steepness.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Low correlation is permanent.&#39;&lt;/b&gt; Correlations between systems often rise in market stress." vertex="1">
+                    <mxGeometry height="330" width="320" x="350" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
+                    <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;r = Σ(x − x̄)(y − ȳ) ÷ √[Σ(x − x̄)² × Σ(y − ȳ)²]&lt;/b&gt;&lt;br&gt;Here: 20.5 ÷ √(42 × 13.875) = 20.5 ÷ 24.1 ≈ 0.85&lt;br&gt;&lt;br&gt;&lt;b&gt;r² = 1 − (squared miss of the line ÷ squared miss of the flat average)&lt;/b&gt;&lt;br&gt;= 1 − 3.87 ÷ 13.88 ≈ 0.72&lt;br&gt;&lt;br&gt;Slope = r × SD(y) ÷ SD(x) = 0.85 × 0.57 ≈ 0.49&lt;br&gt;&lt;br&gt;Two systems with equal SD σ, half each:&lt;br&gt;combined SD = σ × √((1 + r) ÷ 2)" vertex="1">
+                    <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
+                    <mxGeometry height="32" width="320" x="1010" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n9b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Left to right:&lt;br&gt;&lt;br&gt;&lt;b&gt;1 Observation:&lt;/b&gt; two journals with the same slope but very different scatter.&lt;br&gt;&lt;br&gt;&lt;b&gt;2 Intuition:&lt;/b&gt; a cross at the averages; green (agree) and red (disagree) rectangles.&lt;br&gt;&lt;br&gt;&lt;b&gt;3 Experiment:&lt;/b&gt; scatter shapes from +1 to −1 plus a U-shape; how correlation between two systems changes the combined swing.&lt;br&gt;&lt;br&gt;&lt;b&gt;4 Insight:&lt;/b&gt; sign, size, r²; not causation, not slope; the takeaway." vertex="1">
+                    <mxGeometry height="330" width="320" x="1010" y="1204" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n10h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="10 · Takeaway" vertex="1">
+                    <mxGeometry height="32" width="320" x="1340" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr_n10b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;align=center;verticalAlign=middle;spacing=16;fontSize=17;fontStyle=1;fontColor=#1B5E20;" value="Correlation tells you how tightly two things move together, not why, and not by how much." vertex="1">
+                    <mxGeometry height="330" width="320" x="1340" y="1204" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
