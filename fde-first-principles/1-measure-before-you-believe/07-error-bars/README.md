@@ -1,7 +1,7 @@
 # Day 7 · Why 30 test cases can lie: error bars
 
 <!-- learn:status -->
-**Status:** ⏳ open · attempt 3 · dropped 2026-10-28 · ship by Thu 29 Oct, 05:00 · project 1, step 7
+**Status:** ✅ shipped · attempt 3 · dropped 2026-10-28 · ship by Thu 29 Oct, 05:00 · shipped 2026-10-28 05:29 · project 1, step 7
 <!-- /learn:status -->
 
 > **First-principles question:** How big must a difference be before you believe it?
@@ -65,5 +65,5 @@ Until then, if version B scores a few points higher than version A, treat it as 
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/K7KUVnZvZM4)
 <!-- /learn:video -->
