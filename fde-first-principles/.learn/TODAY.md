@@ -1,12 +1,14 @@
 # Today · Day 7 of 66: Why 30 test cases can lie: error bars
 
-**Ship by Tue 27 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/07-error-bars](../1-measure-before-you-believe/07-error-bars/README.md)
+**Ship by Wed 28 Oct, 05:00** · folder: [1-measure-before-you-believe/07-error-bars](../1-measure-before-you-believe/07-error-bars/README.md)
 
 > **First-principles question:** How big must a difference be before you believe it?
 
 **Why it matters for an FDE:** Customers will ask 'is the new version better?'. With small test sets the honest answer is often 'we can't tell yet'.
 
-**Time:** about 140 minutes, over 2 mornings
+**Time:** minimum scope, 1 morning (about 140 minutes for the full topic)
+
+**Attempt 2: minimum scope.** Ship at least this: The simulation histogram and one sentence about it.
 
 ### 1 · Learn (about 30 minutes)
 - [A statistical approach to model evaluations (Anthropic)](https://www.anthropic.com/research/statistical-approach-to-model-evals) · 10 min. Read the introduction and Recommendation #1 only. Don't worry about the formulas: today's notebook builds them by simulation.
