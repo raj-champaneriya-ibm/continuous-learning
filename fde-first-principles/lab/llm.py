@@ -33,7 +33,7 @@ import requests
 
 OLLAMA = "http://localhost:11434"
 CHAT_MODEL = "qwen3:4b"          # Mac with 8 GB of memory? use "llama3.2:3b"
-EMBED_MODEL = "embeddinggemma"
+EMBED_MODEL = "embeddinggemma"   # rubric and recall@3 check: 06-one-llm-call/notebook.ipynb, step 2b
 CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "cache"
 ENV_FILE = Path(__file__).resolve().parent.parent / ".env"     # git-ignored: never commit a key
 API_PREFIX = "api:"
