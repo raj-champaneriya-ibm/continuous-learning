@@ -1,7 +1,7 @@
 # Day 8 · Version C: an agent loop from scratch
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-28 · ship by Fri 30 Oct, 05:00 · project 1, step 8
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-28 · ship by Fri 30 Oct, 05:00 · project 1, step 8
 <!-- /learn:status -->
 
 > **First-principles question:** What is an 'agent', really, once you remove the framework?

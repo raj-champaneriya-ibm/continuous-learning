@@ -1,6 +1,6 @@
 # Today · Day 8 of 66: Version C: an agent loop from scratch
 
-**Ship by Fri 30 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/08-agent-loop-from-scratch](../1-measure-before-you-believe/08-agent-loop-from-scratch/README.md)
+**Ship by Fri 30 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/08-agent-loop-from-scratch](../1-measure-before-you-believe/08-agent-loop-from-scratch/README.md)
 
 > **First-principles question:** What is an 'agent', really, once you remove the framework?
 
