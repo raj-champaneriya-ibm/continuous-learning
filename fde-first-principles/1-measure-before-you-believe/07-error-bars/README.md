@@ -1,7 +1,7 @@
 # Day 7 · Why 30 test cases can lie: error bars
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-24 · ship by Tue 27 Oct, 05:00 · project 1, step 7
+**Status:** ✅ shipped · attempt 3 · dropped 2026-10-28 · ship by Thu 29 Oct, 05:00 · shipped 2026-10-28 05:29 · project 1, step 7
 <!-- /learn:status -->
 
 > **First-principles question:** How big must a difference be before you believe it?
@@ -13,6 +13,7 @@
 ### 1 · Learn (about 30 minutes)
 - [A statistical approach to model evaluations (Anthropic)](https://www.anthropic.com/research/statistical-approach-to-model-evals) · 10 min. Read the introduction and Recommendation #1 only. Don't worry about the formulas: today's notebook builds them by simulation.
 - [Seeing Theory: Basic probability (Brown University)](https://seeing-theory.brown.edu/basic-probability/) · 10 min. Play with the coin flips. How often do 10 fair flips give 7 or more heads?
+- [Seeing Theory: Frequentist inference (Brown University)](https://seeing-theory.brown.edu/frequentist-inference/) · 10 min. The error-bar chapter: each sample gives a different estimate (the dartboard), and a confidence interval is the honest range around your guess. Local visual notes: `seeing-theory/04-frequentist-inference.drawio` — see "Point Estimation" (dartboard: bias vs scatter, scatter shrinks like 1/√n) and "Confidence Intervals" (estimate ± margin, the ring that catches the truth 19 times in 20).
 
 **Maths you need today: Standard error and a 95% range.** If a system is right with probability p, a test of n cases wobbles by about √(p × (1 − p) ÷ n). About 95% of the time the truth is within 2 wobbles of what you measured.
 
@@ -64,5 +65,5 @@ Until then, if version B scores a few points higher than version A, treat it as 
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/K7KUVnZvZM4)
 <!-- /learn:video -->
