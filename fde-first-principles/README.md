@@ -28,6 +28,7 @@ The daily drop, deadlines and this table are managed by
 | 7 | 2026-10-24 | [Why 30 test cases can lie: error bars](1-measure-before-you-believe/07-error-bars/README.md) |  | ❌ missed |
 | 7 | 2026-10-27 | [Why 30 test cases can lie: error bars](1-measure-before-you-believe/07-error-bars/README.md) (attempt 2) |  | ❌ missed |
 | 7 | 2026-10-28 | [Why 30 test cases can lie: error bars](1-measure-before-you-believe/07-error-bars/README.md) (attempt 3) | [▶](https://youtu.be/K7KUVnZvZM4) | ✅ shipped |
+| 8 | 2026-10-28 | [Version C: an agent loop from scratch](1-measure-before-you-believe/08-agent-loop-from-scratch/README.md) |  | ⏳ open |
 
 **7 of 66 topics shipped.**
 <!-- /learn:progress -->

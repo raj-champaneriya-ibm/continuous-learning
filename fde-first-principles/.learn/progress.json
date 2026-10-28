@@ -3,19 +3,17 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-07",
-    "folder": "1-measure-before-you-believe/07-error-bars",
+    "topic_id": "p1-08",
+    "folder": "1-measure-before-you-believe/08-agent-loop-from-scratch",
     "dropped_on": "2026-10-28",
     "seen_on": "2026-10-28",
-    "deadline": "2026-10-29T05:00",
-    "attempt": 3,
-    "mornings": 1,
+    "deadline": "2026-10-30T05:00",
+    "attempt": 1,
+    "mornings": 2,
     "starter_hashes": {
-      "notebook.ipynb": "48d859408e7b8c26264702fbb01a5b24f654c3eed6f88e7c373d18bc4067b729"
-    },
-    "shipped_at": "2026-10-28T05:29",
-    "status": "shipped",
-    "video": "https://youtu.be/K7KUVnZvZM4"
+      "/lab/acme_tools.py": "5a88df246993ab08fb19430132046932a12aef4905f935b754f1eee7a8431823",
+      "notebook.ipynb": "76ab787dd6d136eabdbee2f69fbc44bad6399acec48a34f98a5a98869f8725bf"
+    }
   },
   "log": [
     {
