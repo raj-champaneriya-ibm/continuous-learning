@@ -1,7 +1,7 @@
 # Day 8 · Version C: an agent loop from scratch
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-28 · ship by Fri 30 Oct, 05:00 · project 1, step 8
+**Status:** ✅ shipped · dropped 2026-10-28 · ship by Fri 30 Oct, 05:00 · shipped 2026-10-29 08:13 · project 1, step 8
 <!-- /learn:status -->
 
 > **First-principles question:** What is an 'agent', really, once you remove the framework?
@@ -43,14 +43,11 @@ _Tempted to do more? Park it in `later.md`: Add a tool that changes data (issue_
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:**
-A simple agent that performs actions based on the knowledge and tool capabilities you configure for it.
+**For a beginner:** A simple agent that performs actions based on the knowledge and tool capabilities you configure for it.
 
-**For an engineer:**
-Derived from the ReAct pattern. The loop runs at most 6 steps, and the model decides which tool call is needed. `run_agent()` in the notebook holds the loop logic, `lab/llm.py` makes the model calls, and `lab/acme_tools.py` holds the tool definitions including their contracts.
+**For an engineer:** Derived from the ReAct pattern. The loop runs at most 6 steps, and the model decides which tool call is needed. `run_agent()` in the notebook holds the loop logic, `lab/llm.py` makes the model calls, and `lab/acme_tools.py` holds the tool definitions including their contracts.
 
-**For a customer:**
-The reply emails are more accurate now because the agent checks real account details and the knowledge base instead of guessing.
+**For a customer:** The reply emails are more accurate now because the agent checks real account details and the knowledge base instead of guessing.
 
 ## What surprised me
 
@@ -61,5 +58,5 @@ Even with a local small model doing the tool calls, the step counts were lower t
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/yXcNNqTxFW8)
 <!-- /learn:video -->

@@ -13,7 +13,10 @@
     "starter_hashes": {
       "/lab/acme_tools.py": "5a88df246993ab08fb19430132046932a12aef4905f935b754f1eee7a8431823",
       "notebook.ipynb": "76ab787dd6d136eabdbee2f69fbc44bad6399acec48a34f98a5a98869f8725bf"
-    }
+    },
+    "shipped_at": "2026-10-29T08:13",
+    "status": "shipped",
+    "video": "https://youtu.be/yXcNNqTxFW8"
   },
   "log": [
     {
@@ -118,6 +121,15 @@
       "status": "shipped",
       "shipped_at": "2026-10-28T05:29",
       "video": "https://youtu.be/K7KUVnZvZM4"
+    },
+    {
+      "topic_id": "p1-08",
+      "dropped_on": "2026-10-28",
+      "attempt": 1,
+      "mornings": 2,
+      "status": "shipped",
+      "shipped_at": "2026-10-29T08:13",
+      "video": "https://youtu.be/yXcNNqTxFW8"
     }
   ]
 }
