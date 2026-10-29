@@ -757,7 +757,7 @@ def server(input, output, session):
                             "must include": " | ".join(c["must_include"]),
                             "must not say": " | ".join(c["must_not"]),
                             "tags": ", ".join(c["tags"]), "expert check": c["expert_check"]} for c in LAB.cases])
-        return render.DataGrid(df, selection_mode="row", filters=True, height="360px", width="100%")
+        return render.DataGrid(df, selection_mode="row", filters=True, height="auto", width="100%")
 
     @reactive.calc
     def edit_case():
@@ -826,7 +826,7 @@ def server(input, output, session):
     def customers_grid():
         rows = [{k: ", ".join(map(str, c.get(k) or [])) if k == "payments_this_cycle" else c.get(k) for k in CUST_COLS}
                 for c in LAB.customers.values()]
-        return render.DataGrid(pd.DataFrame(rows), editable=True, width="100%")
+        return render.DataGrid(pd.DataFrame(rows), editable=True, height="auto", width="100%")
 
     @customers_grid.set_patch_fn
     def _(*, patch):
@@ -851,7 +851,7 @@ def server(input, output, session):
     def outages_grid():
         data_rev()
         return render.DataGrid(pd.DataFrame(LAB.outages, columns=OUT_COLS), editable=True, selection_mode="row",
-                               width="100%")
+                               height="auto", width="100%")
 
     @outages_grid.set_patch_fn
     def _(*, patch):
@@ -894,7 +894,7 @@ def server(input, output, session):
     def guards_grid():
         return render.DataGrid(pd.DataFrame([{"name": g["name"], "enabled": "yes" if g["enabled"] else "no",
                                               "pattern": g["pattern"]} for g in SETTINGS.workflow.guards]),
-                               editable=True, width="100%")
+                               editable=True, height="auto", width="100%")
 
     @guards_grid.set_patch_fn
     def _(*, patch):
