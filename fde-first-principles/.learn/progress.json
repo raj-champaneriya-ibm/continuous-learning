@@ -3,16 +3,17 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-08",
-    "folder": "1-measure-before-you-believe/08-agent-loop-from-scratch",
-    "dropped_on": "2026-10-28",
-    "seen_on": "2026-10-28",
-    "deadline": "2026-10-30T05:00",
+    "topic_id": "p1-09",
+    "folder": "1-measure-before-you-believe/09-success-cost-latency",
+    "dropped_on": "2026-10-29",
+    "seen_on": "2026-10-29",
+    "deadline": "2026-10-31T05:00",
     "attempt": 1,
     "mornings": 2,
     "starter_hashes": {
-      "/lab/acme_tools.py": "5a88df246993ab08fb19430132046932a12aef4905f935b754f1eee7a8431823",
-      "notebook.ipynb": "76ab787dd6d136eabdbee2f69fbc44bad6399acec48a34f98a5a98869f8725bf"
+      "/lab/agent.py": "532c7a35b13cacd6028986bb569a4cc83fa87bb8244688bcbbdca76d0fa7a5da",
+      "/lab/version_b.py": "59a6831efd0ae6dec91124352f1e05ea4e66538ae2fc8d2ae643d20aeebf78d4",
+      "notebook.ipynb": "953e92aaf241335b106eeba064e591569fce9d77abdd23cc02c7872abe82f4bf"
     }
   },
   "log": [
@@ -118,6 +119,15 @@
       "status": "shipped",
       "shipped_at": "2026-10-28T05:29",
       "video": "https://youtu.be/K7KUVnZvZM4"
+    },
+    {
+      "topic_id": "p1-08",
+      "dropped_on": "2026-10-28",
+      "attempt": 1,
+      "mornings": 2,
+      "status": "shipped",
+      "shipped_at": "2026-10-29T08:13",
+      "video": "https://youtu.be/yXcNNqTxFW8"
     }
   ]
 }
