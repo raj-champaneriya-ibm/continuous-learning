@@ -134,6 +134,10 @@ same `acme:Refund` concept the grader and the tools use.
 
 ## Implementation plan
 
+Status (2026-10-29): phases 1 and 2 are built: `data/acme/ontology.ttl`, `lab/ontology.py` (`glossary()`,
+`excluded_from_limit()`, `define()`) and `tests/features/ontology.feature`. Phase 0 (tag the failures) still
+decides whether phase 3 is worth running.
+
 Each phase has a gate. Stop at the first gate that fails and write down why; that is a valid result.
 
 ### Phase 0: Measure the problem (no new code)

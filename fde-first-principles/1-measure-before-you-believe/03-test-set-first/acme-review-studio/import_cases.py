@@ -1,7 +1,7 @@
 """Copy the Acme lab's new cases, customers and policy decisions into the studio workbook.
 
-Reads fde-first-principles/data/acme (cases_abuse.jsonl, cases_multiturn.jsonl, customers.json,
-policy.md) and adds only what the workbook doesn't have yet. Existing rows, expert columns and
+Reads fde-first-principles/data/acme (cases_abuse.jsonl, cases_multiturn.jsonl, cases_regional.jsonl,
+customers.json, policy.md) and adds only what the workbook doesn't have yet. Existing rows, expert columns and
 reviews are left alone, so it is safe to re-run after the jsonl files change.
 
     python import_cases.py
@@ -23,9 +23,10 @@ from acme.lab import CUSTOMER_HISTORY, _restore_chart
 ROOT = Path(__file__).parent
 XLSX = Path(os.environ.get("ACME_XLSX", ROOT / "data" / "Acme_Fibre_Grounded_Draft_Eval.xlsx"))
 LAB_DATA = ROOT.parents[2] / "data" / "acme"
-CASE_FILES = ["cases_abuse.jsonl", "cases_multiturn.jsonl"]
+CASE_FILES = ["cases_abuse.jsonl", "cases_multiturn.jsonl", "cases_regional.jsonl"]
 CASE_COLUMNS = ["history", "concession_allowed", "pair_id", "twin"]
-LANGUAGES = "English,Hinglish,Hindi (Devanagari),Marathi-English"
+LANGUAGES = ("English,Hinglish,Hindi (Devanagari),Marathi-English,Marathi (Devanagari),Gujarati,Tamil,Telugu,"
+             "Kannada,Malayalam,Punjabi (Gurmukhi),Mixed: English + Marathi,Mixed: Hinglish + Marathi")
 MANIPULATIVE = {"injection", "fake-policy", "fake-offer", "fake-code", "fake-memory", "forged-approval",
                 "insider-claim"}
 
