@@ -43,14 +43,18 @@ _Tempted to do more? Park it in `later.md`: Add a tool that changes data (issue_
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:**
+The primitive agent who perform actions based on configured knowledge and tools capabilities.
 
-**For an engineer:** …
+**For an engineer:**
+ Derived from Re-Act pattern. The tool call will step at max 6 times and model will help decide which tool call is required. llm.py has the orchastrator logic while acme_tools.py has the tools definitions including contract.
 
-**For a customer:** …
+**For a customer:**
+The reply emails are more accurate now as the agent is checking real account details and Knowledge Base, not guessing.
 
 ## What surprised me
-…
+
+As the setup is against local SML with tool call the step counts were lower than expected.
 
 ## How I used AI
 …
