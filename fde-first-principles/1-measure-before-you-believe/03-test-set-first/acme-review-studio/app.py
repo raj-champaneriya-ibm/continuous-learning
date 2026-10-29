@@ -333,7 +333,7 @@ def server(input, output, session):
     @render.ui
     def progress():
         data = round_data()
-        drafted = sum(1 for c in CASE_IDS if data.get(c, {}).get("decision"))
+        drafted = sum(1 for c in CASE_IDS if data.get(c, {}).get("reply") or data.get(c, {}).get("decision"))
         reviewed = sum(1 for c in CASE_IDS if data.get(c, {}).get("verdict"))
         pct = int(100 * reviewed / len(CASE_IDS))
         return ui.div(
