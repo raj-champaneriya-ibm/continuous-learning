@@ -1,7 +1,7 @@
 # Day 9 · Run all three: success, cost, latency
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-29 · ship by Sat 31 Oct, 05:00 · project 1, step 9
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-29 · ship by Sat 31 Oct, 05:00 · project 1, step 9
 <!-- /learn:status -->
 
 > **First-principles question:** Is the extra intelligence worth its price and its wait?

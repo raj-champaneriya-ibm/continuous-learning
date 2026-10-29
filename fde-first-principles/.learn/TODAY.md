@@ -1,6 +1,6 @@
 # Today · Day 9 of 66: Run all three: success, cost, latency
 
-**Ship by Sat 31 Oct, 05:00** · **morning 1 of 2** · folder: [1-measure-before-you-believe/09-success-cost-latency](../1-measure-before-you-believe/09-success-cost-latency/README.md)
+**Ship by Sat 31 Oct, 05:00** · **morning 2 of 2** · folder: [1-measure-before-you-believe/09-success-cost-latency](../1-measure-before-you-believe/09-success-cost-latency/README.md)
 
 > **First-principles question:** Is the extra intelligence worth its price and its wait?
 
