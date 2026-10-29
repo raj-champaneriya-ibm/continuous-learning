@@ -44,17 +44,17 @@ _Tempted to do more? Park it in `later.md`: Add a tool that changes data (issue_
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
 **For a beginner:**
-The primitive agent who perform actions based on configured knowledge and tools capabilities.
+A simple agent that performs actions based on the knowledge and tool capabilities you configure for it.
 
 **For an engineer:**
- Derived from Re-Act pattern. The tool call will step at max 6 times and model will help decide which tool call is required. llm.py has the orchastrator logic while acme_tools.py has the tools definitions including contract.
+Derived from the ReAct pattern. The loop runs at most 6 steps, and the model decides which tool call is needed. `run_agent()` in the notebook holds the loop logic, `lab/llm.py` makes the model calls, and `lab/acme_tools.py` holds the tool definitions including their contracts.
 
 **For a customer:**
-The reply emails are more accurate now as the agent is checking real account details and Knowledge Base, not guessing.
+The reply emails are more accurate now because the agent checks real account details and the knowledge base instead of guessing.
 
 ## What surprised me
 
-As the setup is against local SML with tool call the step counts were lower than expected.
+Even with a local small model doing the tool calls, the step counts were lower than I expected: 1–3 model calls per case out of the 6 allowed.
 
 ## How I used AI
 …
