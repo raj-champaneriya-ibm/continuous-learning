@@ -1,7 +1,7 @@
 # Day 9 · Run all three: success, cost, latency
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-29 · ship by Sat 31 Oct, 05:00 · project 1, step 9
+**Status:** ✅ shipped · dropped 2026-10-29 · ship by Sat 31 Oct, 05:00 · shipped 2026-10-31 04:33 · project 1, step 9
 <!-- /learn:status -->
 
 > **First-principles question:** Is the extra intelligence worth its price and its wait?
@@ -47,8 +47,7 @@ _Tempted to do more? Park it in `later.md`: Run the same table on a paid API wit
      in your video into text, but keep your own words. -->
 **For a beginner:** Every new feature adds cost and latency. Choosing which ones you are fine to live with — balancing time, cost and reply quality — is more of an art than a science.
 
-**For an engineer:** …
-The job is to present the facts to the client and let them decide how to proceed.
+**For an engineer:** The job is to present the facts to the client and let them decide how to proceed.
 
 **For a customer:** Highest priority is to work with someone with judgement to find a balance and accept an output appropriate to the brand's reputation.
 
@@ -60,5 +59,5 @@ How widely the data points can contradict each other — and that giving clarity
 
 ## Video
 <!-- learn:video -->
-_Added when you ship._
+[![Watch the video](video/thumbnail.png)](https://youtu.be/dsue_wyekpY)
 <!-- /learn:video -->
