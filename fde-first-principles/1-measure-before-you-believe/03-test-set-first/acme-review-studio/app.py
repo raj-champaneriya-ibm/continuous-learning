@@ -7,6 +7,7 @@ from __future__ import annotations
 import asyncio
 import html
 import os
+import re
 import sqlite3
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -309,6 +310,18 @@ def server(input, output, session):
     @reactive.event(input.pick_case)
     def _pick():
         current.set(input.pick_case())
+
+    # Deep link: /?case=c19 selects that case on the review tab (used by data/results/monitor.html).
+    deeplinked = reactive.value(False)
+
+    @reactive.effect
+    def _deeplink():
+        m = re.search(r"[?&]case=(c\d+)", input[".clientdata_url_search"]() or "")
+        if m and m.group(1) in CASE_IDS:
+            deeplinked.set(True)
+            current.set(m.group(1))
+            ui.update_radio_buttons("show", selected="all")
+            ui.update_navs("nav", selected="review")
 
     @reactive.effect
     @reactive.event(input.kbd)
@@ -618,6 +631,9 @@ def server(input, output, session):
     def _keep_current_visible():
         ids = visible_ids()
         with reactive.isolate():
+            if deeplinked():  # skip the first re-filter after a deep link; it would snap back to ids[0]
+                deeplinked.set(False)
+                return
             if ids and current() not in ids:
                 current.set(ids[0])
 
