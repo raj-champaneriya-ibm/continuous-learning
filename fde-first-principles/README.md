@@ -29,7 +29,8 @@ The daily drop, deadlines and this table are managed by
 | 7 | 2026-10-27 | [Why 30 test cases can lie: error bars](1-measure-before-you-believe/07-error-bars/README.md) (attempt 2) |  | ❌ missed |
 | 7 | 2026-10-28 | [Why 30 test cases can lie: error bars](1-measure-before-you-believe/07-error-bars/README.md) (attempt 3) | [▶](https://youtu.be/K7KUVnZvZM4) | ✅ shipped |
 | 8 | 2026-10-28 | [Version C: an agent loop from scratch](1-measure-before-you-believe/08-agent-loop-from-scratch/README.md) | [▶](https://youtu.be/yXcNNqTxFW8) | ✅ shipped |
-| 9 | 2026-10-29 | [Run all three: success, cost, latency](1-measure-before-you-believe/09-success-cost-latency/README.md) |  | ⏳ open |
+| 9 | 2026-10-29 | [Run all three: success, cost, latency](1-measure-before-you-believe/09-success-cost-latency/README.md) | [▶](https://youtu.be/dsue_wyekpY) | ✅ shipped |
+| 10 | 2026-10-30 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) |  | ⏳ open |
 
-**8 of 66 topics shipped.**
+**9 of 66 topics shipped.**
 <!-- /learn:progress -->

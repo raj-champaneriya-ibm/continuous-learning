@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="day9-success-cost-latency" name="Day 9 · Success, cost, latency">
-        <mxGraphModel dx="1212" dy="629" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1540" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="1507" dy="534" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1540" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -118,16 +118,16 @@
                 <mxCell id="lp95" parent="1" style="text;html=1;align=center;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=1;fontColor=#1D4ED8;" value="p95&lt;br&gt;rank 10" vertex="1">
                     <mxGeometry height="36" width="80" x="527" y="676" as="geometry"/>
                 </mxCell>
-                <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;Nearest rank:&lt;/b&gt; sort the times, take the one at rank q% of n (rounded up). It is always a real, observed time." vertex="1">
+                <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;Nearest rank:&lt;/b&gt; sort the times, take the value at rank q% of n" vertex="1">
                     <mxGeometry height="46" width="880" x="660" y="495" as="geometry"/>
                 </mxCell>
-                <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;Few cases decide the tail:&lt;/b&gt; with 84 emails, p95 is rank 80, so only 4 slow emails set it." vertex="1">
+                <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;Few cases decide the tail:&lt;/b&gt;&amp;nbsp;p95 is rank 80 of 84, the 4 slowest emails set it." vertex="1">
                     <mxGeometry height="46" width="880" x="660" y="551" as="geometry"/>
                 </mxCell>
-                <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#93C5FD;dashed=1;fontColor=#0B2545;" value="&lt;b&gt;Counted:&lt;/b&gt; model calls on this Mac. &lt;b&gt;Not counted:&lt;/b&gt; tool time, network to a cloud API, queues, cold start." vertex="1">
+                <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#93C5FD;dashed=1;fontColor=#0B2545;" value="&lt;b&gt;Counted:&lt;/b&gt; model calls on this Mac.&lt;div&gt;&lt;b&gt;Not counted:&lt;/b&gt; tool time, network, queues, cold start.&lt;/div&gt;" vertex="1">
                     <mxGeometry height="46" width="880" x="660" y="607" as="geometry"/>
                 </mxCell>
-                <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;For email,&lt;/b&gt; seconds decide capacity (1,200 emails a day on one machine), not customer happiness." vertex="1">
+                <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="&lt;b&gt;For email,&lt;/b&gt; seconds decide capacity (1,200 a day on one machine), not customer happiness." vertex="1">
                     <mxGeometry height="46" width="880" x="660" y="663" as="geometry"/>
                 </mxCell>
                 <mxCell id="p3" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#BFDBFE;strokeWidth=1.5;" value="" vertex="1">
@@ -268,7 +268,7 @@
                 <mxCell id="l4" parent="1" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="cache repeated prompts" vertex="1">
                     <mxGeometry height="44" width="235" x="801" y="1405" as="geometry"/>
                 </mxCell>
-                <mxCell id="l5" parent="1" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="send easy emails to rules (A)" vertex="1">
+                <mxCell id="l5" parent="1" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="send easy emails routed to rules&amp;nbsp;" vertex="1">
                     <mxGeometry height="44" width="235" x="1048" y="1405" as="geometry"/>
                 </mxCell>
                 <mxCell id="l6" parent="1" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontColor=#0B2545;" value="escalate less, only where safe" vertex="1">

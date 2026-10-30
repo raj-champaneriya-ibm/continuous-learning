@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acme Review Studio · Run C Monitor</title>
+<style>
+:root{--blue:#2563eb;--navy:#162139;--line:#dce5f1;--muted:#647795;--green:#007958;--red:#d80039;--amber:#9a6412}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;font-size:14px;background:#f3f6fb;color:#17233b;margin:0}
+.navbar{background:#fff;border-bottom:1px solid var(--line);padding:12px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.app-monogram{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--blue);color:#fff;border-radius:8px;font-size:16px;font-weight:700}
+.brand{color:var(--navy);font-weight:700;letter-spacing:-.4px}
+.brand .muted{font-weight:400}
+.muted{color:var(--muted);font-size:13px}
+#status{margin-left:auto;font-size:12px;color:var(--muted)}
+#status.live{color:var(--green)}
+main{max-width:1080px;margin:0 auto;padding:20px 24px 40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px #15243b05}
+.card .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#8498b5;font-weight:600}
+.card .v{font-size:24px;font-weight:700;color:var(--navy);margin-top:4px}
+.card .v small{font-size:12px;font-weight:400;color:var(--muted)}
+.progress-wrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.progress-head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.bar{height:8px;background:#eef2f7;border-radius:4px;overflow:hidden}
+.bar>div{height:100%;background:var(--blue);transition:width .4s}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#8498b5;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);background:#fff}
+td{padding:9px 12px;border-bottom:1px solid #eef2f7;font-size:13px}
+tr:last-child td{border-bottom:0}
+td.id{font-family:monospace;color:#647795}
+td.id a{color:#214ca5;text-decoration:none}
+td.id a:hover{text-decoration:underline}
+td.reply{max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4c5f7a}
+.chip{display:inline-block;padding:1px 7px;border-radius:3px;font-size:11px;background:#f1f5f9;color:#566b86;font-family:monospace}
+.chip.esc{color:var(--amber);background:#fdf3e1;border:1px solid #f3e0bd}
+.chip.intent{font-size:10px}
+td.num{font-variant-numeric:tabular-nums;color:#41526a}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:8px;vertical-align:1px}
+tr.done .dot{background:var(--green)}
+tr.pending td{color:#9aa8bd}
+tr.pending .dot{background:#cbd5e1}
+.footer-note{margin-top:12px}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <span class="app-monogram">A</span>
+  <span class="brand">Acme Review Studio <span class="muted">· Run C Monitor</span></span>
+  <span id="status">loading…</span>
+</nav>
+<main>
+  <div class="cards">
+    <div class="card"><div class="k">Cases done</div><div class="v" id="c-done">–</div></div>
+    <div class="card"><div class="k">Avg latency</div><div class="v" id="c-lat">–</div></div>
+    <div class="card"><div class="k">Avg tokens in / out</div><div class="v" id="c-tok">–</div></div>
+    <div class="card"><div class="k">Escalations</div><div class="v" id="c-esc">–</div></div>
+    <div class="card"><div class="k">Fastest / slowest</div><div class="v" id="c-range">–</div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-head"><span>progress</span><span id="pct">–</span></div>
+    <div class="bar"><div id="fill" style="width:0%"></div></div>
+  </div>
+  <table>
+    <thead><tr><th></th><th>case</th><th>intent</th><th>routing</th><th>steps</th><th>tok in</th><th>tok out</th><th>seconds</th><th>reply preview</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="footer-note muted">watching <code id="fname"></code> · refresh 3s · <a href="#" id="swap">switch file</a></div>
+</main>
+<script>
+const TOTAL = 84;
+const qs = new URLSearchParams(location.search);
+const FILE = qs.get('file') || 'C.jsonl';
+const STUDIO = qs.get('studio') || 'http://localhost:8000';
+document.getElementById('fname').textContent = FILE;
+document.getElementById('swap').onclick = e => {
+  e.preventDefault();
+  const f = prompt('jsonl file to watch (A, B or C)?', FILE.replace('.jsonl',''));
+  if (f) location.search = '?file=' + encodeURIComponent(f.replace(/\.jsonl$/,'') + '.jsonl');
+};
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => n == null ? '–' : (n >= 1000 ? (n/1000).toFixed(1) + 'k' : Math.round(n));
+let prevCount = -1;
+
+async function tick() {
+  const el = document.getElementById('status');
+  try {
+    const res = await fetch(FILE, {cache: 'no-store'});
+    if (!res.ok) throw new Error(res.status);
+    const text = await res.text();
+    const rows = text.trim().split('\n').filter(Boolean).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    render(rows);
+    el.textContent = 'live · ' + new Date().toLocaleTimeString();
+    el.className = 'live';
+    if (rows.length !== prevCount && prevCount >= 0 && document.hidden) document.title = '(' + rows.length + '/' + TOTAL + ') Run C Monitor';
+    prevCount = rows.length;
+  } catch (e) {
+    el.textContent = 'cannot read ' + FILE + ' — serve dir over http: python3 -m http.server';
+    el.className = '';
+  }
+}
+
+function render(rows) {
+  const byId = new Map(rows.map(r => [r.id, r]));
+  const ids = Array.from({length: TOTAL}, (_, i) => 'c' + String(i + 1).padStart(2, '0'));
+  const done = rows.length;
+  const secs = rows.map(r => r.seconds).filter(s => s != null);
+  const avgLat = secs.length ? secs.reduce((a, b) => a + b, 0) / secs.length : null;
+  const avgIn = rows.length ? rows.reduce((a, r) => a + (r.tokens_in || 0), 0) / rows.length : null;
+  const avgOut = rows.length ? rows.reduce((a, r) => a + (r.tokens_out || 0), 0) / rows.length : null;
+  const esc_n = rows.filter(r => r.needs_human).length;
+  const min = secs.length ? Math.min(...secs) : null, max = secs.length ? Math.max(...secs) : null;
+
+  document.getElementById('c-done').innerHTML = done + ' <small>/ ' + TOTAL + '</small>';
+  document.getElementById('c-lat').innerHTML = avgLat == null ? '–' : avgLat.toFixed(0) + '<small> s</small>';
+  document.getElementById('c-tok').innerHTML = avgIn == null ? '–' : fmt(avgIn) + ' / ' + fmt(avgOut);
+  document.getElementById('c-esc').innerHTML = esc_n + ' <small>needs_human</small>';
+  document.getElementById('c-range').innerHTML = min == null ? '–' : min.toFixed(0) + 's / ' + max.toFixed(0) + 's';
+  const pct = Math.round(done / TOTAL * 100);
+  document.getElementById('pct').textContent = done + ' of ' + TOTAL + ' (' + pct + '%)';
+  document.getElementById('fill').style.width = pct + '%';
+
+  document.getElementById('rows').innerHTML = ids.map(id => {
+    const r = byId.get(id);
+    if (!r) return '<tr class="pending"><td><span class="dot"></span></td><td class="id">' + id + '</td><td colspan="7" class="muted">pending…</td></tr>';
+    const routeChip = r.needs_human ? '<span class="chip esc">escalate</span>' : '<span class="chip">auto</span>';
+    return '<tr class="done"><td><span class="dot"></span></td><td class="id"><a href="' + esc(STUDIO) + '/?case=' + id + '" target="_blank" title="open in Acme Review Studio">' + id + '</a></td>' +
+      '<td><span class="chip intent">' + esc(r.intent || '?') + '</span></td>' +
+      '<td>' + routeChip + '</td>' +
+      '<td class="num">' + (r.steps ?? '–') + '</td>' +
+      '<td class="num">' + fmt(r.tokens_in) + '</td>' +
+      '<td class="num">' + fmt(r.tokens_out) + '</td>' +
+      '<td class="num">' + (r.seconds != null ? r.seconds.toFixed(1) : '–') + '</td>' +
+      '<td class="reply">' + esc(r.reply || '') + '</td></tr>';
+  }).join('');
+}
+
+tick();
+setInterval(tick, 3000);
+</script>
+</body>
+</html>
