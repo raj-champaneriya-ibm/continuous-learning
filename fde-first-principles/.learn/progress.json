@@ -3,21 +3,16 @@
   "track": "fde-first-principles",
   "started": "2026-10-14",
   "current": {
-    "topic_id": "p1-09",
-    "folder": "1-measure-before-you-believe/09-success-cost-latency",
-    "dropped_on": "2026-10-29",
+    "topic_id": "p1-10",
+    "folder": "1-measure-before-you-believe/10-read-the-failures",
+    "dropped_on": "2026-10-30",
     "seen_on": "2026-10-30",
-    "deadline": "2026-10-31T05:00",
+    "deadline": "2026-11-01T05:00",
     "attempt": 1,
     "mornings": 2,
     "starter_hashes": {
-      "/lab/agent.py": "532c7a35b13cacd6028986bb569a4cc83fa87bb8244688bcbbdca76d0fa7a5da",
-      "/lab/version_b.py": "59a6831efd0ae6dec91124352f1e05ea4e66538ae2fc8d2ae643d20aeebf78d4",
-      "notebook.ipynb": "953e92aaf241335b106eeba064e591569fce9d77abdd23cc02c7872abe82f4bf"
-    },
-    "shipped_at": "2026-10-31T04:33",
-    "status": "shipped",
-    "video": "https://youtu.be/dsue_wyekpY"
+      "notebook.ipynb": "0d6a1daa06c67e0df7db909905ae85c299259635f5c859b4a87f68d4088feac5"
+    }
   },
   "log": [
     {
