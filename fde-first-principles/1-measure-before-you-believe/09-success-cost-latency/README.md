@@ -45,14 +45,15 @@ _Tempted to do more? Park it in `later.md`: Run the same table on a paid API wit
 ## In my words
 <!-- Fill these in before you ship (plain, simple English is perfect). Claude can help you turn what you said
      in your video into text, but keep your own words. -->
-**For a beginner:** …
+**For a beginner:** Every new feature adds cost and latency. Choosing which ones you are fine to live with — balancing time, cost and reply quality — is more of an art than a science.
 
 **For an engineer:** …
+The job is to present the facts to the client and let them decide how to proceed.
 
-**For a customer:** …
+**For a customer:** Highest priority is to work with someone with judgement to find a balance and accept an output appropriate to the brand's reputation.
 
 ## What surprised me
-…
+How widely the data points can contradict each other — and that giving clarity without hiding facts is what helps a client make an informed decision.
 
 ## How I used AI
 …
