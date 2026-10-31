@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="ontology-explained" name="Ontology, explained">
-        <mxGraphModel dx="874" dy="440" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1840" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="1977" dy="930" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1840" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -17,7 +17,7 @@
                     <mxGeometry height="30" width="600" x="60" y="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="em" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Email from Varun, Kothrud&lt;/b&gt;&lt;br&gt;&lt;br&gt;&quot;Net is down again.&lt;br&gt;Give me a ₹300 credit for this.&quot;" vertex="1">
-                    <mxGeometry height="110" width="330" x="80" y="210" as="geometry"/>
+                    <mxGeometry height="110" width="330" x="80" y="228" as="geometry"/>
                 </mxCell>
                 <mxCell id="ag1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;fontColor=#000000;" value="Billing agent" vertex="1">
                     <mxGeometry height="56" width="200" x="500" y="175" as="geometry"/>
@@ -59,7 +59,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="p1n" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="Each agent is fluent, polite and confident. Technically they all work." vertex="1">
-                    <mxGeometry height="40" width="330" x="80" y="335" as="geometry"/>
+                    <mxGeometry height="40" width="330" x="80" y="353" as="geometry"/>
                 </mxCell>
                 <mxCell id="p2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;dashPattern=8 6;" value="" vertex="1">
                     <mxGeometry height="170" width="1520" x="40" y="480" as="geometry"/>
@@ -212,23 +212,25 @@
                     <mxGeometry height="30" width="600" x="60" y="1490" as="geometry"/>
                 </mxCell>
                 <mxCell id="k1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Meaning&lt;/b&gt; · what a word means&lt;br&gt;&lt;i&gt;the same for every customer&lt;/i&gt;&lt;br&gt;ontology.ttl" vertex="1">
-                    <mxGeometry height="100" width="420" x="80" y="1540" as="geometry"/>
+                    <mxGeometry height="100" width="420" x="80" y="1550" as="geometry"/>
                 </mxCell>
                 <mxCell id="k2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="&lt;b&gt;Facts&lt;/b&gt; · what is true for Varun&lt;br&gt;&lt;i&gt;Pro plan, Kothrud, ₹200 credited this month&lt;/i&gt;&lt;br&gt;customers.json" vertex="1">
-                    <mxGeometry height="100" width="420" x="617" y="1540" as="geometry"/>
+                    <mxGeometry height="100" width="420" x="617" y="1550" as="geometry"/>
                 </mxCell>
                 <mxCell id="kdec" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontStyle=1;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;span&gt;&lt;span style=&quot;color: light-dark(rgb(230, 230, 230), rgb(39, 39, 39));&quot;&gt;the agent decides&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-weight: normal; color: rgb(230, 230, 230);&quot;&gt;meaning + facts = answer&lt;/span&gt;&lt;/span&gt;" vertex="1">
-                    <mxGeometry height="100" width="300" x="1220" y="1540" as="geometry"/>
+                    <mxGeometry height="100" width="300" x="1220" y="1550" as="geometry"/>
                 </mxCell>
                 <mxCell id="kwall" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=2;fontColor=#000000;" value="never mixed&lt;br&gt;(no customer data&lt;br&gt;in the ontology)" vertex="1">
-                    <mxGeometry height="60" width="100" x="500" y="1560" as="geometry"/>
+                    <mxGeometry height="60" width="100" x="500" y="1570" as="geometry"/>
                 </mxCell>
-                <mxCell id="ek1" edge="1" parent="1" source="k1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="kdec">
+                <mxCell id="ek1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="290" y="1525"/>
                             <mxPoint x="1370" y="1525"/>
                         </Array>
+                        <mxPoint x="289.99999999999955" y="1550" as="sourcePoint"/>
+                        <mxPoint x="1370" y="1550" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="ek2" edge="1" parent="1" source="k2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;dashed=1;" target="kdec">
