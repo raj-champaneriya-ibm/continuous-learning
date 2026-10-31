@@ -1,0 +1,152 @@
+<mxfile host="drawio">
+    <diagram id="day6-embedding-compat" name="Day 6 · Chat model vs embedding model">
+        <mxGraphModel dx="1600" dy="1000" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1100" background="#0A0A0A" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+
+                <mxCell id="t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=28;fontStyle=1;fontColor=#F5F5F5;" value="Day 6 · Do the chat model and the embedding model need to be compatible?" vertex="1">
+                    <mxGeometry x="40" y="28" width="1360" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontColor=#FBBF24;" value="No. They never exchange vectors. They meet only through plain text." vertex="1">
+                    <mxGeometry x="40" y="72" width="1360" height="28" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="p1" parent="1" style="rounded=1;arcSize=2;html=1;fillColor=#111111;strokeColor=#262626;" value="" vertex="1">
+                    <mxGeometry x="40" y="125" width="1360" height="385" as="geometry"/>
+                </mxCell>
+                <mxCell id="p1t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontStyle=1;fontColor=#F5F5F5;" value="1 · How the two models connect" vertex="1">
+                    <mxGeometry x="60" y="138" width="600" height="28" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="zv" parent="1" style="rounded=1;arcSize=3;html=1;fillColor=none;strokeColor=#3F3F3F;dashed=1;dashPattern=4 4;" value="" vertex="1">
+                    <mxGeometry x="60" y="185" width="740" height="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="zvl" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=1;fontColor=#8A8A8A;" value="EMBEDDING MODEL · works in vectors" vertex="1">
+                    <mxGeometry x="76" y="196" width="400" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="zt" parent="1" style="rounded=1;arcSize=3;html=1;fillColor=none;strokeColor=#3F3F3F;dashed=1;dashPattern=4 4;" value="" vertex="1">
+                    <mxGeometry x="970" y="185" width="410" height="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="ztl" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=1;fontColor=#8A8A8A;" value="CHAT MODEL · works in text" vertex="1">
+                    <mxGeometry x="986" y="196" width="360" height="22" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="n_email" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="Customer email" vertex="1">
+                    <mxGeometry x="80" y="250" width="140" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_emb1" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;embeddinggemma&lt;/b&gt;&lt;br&gt;&lt;span style='color:#8A8A8A'&gt;email → vector&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="250" y="250" width="160" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_kb" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="16 help articles" vertex="1">
+                    <mxGeometry x="80" y="380" width="140" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_emb2" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;embeddinggemma&lt;/b&gt;&lt;br&gt;&lt;span style='color:#8A8A8A'&gt;article → vector&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="250" y="380" width="160" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_search" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;Similarity search&lt;/b&gt;&lt;br&gt;&lt;span style='color:#8A8A8A'&gt;cosine · top 3&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="450" y="315" width="170" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_lookup" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="Look up article&lt;br&gt;text by ID" vertex="1">
+                    <mxGeometry x="650" y="315" width="130" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_note_v" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=2;fontColor=#8A8A8A;" value="Vectors stay inside this box. The chat model never sees them." vertex="1">
+                    <mxGeometry x="450" y="450" width="340" height="24" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="n_handoff" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#FBBF24;strokeWidth=2;fontColor=#FBBF24;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;Plain text&lt;/b&gt;&lt;br&gt;the only handoff" vertex="1">
+                    <mxGeometry x="815" y="310" width="140" height="66" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="n_chat" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;qwen3:4b&lt;/b&gt;&lt;br&gt;&lt;span style='color:#8A8A8A'&gt;reads text only&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="990" y="310" width="160" height="66" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_out" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;JSON reply&lt;/b&gt;&lt;br&gt;&lt;span style='color:#8A8A8A'&gt;intent · reply · needs_human&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="1190" y="310" width="170" height="66" as="geometry"/>
+                </mxCell>
+                <mxCell id="n_note_t" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=2;fontColor=#8A8A8A;" value="Also in the prompt: system prompt, policy, account card and the email itself." vertex="1">
+                    <mxGeometry x="990" y="392" width="370" height="40" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="e1" parent="1" source="n_email" target="n_emb1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" parent="1" source="n_kb" target="n_emb2" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" parent="1" source="n_emb1" target="n_search" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" parent="1" source="n_emb2" target="n_search" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" parent="1" source="n_search" target="n_lookup" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" parent="1" source="n_lookup" target="n_handoff" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#FBBF24;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" parent="1" source="n_handoff" target="n_chat" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#FBBF24;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" parent="1" source="n_chat" target="n_out" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="p2" parent="1" style="rounded=1;arcSize=2;html=1;fillColor=#111111;strokeColor=#262626;" value="" vertex="1">
+                    <mxGeometry x="40" y="535" width="1360" height="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="p2t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontStyle=1;fontColor=#F5F5F5;" value="2 · What must match" vertex="1">
+                    <mxGeometry x="60" y="548" width="600" height="28" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="c1" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;" value="&lt;b style='color:#F5F5F5'&gt;Same embedding model for emails and articles&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vectors from different models, or versions, can't be compared. Mixing them fails silently.&lt;br&gt;&lt;br&gt;&lt;span style='color:#FBBF24'&gt;Safe today: the cache is keyed by model. Watch a saved index after changing EMBED_MODEL.&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="60" y="590" width="252" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="c2" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;" value="&lt;b style='color:#F5F5F5'&gt;Same input format on both sides&lt;/b&gt;&lt;br&gt;&lt;br&gt;embeddinggemma expects a short task label before each text. Add it to both sides or neither.&lt;br&gt;&lt;br&gt;&lt;span style='color:#FBBF24'&gt;Consistent today: no labels on either side.&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="324" y="590" width="252" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="c3" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;" value="&lt;b style='color:#F5F5F5'&gt;Both models handle Hinglish&lt;/b&gt;&lt;br&gt;&lt;br&gt;Search that misses an article can't be rescued by the chat model, and the reverse also fails.&lt;br&gt;&lt;br&gt;&lt;span style='color:#FBBF24'&gt;Check: Hinglish recall@3 in step 2b (14 of 84 emails).&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="588" y="590" width="252" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="c4" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;" value="&lt;b style='color:#F5F5F5'&gt;Fits the chat model's input limit&lt;/b&gt;&lt;br&gt;&lt;br&gt;Retrieved articles are added to the prompt. Ollama's default limit is small and chat() doesn't raise it.&lt;br&gt;&lt;br&gt;&lt;span style='color:#FBBF24'&gt;Fits today: policy + all articles ≈ 1,100 words.&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="852" y="590" width="252" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="c5" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;" value="&lt;b style='color:#F5F5F5'&gt;Both fit in memory together&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ollama keeps both models loaded at the same time.&lt;br&gt;&lt;br&gt;&lt;span style='color:#FBBF24'&gt;Small risk on an 8 GB Mac; a gate in the step 2b rubric.&lt;/span&gt;" vertex="1">
+                    <mxGeometry x="1116" y="590" width="252" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="nm" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontColor=#8A8A8A;" value="&lt;b style='color:#EDEDED'&gt;Doesn't need to match:&lt;/b&gt; model family, vendor, tokenizer or vector size. qwen3 for chat with Gemma for embeddings is fine." vertex="1">
+                    <mxGeometry x="60" y="786" width="1308" height="36" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="p3" parent="1" style="rounded=1;arcSize=2;html=1;fillColor=#111111;strokeColor=#262626;" value="" vertex="1">
+                    <mxGeometry x="40" y="865" width="1360" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="p3t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontStyle=1;fontColor=#F5F5F5;" value="3 · The real test is end to end" vertex="1">
+                    <mxGeometry x="60" y="878" width="600" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="r1" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="Version B + fixed articles (INTENT_KB)" vertex="1">
+                    <mxGeometry x="60" y="922" width="330" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="r2" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#3A3A3A;fontColor=#EDEDED;fontFamily=Helvetica;fontSize=13;" value="Version B + searched articles (top 3)" vertex="1">
+                    <mxGeometry x="60" y="986" width="330" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_gap" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=#FBBF24;strokeWidth=2;fontColor=#FBBF24;fontFamily=Helvetica;fontSize=13;" value="&lt;b&gt;Pass-rate gap&lt;/b&gt;&lt;br&gt;= what search costs you" vertex="1">
+                    <mxGeometry x="450" y="948" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="r_diag" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#161616;strokeColor=#2E2E2E;fontColor=#BDBDBD;fontFamily=Helvetica;fontSize=13;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;" value="&lt;b style='color:#F5F5F5'&gt;Read the gap with recall@3 from step 2b&lt;/b&gt;&lt;br&gt;&lt;br&gt;Low recall@3 → the embedding model misses articles. Fix search first.&lt;br&gt;High recall@3 but a big gap → the chat model struggles with searched context. Fix the prompt or the chat model." vertex="1">
+                    <mxGeometry x="710" y="922" width="658" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9" parent="1" source="r1" target="r_gap" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e10" parent="1" source="r2" target="r_gap" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e11" parent="1" source="r_gap" target="r_diag" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#6B6B6B;endArrow=block;endFill=1;endSize=6;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

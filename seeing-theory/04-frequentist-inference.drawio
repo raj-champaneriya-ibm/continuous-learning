@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="point-estimation" name="01 Point Estimation">
-        <mxGraphModel dx="1594" dy="2275" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1908" dy="1223" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -46,7 +46,7 @@
                 <mxCell id="e_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: the dartboard" vertex="1">
                     <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Bullseye = the hidden true value. Each dart = the estimate from one sample." vertex="1">
+                <mxCell id="e_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Bullseye = the truth. Each dart = one sample&#39;s guess." vertex="1">
                     <mxGeometry height="22" width="340" x="460" y="128" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_colL" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" value="LOW SCATTER" vertex="1">
@@ -343,13 +343,13 @@
                 <mxCell id="e_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="You never see inside the bag; you only see trades. Yet you need numbers: the true win rate, the true expectancy.&lt;br&gt;&lt;br&gt;A recipe turns your trades into a guess. Different recipes give different guesses from the same trades.&lt;br&gt;&lt;br&gt;Since you can&#39;t check a guess against the truth, you judge the &lt;i&gt;recipe&lt;/i&gt;: how its guesses would land across many possible samples." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the dartboard" vertex="1">
+                <mxCell id="e_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: the dartboard" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The bullseye is the hidden true value. Each dart is the estimate from one sample of trades.&lt;br&gt;&lt;br&gt;&lt;b&gt;sort the boards into a 2 × 2&lt;/b&gt;:&lt;br&gt;• on target and tight (the goal)&lt;br&gt;• on target but scattered (unbiased, noisy)&lt;br&gt;• off target but tight (biased, confident)&lt;br&gt;• off target and scattered (the worst)&lt;br&gt;&lt;br&gt;Bias = how far the cluster&#39;s center is from the bullseye. Variance = how spread out the cluster is." vertex="1">
                     <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: guessing a die&#39;s average" vertex="1">
+                <mxCell id="e_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a die&#39;s average" vertex="1">
                     <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A die&#39;s true average is 3.5. Four recipes using 5 rolls:&lt;br&gt;&lt;br&gt;&lt;b&gt;average of the 5 rolls:&lt;/b&gt; on target, fairly tight&lt;br&gt;&lt;b&gt;first roll only:&lt;/b&gt; on target, very scattered&lt;br&gt;&lt;b&gt;highest of the 5 rolls:&lt;/b&gt; always too high (biased)&lt;br&gt;&lt;b&gt;always say 3:&lt;/b&gt; zero scatter, but always off by 0.5&lt;br&gt;&lt;br&gt;Zero scatter is not the same as accurate." vertex="1">
@@ -361,13 +361,13 @@
                 <mxCell id="e_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="True expectancy +0.25R (SD 1.64R). Four recipes:&lt;br&gt;&lt;b&gt;A · average of 100 trades:&lt;/b&gt; on target; −0.08R to +0.58R&lt;br&gt;&lt;b&gt;B · average of last 10:&lt;/b&gt; on target; −0.79R to +1.29R&lt;br&gt;&lt;b&gt;C · best of 20 backtest settings (100 trades each, all truly +0.25R):&lt;/b&gt; lands around +0.56R&lt;br&gt;&lt;b&gt;D · best of 20 settings (10 trades each):&lt;/b&gt; around +1.22R&lt;br&gt;&lt;br&gt;Van Tharp warns about exactly this: optimizing over many settings flatters the backtest." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you change the recipe?" vertex="1">
+                <mxCell id="e_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the recipe" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades:&lt;/b&gt; scatter shrinks like 1/√n. From B to A (10 → 100 trades), the range narrows from 2.08R wide to 0.66R wide.&lt;br&gt;&lt;br&gt;&lt;b&gt;More settings tried:&lt;/b&gt; the &#39;best&#39; result drifts further above the truth. More trades per test reduce this bias, but never to zero while you keep picking the best.&lt;br&gt;&lt;br&gt;&lt;b&gt;Typical miss&lt;/b&gt; (bias and scatter combined): A ≈ 0.16R, C ≈ 0.32R, B ≈ 0.52R, D ≈ 1.01R." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;my estimate is the truth&#39;" vertex="1">
+                <mxCell id="e_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;My estimate is the truth.&#39;&lt;/b&gt; It is one dart. Another sample would give another number.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Unbiased means right.&#39;&lt;/b&gt; Unbiased means right &lt;i&gt;on average&lt;/i&gt; across samples. Recipe B is unbiased and still often misses by 0.5R or more.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;More data fixes everything.&#39;&lt;/b&gt; More data shrinks scatter. A biased recipe (dropping &#39;outlier&#39; losses, counting only remembered trades) stays biased no matter how many trades you add." vertex="1">
@@ -395,7 +395,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="confidence-intervals" name="02 Confidence Intervals">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -477,7 +477,7 @@
                 <mxCell id="i_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: ring toss" vertex="1">
                     <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="i_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Each sample throws a ring of the same width around its own guess." vertex="1">
+                <mxCell id="i_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=12;" value="Every sample throws an equal-width ring at its guess." vertex="1">
                     <mxGeometry height="20" width="340" x="460" y="128" as="geometry"/>
                 </mxCell>
                 <mxCell id="i_trueLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#E65100;" value="hidden true value +0.25R" vertex="1">
@@ -738,7 +738,7 @@
                 <mxCell id="i_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Your journal says +0.31R per trade. Another 100 trades from the same system could say +0.05R or +0.47R. A single number hides that.&lt;br&gt;&lt;br&gt;The central limit theorem told us how much averages wobble: about 2 × SD ÷ √n either way, 19 times in 20. A confidence interval puts that wobble around your estimate, so you can see what the truth could plausibly be." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="i_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: ring toss" vertex="1">
+                <mxCell id="i_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: ring toss" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="i_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The true value is a fixed peg you can&#39;t see. Each sample throws a ring of the same width, centered on its own guess. A 95% recipe makes rings that land around the peg 19 times in 20.&lt;br&gt;&lt;br&gt;Greg Tang move: &lt;b&gt;line up 20 rings and count the hits&lt;/b&gt;: 19 catch the peg, 1 misses. The peg never moves; the rings do." vertex="1">
@@ -756,13 +756,13 @@
                 <mxCell id="i_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="100 trades, average +0.31R, SD ≈ 1.64R:&lt;br&gt;SE = 1.64 ÷ √100 = 0.164R&lt;br&gt;95% interval: +0.31R ± 0.33R → &lt;b&gt;−0.02R to +0.64R&lt;/b&gt;&lt;br&gt;&lt;br&gt;Zero is (just) inside: the edge looks good but isn&#39;t proven.&lt;br&gt;&lt;br&gt;Same average after 400 trades: ± 0.16R → +0.15R to +0.47R. Now the whole range is above zero.&lt;br&gt;&lt;br&gt;Win rate: 45 of 100 → 35% to 55%." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="i_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                <mxCell id="i_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the dials" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="i_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades&lt;/b&gt; (95%):&lt;br&gt;30 → −0.29R to +0.91R&lt;br&gt;100 → −0.02R to +0.64R&lt;br&gt;400 → +0.15R to +0.47R&lt;br&gt;&lt;br&gt;&lt;b&gt;More confidence&lt;/b&gt; (100 trades):&lt;br&gt;80% → +0.10R to +0.52R (misses 1 in 5)&lt;br&gt;95% → −0.02R to +0.64R&lt;br&gt;99% → −0.11R to +0.73R&lt;br&gt;&lt;br&gt;&lt;b&gt;Bumpier system:&lt;/b&gt; double the SD and the interval doubles in width." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="i_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;95% chance it&#39;s in there&#39;" vertex="1">
+                <mxCell id="i_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="i_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;There&#39;s a 95% chance the truth is in my interval.&#39;&lt;/b&gt; Strictly, the truth is fixed and your interval either caught it or didn&#39;t. The 95% describes the recipe: it catches the truth in 19 of 20 samples.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;95% of my trades fall in the interval.&#39;&lt;/b&gt; No. The interval is for the &lt;i&gt;average&lt;/i&gt;. Single trades still range from −1R to +5R.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Narrower is always better.&#39;&lt;/b&gt; An 80% interval is narrower only because it misses more often." vertex="1">
@@ -790,7 +790,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="bootstrapping" name="03 Bootstrapping">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1162,7 +1162,7 @@
                 <mxCell id="b_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The confidence-interval formula covers the average. But traders care about results with no simple formula: worst drawdown, longest losing streak, profit factor.&lt;br&gt;&lt;br&gt;You can&#39;t rerun the market. But your 100 trades are the best picture you have of the bag. Draw new 100-trade journeys from them, score each journey, and the spread of the scores shows how much luck could move the result." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="b_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the journal is the bag" vertex="1">
+                <mxCell id="b_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: journal = the bag" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="b_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Van Tharp&#39;s marble game: write each trade&#39;s R on a marble and put all 100 in a bag.&lt;br&gt;&lt;br&gt;1. Draw a marble, note it, put it back.&lt;br&gt;2. Repeat 100 times: one new journey.&lt;br&gt;3. Score the journey.&lt;br&gt;Repeat the whole thing 1,000 times.&lt;br&gt;&lt;br&gt;&lt;b&gt;pile up the scores&lt;/b&gt;. The width of the pile is the wobble." vertex="1">
@@ -1180,13 +1180,13 @@
                 <mxCell id="b_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Journal: 46 × −1R, 23 × 0R, 26 × +2R, 5 × +5R (average +0.31R). Resampled 20,000 times as 100-trade journeys:&lt;br&gt;• average: 0.00R to +0.64R (middle 95%)&lt;br&gt;• worst drawdown: typically ≈ 8R; 1 journey in 20 hits 16R or deeper&lt;br&gt;• longest losing streak: typically 5; bad luck about 8&lt;br&gt;• all 100 trades losing money: about 2%&lt;br&gt;&lt;br&gt;Van Tharp sizes positions so the bad-luck drawdown is survivable." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="b_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                <mxCell id="b_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the dials" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="b_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Risk per trade:&lt;/b&gt; a 16R bad-luck drawdown costs ≈ 16% of the account at 1% risk per trade, ≈ 32% at 2%, ≈ 48% at 3%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Journey length:&lt;/b&gt; longer journeys (say 200 trades) allow deeper drawdowns and longer streaks, while the average&#39;s range narrows.&lt;br&gt;&lt;br&gt;&lt;b&gt;Number of resamples:&lt;/b&gt; more resamples make the pile smoother, but add no information. Only more real trades do." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="b_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;free new data&#39;" vertex="1">
+                <mxCell id="b_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="b_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Resampling creates new data.&#39;&lt;/b&gt; It only reshuffles what you have. 1,000 resamples of 20 trades are still only 20 trades of evidence.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;The bootstrap shows the worst case.&#39;&lt;/b&gt; It can&#39;t show a loss bigger than your journal&#39;s biggest, or a market you haven&#39;t traded.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Order doesn&#39;t matter.&#39;&lt;/b&gt; Simple resampling treats trades as independent. If losses cluster (same regime), real streaks and drawdowns can be worse." vertex="1">

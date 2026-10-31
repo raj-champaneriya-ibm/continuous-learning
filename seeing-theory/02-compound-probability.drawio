@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="set-theory" name="01 Set Theory">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1817" dy="1164" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -94,7 +94,7 @@
                 <mxCell id="s_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: circles in a box" vertex="1">
                     <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="s_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="The box = all 100 trades. Each tag draws a circle." vertex="1">
+                <mxCell id="s_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="The box = all 100 trades; each tag is a circle." vertex="1">
                     <mxGeometry height="24" width="340" x="460" y="132" as="geometry"/>
                 </mxCell>
                 <mxCell id="s_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;" value="" vertex="1">
@@ -316,7 +316,7 @@
                 <mxCell id="s_v2Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=10;" value="overlap 30&lt;br&gt;&lt;b&gt;OR = 55&lt;/b&gt;" vertex="1">
                     <mxGeometry height="32" width="110" x="992" y="583" as="geometry"/>
                 </mxCell>
-                <mxCell id="s_v3Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=10;" value="T inside W (overlap 40)&lt;br&gt;&lt;b&gt;OR = 45&lt;/b&gt;" vertex="1">
+                <mxCell id="s_v3Lbl" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=10;" value="T in W (overlap 40)&lt;br&gt;&lt;b&gt;OR = 45&lt;/b&gt;" vertex="1">
                     <mxGeometry height="32" width="125" x="1103" y="583" as="geometry"/>
                 </mxCell>
                 <mxCell id="s_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Bigger overlap → smaller OR count. Only when the circles don&#39;t touch can you simply add." vertex="1">
@@ -391,7 +391,7 @@
                 <mxCell id="s_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Real questions are compound: &lt;i&gt;a trend day AND a winner&lt;/i&gt;, &lt;i&gt;a winner OR a breakeven&lt;/i&gt;, &lt;i&gt;NOT a loss&lt;/i&gt;.&lt;br&gt;&lt;br&gt;Set theory gives a clean way to describe and combine those groups. Its main job is bookkeeping: making sure every outcome is counted exactly once.&lt;br&gt;&lt;br&gt;The classic error it prevents is double-counting the outcomes that belong to both groups." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="s_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: circles, then a four-box" vertex="1">
+                <mxCell id="s_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: circles → four-box" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="s_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Draw a box for everything that can happen (all 100 trades). Each tag draws a circle inside the box. Circles can overlap.&lt;br&gt;&lt;br&gt;unfold the circles into a &lt;b&gt;four-box&lt;/b&gt; (a 2 × 2 table):&lt;br&gt;trend · win = 30 &amp;nbsp; not trend · win = 15&lt;br&gt;trend · loss = 10 &amp;nbsp; not trend · loss = 45&lt;br&gt;&lt;br&gt;Every trade lives in exactly one box, so nothing can be counted twice." vertex="1">
@@ -409,13 +409,13 @@
                 <mxCell id="s_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Your journal is the box. Each tag (trend day, setup type, session, win) is a circle.&lt;br&gt;&lt;br&gt;100 trades: 40 on trend days, 45 winners, 30 both.&lt;br&gt;• trend AND win = 30&lt;br&gt;• trend OR win = 40 + 45 − 30 = 55&lt;br&gt;• NOT win = 55 losses&lt;br&gt;&lt;br&gt;Slice by AND and an edge appears: trend days win 30 of 40 (75%); other days win 15 of 60 (25%). Van Tharp-style improvement starts with this kind of slicing." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="s_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the overlap changes?" vertex="1">
+                <mxCell id="s_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the overlap" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="s_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Keep T = 40 and W = 45, and slide the circles:&lt;br&gt;&lt;br&gt;apart (overlap 0) → OR = 85&lt;br&gt;overlap 30 → OR = 55&lt;br&gt;T inside W (overlap 40) → OR = 45&lt;br&gt;&lt;br&gt;&lt;b&gt;Bigger overlap → smaller OR count.&lt;/b&gt; The overlap can never exceed the smaller group (40).&lt;br&gt;&lt;br&gt;Only when the circles don&#39;t touch (mutually exclusive events, like win vs loss on the same trade) can you simply add." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="s_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;OR means add&#39;" vertex="1">
+                <mxCell id="s_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="s_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;OR means add.&#39;&lt;/b&gt; Only if the groups don&#39;t overlap. Otherwise the shared outcomes are counted twice.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;OR means one or the other, not both.&#39;&lt;/b&gt; In everyday speech, maybe. In probability, OR includes both.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;AND can be bigger than either group.&#39;&lt;/b&gt; AND can only shrink: trend AND win (30) is smaller than trend (40) and smaller than win (45)." vertex="1">
@@ -443,7 +443,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="counting" name="02 Counting">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -861,7 +861,7 @@
                 <mxCell id="c_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="For one coin flip you can list the outcomes. For 10 trades there are 1,024 possible win/loss sequences; for 20 trades, over a million.&lt;br&gt;&lt;br&gt;Counting rules exist so you can answer &lt;i&gt;how many ways can this happen?&lt;/i&gt; without writing every case down.&lt;br&gt;&lt;br&gt;Once you know the number of ways, probability is a simple division." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the branching tree" vertex="1">
+                <mxCell id="c_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: the branching tree" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="c_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Each trade splits every path in two (W or L): 2 → 4 → 8 → … → 1,024 after 10 trades.&lt;br&gt;&lt;br&gt;&lt;b&gt;group the leaves&lt;/b&gt; by number of wins. For 3 trades the 8 paths form groups of 1 · 3 · 3 · 1; for 4 trades, 1 · 4 · 6 · 4 · 1.&lt;br&gt;&lt;br&gt;The groups pile up highest in the middle because there are more ways to mix wins and losses than to get all of one kind." vertex="1">
@@ -879,13 +879,13 @@
                 <mxCell id="c_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A 50% win-rate system gives you 3 wins in your last 10 trades. Broken?&lt;br&gt;&lt;br&gt;Count: 1,024 possible 10-trade sequences. Ways to get 3 wins or fewer: 1 + 10 + 45 + 120 = 176.&lt;br&gt;176 ÷ 1,024 ≈ &lt;b&gt;17%&lt;/b&gt;, about 1 stretch in 6.&lt;br&gt;&lt;br&gt;Van Tharp&#39;s point: bad stretches are built into every system. Count how often they should happen before you change anything." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you add trades?" vertex="1">
+                <mxCell id="c_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: more trades" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="c_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Paths double with each trade:&lt;/b&gt; 3 → 8, 4 → 16, 10 → 1,024, 20 → 1,048,576.&lt;br&gt;&lt;br&gt;&lt;b&gt;Any exact count gets less likely:&lt;/b&gt; exactly half wins is 6/16 = 37.5% at 4 trades but 252/1,024 ≈ 25% at 10 trades. Yet 4 to 6 wins out of 10 still covers ≈ 66%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Order matters:&lt;/b&gt; lining up 4 setups = 24 ways.&lt;br&gt;&lt;b&gt;Order doesn&#39;t:&lt;/b&gt; choosing 2 of 4 = 6 ways." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;streaks are rarer&#39;" vertex="1">
+                <mxCell id="c_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="c_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;WWWWWLLLLL is less likely than WLLWLWWLWL.&#39;&lt;/b&gt; Every exact sequence has the same chance: 1 in 1,024. The mixed one only &lt;i&gt;looks&lt;/i&gt; typical because mixed patterns make up most of the 252 ways to get 5 wins.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;The most likely result should usually happen.&#39;&lt;/b&gt; Exactly 5 wins in 10 is the most likely count, yet it happens only about 1 time in 4." vertex="1">
@@ -913,7 +913,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="conditional-probability" name="03 Conditional Probability">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1467" dy="940" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1016,7 +1016,7 @@
                 <mxCell id="k_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: spotlight one column" vertex="1">
                     <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="New information shrinks the box. Recount inside the smaller box." vertex="1">
+                <mxCell id="k_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="New info shrinks the box; recount inside it." vertex="1">
                     <mxGeometry height="26" width="340" x="460" y="132" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_fbC0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;" value="" vertex="1">
@@ -1217,7 +1217,7 @@
                 <mxCell id="k_t3a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Skipping 60 trades earned 15R more. The condition showed where the edge lives." vertex="1">
                     <mxGeometry height="65" width="350" x="875" y="540" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Only trust a condition you can know &lt;b&gt;before&lt;/b&gt; the trade, tested on enough trades (concept 1: the wobble)." vertex="1">
+                <mxCell id="k_t3warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Only trust a condition you can know &lt;b&gt;before&lt;/b&gt; the trade, tested on enough trades (Chance Events: the wobble)." vertex="1">
                     <mxGeometry height="90" width="350" x="875" y="617" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
@@ -1289,13 +1289,13 @@
                 <mxCell id="k_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Your system wins 45% of the time overall. But you never trade &#39;overall&#39;; you trade today, and today has features: trend or chop, news or quiet.&lt;br&gt;&lt;br&gt;New information shrinks the set of cases that matter. Conditional probability is the bookkeeping for that. It answers: &lt;i&gt;out of the trades like this one, how many won?&lt;/i&gt;" vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the spotlight" vertex="1">
+                <mxCell id="k_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: the spotlight" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Shine a spotlight on the trend-day column of the four-box and grey out the rest. That column becomes the whole box: 40 trades.&lt;br&gt;&lt;br&gt;&lt;b&gt;stretch the slice to fill the box&lt;/b&gt;. The trend-day bar (30 wins, 10 losses) is stretched to full width, so it reads 75% / 25%.&lt;br&gt;&lt;br&gt;Same 30 winners; new denominator (40 instead of 100)." vertex="1">
                     <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a die with a hint" vertex="1">
+                <mxCell id="k_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: a hinted die" vertex="1">
                     <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Roll a die. P(6) = 1 of 6.&lt;br&gt;&lt;br&gt;Told &#39;it&#39;s even&#39;: the box shrinks to {2, 4, 6}, so P(6 | even) = 1 of 3.&lt;br&gt;Told &#39;it&#39;s odd&#39;: the box is {1, 3, 5}, so P(6 | odd) = 0.&lt;br&gt;Told &#39;it&#39;s at least 2&#39;: {2, 3, 4, 5, 6}, so 1 of 5.&lt;br&gt;&lt;br&gt;The 6 never changed. The box around it did." vertex="1">
@@ -1307,13 +1307,13 @@
                 <mxCell id="k_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Wins +2R, losses −1R, 100 trades:&lt;br&gt;• every day: 45 wins → +35R (+0.35R per trade)&lt;br&gt;• trend days only: 30 of 40 win → +50R (+1.25R per trade)&lt;br&gt;• other days: 15 of 60 win → −15R (−0.25R per trade)&lt;br&gt;&lt;br&gt;Skipping 60 trades earns 15R more. That is Van Tharp-style incremental improvement: find a condition that changes the odds, then test it on enough trades." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the condition changes?" vertex="1">
+                <mxCell id="k_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the condition" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Change the condition:&lt;/b&gt; no condition 45%, trend day 75%, other day 25%.&lt;br&gt;&lt;br&gt;&lt;b&gt;Flip the question:&lt;/b&gt; P(win | trend) = 30 ÷ 40 = 75%, but P(trend | win) = 30 ÷ 45 ≈ 67%. Same overlap, different box.&lt;br&gt;&lt;br&gt;&lt;b&gt;If both columns had the same win rate&lt;/b&gt; (say 18 of 40 and 27 of 60, both 45%), the condition would tell you nothing. That is &lt;i&gt;independence&lt;/i&gt;, and the filter would be useless." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="k_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;flipping is fine&#39;" vertex="1">
+                <mxCell id="k_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="k_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;P(A | B) = P(B | A).&#39;&lt;/b&gt; &#39;90% of blown accounts used high leverage&#39; does not mean &#39;90% of high-leverage accounts blow up&#39;. The first divides by blown accounts; the second by leveraged accounts.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;A great slice is a great filter.&#39;&lt;/b&gt; A condition found by slicing past trades many ways may just be luck. The filter must be knowable before the trade and confirmed on fresh trades." vertex="1">

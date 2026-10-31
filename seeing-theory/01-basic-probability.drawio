@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="chance-events" name="01 Chance Events">
-        <mxGraphModel dx="1805" dy="847" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -298,7 +298,7 @@
                 <mxCell id="n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="You can&#39;t predict one coin flip or one trade. Look at a thousand of them and a steady pattern appears.&lt;br&gt;&lt;br&gt;Probability answers one question: &lt;i&gt;what can we reliably know about something that is unpredictable one event at a time?&lt;/i&gt;&lt;br&gt;&lt;br&gt;The answer is the pattern across many repeats. Single events are noise; the crowd of events is the signal." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the marble bag" vertex="1">
+                <mxCell id="n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: the marble bag" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Van Tharp&#39;s device: your system is a bag of 10 marbles, laid out as a ten-frame (Greg Tang grouping): &lt;b&gt;4 green&lt;/b&gt; (win) and &lt;b&gt;6 red&lt;/b&gt; (loss).&lt;br&gt;&lt;br&gt;&lt;b&gt;One trade&lt;/b&gt; = draw one marble, write W or L, put it back.&lt;br&gt;&lt;br&gt;The bag never changes and never remembers.&lt;br&gt;&lt;br&gt;Probability of a win = share of green in the bag = 4 of 10.&lt;br&gt;&lt;br&gt;&lt;i&gt;Catch: in real trading you never see inside the bag. You only see the draws.&lt;/i&gt;" vertex="1">
@@ -316,13 +316,13 @@
                 <mxCell id="n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Last 10 trades: W L L L L L W L W L. That&#39;s 3 wins and a streak of 5 losses. The urge: &lt;i&gt;&#39;the system is broken, change it.&#39;&lt;/i&gt;&lt;br&gt;&lt;br&gt;A true 40% bag easily gives anywhere from 1 to 7 wins in 10 draws, so 3 of 10 is ordinary. Changing the system now is reacting to noise.&lt;br&gt;&lt;br&gt;Van Tharp: judge a system on roughly 100 trades. Real improvement changes the bag, not your reaction to the last few draws." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you draw more?" vertex="1">
+                <mxCell id="n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: more draws" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Same 40% bag. Range of win rates you&#39;d see 19 times out of 20:&lt;br&gt;&lt;br&gt;10 trades → 10% to 70%&lt;br&gt;100 trades → 30% to 50%&lt;br&gt;1,000 trades → 37% to 43%&lt;br&gt;&lt;br&gt;The wobble shrinks slowly:&lt;br&gt;100 trades → ±10%&lt;br&gt;400 trades → ±5%&lt;br&gt;1,600 trades → ±2.5%&lt;br&gt;&lt;br&gt;&lt;b&gt;Halving the wobble costs 4× the trades.&lt;/b&gt;" vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;a win is due&#39;" vertex="1">
+                <mxCell id="n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="After 5 losses, the next trade is &lt;b&gt;not&lt;/b&gt; more likely to win. The marble went back in; the next draw is still 4 in 10.&lt;br&gt;&lt;br&gt;The law of averages doesn&#39;t correct streaks. It &lt;b&gt;drowns&lt;/b&gt; them: 5 losses + 95 ordinary trades ≈ 38 wins in 100 = 38%. Close to 40%, with no payback.&lt;br&gt;&lt;br&gt;Streaks are normal: at 40% wins, a run of 5+ losses shows up in almost every 100-trade stretch." vertex="1">
@@ -350,7 +350,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="expectation" name="02 Expectation">
-        <mxGraphModel dx="1651" dy="774" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -618,7 +618,7 @@
                 <mxCell id="x_t3a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;" value="Same win rate. Bigger winners turned a losing bag into a winning one." vertex="1">
                     <mxGeometry height="55" width="350" x="875" y="540" as="geometry"/>
                 </mxCell>
-                <mxCell id="x_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="The expectation only shows up over many trades. After just 10 trades, System B is still behind about 1 time in 7 (concept 1: the wobble)." vertex="1">
+                <mxCell id="x_t3b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="The expectation only shows up over many trades. After just 10 trades, System B is still behind about 1 time in 7 (Chance Events: the wobble)." vertex="1">
                     <mxGeometry height="100" width="350" x="875" y="610" as="geometry"/>
                 </mxCell>
                 <mxCell id="x_p4" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#F6FBF4;strokeColor=#82b366;strokeWidth=2;" value="" vertex="1">
@@ -687,7 +687,7 @@
                 <mxCell id="x_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Win rate tells you &lt;b&gt;how often&lt;/b&gt;. It says nothing about &lt;b&gt;how much&lt;/b&gt;.&lt;br&gt;&lt;br&gt;A system can win 90% of the time and still lose money; another can win 30% of the time and make plenty.&lt;br&gt;&lt;br&gt;Expectation fixes this by combining how often and how much into one number: the average payoff per trade in the long run." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="x_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: level the pile" vertex="1">
+                <mxCell id="x_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: level the pile" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="x_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Write a payoff on every marble. System B&#39;s bag: three +4R and seven −1R.&lt;br&gt;&lt;br&gt;&lt;div&gt;move, &lt;b&gt;cancel then share&lt;/b&gt;:&lt;br&gt;greens add to +12R, reds to −7R&lt;br&gt;cancel → +5R left over&lt;br&gt;share across 10 marbles → +0.5R each&lt;br&gt;&lt;br&gt;Picture stacks of coins of different heights. Level them until every stack is the same height. That height is the expectation.&lt;/div&gt;" vertex="1">
@@ -705,13 +705,13 @@
                 <mxCell id="x_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Van Tharp measures every result in &lt;b&gt;R&lt;/b&gt;, a multiple of what you risked. Expectancy is the average R per trade.&lt;br&gt;&lt;br&gt;&lt;b&gt;System A:&lt;/b&gt; 9 wins of +0.5R, 1 loss of −6R → −1.5R per 10 trades → &lt;b&gt;−0.15R per trade&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;System B:&lt;/b&gt; 3 wins of +4R, 7 losses of −1R → +5R per 10 trades → &lt;b&gt;+0.5R per trade&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Over 100 trades: A ≈ −15R, B ≈ +50R." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="x_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                <mxCell id="x_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the dials" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="x_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Win size&lt;/b&gt; (40% wins, −1R losses):&lt;br&gt;+1R → −0.2R · +1.5R → 0 (break-even)&lt;br&gt;+2R → +0.2R · +3R → +0.6R&lt;br&gt;&lt;br&gt;&lt;b&gt;Win rate&lt;/b&gt; (+2R wins, −1R losses):&lt;br&gt;20% → −0.4R · 30% → −0.1R&lt;br&gt;33% → ≈ 0 · 40% → +0.2R · 50% → +0.5R&lt;br&gt;&lt;br&gt;&lt;b&gt;Improving System B:&lt;/b&gt;&lt;br&gt;winners +4R → +5R: +0.5R → +0.8R&lt;br&gt;losses −1R → −0.5R: +0.5R → +0.85R" vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="x_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;high win rate = good&#39;" vertex="1">
+                <mxCell id="x_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="x_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="System A wins 90% of the time and still loses money: one big loss outweighs nine small wins.&lt;br&gt;&lt;br&gt;Second trap, the word &lt;i&gt;expected&lt;/i&gt;: B&#39;s next trade will be +4R or −1R, never +0.5R. Expectation describes the long run, not the next trade.&lt;br&gt;&lt;br&gt;And over just 10 trades, B still finishes behind about 1 time in 7." vertex="1">
@@ -720,7 +720,7 @@
                 <mxCell id="x_n8h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="8 · Minimal mathematics" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="1172" as="geometry"/>
                 </mxCell>
-                <mxCell id="x_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="For every kind of marble, multiply its value by its chance, then add:&lt;br&gt;&lt;br&gt;&lt;b&gt;E[X] = Σ value × P(value)&lt;/b&gt;&lt;br&gt;&lt;br&gt;System B:&lt;br&gt;0.3 × (+4R) + 0.7 × (−1R) = 1.2 − 0.7 = +0.5R&lt;br&gt;&lt;br&gt;Die:&lt;br&gt;(1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5&lt;br&gt;&lt;br&gt;Link to concept 1: the average of many trades settles on E[X]. This is the law of large numbers." vertex="1">
+                <mxCell id="x_n8b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="For every kind of marble, multiply its value by its chance, then add:&lt;br&gt;&lt;br&gt;&lt;b&gt;E[X] = Σ value × P(value)&lt;/b&gt;&lt;br&gt;&lt;br&gt;System B:&lt;br&gt;0.3 × (+4R) + 0.7 × (−1R) = 1.2 − 0.7 = +0.5R&lt;br&gt;&lt;br&gt;Die:&lt;br&gt;(1 + 2 + 3 + 4 + 5 + 6) ÷ 6 = 3.5&lt;br&gt;&lt;br&gt;Link to Chance Events: the average of many trades settles on E[X]. This is the law of large numbers." vertex="1">
                     <mxGeometry height="330" width="320" x="680" y="1204" as="geometry"/>
                 </mxCell>
                 <mxCell id="x_n9h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="9 · How to read the diagram above" vertex="1">
@@ -739,7 +739,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="variance" name="03 Variance">
-        <mxGraphModel dx="1252" dy="587" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1283,13 +1283,13 @@
                 <mxCell id="v_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Expectation tells you where you end up on average. It says nothing about the ride.&lt;br&gt;&lt;br&gt;Two systems can share the same expectancy and still feel completely different: one steady, one wild. The wild one brings deeper drawdowns and longer losing streaks, which is where traders quit or blow up.&lt;br&gt;&lt;br&gt;Variance puts a number on that bumpiness." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="v_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: strings and squares" vertex="1">
+                <mxCell id="v_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: strings → squares" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="v_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Tie every marble to the average line with a string. Short strings = steady; long strings = wild.&lt;br&gt;&lt;br&gt;Turn each string into a &lt;b&gt;square&lt;/b&gt; whose side is the string&#39;s length. The area of the average square is the &lt;b&gt;variance&lt;/b&gt;. The side of that average square is the &lt;b&gt;standard deviation (SD)&lt;/b&gt;, back in R.&lt;br&gt;&lt;br&gt;Steady: ten 1.5R strings.&lt;br&gt;Wild: nine 1.5R strings and one 13.5R string, whose giant square holds 90% of all the area." vertex="1">
                     <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="v_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: two routes to work" vertex="1">
+                <mxCell id="v_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: two routes" vertex="1">
                     <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="v_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Both routes average 30 minutes.&lt;br&gt;&lt;br&gt;Route 1: 28, 30, 32 min → strings 2, 0, 2&lt;br&gt;Route 2: 15, 30, 45 min → strings 15, 0, 15&lt;br&gt;&lt;br&gt;Squares: 4, 0, 4 vs 225, 0, 225&lt;br&gt;Average square: ≈ 2.7 vs 150&lt;br&gt;SD: ≈ 1.6 min vs ≈ 12.2 min&lt;br&gt;&lt;br&gt;Same average. Only Route 2 makes you late for the meeting." vertex="1">
@@ -1301,13 +1301,13 @@
                 <mxCell id="v_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Two bags, both +0.5R per trade:&lt;br&gt;&lt;b&gt;Steady:&lt;/b&gt; 5 × +2R, 5 × −1R&lt;br&gt;&lt;b&gt;Wild:&lt;/b&gt; 1 × +14R, 9 × −1R&lt;br&gt;&lt;br&gt;Over 100 trades both expect +50R, but:&lt;br&gt;• typical longest losing streak: Steady ≈ 6, Wild ≈ 20&lt;br&gt;• still losing after 100 trades: Steady almost never, Wild about 1 time in 8&lt;br&gt;&lt;br&gt;Van Tharp: the bumpier the system, the smaller the risk per trade must be to survive its drawdowns." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="v_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the payoff shape changes?" vertex="1">
+                <mxCell id="v_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: payoff shape" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
-                <mxCell id="v_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Keep expectancy at +0.5R and reshape the bag:&lt;br&gt;&lt;br&gt;5 × +2R / 5 × −1R → SD 1.5R&lt;br&gt;3 × +4R / 7 × −1R → SD 2.3R&lt;br&gt;1 × +14R / 9 × −1R → SD 4.5R&lt;br&gt;&lt;br&gt;&lt;b&gt;Fewer, bigger winners → same average, bumpier ride.&lt;/b&gt;&lt;br&gt;&lt;br&gt;More trades: the spread of the &lt;i&gt;total&lt;/i&gt; grows like √n (10 × SD after 100 trades), while the &lt;i&gt;average per trade&lt;/i&gt; settles down (concept 1)." vertex="1">
+                <mxCell id="v_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Keep expectancy at +0.5R and reshape the bag:&lt;br&gt;&lt;br&gt;5 × +2R / 5 × −1R → SD 1.5R&lt;br&gt;3 × +4R / 7 × −1R → SD 2.3R&lt;br&gt;1 × +14R / 9 × −1R → SD 4.5R&lt;br&gt;&lt;br&gt;&lt;b&gt;Fewer, bigger winners → same average, bumpier ride.&lt;/b&gt;&lt;br&gt;&lt;br&gt;More trades: the spread of the &lt;i&gt;total&lt;/i&gt; grows like √n (10 × SD after 100 trades), while the &lt;i&gt;average per trade&lt;/i&gt; settles down (Chance Events)." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="v_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;same average, same system&#39;" vertex="1">
+                <mxCell id="v_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="v_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Same expectancy = same system.&#39;&lt;/b&gt; No: the ride decides whether you can stick with it and how much you can risk.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Variance = bad.&#39;&lt;/b&gt; It counts big wins as much as big losses. In Wild, the +14R winner creates 90% of the variance. Variance measures bumpiness, not badness.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Variance is the average distance.&#39;&lt;/b&gt; It is the average &lt;i&gt;squared&lt;/i&gt; distance. SD brings it back to R units." vertex="1">

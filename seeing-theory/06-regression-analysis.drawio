@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="least-squares" name="01 Least Squares">
-        <mxGraphModel dx="2953" dy="1534" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1387" dy="889" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -391,7 +391,7 @@
                 <mxCell id="o_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="You suspect stronger trends give better trades. The scatter plot roughly agrees, but every eye draws a slightly different line.&lt;br&gt;&lt;br&gt;Least squares replaces eyeballing with a rule: measure how far each point misses the line, square those misses, add them up, and choose the line with the smallest total.&lt;br&gt;&lt;br&gt;Squaring keeps misses positive and punishes big misses more than small ones." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="o_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: sticks and squares" vertex="1">
+                <mxCell id="o_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: sticks and squares" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="o_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Hang a vertical stick from each point to the line. Turn each stick into a square.&lt;br&gt;&lt;br&gt;&lt;b&gt;tilt and slide the line until the total square area is as small as it can be&lt;/b&gt;. That position is the least-squares line.&lt;br&gt;&lt;br&gt;It&#39;s the Variance tab&#39;s &#39;strings into squares&#39;, with a sloping line instead of a flat average." vertex="1">
@@ -409,13 +409,13 @@
                 <mxCell id="o_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="8 trades: trend score at entry vs R.&lt;br&gt;Least-squares line: &lt;b&gt;R ≈ −1.57 + 0.49 × score&lt;/b&gt;&lt;br&gt;• each extra point of score adds about +0.5R on average&lt;br&gt;• the line crosses 0R at a score of about 3.2&lt;br&gt;• total squared miss 3.9, vs 13.9 for &#39;every trade is the average +0.63R&#39;&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: the slope suggests a filter (only take scores of 4 or more). Treat it as a hypothesis and test it on new trades; 8 trades is a tiny sample." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="o_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you move the line?" vertex="1">
+                <mxCell id="o_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the line" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="o_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Tilt the line&lt;/b&gt; (total squared miss): flat 13.9 · too shallow 6.3 · least squares 3.9 · too steep 14.9.&lt;br&gt;&lt;br&gt;&lt;b&gt;Add one +8R outlier:&lt;/b&gt; at score 2 the slope drops from 0.49 to 0.09; at score 8 it jumps to 0.82. One trade can erase or exaggerate the trend.&lt;br&gt;&lt;br&gt;&lt;b&gt;More trades:&lt;/b&gt; the slope estimate steadies; its wobble shrinks like 1/√n." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="o_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;the line predicts each trade&#39;" vertex="1">
+                <mxCell id="o_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="o_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The line predicts each trade.&#39;&lt;/b&gt; It predicts the average. Individual trades still miss by up to about 0.9R here.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;A slope proves the score causes better trades.&#39;&lt;/b&gt; It shows they move together in this sample. Something else could drive both.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Extend the line anywhere.&#39;&lt;/b&gt; A score of 20 was never seen; the line says nothing reliable there.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Outliers don&#39;t matter.&#39;&lt;/b&gt; Squaring makes them matter a lot." vertex="1">
@@ -443,7 +443,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="correlation" name="02 Correlation">
-        <mxGraphModel dx="566" dy="477" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1861" dy="1193" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -867,13 +867,13 @@
                 <mxCell id="cr_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="The least-squares slope tells you how much R changes per point of trend score. But two journals can share the same slope while one hugs the line and the other scatters wildly.&lt;br&gt;&lt;br&gt;We also want a measure that doesn&#39;t depend on units (score points, R, dollars). Correlation standardizes both variables and asks: do they rise and fall together, and how consistently?" vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="cr_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: rectangles from the center" vertex="1">
+                <mxCell id="cr_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: rectangles" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="cr_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Draw a cross at the two averages. Each trade forms a rectangle with the center of the cross.&lt;br&gt;• Top-right or bottom-left (both above or both below average): &lt;b&gt;green&lt;/b&gt;, they agree&lt;br&gt;• Top-left or bottom-right: &lt;b&gt;red&lt;/b&gt;, they disagree&lt;br&gt;&lt;br&gt;&lt;b&gt;compare the green area with the red area&lt;/b&gt;. Here: 21.0 green vs 0.5 red, strongly positive. Rescaled so a perfect line scores ±1, that&#39;s r = +0.85." vertex="1">
                     <mxGeometry height="320" width="320" x="680" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="cr_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: study hours and scores" vertex="1">
+                <mxCell id="cr_n4h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="4 · Simple example: study hours" vertex="1">
                     <mxGeometry height="32" width="320" x="1010" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="cr_n4b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Hours studied vs test score for 4 students:&lt;br&gt;&lt;br&gt;(1, 60), (2, 70), (3, 80), (4, 90): every point on one line, &lt;b&gt;r = +1&lt;/b&gt;&lt;br&gt;&lt;br&gt;Swap two scores: (1, 70), (2, 60), (3, 90), (4, 80): still rising, less tight, &lt;b&gt;r = +0.6&lt;/b&gt;&lt;br&gt;&lt;br&gt;Reverse the original scores: &lt;b&gt;r = −1&lt;/b&gt;" vertex="1">
@@ -885,13 +885,13 @@
                 <mxCell id="cr_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Inside one system:&lt;/b&gt; trend score vs R has r = +0.85, so r² ≈ 72% of the scatter in R lines up with the score.&lt;br&gt;&lt;br&gt;&lt;b&gt;Between systems:&lt;/b&gt; two systems with the same edge and the same swing, traded half-and-half. Combined swing vs one system alone:&lt;br&gt;r = +1 → 100% · r = +0.5 → 87% · r = 0 → 71% · r = −0.5 → 50%&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: the same expectancy with a smoother ride, by combining weakly correlated systems." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="cr_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the cloud changes?" vertex="1">
+                <mxCell id="cr_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the cloud" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="cr_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Tighter cloud:&lt;/b&gt; r moves toward ±1.&lt;br&gt;&lt;b&gt;Steeper line, same tightness:&lt;/b&gt; r is unchanged.&lt;br&gt;&lt;b&gt;Change units&lt;/b&gt; (R → dollars): r is unchanged.&lt;br&gt;&lt;b&gt;Curved pattern&lt;/b&gt; (U-shape): r ≈ 0 despite a perfect relationship.&lt;br&gt;&lt;b&gt;One outlier:&lt;/b&gt; can push r up or down a lot in small samples.&lt;br&gt;&lt;b&gt;Lower correlation between systems:&lt;/b&gt; smoother combined equity, same edge." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="cr_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;correlation means causation&#39;" vertex="1">
+                <mxCell id="cr_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="cr_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Correlation means causation.&#39;&lt;/b&gt; Ice-cream sales and drownings correlate because summer drives both. A high trend score and good R could both come from the market regime.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;r = 0 means unrelated.&#39;&lt;/b&gt; It only means no &lt;i&gt;straight-line&lt;/i&gt; link (see the U-shape).&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;High r means a big effect.&#39;&lt;/b&gt; r measures tightness, not steepness.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Low correlation is permanent.&#39;&lt;/b&gt; Correlations between systems often rise in market stress." vertex="1">
@@ -919,7 +919,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="analysis-of-variance" name="03 Analysis of Variance">
-        <mxGraphModel dx="964" dy="501" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1122" dy="719" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1001,7 +1001,7 @@
                 <mxCell id="av_t1b" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="The averages are 2R apart from best to worst. But single trades inside each setup also swing by 2 to 4R." vertex="1">
                     <mxGeometry height="50" width="340" x="40" y="295" as="geometry"/>
                 </mxCell>
-                <mxCell id="av_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Is the setup really making a difference... or is it noise?" vertex="1">
+                <mxCell id="av_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Is the setup really making a&amp;nbsp;&lt;div&gt;difference... or is it noise?&lt;/div&gt;" vertex="1">
                     <mxGeometry height="125" width="300" x="60" y="355" as="geometry"/>
                 </mxCell>
                 <mxCell id="av_t1c" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;" value="Dropping Reversal would be an incremental improvement, but only if the difference is real." vertex="1">
@@ -1283,7 +1283,7 @@
                 <mxCell id="av_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Your three setups average +1.6R, +0.6R and −0.4R. That looks like a clear ranking.&lt;br&gt;&lt;br&gt;But single trades inside each setup swing by 2 to 4R. With only 5 trades each, some gap between averages would appear even if setups made no difference at all.&lt;br&gt;&lt;br&gt;ANOVA measures the gap between averages against the noise inside the groups. A big ratio means the setup label carries real information." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="av_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: signal pile vs noise pile" vertex="1">
+                <mxCell id="av_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: signal vs noise" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="av_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Three columns of dots (one per setup), a tick at each setup&#39;s average, and a dashed line at the overall average.&lt;br&gt;&lt;br&gt;&lt;b&gt;split every miss into two pieces&lt;/b&gt;: trade → setup average (within) and setup average → overall average (between). Square and add each pile:&lt;br&gt;total 23.6 = between 10.0 + within 13.6&lt;br&gt;&lt;br&gt;The between pile is the share the setup explains: 42%." vertex="1">
@@ -1301,13 +1301,13 @@
                 <mxCell id="av_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="5 trades each:&lt;br&gt;Breakout: +2, +1, +3, 0, +2 → avg +1.6R&lt;br&gt;Pullback: +1, 0, +2, −1, +1 → avg +0.6R&lt;br&gt;Reversal: −1, 0, −1, +1, −1 → avg −0.4R&lt;br&gt;&lt;br&gt;Setup explains 42% of the scatter; F ≈ 4.4. Shuffling the setup labels gives an F this big about 5% of the time: suggestive, not proven.&lt;br&gt;&lt;br&gt;Van Tharp-style improvement: dropping Reversal could lift expectancy. Trade it smaller or on paper until more trades confirm." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="av_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you turn a dial?" vertex="1">
+                <mxCell id="av_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the dials" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="av_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Noisier trades&lt;/b&gt; (3× the spread inside each setup, same averages): between share 42% → 8%, F 4.4 → 0.5, and 63% of shuffles do as well. The ranking means nothing.&lt;br&gt;&lt;br&gt;&lt;b&gt;More trades&lt;/b&gt; (20 per setup, same pattern): the share stays 42%, but F rises to about 21 and no shuffle in 5,000 matched it. The same gap becomes convincing.&lt;br&gt;&lt;br&gt;&lt;b&gt;Bigger gap between averages:&lt;/b&gt; the between pile grows and F rises." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="av_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;different averages = different setups&#39;" vertex="1">
+                <mxCell id="av_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="av_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;Different averages mean different setups.&#39;&lt;/b&gt; Averages always differ a little by luck. The question is whether they differ more than the noise allows.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;A big F tells you which setup is best.&#39;&lt;/b&gt; It says &lt;i&gt;some&lt;/i&gt; setup differs. Check which pairs differ separately.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Test every tag until something works.&#39;&lt;/b&gt; Test 20 tags and about one will look significant at the 5% level by pure luck." vertex="1">

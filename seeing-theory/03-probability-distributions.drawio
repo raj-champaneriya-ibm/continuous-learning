@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="random-variables" name="01 Random Variables">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -79,7 +79,7 @@
                 <mxCell id="r_h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;" value="2 · INTUITION: the price-tag machine" vertex="1">
                     <mxGeometry height="44" width="380" x="440" y="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="r_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="A random variable is a rule that puts a number on every outcome." vertex="1">
+                <mxCell id="r_t2a" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=13;" value="A random variable puts a number on each outcome." vertex="1">
                     <mxGeometry height="24" width="340" x="460" y="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="r_ruleLbl" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=3;fontColor=#8D6E00;" value="rule X = R-multiple" vertex="1">
@@ -358,7 +358,7 @@
                 <mxCell id="r_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Outcomes are often words: heads, stopped out, trend day. You can&#39;t average words.&lt;br&gt;&lt;br&gt;A random variable attaches a number to every outcome. Once outcomes are numbers, you can average them (expectation), measure their spread (variance), and chart them (distribution).&lt;br&gt;&lt;br&gt;Different questions call for different rules on the same outcomes." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="r_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: the price-tag machine" vertex="1">
+                <mxCell id="r_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: price-tag machine" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="r_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Every outcome walks through the machine and comes out wearing a number:&lt;br&gt;stopped out → −1R&lt;br&gt;scratched → 0R&lt;br&gt;hit target → +2R&lt;br&gt;trailed out big → +5R&lt;br&gt;&lt;br&gt;&lt;b&gt;stack the outcomes on their numbers&lt;/b&gt;. 100 trades pile up as 50 · 20 · 25 · 5 above −1, 0, +2, +5. That stacked picture is the &lt;b&gt;distribution&lt;/b&gt;." vertex="1">
@@ -376,13 +376,13 @@
                 <mxCell id="r_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Van Tharp&#39;s R-multiple is a random variable: result ÷ initial risk.&lt;br&gt;&lt;br&gt;stopped out (50%) → −1R&lt;br&gt;scratched (20%) → 0R&lt;br&gt;hit target (25%) → +2R&lt;br&gt;trailed out big (5%) → +5R&lt;br&gt;&lt;br&gt;Average: 0.5 × (−1) + 0.25 × 2 + 0.05 × 5 = &lt;b&gt;+0.25R&lt;/b&gt;&lt;br&gt;&lt;br&gt;Because R ignores position size, it measures the system itself." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="r_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you change the rule?" vertex="1">
+                <mxCell id="r_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: the rule" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="r_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Change the rule:&lt;/b&gt; R-multiple (average +0.25R), $ profit at 1R = $500 (average +$125), win flag 1/0 (average 0.30 = the win rate).&lt;br&gt;&lt;br&gt;&lt;b&gt;Change the size:&lt;/b&gt; at 1R = $1,000, the average becomes +$250 and the SD ≈ $1,640 (both double; variance ×4). The edge in R stays +0.25R.&lt;br&gt;&lt;br&gt;&lt;b&gt;Change the odds:&lt;/b&gt; move 5% of trades from −1R to +5R and the average rises from +0.25R to +0.55R." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="r_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;it&#39;s a random number&#39;" vertex="1">
+                <mxCell id="r_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="r_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;A random variable is a random number.&#39;&lt;/b&gt; The rule itself is fixed and boring. The randomness is in which outcome happens.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;The number is the outcome.&#39;&lt;/b&gt; The outcome is what the market did. The number is one chosen way to measure it; another rule gives another number.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Win rate is a different kind of thing.&#39;&lt;/b&gt; It is just the average of the 1/0 rule." vertex="1">
@@ -410,7 +410,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="discrete-continuous" name="02 Discrete and Continuous">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="2384" dy="1528" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -839,7 +839,7 @@
                 <mxCell id="d_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Some trading numbers are counted: wins this week, trades today, losses in a row. Others are measured: hold time, slippage, the exact R of a trailing-stop exit.&lt;br&gt;&lt;br&gt;For counted things you can ask &lt;i&gt;what&#39;s the chance of exactly 3?&lt;/i&gt; For measured things, the chance of any exact value (say +2.37000…R) is zero, so the useful question becomes &lt;i&gt;what&#39;s the chance of landing in this range?&lt;/i&gt;" vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="d_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: bricks vs sand" vertex="1">
+                <mxCell id="d_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: bricks vs sand" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="d_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Discrete:&lt;/b&gt; bricks stacked on specific spots. A brick&#39;s height is the chance of that spot.&lt;br&gt;&lt;br&gt;&lt;b&gt;Continuous:&lt;/b&gt; sand spread along a line. The amount of sand over a stretch is the chance of that stretch. A single point has no width, so it holds no sand.&lt;br&gt;&lt;br&gt;&lt;b&gt;shrink the bins&lt;/b&gt;. Narrow bars become a smooth curve, and probability becomes the area under it." vertex="1">
@@ -857,13 +857,13 @@
                 <mxCell id="d_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="Fixed stop and fixed target: R takes only a few values (−1R, +2R), so it is discrete.&lt;br&gt;&lt;br&gt;Trailing stops: R can be anything (+0.4R, +2.37R, +6.1R), so treat it as continuous. Chart it as a histogram and read areas:&lt;br&gt;• above +3R: 8%&lt;br&gt;• between +1R and +3R: 22%&lt;br&gt;&lt;br&gt;Van Tharp: the big-winner tail often pays for the whole system. Measure its area, and protect it." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="d_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when the bins shrink?" vertex="1">
+                <mxCell id="d_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: bin width" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="d_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;Shrink the bins&lt;/b&gt; (1R → ½R → smooth): each bar gets narrower and holds less probability, but the area over any range stays the same (8% above +3R).&lt;br&gt;&lt;br&gt;&lt;b&gt;Widen the range:&lt;/b&gt; more area, more probability (above +3R: 8%; above +1R: 30%).&lt;br&gt;&lt;br&gt;&lt;b&gt;Shrink the range to a point:&lt;/b&gt; the area goes to 0." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="d_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;height = probability&#39;" vertex="1">
+                <mxCell id="d_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="d_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The height of the curve is the probability.&#39;&lt;/b&gt; Height is &lt;i&gt;density&lt;/i&gt;: chance per unit. It can even exceed 1: hold time spread evenly over 0 to ½ hour has a height of 2 per hour. Only area is probability.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;Probability 0 means impossible.&#39;&lt;/b&gt; Every exact value of a continuous variable has probability 0, yet some value always happens. Zero here means &#39;too thin to hold any area&#39;." vertex="1">
@@ -891,7 +891,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="central-limit-theorem" name="03 Central Limit Theorem">
-        <mxGraphModel dx="2496" dy="1517" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
+        <mxGraphModel dx="1139" dy="730" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1560" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -973,7 +973,7 @@
                 <mxCell id="t_t1c" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" value="tame, and all near +0.25R" vertex="1">
                     <mxGeometry height="20" width="354" x="33" y="404" as="geometry"/>
                 </mxCell>
-                <mxCell id="t_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Single trades are wild.&lt;br&gt;Why are the averages so tame?" vertex="1">
+                <mxCell id="t_cloud" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=14;fontStyle=2;" value="Single trades are wild.&lt;br&gt;Why are the averages&amp;nbsp;&lt;div&gt;so tame?&lt;/div&gt;" vertex="1">
                     <mxGeometry height="125" width="300" x="60" y="435" as="geometry"/>
                 </mxCell>
                 <mxCell id="t_q1" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#3A5F9E;" value="Question: what shape do averages take, even when single results are lopsided?" vertex="1">
@@ -1006,8 +1006,23 @@
                 <mxCell id="t_d1f" parent="1" style="rounded=0;html=1;fillColor=#7EA6E0;strokeColor=#6c8ebf;" value="" vertex="1">
                     <mxGeometry height="20" width="40" x="720" y="180" as="geometry"/>
                 </mxCell>
-                <mxCell id="t_d1l" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;" value="&amp;nbsp; &amp;nbsp; 1 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 2 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 3 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 4 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 5 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 6" vertex="1">
-                    <mxGeometry height="12" width="300" x="470" y="202" as="geometry"/>
+                <mxCell id="t_d1l1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="1" vertex="1">
+                    <mxGeometry height="12" width="40" x="470" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="2" vertex="1">
+                    <mxGeometry height="12" width="40" x="520" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l3" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="3" vertex="1">
+                    <mxGeometry height="12" width="40" x="570" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l4" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="4" vertex="1">
+                    <mxGeometry height="12" width="40" x="620" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l5" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="5" vertex="1">
+                    <mxGeometry height="12" width="40" x="670" y="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="t_d1l6" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;" value="6" vertex="1">
+                    <mxGeometry height="12" width="40" x="720" y="202" as="geometry"/>
                 </mxCell>
                 <mxCell id="t_d2T" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" value="sum of 2 dice: a triangle" vertex="1">
                     <mxGeometry height="18" width="340" x="460" y="222" as="geometry"/>
@@ -1285,7 +1300,7 @@
                 <mxCell id="t_n2b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="A single trade&#39;s R is lumpy: −1R half the time, +5R rarely. You can&#39;t predict it.&lt;br&gt;&lt;br&gt;But nobody lives on one trade. The average of 100 trades is predictable: it lands near the expectancy, in a bell-shaped spread whose width you can calculate.&lt;br&gt;&lt;br&gt;That is what lets you put error bars on a system&#39;s expectancy, and why the &#39;wobble&#39; in Chance Events had a predictable size." vertex="1">
                     <mxGeometry height="320" width="320" x="350" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="t_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual mental model: add more dice" vertex="1">
+                <mxCell id="t_n3h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="3 · Visual model: add more dice" vertex="1">
                     <mxGeometry height="32" width="320" x="680" y="805" as="geometry"/>
                 </mxCell>
                 <mxCell id="t_n3b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="One die: flat (each face 1 in 6).&lt;br&gt;Sum of two dice: a triangle (7 can be made 6 ways, 2 only 1 way).&lt;br&gt;Sum of three dice: already a bell.&lt;br&gt;&lt;br&gt;Greg Tang move: &lt;b&gt;count the paths to the middle&lt;/b&gt;. Extremes need every piece to agree; the middle can be reached many ways. So sums pile up in the middle, and the lumps of a single piece cancel out." vertex="1">
@@ -1303,13 +1318,13 @@
                 <mxCell id="t_n5b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="System from the Random Variables tab: −1R (50%), 0R (20%), +2R (25%), +5R (5%). Expectancy +0.25R, SD ≈ 1.64R.&lt;br&gt;&lt;br&gt;Average R over n trades, 19 times in 20:&lt;br&gt;10 trades: −0.79R to +1.29R&lt;br&gt;30 trades: −0.35R to +0.85R&lt;br&gt;100 trades: −0.08R to +0.58R&lt;br&gt;400 trades: +0.09R to +0.41R&lt;br&gt;&lt;br&gt;Van Tharp: you need a big sample before trusting an expectancy. The bell tells you how big." vertex="1">
                     <mxGeometry height="320" width="320" x="1340" y="837" as="geometry"/>
                 </mxCell>
-                <mxCell id="t_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes when you add trades?" vertex="1">
+                <mxCell id="t_n6h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="6 · What changes: more trades" vertex="1">
                     <mxGeometry height="32" width="320" x="20" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="t_n6b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;More trades:&lt;/b&gt; the center stays at +0.25R; the width shrinks like 1/√n (4× the trades → half the width).&lt;br&gt;&lt;br&gt;&lt;b&gt;Lumpier system:&lt;/b&gt; bigger SD → wider bell → more trades needed. Trades until the 95% range clears zero:&lt;br&gt;Steady (+0.5R, SD 1.5R): ≈ 40&lt;br&gt;This system (+0.25R, SD 1.64R): ≈ 170&lt;br&gt;Wild (+0.5R, SD 4.5R): ≈ 330&lt;br&gt;&lt;br&gt;&lt;b&gt;Totals:&lt;/b&gt; over 100 trades, about +25R; 19 times in 20 between −8R and +58R." vertex="1">
                     <mxGeometry height="330" width="320" x="20" y="1204" as="geometry"/>
                 </mxCell>
-                <mxCell id="t_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Misconception: &#39;returns are normal&#39;" vertex="1">
+                <mxCell id="t_n7h" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#B0B0B0;align=left;spacingLeft=10;fontSize=14;fontStyle=1;" value="7 · Common misconceptions" vertex="1">
                     <mxGeometry height="32" width="320" x="350" y="1172" as="geometry"/>
                 </mxCell>
                 <mxCell id="t_n7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;align=left;verticalAlign=top;spacing=10;fontSize=13;" value="&lt;b&gt;&#39;The CLT means trade returns are normal.&#39;&lt;/b&gt; No. Single trades keep their lumpy shape. Only averages and sums become bell-shaped.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;30 trades is always enough.&#39;&lt;/b&gt; A rule of thumb that fails for lopsided systems: rare big winners need many more trades before the bell can be trusted.&lt;br&gt;&lt;br&gt;&lt;b&gt;&#39;It always applies.&#39;&lt;/b&gt; It assumes trades are roughly independent and the spread is finite. Correlated trades (same move, same day) count as fewer real samples." vertex="1">
