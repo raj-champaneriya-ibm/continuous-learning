@@ -47,7 +47,7 @@ _Tempted to do more? Park it in `later.md`: Run the same table on a paid API wit
      in your video into text, but keep your own words. -->
 **For a beginner:** Every new feature adds cost and latency. Choosing which ones you are fine to live with — balancing time, cost and reply quality — is more of an art than a science.
 
-**For an engineer:** The job is to present the facts to the client and let them decide how to proceed.
+**For an engineer:** My job is to recommend with evidence, not to hand the client a table. Today the evidence says none of the three ships: A and B miss almost every escalation, and C escalates but is slow and still fails most replies. All three ran on one small local model, so the next step is to fix routing and repeat the run on other local models with tool-call support before choosing.
 
 **For a customer:** Highest priority is to work with someone with judgement to find a balance and accept an output appropriate to the brand's reputation.
 

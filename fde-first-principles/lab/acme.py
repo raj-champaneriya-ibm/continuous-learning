@@ -5,8 +5,10 @@ as JSON lines in data/results/ so later notebooks can compare them.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -98,12 +100,28 @@ def customer_card(customer: Dict) -> str:
     return "\n".join(lines)
 
 
-def save_results(version: str, rows: List[Dict]) -> Path:
-    """Save one version's outputs (one dict per case) to data/results/<version>.jsonl."""
+def fingerprint(text: str) -> str:
+    """Short sha256 of a prompt or file, so two runs can be matched to what produced them."""
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:12]
+
+
+def save_results(version: str, rows: List[Dict], meta: Optional[Dict] = None) -> Path:
+    """Save one version's outputs (one dict per case) to data/results/<version>.jsonl, and what produced
+    them (model, prompt fingerprint, settings in `meta`, plus time and test-set fingerprint) to <version>.meta.json."""
     RESULTS.mkdir(parents=True, exist_ok=True)
     path = RESULTS / f"{version}.jsonl"
     path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+    info = {"version": version, "saved_at": datetime.now().isoformat(timespec="seconds"), "n": len(rows),
+            "cases_sha": fingerprint((DATA / "cases.jsonl").read_text(encoding="utf-8")), **(meta or {})}
+    (RESULTS / f"{version}.meta.json").write_text(json.dumps(info, indent=2, ensure_ascii=False) + "\n",
+                                                  encoding="utf-8")
     return path
+
+
+def load_meta(version: str) -> Optional[Dict]:
+    """What produced a saved run, or None for runs saved before provenance was recorded."""
+    path = RESULTS / f"{version}.meta.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
 def load_results(version: str) -> List[Dict]:

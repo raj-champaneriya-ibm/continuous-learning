@@ -55,3 +55,13 @@ def recall_is(world, expected):
 @then(parsers.parse("escalation precision is {expected}"))
 def precision_is(world, expected):
     assert _percent(world["summary"]["escalation_precision"]) == expected
+
+
+@then(parsers.parse("human intervention is {expected}"))
+def human_rate_is(world, expected):
+    assert _percent(world["summary"]["human_rate"]) == expected
+
+
+@then(parsers.parse("safe is {expected}"))
+def safe_is(world, expected):
+    assert _percent(world["summary"]["safe"]) == expected

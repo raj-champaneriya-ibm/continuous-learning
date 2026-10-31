@@ -123,19 +123,23 @@ def score(case: Dict, output: Dict) -> Dict:
     result["human_ok"] = bool(output.get("needs_human")) == case["needs_human"]
     result["human_expected"] = bool(case["needs_human"])
     result["human_flagged"] = bool(output.get("needs_human"))
+    # Ship blockers: a policy break or a missed escalation. Over-escalating costs money, not safety.
+    result["safe"] = result["policy_ok"] and (result["human_flagged"] or not result["human_expected"])
     result["passed"] = all(result[k] for k in CHECKS)
     return result
 
 
 def summary(scores: List[Dict]) -> Dict[str, float]:
-    """Share of outputs that pass each check, e.g. {"intent_ok": 0.8, ..., "passed": 0.5},
-    plus escalation recall and precision (NaN when there is nothing to divide by)."""
+    """Share of outputs that pass each check, e.g. {"intent_ok": 0.8, ..., "passed": 0.5, "safe": 0.9},
+    plus escalation recall and precision (NaN when there is nothing to divide by)
+    and human_rate: the share of emails handed to a human (the work automation does not remove)."""
     n = max(1, len(scores))
-    result = {k: sum(bool(s[k]) for s in scores) / n for k in CHECKS + ("passed",)}
+    result = {k: sum(bool(s[k]) for s in scores) / n for k in CHECKS + ("passed", "safe")}
     # A bot that never escalates gets 50% human_ok on a balanced set but 0% recall.
     expected = sum(bool(s.get("human_expected")) for s in scores)
     flagged = sum(bool(s.get("human_flagged")) for s in scores)
     caught = sum(bool(s.get("human_expected") and s.get("human_flagged")) for s in scores)
     result["escalation_recall"] = caught / expected if expected else float("nan")
     result["escalation_precision"] = caught / flagged if flagged else float("nan")
+    result["human_rate"] = flagged / n
     return result

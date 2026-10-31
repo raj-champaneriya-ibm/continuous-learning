@@ -1,0 +1,12 @@
+{
+  "version": "C",
+  "saved_at": "2026-10-31T06:00:57",
+  "n": 84,
+  "cases_sha": "c81e6ac8313c",
+  "system": "agent loop, max 6 steps (09-success-cost-latency/notebook.ipynb)",
+  "model": "qwen3:4b",
+  "temperature": 0.0,
+  "context": "retrieved: the agent searches the KB with its tools",
+  "prompt_sha": null,
+  "backfilled": "Written on 2026-10-31, after the run. saved_at is the file time. The model is the lab/llm.py default and was not recorded at run time. lab/agent.py SYSTEM_C is 69179a39fd1d today but was not recorded at run time."
+}

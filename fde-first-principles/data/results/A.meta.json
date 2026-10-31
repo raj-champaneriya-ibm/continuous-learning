@@ -1,0 +1,9 @@
+{
+  "version": "A",
+  "saved_at": "2026-10-22T10:19:21",
+  "n": 84,
+  "cases_sha": "c81e6ac8313c",
+  "system": "keyword rules (04-rules-baseline/notebook.ipynb)",
+  "model": null,
+  "backfilled": "Written on 2026-10-31, after the run. saved_at is the file time."
+}

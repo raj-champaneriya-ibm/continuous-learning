@@ -1,0 +1,12 @@
+{
+  "version": "B",
+  "saved_at": "2026-10-25T06:09:04",
+  "n": 84,
+  "cases_sha": "c81e6ac8313c",
+  "system": "one model call (06-one-llm-call/notebook.ipynb)",
+  "model": "qwen3:4b",
+  "temperature": 0.0,
+  "context": "oracle: KB articles picked from the expected intent",
+  "prompt_sha": null,
+  "backfilled": "Written on 2026-10-31, after the run. saved_at is the file time. The model is the lab/llm.py default and was not recorded at run time. The prompt came from the day 6 notebook; lab/version_b.py (SYSTEM f50af5032098) was created later and is not confirmed to match."
+}
