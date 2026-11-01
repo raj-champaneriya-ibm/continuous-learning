@@ -5,5 +5,8 @@
   "python.testing.cwd": "${workspaceFolder}/fde-first-principles",
   "python.testing.pytestArgs": ["tests"],
   "cucumber.features": ["fde-first-principles/tests/features/**/*.feature"],
-  "cucumber.glue": ["fde-first-principles/tests/**/*.py"]
+  "cucumber.glue": [
+    "fde-first-principles/tests/**/*.py"
+  ],
+  "python.terminal.useEnvFile": true
 }

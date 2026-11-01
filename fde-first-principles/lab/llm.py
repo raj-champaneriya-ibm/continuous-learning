@@ -12,6 +12,7 @@ It talks to the Ollama server on your own Mac: free, private, no API key.
 Only the final run in project 6 uses a stronger model, switched with one line:
 
     llm.use("qwen3:14b")        # a bigger model in your own Ollama (free)
+    llm.use("anthropic:<model>")  # an Anthropic-format endpoint (e.g. z.ai), LLM_ANTHROPIC_BASE in .env
     llm.use("api:<model>")      # a paid model behind any OpenAI-compatible API, configured in .env:
                                 #   LLM_BASE_URL=https://…/v1   LLM_API_KEY=…   (set a hard spending cap first)
     llm.use(llm.CHAT_MODEL)     # back to the small model
@@ -37,6 +38,7 @@ EMBED_MODEL = "embeddinggemma"   # rubric and recall@3 check: 06-one-llm-call/no
 CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "cache"
 ENV_FILE = Path(__file__).resolve().parent.parent / ".env"     # git-ignored: never commit a key
 API_PREFIX = "api:"
+ANTHROPIC_PREFIX = "anthropic:"
 API_CALL_LIMIT = int(os.environ.get("LLM_MAX_CALLS", "500"))  # API requests per Python session
 
 _memory: Dict[str, Dict[str, Any]] = {}
@@ -105,6 +107,11 @@ def chat(messages: List[Dict[str, Any]], *, model: Optional[str] = None, tempera
     content, tool_calls, message (the raw assistant message), tokens_in, tokens_out,
     seconds (of the original call, even when cached) and cached (True/False)."""
     model = model or _current["model"]
+    if model.startswith(ANTHROPIC_PREFIX):
+        if schema is not None:
+            raise RuntimeError("The anthropic: route does not support json schemas (tools and plain calls only).")
+        return _chat_anthropic(messages, model=model, temperature=temperature, tools=tools,
+                               run=run, use_cache=use_cache)
     if model.startswith(API_PREFIX):
         return _chat_api(messages, model=model, temperature=temperature, seed=seed, tools=tools, schema=schema,
                          run=run, use_cache=use_cache)
@@ -243,6 +250,110 @@ def _chat_api(messages: List[Dict[str, Any]], *, model: str, temperature: float,
     _api_usage["tokens_in"] += result["tokens_in"]
     _api_usage["tokens_out"] += result["tokens_out"]
     _store("chat", key, result)
+    return dict(result, cached=False)
+
+
+def _to_anthropic(messages: List[Dict[str, Any]]) -> tuple:
+    """Ollama-style messages -> (system, anthropic messages). Tool calls get ids, tool results point back."""
+    system = "\n\n".join(m["content"] for m in messages if m.get("role") == "system" and m.get("content"))
+    out: List[Dict[str, Any]] = []
+    pending: List[tuple] = []
+    n = 0
+    for m in messages:
+        role = m.get("role")
+        if role == "system":
+            continue
+        if role == "assistant":
+            blocks = []
+            if m.get("content"):
+                blocks.append({"type": "text", "text": m["content"]})
+            calls = []
+            for call in m.get("tool_calls") or []:
+                fn = call.get("function") or {}
+                cid = call.get("id") or f"toolu_{n}"
+                n += 1
+                calls.append((cid, fn.get("name")))
+                blocks.append({"type": "tool_use", "id": cid, "name": fn.get("name"),
+                               "input": fn.get("arguments") or {}})
+            out.append({"role": "assistant", "content": blocks or [{"type": "text", "text": ""}]})
+            pending = calls
+        elif role == "tool":
+            call_id = m.get("tool_call_id")
+            if not call_id and pending:
+                name = m.get("tool_name") or m.get("name")
+                match = next((p for p in pending if p[1] == name), pending[0])
+                pending.remove(match)
+                call_id = match[0]
+            content = m.get("content")
+            out.append({"role": "user", "content": [{"type": "tool_result", "tool_use_id": call_id or "toolu_0",
+                        "content": content if isinstance(content, str) else json.dumps(content, ensure_ascii=False)}]})
+        else:
+            out.append({"role": role or "user", "content": m.get("content") or ""})
+    return system, out
+
+
+def _chat_anthropic(messages: List[Dict[str, Any]], *, model: str, temperature: float,
+                    tools: Optional[List[Dict]], run: int, use_cache: bool) -> Dict[str, Any]:
+    """One chat call through an Anthropic-format /v1/messages endpoint (e.g. z.ai's anthropic route).
+    Supports plain messages and tool calls; no json schemas, no seed."""
+    base = (_env("LLM_ANTHROPIC_BASE") or "https://api.z.ai/api/anthropic").rstrip("/")
+    key = _env("LLM_ANTHROPIC_KEY") or _env("LLM_API_KEY")
+    name = model[len(ANTHROPIC_PREFIX):]
+    system, msgs = _to_anthropic(messages)
+    body: Dict[str, Any] = {"model": name, "max_tokens": 8192, "messages": msgs, "temperature": temperature}
+    if system:
+        body["system"] = system
+    if tools:
+        body["tools"] = [{"name": t["function"]["name"], "description": t["function"]["description"],
+                          "input_schema": t["function"]["parameters"]} for t in tools]
+    key_hash = _key({"anthropic": base, "body": body, "run": run})
+    if use_cache and key_hash in _load("chat"):
+        return dict(_load("chat")[key_hash], cached=True)
+    headers = {"x-api-key": key, "Authorization": f"Bearer {key}",
+               "anthropic-version": "2023-06-01", "content-type": "application/json"}
+    started = time.perf_counter()
+    data = None
+    for attempt in range(4):
+        if _api_usage["calls"] >= API_CALL_LIMIT:
+            raise RuntimeError(f"API call limit reached ({API_CALL_LIMIT} requests). Something may be looping.")
+        _api_usage["calls"] += 1
+        try:
+            response = requests.post(f"{base}/v1/messages", json=body, headers=headers, timeout=300)
+        except requests.RequestException as e:  # dropped connections are routine on long runs: retry
+            if attempt == 3:
+                raise RuntimeError(f"{base} unreachable after retries: {e}") from e
+            time.sleep(2 * (attempt + 1) ** 2)
+            continue
+        if response.status_code in (429, 500, 502, 503, 504) and attempt < 3:
+            time.sleep(2 * (attempt + 1) ** 2)
+            continue
+        if response.status_code >= 400:
+            raise RuntimeError(f"{base} answered {response.status_code}: {response.text[:300]}")
+        data = response.json()
+        break
+    text, calls = "", []
+    for block in (data or {}).get("content") or []:
+        if block.get("type") == "text":
+            text += block.get("text") or ""
+        elif block.get("type") == "tool_use":
+            calls.append({"id": block.get("id"), "function": {"name": block["name"],
+                                                              "arguments": block.get("input") or {}}})
+    message: Dict[str, Any] = {"role": "assistant", "content": text}
+    if calls:
+        message["tool_calls"] = calls
+    usage = (data or {}).get("usage") or {}
+    result = {
+        "content": text,
+        "tool_calls": calls,
+        "message": message,
+        "tokens_in": int(usage.get("input_tokens") or 0),
+        "tokens_out": int(usage.get("output_tokens") or 0),
+        "seconds": round(time.perf_counter() - started, 3),
+        "model": model,
+    }
+    _api_usage["tokens_in"] += result["tokens_in"]
+    _api_usage["tokens_out"] += result["tokens_out"]
+    _store("chat", key_hash, result)
     return dict(result, cached=False)
 
 
