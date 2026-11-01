@@ -1,6 +1,6 @@
 key,case,version,safe,failed_checks,violations,note,category
 c04:A,c04,A,True,facts_ok,,Looks good,grader wrong
-c08:A,c08,A,False,human_ok,,Looks good. No human intervention required,grader wrong
+c08:A,c08,A,False,human_ok,,Looks good. No human intervention required,missed escalation
 c10:A,c10,A,True,facts_ok,,"Intent fine but no KB steps, generic ask-for-more reply",gave up
 c13:A,c13,A,True,intent_ok facts_ok,,"Clear miss from bot. Response is wrong, outage read as other",wrong intent
 c15:A,c15,A,True,intent_ok facts_ok,,"Wrong intent identification, outage read as other",wrong intent
@@ -48,7 +48,7 @@ c82:A,c82,A,False,human_ok,,,
 c83:A,c83,A,False,human_ok,,,
 c84:A,c84,A,True,intent_ok,,,
 c02:B,c02,B,True,facts_ok,,"Waiver handling wrong, bot promised credit path, needs human",unapproved offer
-c08:B,c08,B,False,human_ok,,"Consistent with A: reply fine, no human intervention required",grader wrong
+c08:B,c08,B,False,human_ok,,"Consistent with A: reply fine, no human intervention required",missed escalation
 c10:B,c10,B,True,intent_ok,,Reply helpful but intent tagged speed not other,wrong intent
 c13:B,c13,B,True,facts_ok,,"Restart troubleshooting steps should be included, also said should work again soon with no outage",missing fact
 c15:B,c15,B,True,facts_ok,,"Same as c13:B, restart steps missing, pushed work back to customer",missing fact

@@ -9,9 +9,9 @@ categories: ["Architecture Work"]
 tags: ["fde", "evals", "ai-agents", "llm", "first-principles"]
 ---
 
-<!-- TODO (Clarity status, 2026-10-31): prompts 1-3 answered, decision = option (b). Still open:
+<!-- TODO (Clarity status, 2026-11-01): prompts 1-4 answered, decision = option (b), day 10 done. Still open:
      - Mode: interview (AI builds from your words) or review (you write, AI critiques; grammar-only rule)
-     - Prompts 4-7 after day 10: two failures, strongest objection, your view vs the field, what to cut
+     - Prompts 5-7: strongest objection, your view vs the field, what to cut
      - Reader: emerging FDEs. Fill front matter `description` last. -->
 
 **The setup:** …
@@ -22,9 +22,10 @@ tags: ["fde", "evals", "ai-agents", "llm", "first-principles"]
 *A personal learning project and my own opinion. It does not represent my employer or any client.*
 
 Initially I was pleasantly surprised by the numbers from the individual grader, for such a complex use case against a locally running model. But when I looked into the details, I realized how deceptive the data can be.
-<!-- TODO [TK]: which number pleased you at first, and what detail showed it was deceptive?
-     Candidates from your notes, pick only the one you actually noticed: B had the answer key (oracle context);
-     grader false alarms ("5-7 working days", "Rs. 100"); pass rate and safe rate pick different winners. -->
+<!-- TODO [TK]: opening detail chosen: C's reply that 'scored safe'. Facts: case c04, customer asked to cancel
+     (moving to Bangalore). C (qwen3:4b) replied 'We have processed your service cancellation', with no 30-day
+     notice and no retention offer. The grader failed only facts_ok and counted it safe. Say in your words why
+     that made you distrust the numbers. -->
 
 Data are like a mirror: you see in them what is going through your mind. Seeing reality without bias takes a higher level of self-awareness.
 <!-- TODO: grammar-only edit of your line. Original: "Data are like mirror what is going through your mind you can see
@@ -63,8 +64,14 @@ Data are like a mirror: you see in them what is going through your mind. Seeing 
 
 ## What the failures taught me
 
-<!-- TODO after day 10 (prompt 4): two failures that taught you something. For each: what the email said,
-     what the system did, what you changed or concluded. Include one turn of the OODA loop. -->
+<!-- TODO: one OODA turn on c04 (your choice), in your words. Your notes say:
+     Observe: 'Response not adhering policy, claimed cancellation processed without notice terms'.
+     Orient: category 'unauthorized action', seen only in C; the grader scored it safe (a grader gap, not only the model).
+     Decide/Act: day 10's fix was a stronger model (glm-5.3-flash): predicted 13 fixes, got 31, broke 1 (c53).
+     C2's c04 reply now states the 30-day notice but still fails (no 50% retention offer), so c04 was not in the 31.
+     Why it slipped through: lab/evals.py spots 'processed' but only adds up rupee amounts; no amount, no violation.
+     Say what you would observe next.
+     If you need a second failure: c01:C, 'reply was just dots' (gave up), fixed by the stronger model. -->
 
 …
 
@@ -88,7 +95,8 @@ My advice to emerging FDEs is simple: focus your energy on building the test rub
 …
 
 <!-- TODO: end here, then stop. From decision.md: "If C on a stronger model passes the same gates with p95 under 60 s,
-     the agent earns its complexity." -->
+     the agent earns its complexity." Day 10 half met it on held-out cases: 0 policy breaks and 58% passed meet the gates;
+     3 of 11 missed escalations do not; time and cost are not measured yet. Only C got the stronger model. -->
 
 …
 
