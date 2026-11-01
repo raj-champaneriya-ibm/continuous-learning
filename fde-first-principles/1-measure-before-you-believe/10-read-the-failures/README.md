@@ -1,7 +1,7 @@
 # Day 10 · Read the failures, not the averages
 
 <!-- learn:status -->
-**Status:** ⏳ open · morning 1 of 2 · dropped 2026-10-30 · ship by Sun 1 Nov, 05:00 · project 1, step 10
+**Status:** ⏳ open · morning 2 of 2 · dropped 2026-10-30 · ship by Sun 1 Nov, 05:00 · project 1, step 10
 <!-- /learn:status -->
 
 > **First-principles question:** Why does it fail, and which fix matters most?
