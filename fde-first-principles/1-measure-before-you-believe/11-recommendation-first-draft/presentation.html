@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADR-001: Acme Fibre Support Automation — 5-Min CTO Pitch</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f0f7fd 0%, #e3effa 100%);
+      --card-bg: #ffffff;
+      --card-border: #d0e3f5;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --primary-subtle: #f0f9ff;
+      --navy: #0f2744;
+      --slate: #475569;
+      --slate-light: #64748b;
+      --border-color: #e2e8f0;
+      --accent-green: #0d9488;
+      --accent-green-bg: #f0fdfa;
+      --accent-red: #e11d48;
+      --accent-red-bg: #fff1f2;
+      --accent-amber: #d97706;
+      --accent-amber-bg: #fffbeb;
+      --shadow-sm: 0 2px 8px rgba(2, 132, 199, 0.06);
+      --shadow-md: 0 10px 25px -5px rgba(2, 44, 84, 0.08), 0 8px 10px -6px rgba(2, 44, 84, 0.04);
+      --shadow-lg: 0 20px 35px -10px rgba(2, 44, 84, 0.12);
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-gradient);
+      color: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .deck-container {
+      width: 100%;
+      max-width: 1200px;
+      height: 720px;
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Bar */
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: #fafcfe;
+      border-bottom: 1px solid #edf4fa;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .brand-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .deck-meta {
+      font-size: 12px;
+      color: var(--slate-light);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Slides Content */
+    .slides-wrapper {
+      flex: 1;
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 36px 44px;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Slide Elements */
+    .slide-category {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Content Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: #fafcfe;
+      border: 1px solid #e2effa;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card.highlight {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+    }
+
+    .card.danger {
+      background: #fff5f5;
+      border-color: #fecdd3;
+    }
+
+    .card.success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .badge-blue { background: #e0f2fe; color: #0369a1; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-red { background: #fee2e2; color: #b91c1c; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
+
+    /* Tables */
+    .table-container {
+      background: #ffffff;
+      border: 1px solid #e2effa;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f1f8fe;
+      color: var(--navy);
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #e0eef8;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--slate);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr.row-highlight {
+      background: #f0f9ff;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* Big Numbers Callouts */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .metric-box {
+      background: #fafcfe;
+      border: 1px solid #e2effa;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--slate-light);
+    }
+
+    /* Diagram View */
+    .diagram-wrapper {
+      background: #ffffff;
+      border: 1px solid #ddecfa;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .diagram-wrapper svg {
+      max-width: 100%;
+      max-height: 440px;
+    }
+
+    /* Presenter Notes Panel */
+    .notes-panel {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 18px 28px;
+      font-size: 13px;
+      line-height: 1.6;
+      border-top: 2px solid var(--primary);
+      display: none;
+      z-index: 20;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .notes-panel.visible {
+      display: block;
+    }
+
+    .notes-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    /* Controls Footer */
+    .deck-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 28px;
+      background: #ffffff;
+      border-top: 1px solid #edf4fa;
+      z-index: 10;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      margin: 0 24px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 12.5%;
+      transition: width 0.3s ease;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      background: #f1f8fe;
+      border: 1px solid #d0e4f5;
+      color: var(--navy);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .btn-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: var(--slate);
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Key Shortcuts Info */
+    .shortcut-hint {
+      font-size: 11px;
+      color: var(--slate-light);
+    }
+
+    kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container" id="deckContainer">
+    <!-- Header -->
+    <header class="deck-header">
+      <div class="brand">
+        <span>Acme Fibre · Engineering</span>
+        <span class="brand-badge">ADR-001</span>
+      </div>
+      <div class="deck-meta">
+        <span>Presenter: Forward Deployed Engineer</span>
+        <span>Duration: 5 Minutes</span>
+        <button class="btn btn-pill" id="toggleNotesBtn" onclick="toggleNotes()">🎙️ Notes (<kbd>N</kbd>)</button>
+      </div>
+    </header>
+
+    <!-- Slides Area -->
+    <div class="slides-wrapper">
+      
+      <!-- Slide 1: Title & Executive Summary -->
+      <section class="slide active" data-slide="1" data-notes="Good morning. Acme Fibre receives ~1,200 support emails daily. Our number one rule is customer trust: never leak credentials, never exceed refund policies, and never automate an email that requires a human. Our recommendation is unambiguous: do not ship an autonomous agent loop. Build a deterministic workflow around Option B with ingress and egress guardrails.">
+        <div class="slide-category">01 · Executive Summary</div>
+        <h1 class="slide-title">How Acme Fibre Should Automate Support Emails</h1>
+        <p class="slide-subtitle">A first-principles architectural evaluation: Rules vs. Single LLM Call vs. Autonomous Agent.</p>
+
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="card">
+            <div class="card-title">🏢 Operating Reality</div>
+            <p class="card-desc">
+              • <strong>1,200 emails / day</strong> in Pune<br>
+              • Asynchronous SLA (minutes are acceptable)<br>
+              • Brand trust is the non-negotiable metric
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title">🛡️ Core Mandates</div>
+            <p class="card-desc">
+              • <strong>0 Policy Violations</strong> (OTPs, passwords)<br>
+              • <strong>Never bypass escalation</strong> when human needed<br>
+              • Compute & unit cost must scale locally
+            </p>
+          </div>
+          <div class="card highlight">
+            <div class="card-title">🎯 The Recommendation</div>
+            <p class="card-desc">
+              <strong>Build a Workflow, Not an Agent:</strong><br>
+              Option B with a pre-LLM safety router and post-LLM deterministic policy check.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding: 14px 20px; background: #f0f7ff; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; font-size: 13px;">
+          <strong>Bottom Line:</strong> Autonomous multi-turn agents are 20× slower, 7× more expensive, and fail safety policies. Deterministic workflows deliver higher safety at predictable SLAs.
+        </div>
+      </section>
+
+      <!-- Slide 2: The Three Paradigms -->
+      <section class="slide" data-slide="2" data-notes="We evaluated three distinct paradigms on 84 test cases where 40 cases required mandatory human escalation. Option A has zero model cost but zero intelligence. Option B makes one call with context. Option C gives full tool calling authority to the model.">
+        <div class="slide-category">02 · Architectural Options</div>
+        <h2 class="slide-title">Three Competing Architectural Paradigms</h2>
+        <p class="slide-subtitle">Tested against an 84-case benchmark (40 requiring human escalation) with strict automated policy grading.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span class="badge badge-blue">Option A</span>
+              <span style="font-size:11px; color:var(--slate-light);">Deterministic</span>
+            </div>
+            <div class="card-title">Rules & Templates</div>
+            <p class="card-desc" style="margin-bottom:12px;">Keyword regex rules classify customer intent and populate rigid string templates without an LLM.</p>
+            <div style="margin-top:auto; font-size:12px; color:var(--slate); border-top:1px solid #e2e8f0; padding-top:8px;">
+              ✅ Zero latency & cost<br>
+              ❌ Zero nuance, misses 100% of escalations
+            </div>
+          </div>
+
+          <div class="card highlight">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span class="badge badge-blue" style="background:var(--primary); color:#fff;">Option B (Core)</span>
+              <span style="font-size:11px; color:var(--primary-dark); font-weight:700;">Recommended Base</span>
+            </div>
+            <div class="card-title">Single LLM Call + Context</div>
+            <p class="card-desc" style="margin-bottom:12px;">One model call injected with structured customer card and relevant knowledge base articles.</p>
+            <div style="margin-top:auto; font-size:12px; color:var(--slate); border-top:1px solid #e2e8f0; padding-top:8px;">
+              ✅ High factual accuracy (74%)<br>
+              ⚠️ Requires front-end router for safety
+            </div>
+          </div>
+
+          <div class="card danger">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span class="badge badge-red">Option C</span>
+              <span style="font-size:11px; color:#b91c1c;">Autonomous Loop</span>
+            </div>
+            <div class="card-title">Multi-Turn Agent + Tools</div>
+            <p class="card-desc" style="margin-bottom:12px;">Autonomous ReAct loop with up to 6 tool calls to search KB, look up accounts, and decide actions.</p>
+            <div style="margin-top:auto; font-size:12px; color:var(--slate); border-top:1px solid #e2e8f0; padding-top:8px;">
+              ❌ p95: 213s, breaks policy in 8 replies<br>
+              ❌ 35 hours compute / day on 1 machine
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Empirical Evidence Table -->
+      <section class="slide" data-slide="3" data-notes="Here is the empirical scorecard. Notice the pass rates: A is 19±9%, B is 29±10%, C is 20±9%. The error bars completely overlap. Pass rate alone cannot pick a winner. Safety and compute latency are the true decision drivers.">
+        <div class="slide-category">03 · Empirical Findings</div>
+        <h2 class="slide-title">The Scoreboard: Overlapping Pass Rates, Divergent Safety</h2>
+        <p class="slide-subtitle">Evidence gathered across 84 runs with statistical uncertainty (±2 Standard Errors).</p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Pass Rate (± 2 SE)</th>
+                <th>Safe Rate (± 2 SE)</th>
+                <th>Missed Escalations</th>
+                <th>Median Latency</th>
+                <th>p95 Latency</th>
+                <th>Cost / 1k Emails</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A · Rules</strong></td>
+                <td>19% ± 9%</td>
+                <td>52% ± 11%</td>
+                <td><span class="badge badge-red">40 of 40 (100%)</span></td>
+                <td>0.0 s</td>
+                <td>0.0 s</td>
+                <td>₹0.00</td>
+              </tr>
+              <tr class="row-highlight">
+                <td><strong>B · Single Call</strong></td>
+                <td><strong>29% ± 10%</strong></td>
+                <td>54% ± 11%</td>
+                <td><span class="badge badge-red">38 of 40 (95%)</span></td>
+                <td>4.3 s</td>
+                <td>6.2 s</td>
+                <td>₹1.30</td>
+              </tr>
+              <tr>
+                <td><strong>C · Agent Loop</strong></td>
+                <td>20% ± 9%</td>
+                <td><span class="badge badge-green">71% ± 10%</span></td>
+                <td>17 of 40 (42%)</td>
+                <td>104.2 s</td>
+                <td><span class="badge badge-red">213.8 s</span></td>
+                <td>₹8.70</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" style="border-left: 3px solid #0284c7;">
+            <div class="card-title">Key Insight 1: Pass Rate is Indistinguishable</div>
+            <p class="card-desc">With overlapping error bars, no architecture wins on accuracy alone. Safety (preventing policy leaks & missed human handoffs) must determine the ship decision.</p>
+          </div>
+          <div class="card" style="border-left: 3px solid #e11d48;">
+            <div class="card-title">Key Insight 2: Agent Compute Bottleneck</div>
+            <p class="card-desc">At 104s median and 213s p95, 1,200 daily emails require ~35 hours of active compute per day on local hardware. The agent creates immediate queue starvation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Failure Analysis -->
+      <section class="slide" data-slide="4" data-notes="Why did each architecture fail? Option A is blind to unscripted intent. Option B answers every question directly, ignoring escalation cues. Option C catches escalations but hallucinates policy violations and gets bogged down in tool search loops.">
+        <div class="slide-category">04 · Error Analysis</div>
+        <h2 class="slide-title">Why They Failed: Dissecting the Bottlenecks</h2>
+        <p class="slide-subtitle">Failure mode breakdown from Day 10 error analysis across 84 runs.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title" style="color:#b91c1c;">🚫 A's Failure Mode</div>
+            <p class="card-desc" style="font-size:13px; line-height:1.6;">
+              <strong>Blind to Context:</strong><br>
+              Cannot detect sentiment, frustration, or subtle escalation cues.<br><br>
+              <em>Result:</em> Failed 40 out of 40 human escalation cases by attempting to template answers.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color:#d97706;">⚠️ B's Failure Mode</div>
+            <p class="card-desc" style="font-size:13px; line-height:1.6;">
+              <strong>Over-Helpful Answering:</strong><br>
+              High factual accuracy (74%) but answers emails that legally require humans.<br><br>
+              <em>Caveat:</em> Uses oracle context (pre-selected articles). Needs a dedicated front router.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color:#e11d48;">💥 C's Failure Mode</div>
+            <p class="card-desc" style="font-size:13px; line-height:1.6;">
+              <strong>Policy Breaches & Search Lag:</strong><br>
+              Breached strict policies in 8 replies (e.g. promising unapproved refunds).<br><br>
+              Tool search dropped facts to 36% (vs. B's 74%) while inflating latency 25×.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; padding:12px 18px; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; font-size:13px; color:#92400e;">
+          📌 <strong>Takeaway:</strong> Do not use an LLM loop where deterministic code suffices. Move escalation and policy verification out of the prompt and into software logic.
+        </div>
+      </section>
+
+      <!-- Slide 5: Recommended Architecture Topology -->
+      <section class="slide" data-slide="5" data-notes="Here is the target architecture. Step 1: load customer card in code. Step 2: Safety router routes OTPs, cancellations, and requests for humans directly to human support. Step 3: Search KB articles. Step 4: Single model call drafts JSON. Step 5: Programmatic policy check verifies no rule violations. Step 6: Human shadow queue approval.">
+        <div class="slide-category">05 · Target Architecture</div>
+        <h2 class="slide-title">The Recommended Topology: Guarded Workflow</h2>
+        <p class="slide-subtitle">Encapsulating safety and policy checks in deterministic code rather than probabilistic prompts.</p>
+
+        <div class="diagram-wrapper">
+          <svg viewBox="0 0 880 340" style="width:100%; height:320px;" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#0284c7"/>
+              </marker>
+              <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#e11d48"/>
+              </marker>
+            </defs>
+
+            <!-- Main Pipeline Nodes -->
+            <g transform="translate(40, 20)">
+              <!-- 1. Email In -->
+              <rect x="0" y="0" width="130" height="42" rx="21" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+              <text x="65" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">1. Email In (1.2k/d)</text>
+
+              <!-- Connector 1->2 -->
+              <line x1="130" y1="21" x2="160" y2="21" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- 2. Data Loader -->
+              <rect x="165" y="0" width="145" height="42" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="237" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">2. Load Account Card</text>
+              <text x="237" y="33" text-anchor="middle" font-size="9" fill="#64748b">Code, zero model</text>
+
+              <!-- Connector 2->3 -->
+              <line x1="310" y1="21" x2="340" y2="21" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- 3. Safety Router -->
+              <rect x="345" y="-5" width="150" height="52" rx="8" fill="#fef2f2" stroke="#f43f5e" stroke-width="1.5"/>
+              <text x="420" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#9f1239">3. Safety Router</text>
+              <text x="420" y="32" text-anchor="middle" font-size="9" fill="#be123c">Needs human? (Rules+LLM)</text>
+
+              <!-- Connector 3->4 -->
+              <line x1="495" y1="21" x2="525" y2="21" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- 4. Article Retrieval -->
+              <rect x="530" y="0" width="135" height="42" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="597" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">4. Search Articles</text>
+              <text x="597" y="33" text-anchor="middle" font-size="9" fill="#64748b">Semantic Search</text>
+
+              <!-- Down Connector to Row 2 -->
+              <line x1="597" y1="42" x2="597" y2="100" stroke="#0284c7" stroke-width="1.5"/>
+              <line x1="597" y1="100" x2="565" y2="100" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+            </g>
+
+            <!-- Row 2 Nodes -->
+            <g transform="translate(40, 100)">
+              <!-- 5. Single LLM Synthesis -->
+              <rect x="390" y="0" width="170" height="46" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2"/>
+              <text x="475" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">5. Synthesis (Option B)</text>
+              <text x="475" y="34" text-anchor="middle" font-size="9" fill="#0284c7">Drafts JSON response</text>
+
+              <!-- Connector 5->6 -->
+              <line x1="390" y1="23" x2="355" y2="23" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- 6. Policy Check -->
+              <rect x="200" y="-3" width="150" height="52" rx="8" fill="#fef2f2" stroke="#f43f5e" stroke-width="1.5"/>
+              <text x="275" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#9f1239">6. Grader Policy Check</text>
+              <text x="275" y="34" text-anchor="middle" font-size="9" fill="#be123c">Deterministic code</text>
+
+              <!-- Connector 6->7 -->
+              <line x1="200" y1="23" x2="165" y2="23" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- 7. Shadow Approval -->
+              <rect x="0" y="0" width="160" height="46" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">7. Human Approval</text>
+              <text x="80" y="34" text-anchor="middle" font-size="9" fill="#b45309">Shadow mode staging</text>
+
+              <!-- Connector 7->8 (Down) -->
+              <line x1="80" y1="46" x2="80" y2="85" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow)"/>
+            </g>
+
+            <!-- Row 3: Reply Out & Human Queue -->
+            <g transform="translate(40, 205)">
+              <!-- 8. Reply Out -->
+              <rect x="0" y="0" width="160" height="40" rx="20" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="80" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">8. Reply Out</text>
+
+              <!-- Fallback Queue -->
+              <rect x="360" y="-10" width="380" height="54" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <text x="550" y="14" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">🧑‍💼 Human Support Queue</text>
+              <text x="550" y="30" text-anchor="middle" font-size="10" fill="#ea580c">Receives router escalations & policy violations (Fail Safe)</text>
+            </g>
+
+            <!-- Escalation Lines to Human Queue -->
+            <path d="M 465 57 L 465 95 L 700 95 L 700 190" fill="none" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dash)"/>
+            <text x="580" y="88" font-size="9" fill="#e11d48" font-weight="600">Yes (Needs Human)</text>
+
+            <path d="M 275 160 L 275 220 L 355 220" fill="none" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dash)"/>
+            <text x="280" y="205" font-size="9" fill="#e11d48" font-weight="600">Policy Breach</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Slide 6: Go-Live Gates & Rollout -->
+      <section class="slide" data-slide="6" data-notes="We will not allow automated unreviewed emails until three quantitative gates hold on held-out evaluation sets. Gate 1: exactly zero policy violations. Gate 2: at most 2 of 40 missed escalations. Gate 3: Pass rate strictly exceeds rules baseline. In Phase 1, 100% of drafts are reviewed in shadow mode.">
+        <div class="slide-category">06 · Risk & Governance</div>
+        <h2 class="slide-title">Go-Live Gates & Phased Rollout</h2>
+        <p class="slide-subtitle">Strict quantitative criteria before disabling human review on production traffic.</p>
+
+        <div class="grid-3" style="margin-bottom:20px;">
+          <div class="card success">
+            <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#15803d; margin-bottom:4px;">Gate 1 · Zero Tolerance</div>
+            <div class="metric-value" style="color:#15803d;">0</div>
+            <div class="card-title" style="margin-top:4px;">Policy Violations</div>
+            <p class="card-desc">Zero OTP leaks, zero unapproved refund promises, zero fabricated discount commitments.</p>
+          </div>
+
+          <div class="card success">
+            <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#15803d; margin-bottom:4px;">Gate 2 · Safety Recall</div>
+            <div class="metric-value" style="color:#15803d;">≤ 2 / 40</div>
+            <div class="card-title" style="margin-top:4px;">Missed Escalations</div>
+            <p class="card-desc">At least 95% of emails requiring human intervention are correctly diverted to the queue.</p>
+          </div>
+
+          <div class="card success">
+            <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#15803d; margin-bottom:4px;">Gate 3 · Quality Floor</div>
+            <div class="metric-value" style="color:#15803d;">&gt; 19%</div>
+            <div class="card-title" style="margin-top:4px;">Pass Rate Lower Bound</div>
+            <p class="card-desc">Statistical confidence interval lower bound must strictly exceed Option A's baseline.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🚀 Rollout Strategy: Shadow Mode First</div>
+          <p class="card-desc" style="font-size:13px; line-height:1.6;">
+            <strong>Phase 1 (Shadow Mode):</strong> The system drafts all 1,200 replies. Human agents see pre-populated drafts in Zendesk/Freshdesk and one-click approve or edit. Reduces handle time by 50% without risk.<br>
+            <strong>Phase 2 (Automated Egress):</strong> Unreviewed sending is enabled exclusively for high-confidence intents that clear all 3 gates.
+          </p>
+        </div>
+      </section>
+
+      <!-- Slide 7: Falsification Criteria -->
+      <section class="slide" data-slide="7" data-notes="What would change my mind? As a Principal Engineer, every recommendation must have falsification triggers. If the router fails, we stop automation and use templates. If an agent on a frontier model solves latency and policy breaks, the agent earns its keep. If search degrades facts by >10%, RAG comes first.">
+        <div class="slide-category">07 · Falsification Criteria</div>
+        <h2 class="slide-title">What Would Change My Mind?</h2>
+        <p class="slide-subtitle">Explicit empirical triggers that would alter this architectural recommendation.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="badge badge-amber" style="width:fit-content; margin-bottom:8px;">Trigger 1 · Safety Limit</div>
+            <div class="card-title">Router Misses &gt; 2 of 40</div>
+            <p class="card-desc">
+              If the safety router cannot achieve ≥95% escalation recall:<br><br>
+              <strong>Action:</strong> Abort automated drafting completely. Revert to Option A regex templates + 100% human triage.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="badge badge-blue" style="width:fit-content; margin-bottom:8px;">Trigger 2 · Agent Breakthrough</div>
+            <div class="card-title">Frontier Model Meets SLA</div>
+            <p class="card-desc">
+              If Option C on a hosted frontier model achieves 0 policy breaks with p95 &lt; 60s at viable cost:<br><br>
+              <strong>Action:</strong> Adopt Option C. The agent will have earned its architectural complexity.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="badge badge-red" style="width:fit-content; margin-bottom:8px;">Trigger 3 · Retrieval Decay</div>
+            <div class="card-title">Search Drops Facts &gt; 10%</div>
+            <p class="card-desc">
+              If replacing oracle context with real search degrades B's factual accuracy by &gt;10 points:<br><br>
+              <strong>Action:</strong> Halt model deployment. Shift engineering entirely to retrieval indexing (Project 2).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Roadmap & Open Questions -->
+      <section class="slide" data-slide="8" data-notes="Here is what we test next across Projects 2 through 6. Project 2 measures real semantic retrieval. Project 3 trains a lightweight classifier for routing. Projects 4 and 5 attribute error modes. Project 6 validates frontier models on real Acme emails.">
+        <div class="slide-category">08 · Engineering Roadmap</div>
+        <h2 class="slide-title">Roadmap & Open Questions (Projects 2 – 6)</h2>
+        <p class="slide-subtitle">Systematically de-risking the remaining uncertainties before production deployment.</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">🔍 Project 2 · Real-World Retrieval (RAG)</div>
+            <p class="card-desc">
+              • Measure factual retention when searching KB articles dynamically vs. oracle context.<br>
+              • Quantify chunking and ranking impact on synthesis accuracy.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title">🧠 Project 3 · Learned Safety Classifier</div>
+            <p class="card-desc">
+              • Benchmark a small local embedding/transformer classifier vs. prompt routing.<br>
+              • Objective: Reduce safety router latency from 500ms to &lt;20ms.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title">🔬 Projects 4 & 5 · Error Attribution</div>
+            <p class="card-desc">
+              • Isolate errors stemming from model size vs. prompt phrasing vs. grader false alarms.<br>
+              • Harden mutation tests to prevent false negatives in policy validation.
+            </p>
+          </div>
+          <div class="card highlight">
+            <div class="card-title">⚡ Project 6 · Frontier Model & Real Traffic</div>
+            <p class="card-desc">
+              • Re-evaluate Workflow B vs. Agent C on hosted frontier LLMs.<br>
+              • Final production validation on anonymized live Acme email stream.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Speaker Notes Panel -->
+    <div class="notes-panel" id="notesPanel">
+      <div class="notes-tag">🎙️ Presenter Script / Speaker Notes</div>
+      <div id="notesText"></div>
+    </div>
+
+    <!-- Footer Controls -->
+    <footer class="deck-footer">
+      <div class="btn-group">
+        <button class="btn" id="prevBtn" onclick="prevSlide()">◀ Prev</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextSlide()">Next ▶</button>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="deck-meta">
+        <span class="shortcut-hint">Slide <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">8</span></span>
+        <span class="shortcut-hint">(Navigate: <kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> | Fullscreen: <kbd>F</kbd>)</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressFill = document.getElementById('progressFill');
+    const currentSlideNum = document.getElementById('currentSlideNum');
+    const totalSlidesNum = document.getElementById('totalSlidesNum');
+    const notesPanel = document.getElementById('notesPanel');
+    const notesText = document.getElementById('notesText');
+
+    totalSlidesNum.textContent = totalSlides;
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        if (idx + 1 === currentSlide) {
+          s.classList.add('active');
+          notesText.textContent = s.getAttribute('data-notes') || 'No speaker notes for this slide.';
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      currentSlideNum.textContent = currentSlide;
+      progressFill.style.width = ((currentSlide / totalSlides) * 100) + '%';
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      notesPanel.classList.toggle('visible');
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        const elem = document.getElementById('deckContainer');
+        if (!document.fullscreenElement) {
+          elem.requestFullscreen().catch(err => alert(`Fullscreen error: ${err.message}`));
+        } else {
+          document.exitFullscreen();
+        }
+      }
+    });
+
+    // Initialize
+    updateSlide();
+  </script>
+</body>
+</html>
