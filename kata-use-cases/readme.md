@@ -1,3 +1,14 @@
-Continuous operational-state evaluation with policy-driven action orchestration
+# Think, Build & Repeat
 
-Cross-domain enterprise contextual federation
+## Continuous operational-state evaluation with policy-driven action orchestration
+
+Operational-state monitoring tracks real-time business events, telemetry, and operational signals to detect and evaluate changing business conditions.
+
+## Cross-domain enterprise contextual federation
+
+Enterprise contextual federation unifies information across structured data sources and unstructured content repositories to connect structured and unstructured enterprise knowledge.
+
+Technical limitations of copilot grouding, github cli, fabric ontology and ai builder
+  cost optimization
+  accuracy improvement
+  speed
