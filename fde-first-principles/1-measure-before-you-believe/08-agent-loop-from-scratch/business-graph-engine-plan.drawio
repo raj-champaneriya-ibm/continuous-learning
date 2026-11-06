@@ -1,4 +1,4 @@
-<mxfile host="65bd71144e" pages="3">
+<mxfile host="65bd71144e" pages="4">
     <diagram id="page-1-principal-review" name="1 · Principal review: glossary vs graph">
         <mxGraphModel dx="711" dy="679" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1360" background="#FFFFFF" math="0" shadow="0">
             <root>
@@ -415,6 +415,104 @@
                 </mxCell>
                 <mxCell id="q_body" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=14;fontColor=#000000;" value="1. &lt;b&gt;Why RDF/SPARQL over plain Python if-statements?&lt;/b&gt; When rules are hardcoded in Python, the grader (evals.py), the prompt (version_b.py), and the router drift apart. In a Business Graph, the rule is data: one node defines the term, its multilingual aliases, its KB article, its eligibility predicate, and its grader constraint.&lt;br&gt;&lt;br&gt;2. &lt;b&gt;Why not dump the entire ontology into every prompt?&lt;/b&gt; Prompt bloat degrades small-model attention (qwen3:4b). Subgraph pruning selects only the concepts and rules activated by the customer&#39;s record and email mentions.&lt;br&gt;&lt;br&gt;3. &lt;b&gt;When should we stop?&lt;/b&gt; If B + DecisionEnvelope does not beat B + plain glossary outside the Day 7 error bars on cases_abuse.jsonl and cases_regional.jsonl, keep the graph only for the deterministic Router and Grader." vertex="1">
                     <mxGeometry height="150" width="1480" x="60" y="1160" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="page-4-ops-governance-and-c3" name="4 · Operational governance &amp; C3 mitigations">
+        <mxGraphModel dx="1500" dy="850" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1320" background="#FFFFFF" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="p4_t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=30;fontStyle=1;fontColor=#000000;" value="Operations &amp; Mitigations: How Concepts, Rules &amp; Reasoner Evolve" vertex="1">
+                    <mxGeometry height="44" width="1520" x="40" y="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="p4_t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontStyle=2;fontColor=#000000;" value="Three-speed operational architecture: separating Ontology meaning (TBox), Commercial parameters (business_rules.json), and Customer records (ABox)." vertex="1">
+                    <mxGeometry height="28" width="1520" x="40" y="70" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 1: Three-Speed Operational Governance -->
+                <mxCell id="ops_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+                    <mxGeometry height="430" width="1520" x="40" y="115" as="geometry"/>
+                </mxCell>
+                <mxCell id="ops_t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="1 · Operational governance: three change cadences, five owning teams, one CI drift gate" vertex="1">
+                    <mxGeometry height="30" width="1100" x="60" y="125" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="tier1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Layer 1 · Semantic TBox (Slow Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/ontology.ttl&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Classes, Taxonomy (rdfs:subClassOf), Multilingual SKOS labels&lt;br&gt;• Object Properties: &lt;b&gt;documentedIn&lt;/b&gt;, &lt;b&gt;enforcesRule&lt;/b&gt;, &lt;b&gt;requiresRole&lt;/b&gt;, &lt;b&gt;ownedBy&lt;/b&gt;&lt;br&gt;• Domain Catalog: &lt;b&gt;Plan&lt;/b&gt; (Basic/Plus/Pro), &lt;b&gt;PuneServiceArea&lt;/b&gt; (8 areas), &lt;b&gt;KB01..16&lt;/b&gt;&lt;br&gt;• Stewards via &lt;b&gt;acme:ownedBy&lt;/b&gt;: Trust &amp;amp; Safety, Product Catalog, Network Ops, Billing Ops, Retention" vertex="1">
+                    <mxGeometry height="220" width="380" x="60" y="175" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="tier2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Layer 2 · Deterministic Business Rules (Fast Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/business_rules.json + lab/business_rules.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Evolves independently of OWL classes!&lt;br&gt;• Commercial thresholds: &lt;b&gt;max_rupees_30_days=500&lt;/b&gt;, &lt;b&gt;min_tenure_months=13&lt;/b&gt;, &lt;b&gt;cooldown_months=12&lt;/b&gt;, &lt;b&gt;discount_percent=50&lt;/b&gt;&lt;br&gt;• Supports runtime &lt;b&gt;overrides={...}&lt;/b&gt; for promos or policy experiments without touching ontology.ttl" vertex="1">
+                    <mxGeometry height="220" width="380" x="480" y="175" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="tier3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="&lt;b&gt;Layer 3 · Operational Records (Live Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;customers.json + outages.json + kb.md&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Per-customer ledger: &lt;b&gt;tenure_months&lt;/b&gt;, &lt;b&gt;credits_last_30_days&lt;/b&gt;, &lt;b&gt;late_fee_waived_on&lt;/b&gt;, &lt;b&gt;retention_offer_used_on&lt;/b&gt;, &lt;b&gt;payments_this_cycle&lt;/b&gt;&lt;br&gt;• Joined only in ephemeral single-customer subgraphs (&lt;b&gt;customer_subgraph()&lt;/b&gt;)" vertex="1">
+                    <mxGeometry height="220" width="340" x="900" y="175" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="ops_gate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;CI Operational Drift Gate&lt;/b&gt;&lt;br&gt;&lt;i&gt;validate_ontology_ops()&lt;/i&gt;&lt;br&gt;&lt;br&gt;1. 100% class stewardship (&lt;b&gt;ownedBy&lt;/b&gt;)&lt;br&gt;2. Every customer plan &amp;amp; area in JSON exists in TBox&lt;br&gt;3. Every &lt;b&gt;documentedIn&lt;/b&gt; KB IRI exists in &lt;b&gt;kb.md&lt;/b&gt;&lt;br&gt;4. Every rule in &lt;b&gt;business_rules.json&lt;/b&gt; maps to a valid TBox concept&lt;br&gt;5. Zero PII in static TBox" vertex="1">
+                    <mxGeometry height="220" width="260" x="1280" y="175" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="e_op1" edge="1" parent="1" source="tier1" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="250" y="425"/>
+                            <mxPoint x="1410" y="425"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_op2" edge="1" parent="1" source="tier2" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="670" y="425"/>
+                            <mxPoint x="1410" y="425"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_op3" edge="1" parent="1" source="tier3" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;dashed=1;endArrow=block;endFill=1;">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1070" y="425"/>
+                            <mxPoint x="1410" y="425"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+
+                <mxCell id="ops_note" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="Why this solves the Operations Problem: Product/Network/Billing teams can update plans, areas, or rupee thresholds in JSON/Turtle, and validate_ontology_ops() fails CI immediately if any edge or concept drifts out of sync." vertex="1">
+                    <mxGeometry height="40" width="1460" x="60" y="485" as="geometry"/>
+                </mxCell>
+
+                <!-- Panel 2: OWL 2 RL Reasoner + Entitlement Engine + Version C3 -->
+                <mxCell id="mit_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+                    <mxGeometry height="710" width="1520" x="40" y="575" as="geometry"/>
+                </mxCell>
+                <mxCell id="mit_t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="2 · Implemented mitigations: OWL Reasoner → Entitlement Computation → Version C3 &amp; Grader" vertex="1">
+                    <mxGeometry height="30" width="1100" x="60" y="588" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="m_owl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Mitigation #4 · OWL 2 RL + Defeasible Reasoner&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab.ontology.reason_owl_rl(store)&lt;/i&gt;&lt;br&gt;&lt;br&gt;Materializes SPARQL 1.1 Update rules to a fixed point:&lt;br&gt;• &lt;b&gt;cls-def-inh:&lt;/b&gt; Direct-hop subclass inheritance for &lt;i&gt;countsTowardLimit&lt;/i&gt;, &lt;i&gt;oncePerMonths&lt;/i&gt;, &lt;i&gt;requiresRole&lt;/i&gt;, &lt;i&gt;ownedBy&lt;/i&gt; (preserves &lt;i&gt;false&lt;/i&gt; overrides on DoublePaymentRefund &amp;amp; OutageCredit)&lt;br&gt;• &lt;b&gt;scm-sco &amp;amp; cax-sco:&lt;/b&gt; Transitive &lt;i&gt;subClassOf&lt;/i&gt; &amp;amp; instance typing&lt;br&gt;• &lt;b&gt;prp-inv / dom / rng:&lt;/b&gt; &lt;i&gt;documentedIn ↔ documentsConcept&lt;/i&gt;" vertex="1">
+                    <mxGeometry height="240" width="460" x="60" y="640" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="m_ent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Mitigation #5 · Deterministic Entitlement Engine&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab.ontology.compute_entitlements(customer, rules=...)&lt;/i&gt;&lt;br&gt;&lt;br&gt;Joins reasoned TBox + &lt;i&gt;business_rules.json&lt;/i&gt; + 1 customer record:&lt;br&gt;• &lt;b&gt;30-day headroom:&lt;/b&gt; max(0, ₹500 − credits_last_30_days)&lt;br&gt;• &lt;b&gt;late-fee waiver:&lt;/b&gt; tenure ≥ 13m ∧ cooldown ≥ 12m ∧ ₹100 ≤ headroom&lt;br&gt;• &lt;b&gt;retention offer:&lt;/b&gt; tenure ≥ 13m ∧ cooldown ≥ 12m ∧ 50% × Plan price&lt;br&gt;• &lt;b&gt;double payment refund:&lt;/b&gt; duplicate amount in &lt;i&gt;payments_this_cycle&lt;/i&gt;&lt;br&gt;• &lt;b&gt;outage credit:&lt;/b&gt; active area outage &amp;gt; 24h (excluded from limit)" vertex="1">
+                    <mxGeometry height="240" width="480" x="560" y="640" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="m_c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;Mitigation #1 · Version C3 &amp;amp; Ontology Grader&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/version_c3.py + lab/evals.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;version_c3.py:&lt;/b&gt; Pre-computes &lt;i&gt;DecisionEnvelope&lt;/i&gt;, adds &lt;i&gt;define_term&lt;/i&gt; &amp;amp; &lt;i&gt;check_entitlement&lt;/i&gt; tools, upgrades &lt;i&gt;search_kb_c3&lt;/i&gt; to follow &lt;i&gt;skos:altLabel → documentedIn → KB&lt;/i&gt;, and enforces post-draft policy guardrails.&lt;br&gt;• &lt;b&gt;evals.py:&lt;/b&gt; Prices &lt;i&gt;&quot;50% off your Pro plan&quot;&lt;/i&gt; (₹750 &amp;gt; ₹500) via &lt;i&gt;ontology.plans()&lt;/i&gt; and enforces per-customer 30-day headroom." vertex="1">
+                    <mxGeometry height="240" width="460" x="1080" y="640" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="em1" edge="1" parent="1" source="m_owl" target="m_ent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="em2" edge="1" parent="1" source="m_ent" target="m_c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="ver_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Verification Summary (pytest BDD + Unit Suite: 88 passed, 9 xfailed in &amp;lt; 1s)&lt;/b&gt;&lt;br&gt;&lt;br&gt;✓ &lt;b&gt;Closed @known_gap in policy_rules.feature:&lt;/b&gt; &lt;i&gt;&quot;Hi Aditya, we&#39;ll give you 50% off your Pro plan next month.&quot;&lt;/i&gt; now priced via ontology at ₹750 and flagged as &lt;b&gt;big_refund&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;OWL Reasoner verified:&lt;/b&gt; &lt;i&gt;late-fee waiver&lt;/i&gt; and &lt;i&gt;retention offer&lt;/i&gt; inherit &lt;b&gt;countsTowardLimit=true&lt;/b&gt; and &lt;b&gt;oncePerMonths=12&lt;/b&gt; without redundant triples in Turtle; &lt;i&gt;double payment refund&lt;/i&gt; and &lt;i&gt;outage credit&lt;/i&gt; preserve &lt;b&gt;countsTowardLimit=false&lt;/b&gt;; &lt;i&gt;cancellation&lt;/i&gt; inherits &lt;b&gt;requiresRole=&quot;account holder&quot;&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;Entitlement &amp;amp; Rule Evolution verified:&lt;/b&gt; Boundary cases (AC1020 12m vs AC1021 13m, AC1025 vs AC1028 cooldowns, AC1009 vs AC1012 duplicate payments, AC1014 ₹50 headroom, AC1032 ₹300 headroom) + commercial override test pass.&lt;br&gt;✓ &lt;b&gt;Operational Drift Gate verified:&lt;/b&gt; 100% stewardship coverage across all OWL classes and zero catalog drift against &lt;i&gt;customers.json&lt;/i&gt;, &lt;i&gt;outages.json&lt;/i&gt;, &lt;i&gt;kb.md&lt;/i&gt;, and &lt;i&gt;business_rules.json&lt;/i&gt;." vertex="1">
+                    <mxGeometry height="210" width="1480" x="60" y="925" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

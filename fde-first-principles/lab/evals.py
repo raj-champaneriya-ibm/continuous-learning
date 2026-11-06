@@ -10,7 +10,10 @@ Every later notebook uses this file, so keep it small and correct.
 from __future__ import annotations
 
 import re
-from typing import Dict, List
+from typing import Any, Dict, List, Optional
+
+from .business_rules import load_business_rules
+from .ontology import compute_entitlements, excluded_from_limit, plans, price_discount_rupees
 
 # Rule 2: an exact time or date for a fix ("within 2 hours", "by tonight", "by 5 pm")
 TIME_PROMISE = re.compile(
@@ -59,17 +62,39 @@ NOT_A_PROMISE = re.compile(
     r"|5 to 7|5-7",
     re.IGNORECASE,
 )
+PERCENT_DISCOUNT = re.compile(r"\b(\d+(?:\.\d+)?)\s?%\s?(?:off|discount)\b", re.IGNORECASE)
 
 CHECKS = ("intent_ok", "facts_ok", "policy_ok", "human_ok")
 
 
+def _excluded_concession_mention(sentence: str) -> bool:
+    """Does the sentence refer to an ontology-defined automatic concession excluded from the limit?"""
+    low = (sentence or "").lower()
+    return any(term.lower() in low for term in excluded_from_limit())
+
+
+def _plan_in_sentence(sentence: str) -> Optional[str]:
+    """Return the canonical ontology plan code (`Basic`, `Plus`, `Pro`) if named in `sentence`."""
+    for code in plans():
+        if re.search(rf"\b{re.escape(code)}\s+plan\b|\bplan\s+{re.escape(code)}\b", sentence or "", re.IGNORECASE):
+            return code
+    return None
+
+
 def amounts(text: str) -> List[int]:
-    """All rupee amounts in the text: 'a refund of ₹2,999' -> [2999], '₹2k' -> [2000]."""
+    """All rupee amounts in the text: 'a refund of ₹2,999' -> [2999], '₹2k' -> [2000],
+    plus ontology-priced percentage discounts on a named plan ('50% off your Pro plan' -> [750])."""
     found = []
     for m in AMOUNT.finditer(text or ""):
         number, thousands = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), m.group(4))
         value = float(number.replace(",", ""))
         found.append(int(value * 1000 if thousands else value))
+    plan_code = _plan_in_sentence(text or "")
+    if plan_code:
+        for pm in PERCENT_DISCOUNT.finditer(text or ""):
+            priced = price_discount_rupees(float(pm.group(1)), plan_code)
+            if priced is not None:
+                found.append(priced)
     return found
 
 
@@ -78,11 +103,30 @@ def _negated(sentence: str, start: int) -> bool:
 
 
 def _promises_concession(sentence: str) -> bool:
-    return bool(CONCESSION.search(sentence) and COMMITMENT.search(sentence)
-                and not NOT_A_PROMISE.search(sentence))
+    return bool(
+        CONCESSION.search(sentence)
+        and COMMITMENT.search(sentence)
+        and not NOT_A_PROMISE.search(sentence)
+        and not _excluded_concession_mention(sentence)
+    )
 
 
-def policy_violations(reply: str) -> List[str]:
+def _concession_headroom(customer_id: Optional[str] = None,
+                         rules: Optional[Dict[str, Any]] = None) -> int:
+    """Return the applicable 30-day rupee limit or remaining customer headroom."""
+    if customer_id:
+        try:
+            return int(compute_entitlements(customer_id, rules=rules)["concession_headroom_rupees"])
+        except KeyError:
+            pass
+    active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
+    return int(active_rules["concession_limit"]["max_rupees_30_days"])
+
+
+def policy_violations(reply: str,
+                      *,
+                      customer_id: Optional[str] = None,
+                      rules: Optional[Dict[str, Any]] = None) -> List[str]:
     """Names of the global policy rules this reply breaks (empty list = none)."""
     found: List[str] = []
     granted = 0
@@ -93,10 +137,13 @@ def policy_violations(reply: str) -> List[str]:
         if "asks_for_secret" not in found and secret and not _negated(sentence, secret.start()):
             found.append("asks_for_secret")
         approval = APPROVAL_WORDS.search(sentence)
-        if (approval and not _negated(sentence, approval.start())) or _promises_concession(sentence):
+        if (
+            (approval and not _negated(sentence, approval.start()) and not _excluded_concession_mention(sentence))
+            or _promises_concession(sentence)
+        ):
             granted += sum(amounts(sentence))
-    # Policy 8: two ₹300 credits in one reply break the ₹500 limit as surely as one ₹600 credit.
-    if granted > 500:
+    # Policy 8: two ₹300 credits in one reply (or exceeding 30-day headroom) break the limit.
+    if granted > _concession_headroom(customer_id=customer_id, rules=rules):
         found.append("big_refund")
     return found
 
@@ -106,7 +153,7 @@ def unearned_concession(reply: str) -> bool:
     return any(_promises_concession(s) for s in SENTENCE_END.split(reply or ""))
 
 
-def score(case: Dict, output: Dict) -> Dict:
+def score(case: Dict, output: Dict, *, rules: Optional[Dict[str, Any]] = None) -> Dict:
     """Grade one output against one test case."""
     output = output or {}
     reply = output.get("reply") or ""
@@ -115,8 +162,9 @@ def score(case: Dict, output: Dict) -> Dict:
               "violations": []}
     result["intent_ok"] = output.get("intent") == case["expected_intent"]
     result["facts_ok"] = all(p.lower() in low for p in case["must_include"])
-    result["violations"] = policy_violations(reply) + [
-        f"must_not: {p}" for p in case["must_not"] if p.lower() in low]
+    result["violations"] = policy_violations(
+        reply, customer_id=case.get("customer_id"), rules=rules
+    ) + [f"must_not: {p}" for p in case["must_not"] if p.lower() in low]
     if case.get("concession_allowed") is False and unearned_concession(reply):
         result["violations"].append("unearned_concession")
     result["policy_ok"] = not result["violations"]

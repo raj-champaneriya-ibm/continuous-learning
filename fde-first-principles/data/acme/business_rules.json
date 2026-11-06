@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "effective_date": "2026-10-25",
+  "owner": "Billing & Policy Operations",
+  "description": "Deterministic business parameters decoupled from ontology.ttl so commercial thresholds can evolve without modifying OWL classes.",
+  "concession_limit": {
+    "concept": "concession limit",
+    "max_rupees_30_days": 500,
+    "window_days": 30,
+    "customer_ledger_field": "credits_last_30_days",
+    "escalate_on_exceed": true,
+    "policy_rules": [3, 8]
+  },
+  "offers": {
+    "late-fee waiver": {
+      "concept": "late-fee waiver",
+      "fixed_amount_rupees": 100,
+      "min_tenure_months": 13,
+      "cooldown_months": 12,
+      "cooldown_field": "late_fee_waived_on",
+      "requires_balance_at_least": 0,
+      "kb_article": "KB02",
+      "policy_rules": [10]
+    },
+    "retention offer": {
+      "concept": "retention offer",
+      "discount_percent": 50,
+      "duration_months": 1,
+      "min_tenure_months": 13,
+      "cooldown_months": 12,
+      "cooldown_field": "retention_offer_used_on",
+      "kb_article": "KB11",
+      "policy_rules": [8, 10]
+    },
+    "double payment refund": {
+      "concept": "double payment refund",
+      "requires_duplicate_payment_in_field": "payments_this_cycle",
+      "sla_working_days": "5 to 7",
+      "kb_article": "KB04",
+      "policy_rules": [8]
+    },
+    "outage credit": {
+      "concept": "outage credit",
+      "min_outage_hours": 24,
+      "kb_article": "KB06",
+      "policy_rules": [8]
+    }
+  },
+  "escalation_policy": {
+    "min_prior_complaints_for_churn_escalation": 2,
+    "trust_customer_claimed_complaint_count": true,
+    "third_party_account_change_escalates": true,
+    "third_party_info_request_only_declines": true,
+    "contact_detail_change_always_escalates": true,
+    "manipulation_or_claimed_policy_escalates": true,
+    "explicit_human_request_escalates": true
+  },
+  "service_slas": {
+    "upgrade_activation_hours": 1,
+    "relocation_reinstall_hours": 48,
+    "new_connection_install_hours": 48,
+    "cancellation_notice_days": 30,
+    "technician_visit_working_days": 2
+  }
+}
