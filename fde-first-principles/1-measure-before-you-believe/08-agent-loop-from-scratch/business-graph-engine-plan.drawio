@@ -1,10 +1,10 @@
-<mxfile host="65bd71144e" pages="4">
-    <diagram id="page-1-principal-review" name="1 · Principal review: glossary vs graph">
-        <mxGraphModel dx="711" dy="679" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1360" background="#FFFFFF" math="0" shadow="0">
+<mxfile host="65bd71144e" pages="5">
+    <diagram id="page-1-principal-review" name="1 · Baseline review (before 79a83bf)">
+        <mxGraphModel dx="1538" dy="2038" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1360" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=30;fontStyle=1;fontColor=#000000;" value="Why did the ontology stop at a glossary?" vertex="1">
+                <mxCell id="t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=30;fontStyle=1;fontColor=#000000;" value="Baseline (before commit 79a83bf): why did the ontology stop at a glossary?" vertex="1">
                     <mxGeometry height="44" width="1520" x="40" y="24" as="geometry"/>
                 </mxCell>
                 <mxCell id="t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontStyle=2;fontColor=#000000;" value="Principal engineer review of data/acme/ontology.ttl and lab/ontology.py: what is built, what is disconnected, and why the model still does arithmetic in its head." vertex="1">
@@ -160,8 +160,8 @@
             </root>
         </mxGraphModel>
     </diagram>
-    <diagram id="page-2-business-graph-schema" name="2 · Business graph schema (TBox + ABox)">
-        <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="1320" background="#FFFFFF" math="0" shadow="0">
+    <diagram id="page-2-business-graph-schema" name="2 · Business graph schema (as built)">
+        <mxGraphModel dx="1538" dy="2038" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1320" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -177,10 +177,10 @@
                 <mxCell id="tbox_lbl" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="1 · STATIC TBOX (data/acme/ontology.ttl) — Shared across all requests, zero PII, loaded once into base Store" vertex="1">
                     <mxGeometry height="30" width="1200" x="60" y="125" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_actor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="acme:ActorRole&lt;br&gt;&lt;font style=&quot;font-weight:normal;font-size:12px&quot;&gt;AccountHolder | ThirdParty&lt;/font&gt;" vertex="1">
+                <mxCell id="c_actor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="acme:AccountHolder&lt;br&gt;&lt;font style=&quot;font-weight:normal;font-size:12px&quot;&gt;subClassOf Customer · vs ThirdParty&lt;/font&gt;" vertex="1">
                     <mxGeometry height="64" width="210" x="70" y="180" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_action" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="acme:AccountAction&lt;br&gt;&lt;font style=&quot;font-weight:normal;font-size:12px&quot;&gt;Cancel | Shift | PlanChange |&lt;br&gt;Transfer | ContactChange&lt;/font&gt;" vertex="1">
+                <mxCell id="c_action" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="acme:AccountAction&lt;br&gt;&lt;font style=&quot;font-weight:normal;font-size:12px&quot;&gt;Cancel | Shift | PlanChange |&lt;br&gt;ContactChange (no Transfer yet)&lt;/font&gt;" vertex="1">
                     <mxGeometry height="74" width="230" x="70" y="310" as="geometry"/>
                 </mxCell>
                 <mxCell id="e_act_role" edge="1" parent="1" source="c_action" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=#FFFFFF;" target="c_actor" value="acme:requiresRole (Rule 11)">
@@ -195,22 +195,22 @@
                 <mxCell id="c_conc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="acme:Concession&lt;br&gt;&lt;font style=&quot;font-weight:normal;font-size:12px&quot;&gt;default countsTowardLimit: true&lt;/font&gt;" vertex="1">
                     <mxGeometry height="64" width="260" x="560" y="180" as="geometry"/>
                 </mxCell>
-                <mxCell id="c_limit" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=12;" value="&lt;b&gt;acme:ConcessionLimitPolicy&lt;/b&gt;&lt;br&gt;acme:maxRupees: 500&lt;br&gt;acme:windowDays: 30&lt;br&gt;acme:ledgerField: &quot;credits_last_30_days&quot;&lt;br&gt;acme:onExceed: acme:EscalateToHuman" vertex="1">
+                <mxCell id="c_limit" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=12;" value="&lt;b&gt;acme:ConcessionLimit&lt;/b&gt; (TBox: meaning only)&lt;br&gt;Numbers live in business_rules.json:&lt;br&gt;max_rupees_30_days: 500 · window_days: 30&lt;br&gt;ledger: credits_last_30_days&lt;br&gt;⚠ ₹500 is also prose in policy.md + kb.md" vertex="1">
                     <mxGeometry height="96" width="280" x="940" y="164" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_conc_lim" edge="1" parent="1" source="c_conc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=#FFFFFF;" target="c_limit" value="acme:&lt;div&gt;governedBy&lt;/div&gt;">
+                <mxCell id="e_conc_lim" edge="1" parent="1" source="c_conc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=#FFFFFF;" target="c_limit" value="threshold&lt;div&gt;in JSON&lt;/div&gt;">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="sub_dpr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:DoublePaymentRefund&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;false&lt;/b&gt;&lt;br&gt;requiresFact: duplicate_payment&lt;br&gt;slaWorkingDays: &quot;5 to 7&quot;" vertex="1">
+                <mxCell id="sub_dpr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:DoublePaymentRefund&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;false&lt;/b&gt;&lt;br&gt;JSON: same amount twice in&lt;br&gt;payments_this_cycle · 5 to 7 days" vertex="1">
                     <mxGeometry height="86" width="220" x="350" y="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="sub_oc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:OutageCredit&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;false&lt;/b&gt;&lt;br&gt;minOutageHours: &lt;b&gt;24&lt;/b&gt;&lt;br&gt;mode: automatic" vertex="1">
+                <mxCell id="sub_oc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:OutageCredit&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;false&lt;/b&gt;&lt;br&gt;JSON: min_outage_hours 24&lt;br&gt;⚠ outage age not computable (stub)" vertex="1">
                     <mxGeometry height="86" width="200" x="590" y="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="sub_lfw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:LateFeeWaiver&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;true&lt;/b&gt;&lt;br&gt;fixedAmountRupees: &lt;b&gt;100&lt;/b&gt;&lt;br&gt;minTenureMonths: &lt;b&gt;13&lt;/b&gt;&lt;br&gt;cooldownMonths: &lt;b&gt;12&lt;/b&gt;&lt;br&gt;recordField: &quot;late_fee_waived_on&quot;" vertex="1">
+                <mxCell id="sub_lfw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:LateFeeWaiver&lt;/b&gt;&lt;br&gt;TBox (inferred): countsTowardLimit &lt;b&gt;true&lt;/b&gt;, oncePerMonths &lt;b&gt;12&lt;/b&gt;&lt;br&gt;JSON: ₹100 · min tenure 13 · cooldown 12&lt;br&gt;field: late_fee_waived_on&lt;br&gt;⚠ 12 months stored twice" vertex="1">
                     <mxGeometry height="115" width="235" x="810" y="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="sub_ro" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:RetentionOffer&lt;/b&gt;&lt;br&gt;countsTowardLimit: &lt;b&gt;true&lt;/b&gt;&lt;br&gt;discountPercent: &lt;b&gt;50&lt;/b&gt; (× Plan price)&lt;br&gt;minTenureMonths: &lt;b&gt;13&lt;/b&gt;&lt;br&gt;cooldownMonths: &lt;b&gt;12&lt;/b&gt;&lt;br&gt;recordField: &quot;retention_offer_used_on&quot;" vertex="1">
+                <mxCell id="sub_ro" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:RetentionOffer&lt;/b&gt;&lt;br&gt;TBox (inferred): countsTowardLimit &lt;b&gt;true&lt;/b&gt;, oncePerMonths &lt;b&gt;12&lt;/b&gt;&lt;br&gt;JSON: 50% × plan price · min tenure 13&lt;br&gt;field: retention_offer_used_on&lt;br&gt;⚠ Pro: ₹750 &amp;gt; ₹500 needs a human" vertex="1">
                     <mxGeometry height="115" width="245" x="1065" y="310" as="geometry"/>
                 </mxCell>
                 <mxCell id="es1" edge="1" parent="1" source="sub_dpr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=0;" target="c_conc">
@@ -230,7 +230,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="c_esc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:EscalationTrigger&lt;/b&gt; (Rule 6, 9, 11)&lt;br&gt;• LegalThreat (trustCustomerWord: true)&lt;br&gt;• ChurnAfterRepeatedComplaints&lt;br&gt;• FraudOrOTPSolicitation&lt;br&gt;• ManipulationOrFakePolicy&lt;br&gt;• UnauthorizedThirdPartyChange&lt;br&gt;• ConcessionAbove500" vertex="1">
+                <mxCell id="c_esc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;PLANNED · not in ontology.ttl&lt;/b&gt;&lt;br&gt;&lt;b&gt;acme:EscalationTrigger&lt;/b&gt; (Rule 6, 9, 11)&lt;br&gt;• LegalThreat (trustCustomerWord: true)&lt;br&gt;• ChurnAfterRepeatedComplaints&lt;br&gt;• FraudOrOTPSolicitation&lt;br&gt;• ManipulationOrFakePolicy&lt;br&gt;• UnauthorizedThirdPartyChange&lt;br&gt;• ConcessionAbove500" vertex="1">
                     <mxGeometry height="140" width="330" x="350" y="465" as="geometry"/>
                 </mxCell>
                 <mxCell id="c_kb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;acme:KnowledgeArticle &amp;amp; PolicyRule&lt;/b&gt;&lt;br&gt;First-class IRI nodes (not strings!):&lt;br&gt;• acme:KB01 .. acme:KB16&lt;br&gt;• acme:PolicyRule1 .. acme:PolicyRule11&lt;br&gt;• Connected via &lt;b&gt;acme:documentedIn&lt;/b&gt; &amp;amp; &lt;b&gt;acme:enforcesRule&lt;/b&gt;" vertex="1">
@@ -242,7 +242,7 @@
                 <mxCell id="e_lex_kb" edge="1" parent="1" source="c_lex" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=#FFFFFF;" target="c_kb" value="2-hop&amp;nbsp;&lt;div&gt;traversal&lt;/div&gt;">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="iso_bar" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontStyle=1;align=center;" value="POLICY RULE 5 ISOLATION BOUNDARY · Base TBox Store is cloned per request; only ONE customer&#39;s ABox triples are ever inserted, queried, and discarded" vertex="1">
+                <mxCell id="iso_bar" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontStyle=1;align=center;" value="POLICY RULE 5 BOUNDARY · ontology.ttl holds no customer data (CI-checked) · customer_subgraph() clones TBox + ONE customer in 1.5 ms, but the decision path reads the JSON record directly" vertex="1">
                     <mxGeometry height="38" width="1520" x="40" y="760" as="geometry"/>
                 </mxCell>
                 <mxCell id="abox_zone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;dashed=1;" value="" vertex="1">
@@ -260,7 +260,7 @@
                 <mxCell id="ab_req" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=12;" value="&lt;b&gt;acme_req:IncomingRequest&lt;/b&gt;&lt;br&gt;acme:senderRole acme:AccountHolder ;&lt;br&gt;acme:mentionsConcept acme:Credit, acme:OutageCredit ;&lt;br&gt;acme:requestedAmountRupees 300 ;&lt;br&gt;acme:recordDate &quot;2026-10-25&quot;^^xsd:date ." vertex="1">
                     <mxGeometry height="135" width="360" x="440" y="885" as="geometry"/>
                 </mxCell>
-                <mxCell id="ab_sparql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=14;" value="&lt;b&gt;SPARQL Rule Evaluation (TBox + ABox Join)&lt;/b&gt;&lt;br&gt;&lt;br&gt;1. &lt;b&gt;Concession Headroom:&lt;/b&gt; ₹500 − ₹200 = &lt;b&gt;₹300 remaining&lt;/b&gt;&lt;br&gt;2. &lt;b&gt;OutageCredit Check:&lt;/b&gt; OUT-KOTH-1021 is &amp;lt; 24h → automatic outage credit not yet triggered&lt;br&gt;3. &lt;b&gt;RetentionOffer Check:&lt;/b&gt; tenure 9 &amp;lt; 13 AND 50% × ₹1,499 = ₹750 &amp;gt; ₹300 headroom → &lt;b&gt;ineligible&lt;/b&gt;&lt;br&gt;4. &lt;b&gt;Linked KB Articles:&lt;/b&gt; KB04, KB05, KB06" vertex="1">
+                <mxCell id="ab_sparql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=14;" value="&lt;b&gt;compute_entitlements(): Python over one record (not a SPARQL ABox join)&lt;/b&gt;&lt;br&gt;&lt;br&gt;1. &lt;b&gt;Concession Headroom:&lt;/b&gt; ₹500 − ₹200 = &lt;b&gt;₹300 remaining&lt;/b&gt;&lt;br&gt;2. &lt;b&gt;OutageCredit Check:&lt;/b&gt; OUT-KOTH-1021 is &amp;lt; 24h → automatic outage credit not yet triggered&lt;br&gt;3. &lt;b&gt;RetentionOffer Check:&lt;/b&gt; tenure 9 &amp;lt; 13 AND 50% × ₹1,499 = ₹750 &amp;gt; ₹300 headroom → &lt;b&gt;ineligible&lt;/b&gt;&lt;br&gt;4. &lt;b&gt;Linked KB Articles:&lt;/b&gt; KB04 only. ⚠ No Outage concept, so KB05 and KB06 are missed" vertex="1">
                     <mxGeometry height="200" width="640" x="880" y="885" as="geometry"/>
                 </mxCell>
                 <mxCell id="ab_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;fontColor=#000000;align=left;spacingLeft=14;" value="&lt;b&gt;Why this fixes the @known_gap in policy_rules.feature:&lt;/b&gt;&lt;br&gt;Today&#39;s grader misses &lt;i&gt;&quot;Hi Aditya, we&#39;ll give you 50% off your Pro plan next month&quot;&lt;/i&gt; because regex cannot multiply 50% × Pro plan (₹1,499) = ₹750 &amp;gt; ₹500. In the Business Graph, &lt;b&gt;acme:RetentionOffer&lt;/b&gt; joins with &lt;b&gt;acme:Plan_Pro (acme:monthlyPriceRupees 1499)&lt;/b&gt; to deterministically value the discount at ₹750." vertex="1">
@@ -284,8 +284,8 @@
             </root>
         </mxGraphModel>
     </diagram>
-    <diagram id="page-3-engine-architecture-plan" name="3 · Engine architecture &amp; implementation plan">
-        <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="1380" background="#FFFFFF" math="0" shadow="0">
+    <diagram id="page-3-engine-architecture-plan" name="3 · Engine architecture &amp; plan status">
+        <mxGraphModel dx="1538" dy="2038" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1380" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -304,22 +304,22 @@
                 <mxCell id="in_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Incoming Case&lt;/b&gt;&lt;br&gt;customer_id + email&lt;br&gt;(English / Hinglish / Regional)" vertex="1">
                     <mxGeometry height="80" width="190" x="60" y="220" as="geometry"/>
                 </mxCell>
-                <mxCell id="step1_lex" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;Stage 1 · Lexical &amp;amp; Entity Linker&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/business_graph.py&lt;/i&gt;&lt;br&gt;• Aho-Corasick / n-gram match over &lt;b&gt;skos:prefLabel&lt;/b&gt; + &lt;b&gt;altLabel&lt;/b&gt;&lt;br&gt;• Maps phrases → Concept IRIs&lt;br&gt;• Extracts ₹ &amp;amp; % amounts" vertex="1">
+                <mxCell id="step1_lex" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;Stage 1 · Lexical &amp;amp; Entity Linker&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/ontology.extract_concepts()&lt;/i&gt;&lt;br&gt;• Longest-first regex scan over &lt;b&gt;skos:prefLabel&lt;/b&gt; + &lt;b&gt;altLabel&lt;/b&gt;&lt;br&gt;• Maps phrases → Concept IRIs&lt;br&gt;• Extracts ₹ &amp;amp; % amounts" vertex="1">
                     <mxGeometry height="120" width="250" x="290" y="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="step2_sub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=12;" value="&lt;b&gt;Stage 2 · Ephemeral Subgraph &amp;amp; Rule Engine&lt;/b&gt;&lt;br&gt;&lt;i&gt;pyoxigraph in-memory Store&lt;/i&gt;&lt;br&gt;• Loads TBox (ontology.ttl)&lt;br&gt;• Injects 1 Customer + Outage ABox&lt;br&gt;• Runs SPARQL entitlement, limit, cooldown &amp;amp; role queries" vertex="1">
+                <mxCell id="step2_sub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;align=left;spacingLeft=12;" value="&lt;b&gt;Stage 2 · Entitlement rules&lt;/b&gt;&lt;br&gt;&lt;i&gt;compute_entitlements() + business_rules.json&lt;/i&gt;&lt;br&gt;• Reasoned TBox: plan prices, excluded_from_limit()&lt;br&gt;• Python over ONE JSON record (no SPARQL join)&lt;br&gt;• Headroom, tenure, cooldown, duplicate payment" vertex="1">
                     <mxGeometry height="140" width="270" x="580" y="190" as="geometry"/>
                 </mxCell>
-                <mxCell id="env_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;DecisionEnvelope (dataclass)&lt;/b&gt;&lt;br&gt;• matched_concepts: [IRI]&lt;br&gt;• grounded_kb_ids: [&quot;KB04&quot;, ...]&lt;br&gt;• concession_headroom_inr: 300&lt;br&gt;• offer_eligibility: {waiver: False, ...}&lt;br&gt;• escalation_reasons: [str]&lt;br&gt;• relevant_glossary: str" vertex="1">
+                <mxCell id="env_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;DecisionEnvelope (dict)&lt;/b&gt;&lt;br&gt;&lt;i&gt;version_c3.build_decision_envelope()&lt;/i&gt;&lt;br&gt;• matched_concepts · grounded_kb_ids&lt;br&gt;• concession_headroom_rupees: 300&lt;br&gt;• offers {eligible, auto_approvable, reason}&lt;br&gt;• escalation_reasons&lt;br&gt;• pruned_glossary" vertex="1">
                     <mxGeometry height="150" width="260" x="890" y="185" as="geometry"/>
                 </mxCell>
-                <mxCell id="con_router" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;1. Safety Router (ADR-001 Step 1)&lt;/b&gt;&lt;br&gt;Hard escalations (limit &amp;gt; ₹500, 3rd complaint, non-holder change) route to human deterministically before LLM." vertex="1">
+                <mxCell id="con_router" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;1. Amount guard (C3 only), not yet a router&lt;/b&gt;&lt;br&gt;Fires on ₹ in email &amp;gt; headroom or injection markers. On 256 labels: precision 0.82, recall 0.34. Complaints and third-party rules not encoded." vertex="1">
                     <mxGeometry height="90" width="330" x="1200" y="145" as="geometry"/>
                 </mxCell>
-                <mxCell id="con_b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;2. Version B / C Context (ADR-001 Step 2)&lt;/b&gt;&lt;br&gt;Injects &lt;i&gt;relevant_glossary&lt;/i&gt; (only matched concepts, saving tokens), &lt;i&gt;grounded_kb_ids&lt;/i&gt;, and pre-computed eligibility facts." vertex="1">
+                <mxCell id="con_b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;2. Prompt context (C3 only)&lt;/b&gt;&lt;br&gt;Envelope + define_term, check_entitlement, search_kb_c3. B and C are NOT wired. KB hit@2: 0.54 → 0.65 (regional 0.41 → 0.57)." vertex="1">
                     <mxGeometry height="90" width="330" x="1200" y="255" as="geometry"/>
                 </mxCell>
-                <mxCell id="con_eval" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;3. Policy Grader (ADR-001 Step 3 · evals.py)&lt;/b&gt;&lt;br&gt;Replaces hardcoded regex lists with &lt;i&gt;excluded_from_limit()&lt;/i&gt;, plan-aware % pricing, and customer-specific ₹ headroom." vertex="1">
+                <mxCell id="con_eval" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;align=left;spacingLeft=10;" value="&lt;b&gt;3. Policy grader (evals.py)&lt;/b&gt;&lt;br&gt;Plan-aware % pricing + per-customer headroom; KB04 exemption only for the duplicate the record shows. ⚠ Shares the ontology with C3." vertex="1">
                     <mxGeometry height="90" width="330" x="1200" y="365" as="geometry"/>
                 </mxCell>
                 <mxCell id="rec_db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="customers.json + outages.json&lt;br&gt;(1 record fetched by customer_id)" vertex="1">
@@ -368,7 +368,7 @@
                         <mxPoint x="738" y="330" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="arch_note" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="Key Principal Pattern: The LLM never queries RDF directly. The Business Graph Engine compiles RDF + single-customer JSON into a deterministic DecisionEnvelope in &amp;lt; 2 ms in-process." vertex="1">
+                <mxCell id="arch_note" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="The LLM never queries RDF directly. Measured on this Mac: build_decision_envelope 0.5 ms/case, compute_entitlements 0.3 ms/customer, customer_subgraph 1.5 ms (built, but unused by the decision path)." vertex="1">
                     <mxGeometry height="30" width="1460" x="60" y="540" as="geometry"/>
                 </mxCell>
                 <mxCell id="plan_p" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
@@ -377,19 +377,19 @@
                 <mxCell id="plan_pt" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="2 · Gated implementation plan (measure before you believe)" vertex="1">
                     <mxGeometry height="30" width="900" x="60" y="622" as="geometry"/>
                 </mxCell>
-                <mxCell id="ph0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Phase 0 · Baseline Audit&lt;/b&gt;&lt;br&gt;&lt;i&gt;failures.csv + B/C.jsonl&lt;/i&gt;&lt;br&gt;&lt;br&gt;Quantify failures across:&lt;br&gt;• Term / language misread&lt;br&gt;• Eligibility / limit math&lt;br&gt;• Concept → KB retrieval miss&lt;br&gt;• Missed escalation rule&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 0:&lt;/b&gt; ≥ 20% of failures map to graph-computable rules." vertex="1">
+                <mxCell id="ph0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Phase 0 · Baseline Audit · ⏳ NOT DONE&lt;/b&gt;&lt;br&gt;&lt;i&gt;failures.csv + B/C.jsonl&lt;/i&gt;&lt;br&gt;&lt;br&gt;Quantify failures across:&lt;br&gt;• Term / language misread&lt;br&gt;• Eligibility / limit math&lt;br&gt;• Concept → KB retrieval miss&lt;br&gt;• Missed escalation rule&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 0:&lt;/b&gt; ≥ 20% of failures map to graph-computable rules." vertex="1">
                     <mxGeometry height="250" width="270" x="60" y="670" as="geometry"/>
                 </mxCell>
-                <mxCell id="ph1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 1 · Rich TBox Schema&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/ontology.ttl&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Add Plans (₹699/999/1499), 8 Pune ServiceAreas, Actions&lt;br&gt;• Replace string sources with KB01..16 &amp;amp; PolicyRule IRIs&lt;br&gt;• Encode structured rule predicates (minTenureMonths, cooldownMonths, maxRupees)&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 1:&lt;/b&gt; Existing + new BDD ontology scenarios pass." vertex="1">
+                <mxCell id="ph1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 1 · Rich TBox Schema · ✅ DONE&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/ontology.ttl&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Add Plans (₹699/999/1499), 8 Pune ServiceAreas, Actions&lt;br&gt;• Replace string sources with KB01..16 &amp;amp; PolicyRule IRIs&lt;br&gt;• Encode structured rule predicates (minTenureMonths, cooldownMonths, maxRupees)&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 1:&lt;/b&gt; Existing + new BDD ontology scenarios pass." vertex="1">
                     <mxGeometry height="250" width="280" x="360" y="670" as="geometry"/>
                 </mxCell>
-                <mxCell id="ph2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 2 · Graph Engine Core&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/ontology.py / business_graph.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• O(1) cached alias index + LANG(&quot;en&quot;) filter&lt;br&gt;• Subclass property inheritance&lt;br&gt;• Single-customer ephemeral ABox builder&lt;br&gt;• evaluate_case(case) → DecisionEnvelope&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 2:&lt;/b&gt; 100% accuracy on eligibility &amp;amp; limit unit tests (&amp;lt; 2 ms/case)." vertex="1">
+                <mxCell id="ph2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 2 · Graph Engine Core · ✅ DONE&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/ontology.py + business_rules.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• O(1) cached alias index + LANG(&quot;en&quot;) filter&lt;br&gt;• Subclass property inheritance&lt;br&gt;• Single-customer ephemeral ABox builder&lt;br&gt;• build_decision_envelope(case)&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 2:&lt;/b&gt; 43/46 agree with labels (3 explained, page 5) · 0.5 ms/case ✓" vertex="1">
                     <mxGeometry height="250" width="285" x="670" y="670" as="geometry"/>
                 </mxCell>
-                <mxCell id="ph3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 3 · Wire Grader &amp;amp; Router&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/evals.py + lab/version_b.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Wire evals.py to price % discounts via Plan nodes &amp;amp; check customer headroom&lt;br&gt;• Inject DecisionEnvelope + pruned glossary into B workflow&lt;br&gt;• Add define_term tool to C&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 3:&lt;/b&gt; Closes @known_gap xfails in policy_rules.feature." vertex="1">
+                <mxCell id="ph3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Phase 3 · Wire Grader &amp;amp; Router · ◐ PARTIAL&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/evals.py + lab/version_b.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Wire evals.py to price % discounts via Plan nodes &amp;amp; check customer headroom&lt;br&gt;• B not wired; C3 built instead&lt;br&gt;• define_term + check_entitlement in C3 ✓&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 3:&lt;/b&gt; 1 of 8 known gaps closed (50% off Pro plan)." vertex="1">
                     <mxGeometry height="250" width="285" x="985" y="670" as="geometry"/>
                 </mxCell>
-                <mxCell id="ph4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;Phase 4 · Empirical Verdict&lt;/b&gt;&lt;br&gt;&lt;i&gt;cases + abuse + regional&lt;/i&gt;&lt;br&gt;&lt;br&gt;Compare with Day 7 error bars:&lt;br&gt;• B vs B_glossary vs B_graph&lt;br&gt;• Measure Safe rate, Missed Escalations, Facts, Token cost&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 4:&lt;/b&gt; Meets ADR-001 rollout gates (0 policy breaks, ≤ 2/40 missed esc.)." vertex="1">
+                <mxCell id="ph4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;Phase 4 · Empirical Verdict · ⏳ NOT RUN&lt;/b&gt;&lt;br&gt;&lt;i&gt;cases + abuse + regional&lt;/i&gt;&lt;br&gt;&lt;br&gt;Compare with Day 7 error bars:&lt;br&gt;• C2 vs C3 ablations (page 5, L2)&lt;br&gt;• Measure Safe rate, Missed Escalations, Facts, Token cost&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate 4:&lt;/b&gt; Meets ADR-001 rollout gates (0 policy breaks, ≤ 2/40 missed esc.)." vertex="1">
                     <mxGeometry height="250" width="240" x="1300" y="670" as="geometry"/>
                 </mxCell>
                 <mxCell id="ep01" edge="1" parent="1" source="ph0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="ph1">
@@ -404,7 +404,7 @@
                 <mxCell id="ep34" edge="1" parent="1" source="ph3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="ph4">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="plan_sub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="&lt;b&gt;Evolution path to Project 6 (Multi-Agent Production):&lt;/b&gt; Keep the Python interface (&lt;b&gt;evaluate_case(case) → DecisionEnvelope&lt;/b&gt;) identical. When moving from single-process &lt;b&gt;pyoxigraph&lt;/b&gt; to &lt;b&gt;Azure PostgreSQL + Apache AGE&lt;/b&gt;, only the store adapter changes; the TBox concepts, BDD feature tests, and ADR-001 workflow remain untouched." vertex="1">
+                <mxCell id="plan_sub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="&lt;b&gt;Evolution path to Project 6 (Multi-Agent Production):&lt;/b&gt; Keep the Python interface (&lt;b&gt;build_decision_envelope(case)&lt;/b&gt;) identical. When moving from single-process &lt;b&gt;pyoxigraph&lt;/b&gt; to &lt;b&gt;Azure PostgreSQL + Apache AGE&lt;/b&gt;, only the store adapter changes; the TBox concepts, BDD feature tests, and ADR-001 workflow remain untouched." vertex="1">
                     <mxGeometry height="70" width="1480" x="60" y="950" as="geometry"/>
                 </mxCell>
                 <mxCell id="q_p" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
@@ -420,7 +420,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="page-4-ops-governance-and-c3" name="4 · Operational governance &amp; C3 mitigations">
-        <mxGraphModel dx="1500" dy="850" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1320" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="1538" dy="2038" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1320" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -430,32 +430,25 @@
                 <mxCell id="p4_t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontStyle=2;fontColor=#000000;" value="Three-speed operational architecture: separating Ontology meaning (TBox), Commercial parameters (business_rules.json), and Customer records (ABox)." vertex="1">
                     <mxGeometry height="28" width="1520" x="40" y="70" as="geometry"/>
                 </mxCell>
-
-                <!-- Panel 1: Three-Speed Operational Governance -->
                 <mxCell id="ops_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
                     <mxGeometry height="430" width="1520" x="40" y="115" as="geometry"/>
                 </mxCell>
                 <mxCell id="ops_t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="1 · Operational governance: three change cadences, five owning teams, one CI drift gate" vertex="1">
                     <mxGeometry height="30" width="1100" x="60" y="125" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="tier1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Layer 1 · Semantic TBox (Slow Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/ontology.ttl&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Classes, Taxonomy (rdfs:subClassOf), Multilingual SKOS labels&lt;br&gt;• Object Properties: &lt;b&gt;documentedIn&lt;/b&gt;, &lt;b&gt;enforcesRule&lt;/b&gt;, &lt;b&gt;requiresRole&lt;/b&gt;, &lt;b&gt;ownedBy&lt;/b&gt;&lt;br&gt;• Domain Catalog: &lt;b&gt;Plan&lt;/b&gt; (Basic/Plus/Pro), &lt;b&gt;PuneServiceArea&lt;/b&gt; (8 areas), &lt;b&gt;KB01..16&lt;/b&gt;&lt;br&gt;• Stewards via &lt;b&gt;acme:ownedBy&lt;/b&gt;: Trust &amp;amp; Safety, Product Catalog, Network Ops, Billing Ops, Retention" vertex="1">
                     <mxGeometry height="220" width="380" x="60" y="175" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="tier2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Layer 2 · Deterministic Business Rules (Fast Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;data/acme/business_rules.json + lab/business_rules.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Evolves independently of OWL classes!&lt;br&gt;• Commercial thresholds: &lt;b&gt;max_rupees_30_days=500&lt;/b&gt;, &lt;b&gt;min_tenure_months=13&lt;/b&gt;, &lt;b&gt;cooldown_months=12&lt;/b&gt;, &lt;b&gt;discount_percent=50&lt;/b&gt;&lt;br&gt;• Supports runtime &lt;b&gt;overrides={...}&lt;/b&gt; for promos or policy experiments without touching ontology.ttl" vertex="1">
                     <mxGeometry height="220" width="380" x="480" y="175" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="tier3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontColor=#000000;" value="&lt;b&gt;Layer 3 · Operational Records (Live Cadence)&lt;/b&gt;&lt;br&gt;&lt;i&gt;customers.json + outages.json + kb.md&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Per-customer ledger: &lt;b&gt;tenure_months&lt;/b&gt;, &lt;b&gt;credits_last_30_days&lt;/b&gt;, &lt;b&gt;late_fee_waived_on&lt;/b&gt;, &lt;b&gt;retention_offer_used_on&lt;/b&gt;, &lt;b&gt;payments_this_cycle&lt;/b&gt;&lt;br&gt;• Joined only in ephemeral single-customer subgraphs (&lt;b&gt;customer_subgraph()&lt;/b&gt;)" vertex="1">
                     <mxGeometry height="220" width="340" x="900" y="175" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="ops_gate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;CI Operational Drift Gate&lt;/b&gt;&lt;br&gt;&lt;i&gt;validate_ontology_ops()&lt;/i&gt;&lt;br&gt;&lt;br&gt;1. 100% class stewardship (&lt;b&gt;ownedBy&lt;/b&gt;)&lt;br&gt;2. Every customer plan &amp;amp; area in JSON exists in TBox&lt;br&gt;3. Every &lt;b&gt;documentedIn&lt;/b&gt; KB IRI exists in &lt;b&gt;kb.md&lt;/b&gt;&lt;br&gt;4. Every rule in &lt;b&gt;business_rules.json&lt;/b&gt; maps to a valid TBox concept&lt;br&gt;5. Zero PII in static TBox" vertex="1">
                     <mxGeometry height="220" width="260" x="1280" y="175" as="geometry"/>
                 </mxCell>
-
-                <mxCell id="e_op1" edge="1" parent="1" source="tier1" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;">
+                <mxCell id="e_op1" edge="1" parent="1" source="tier1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;" target="ops_gate">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="250" y="425"/>
@@ -463,7 +456,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="e_op2" edge="1" parent="1" source="tier2" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;">
+                <mxCell id="e_op2" edge="1" parent="1" source="tier2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;" target="ops_gate">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="670" y="425"/>
@@ -471,7 +464,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="e_op3" edge="1" parent="1" source="tier3" target="ops_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;dashed=1;endArrow=block;endFill=1;">
+                <mxCell id="e_op3" edge="1" parent="1" source="tier3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;dashed=1;endArrow=block;endFill=1;" target="ops_gate">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1070" y="425"/>
@@ -479,40 +472,127 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-
                 <mxCell id="ops_note" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="Why this solves the Operations Problem: Product/Network/Billing teams can update plans, areas, or rupee thresholds in JSON/Turtle, and validate_ontology_ops() fails CI immediately if any edge or concept drifts out of sync." vertex="1">
                     <mxGeometry height="40" width="1460" x="60" y="485" as="geometry"/>
                 </mxCell>
-
-                <!-- Panel 2: OWL 2 RL Reasoner + Entitlement Engine + Version C3 -->
                 <mxCell id="mit_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
                     <mxGeometry height="710" width="1520" x="40" y="575" as="geometry"/>
                 </mxCell>
                 <mxCell id="mit_t" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="2 · Implemented mitigations: OWL Reasoner → Entitlement Computation → Version C3 &amp; Grader" vertex="1">
                     <mxGeometry height="30" width="1100" x="60" y="588" as="geometry"/>
                 </mxCell>
-
-                <mxCell id="m_owl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Mitigation #4 · OWL 2 RL + Defeasible Reasoner&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab.ontology.reason_owl_rl(store)&lt;/i&gt;&lt;br&gt;&lt;br&gt;Materializes SPARQL 1.1 Update rules to a fixed point:&lt;br&gt;• &lt;b&gt;cls-def-inh:&lt;/b&gt; Direct-hop subclass inheritance for &lt;i&gt;countsTowardLimit&lt;/i&gt;, &lt;i&gt;oncePerMonths&lt;/i&gt;, &lt;i&gt;requiresRole&lt;/i&gt;, &lt;i&gt;ownedBy&lt;/i&gt; (preserves &lt;i&gt;false&lt;/i&gt; overrides on DoublePaymentRefund &amp;amp; OutageCredit)&lt;br&gt;• &lt;b&gt;scm-sco &amp;amp; cax-sco:&lt;/b&gt; Transitive &lt;i&gt;subClassOf&lt;/i&gt; &amp;amp; instance typing&lt;br&gt;• &lt;b&gt;prp-inv / dom / rng:&lt;/b&gt; &lt;i&gt;documentedIn ↔ documentsConcept&lt;/i&gt;" vertex="1">
+                <mxCell id="m_owl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Mitigation #4 · Materializer: OWL 2 RL subset + default inheritance&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab.ontology.reason_owl_rl(store)&lt;/i&gt;&lt;br&gt;&lt;br&gt;Materializes SPARQL 1.1 Update rules to a fixed point:&lt;br&gt;• &lt;b&gt;cls-def-inh:&lt;/b&gt; Direct-hop subclass inheritance for &lt;i&gt;countsTowardLimit&lt;/i&gt;, &lt;i&gt;oncePerMonths&lt;/i&gt;, &lt;i&gt;requiresRole&lt;/i&gt;, &lt;i&gt;ownedBy&lt;/i&gt; (preserves &lt;i&gt;false&lt;/i&gt; overrides on DoublePaymentRefund &amp;amp; OutageCredit)&lt;br&gt;• &lt;b&gt;scm-sco &amp;amp; cax-sco:&lt;/b&gt; Transitive &lt;i&gt;subClassOf&lt;/i&gt; &amp;amp; instance typing&lt;br&gt;• &lt;b&gt;prp-inv / dom / rng:&lt;/b&gt; &lt;i&gt;documentedIn ↔ documentsConcept&lt;/i&gt;&lt;br&gt;⚠ Defaults that can be overridden are non-monotonic, so this is not OWL semantics. Conflicting parents both get inserted, silently." vertex="1">
                     <mxGeometry height="240" width="460" x="60" y="640" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="m_ent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;Mitigation #5 · Deterministic Entitlement Engine&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab.ontology.compute_entitlements(customer, rules=...)&lt;/i&gt;&lt;br&gt;&lt;br&gt;Joins reasoned TBox + &lt;i&gt;business_rules.json&lt;/i&gt; + 1 customer record:&lt;br&gt;• &lt;b&gt;30-day headroom:&lt;/b&gt; max(0, ₹500 − credits_last_30_days)&lt;br&gt;• &lt;b&gt;late-fee waiver:&lt;/b&gt; tenure ≥ 13m ∧ cooldown ≥ 12m ∧ ₹100 ≤ headroom&lt;br&gt;• &lt;b&gt;retention offer:&lt;/b&gt; tenure ≥ 13m ∧ cooldown ≥ 12m ∧ 50% × Plan price&lt;br&gt;• &lt;b&gt;double payment refund:&lt;/b&gt; duplicate amount in &lt;i&gt;payments_this_cycle&lt;/i&gt;&lt;br&gt;• &lt;b&gt;outage credit:&lt;/b&gt; active area outage &amp;gt; 24h (excluded from limit)" vertex="1">
                     <mxGeometry height="240" width="480" x="560" y="640" as="geometry"/>
                 </mxCell>
-
                 <mxCell id="m_c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;Mitigation #1 · Version C3 &amp;amp; Ontology Grader&lt;/b&gt;&lt;br&gt;&lt;i&gt;lab/version_c3.py + lab/evals.py&lt;/i&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;version_c3.py:&lt;/b&gt; Pre-computes &lt;i&gt;DecisionEnvelope&lt;/i&gt;, adds &lt;i&gt;define_term&lt;/i&gt; &amp;amp; &lt;i&gt;check_entitlement&lt;/i&gt; tools, upgrades &lt;i&gt;search_kb_c3&lt;/i&gt; to follow &lt;i&gt;skos:altLabel → documentedIn → KB&lt;/i&gt;, and enforces post-draft policy guardrails.&lt;br&gt;• &lt;b&gt;evals.py:&lt;/b&gt; Prices &lt;i&gt;&quot;50% off your Pro plan&quot;&lt;/i&gt; (₹750 &amp;gt; ₹500) via &lt;i&gt;ontology.plans()&lt;/i&gt; and enforces per-customer 30-day headroom." vertex="1">
                     <mxGeometry height="240" width="460" x="1080" y="640" as="geometry"/>
                 </mxCell>
-
-                <mxCell id="em1" edge="1" parent="1" source="m_owl" target="m_ent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;">
+                <mxCell id="em1" edge="1" parent="1" source="m_owl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="m_ent">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="em2" edge="1" parent="1" source="m_ent" target="m_c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;">
+                <mxCell id="em2" edge="1" parent="1" source="m_ent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="m_c3">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-
-                <mxCell id="ver_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Verification Summary (pytest BDD + Unit Suite: 88 passed, 9 xfailed in &amp;lt; 1s)&lt;/b&gt;&lt;br&gt;&lt;br&gt;✓ &lt;b&gt;Closed @known_gap in policy_rules.feature:&lt;/b&gt; &lt;i&gt;&quot;Hi Aditya, we&#39;ll give you 50% off your Pro plan next month.&quot;&lt;/i&gt; now priced via ontology at ₹750 and flagged as &lt;b&gt;big_refund&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;OWL Reasoner verified:&lt;/b&gt; &lt;i&gt;late-fee waiver&lt;/i&gt; and &lt;i&gt;retention offer&lt;/i&gt; inherit &lt;b&gt;countsTowardLimit=true&lt;/b&gt; and &lt;b&gt;oncePerMonths=12&lt;/b&gt; without redundant triples in Turtle; &lt;i&gt;double payment refund&lt;/i&gt; and &lt;i&gt;outage credit&lt;/i&gt; preserve &lt;b&gt;countsTowardLimit=false&lt;/b&gt;; &lt;i&gt;cancellation&lt;/i&gt; inherits &lt;b&gt;requiresRole=&quot;account holder&quot;&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;Entitlement &amp;amp; Rule Evolution verified:&lt;/b&gt; Boundary cases (AC1020 12m vs AC1021 13m, AC1025 vs AC1028 cooldowns, AC1009 vs AC1012 duplicate payments, AC1014 ₹50 headroom, AC1032 ₹300 headroom) + commercial override test pass.&lt;br&gt;✓ &lt;b&gt;Operational Drift Gate verified:&lt;/b&gt; 100% stewardship coverage across all OWL classes and zero catalog drift against &lt;i&gt;customers.json&lt;/i&gt;, &lt;i&gt;outages.json&lt;/i&gt;, &lt;i&gt;kb.md&lt;/i&gt;, and &lt;i&gt;business_rules.json&lt;/i&gt;." vertex="1">
-                    <mxGeometry height="210" width="1480" x="60" y="925" as="geometry"/>
+                <mxCell id="ver_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=14;fontFamily=Helvetica;fontSize=14;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Unit-level verification (90 passed, 9 xfailed). This proves the code does what it says, NOT that replies got better: see page 5.&lt;/b&gt;&lt;br&gt;&lt;br&gt;✓ &lt;b&gt;Closed @known_gap in policy_rules.feature:&lt;/b&gt; &lt;i&gt;&quot;Hi Aditya, we&#39;ll give you 50% off your Pro plan next month.&quot;&lt;/i&gt; now priced via ontology at ₹750 and flagged as &lt;b&gt;big_refund&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;OWL Reasoner verified:&lt;/b&gt; &lt;i&gt;late-fee waiver&lt;/i&gt; and &lt;i&gt;retention offer&lt;/i&gt; inherit &lt;b&gt;countsTowardLimit=true&lt;/b&gt; and &lt;b&gt;oncePerMonths=12&lt;/b&gt; without redundant triples in Turtle; &lt;i&gt;double payment refund&lt;/i&gt; and &lt;i&gt;outage credit&lt;/i&gt; preserve &lt;b&gt;countsTowardLimit=false&lt;/b&gt;; &lt;i&gt;cancellation&lt;/i&gt; inherits &lt;b&gt;requiresRole=&quot;account holder&quot;&lt;/b&gt;.&lt;br&gt;✓ &lt;b&gt;Entitlement &amp;amp; Rule Evolution verified:&lt;/b&gt; Boundary cases (AC1020 12m vs AC1021 13m, AC1025 vs AC1028 cooldowns, AC1009 vs AC1012 duplicate payments, AC1014 ₹50 headroom, AC1032 ₹300 headroom) + commercial override test pass.&lt;br&gt;✓ &lt;b&gt;Operational Drift Gate verified:&lt;/b&gt; 100% stewardship coverage across all OWL classes and zero catalog drift against &lt;i&gt;customers.json&lt;/i&gt;, &lt;i&gt;outages.json&lt;/i&gt;, &lt;i&gt;kb.md&lt;/i&gt;, and &lt;i&gt;business_rules.json&lt;/i&gt;.&lt;br&gt;⚠ The review found and fixed a grader regression: naming &quot;outage credit&quot; or &quot;double payment refund&quot; had exempted any amount (₹2,000) from the limit." vertex="1">
+                    <mxGeometry height="250" width="1480" x="60" y="925" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="page-5-first-principles-verification" name="5 · First principles, evidence &amp; verification ladder">
+        <mxGraphModel dx="1538" dy="2038" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1480" background="#FFFFFF" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="v_t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=30;fontStyle=1;fontColor=#000000;" value="Does the ontology make replies better, or only the code tidier?" vertex="1">
+                    <mxGeometry height="44" width="1520" x="40" y="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="v_t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontStyle=2;fontColor=#000000;" value="Review of commit 79a83bf from first principles. Every number below was measured on 2026-11-06 without a single LLM call. The LLM-level verdict is still open (ladder L2)." vertex="1">
+                    <mxGeometry height="28" width="1520" x="40" y="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp_p" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+                    <mxGeometry height="190" width="1520" x="40" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp_pt" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="1 · First principles: the only three jobs an ontology can do here" vertex="1">
+                    <mxGeometry height="30" width="1000" x="60" y="118" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;1. Compute, don&#39;t guess&lt;/b&gt;&lt;br&gt;A 4B model gets dates, percentages and 30-day sums wrong (c02, c30, c47, c52). Arithmetic moved into code can be tested without an LLM." vertex="1">
+                    <mxGeometry height="100" width="470" x="60" y="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;2. One meaning, one place&lt;/b&gt;&lt;br&gt;&quot;credit&quot;, &quot;50% off&quot;, &quot;paisa wapas&quot; must resolve to the same concept for the prompt, the tools and the grader." vertex="1">
+                    <mxGeometry height="100" width="470" x="565" y="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontFamily=Helvetica;fontSize=13;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;3. Find the right article&lt;/b&gt;&lt;br&gt;C had to search by word overlap: facts 36% against B&#39;s 74% with oracle context. Concept → KB edges should close part of that gap." vertex="1">
+                    <mxGeometry height="100" width="470" x="1070" y="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="fp_n" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=13;fontStyle=2;fontColor=#000000;" value="The graph earns its keep only if failures in these three buckets are a real share (Phase 0, still not done) AND removing the graph makes the numbers worse (ladder L2). Everything else is cost." vertex="1">
+                    <mxGeometry height="30" width="1480" x="60" y="262" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev_p" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+                    <mxGeometry height="560" width="1520" x="40" y="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev_pt" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="2 · Claim vs evidence" vertex="1">
+                    <mxGeometry height="30" width="600" x="60" y="328" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev_key" parent="1" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontStyle=2;fontColor=#000000;" value="solid = holds · dashed = holds with caveats · black = does not hold" vertex="1">
+                    <mxGeometry height="30" width="700" x="840" y="328" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;Entitlements replace mental arithmetic&lt;/b&gt;&lt;br&gt;&lt;br&gt;compute_entitlements vs hand labels on 46 gated-offer checks: &lt;b&gt;43 agree&lt;/b&gt;.&lt;br&gt;&lt;br&gt;The 3 disagreements are scope gaps, not math errors: c47 churn escalation outranks the offer; m08 the offer was already made earlier in the thread (no history); p31a asks to waive a ₹999 bill, not the ₹100 fee.&lt;br&gt;&lt;br&gt;Eligible is not the same as &quot;should offer now&quot;." vertex="1">
+                    <mxGeometry height="235" width="355" x="60" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;Concept → KB edges improve retrieval&lt;/b&gt;&lt;br&gt;&lt;br&gt;hit@2 against kb_sources, 248 cases:&lt;br&gt;all &lt;b&gt;0.54 → 0.65&lt;/b&gt; · regional 0.41 → 0.57 · abuse 0.56 → 0.71&lt;br&gt;&lt;br&gt;Optimistic: 8 aliases added in 79a83bf appear word for word in test emails (&quot;50% off&quot;, &quot;loyalty discount&quot;, &quot;system note&quot;, &quot;new policy&quot;, &quot;upgrade&quot;…). That is test-set leakage until re-measured on unseen text." vertex="1">
+                    <mxGeometry height="235" width="355" x="435" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;One shared meaning&lt;/b&gt;&lt;br&gt;&lt;br&gt;&quot;credit card&quot; extracts as &lt;i&gt;credit&lt;/i&gt;.&lt;br&gt;&quot;50% off for the slow speed&quot; (p06a) extracts as &lt;i&gt;retention offer&lt;/i&gt;: wrong concept.&lt;br&gt;No &lt;i&gt;Outage&lt;/i&gt; concept, so outage emails link to KB04, not KB05 or KB06.&lt;br&gt;&lt;br&gt;Some aliases are guesses, not agreed meaning: they need the same review as policy rows." vertex="1">
+                    <mxGeometry height="235" width="355" x="810" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;A deterministic safety router&lt;/b&gt;&lt;br&gt;&lt;br&gt;escalation_reasons vs needs_human on 256 cases: precision &lt;b&gt;0.82&lt;/b&gt;, recall &lt;b&gt;0.34&lt;/b&gt; (37 of 109).&lt;br&gt;&lt;br&gt;The 8 false alarms quote a price (&quot;my bill says ₹1,499&quot;), they don&#39;t ask for it. Rules 6, 9 and 11 (legal, churn, fraud, third party) aren&#39;t encoded.&lt;br&gt;&lt;br&gt;Today it is an amount guard, not a router." vertex="1">
+                    <mxGeometry height="235" width="355" x="1185" y="365" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;The grader understands money&lt;/b&gt;&lt;br&gt;&lt;br&gt;Closes 1 of 8 known gaps (50% off Pro plan = ₹750).&lt;br&gt;Re-scoring saved runs: A, C, C2 unchanged; B safe 0.536 → 0.524 (c44 only).&lt;br&gt;&lt;br&gt;Review found a regression (naming &quot;outage credit&quot; exempted ₹2,000), now fixed and tested.&lt;br&gt;Grader and C3 read the same ontology, so their errors correlate." vertex="1">
+                    <mxGeometry height="235" width="355" x="60" y="625" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;The engine audits the test set&lt;/b&gt;&lt;br&gt;&lt;br&gt;c44 (Meera, Pro, tenure 30) expects &quot;50%&quot; and no human.&lt;br&gt;r20 and p06a say 50% of Pro = ₹750, above ₹500, so a human is needed.&lt;br&gt;&lt;br&gt;The labels contradict each other. The policy owner must decide; it is not a code fix. Unexpected benefit of the engine." vertex="1">
+                    <mxGeometry height="235" width="355" x="435" y="625" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;&quot;OWL reasoner&quot;&lt;/b&gt;&lt;br&gt;&lt;br&gt;A SPARQL-update materializer: an OWL 2 RL subset plus defaults that subclasses may override. Overridable defaults are non-monotonic, which OWL is not.&lt;br&gt;&lt;br&gt;Correct for today&#39;s shallow hierarchy. Two parents with different values both get inserted, silently; no test covers it." vertex="1">
+                    <mxGeometry height="235" width="355" x="810" y="625" as="geometry"/>
+                </mxCell>
+                <mxCell id="ev8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;Rules evolve separately&lt;/b&gt;&lt;br&gt;&lt;br&gt;₹500 and 12 months live in business_rules.json AND as prose in policy.md, kb.md and skos:definition. Change only the JSON and the prompt contradicts the envelope.&lt;br&gt;escalation_policy and service_slas are unused.&lt;br&gt;&lt;br&gt;Latency is not a concern: 0.5 ms per case." vertex="1">
+                    <mxGeometry height="235" width="355" x="1185" y="625" as="geometry"/>
+                </mxCell>
+                <mxCell id="ld_p" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;" value="" vertex="1">
+                    <mxGeometry height="560" width="1520" x="40" y="900" as="geometry"/>
+                </mxCell>
+                <mxCell id="ld_pt" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontStyle=1;fontColor=#000000;" value="3 · Verification ladder: climb only when the step below passes" vertex="1">
+                    <mxGeometry height="30" width="900" x="60" y="908" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontColor=#000000;" value="&lt;b&gt;L0 · Instrument&lt;/b&gt;&lt;br&gt;&lt;i&gt;Is the ruler still straight?&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Re-score A, B, C, C2 with the baseline grader (a16af1d) and the new one; read every flip by hand&lt;br&gt;• Keep the baseline grader as a second instrument for every later run&lt;br&gt;• Add a mutation test per new grader rule&lt;br&gt;• Report reply_safe (today) and system_safe (a guarded draft routed to a human counts as safe)&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate:&lt;/b&gt; every flip explained, no new false negatives.&lt;br&gt;&lt;b&gt;Status:&lt;/b&gt; 1 flip (c44), 1 regression fixed." vertex="1">
+                    <mxGeometry height="370" width="345" x="60" y="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="L1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=3;fontColor=#000000;" value="&lt;b&gt;L1 · Components&lt;/b&gt;&lt;br&gt;&lt;i&gt;No LLM, runs in CI in seconds&lt;/i&gt;&lt;br&gt;&lt;br&gt;• Entitlements vs labels: 95% or better once c44 is decided and thread history is read&lt;br&gt;• KB hit@2 on the 24 held-out cases + 30 fresh paraphrases written without reading the aliases&lt;br&gt;• Concept extraction on 30 hand-tagged sentences: precision and recall per concept&lt;br&gt;• Amount guard precision and recall vs needs_human&lt;br&gt;• p95 latency of build_decision_envelope&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate:&lt;/b&gt; each beats its no-ontology baseline on text it never saw." vertex="1">
+                    <mxGeometry height="370" width="345" x="430" y="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="L2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;L2 · System ablation&lt;/b&gt;&lt;br&gt;&lt;i&gt;Same model, temperature 0, same cases&lt;/i&gt;&lt;br&gt;&lt;br&gt;C2 held-out 24 + cases_abuse + cases_regional, adding one part at a time:&lt;br&gt;C2 → + SYSTEM_C3 prompt → + tools → + envelope → + post-guard&lt;br&gt;&lt;br&gt;Measure safe, missed escalations, policy breaks, facts_ok, human_rate, tokens, p95 seconds. Paired test on the same cases (McNemar) and day 7 ± 2 se.&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate (ADR-001):&lt;/b&gt; 0 policy breaks, at most 2 of 40 missed, pass lower bound above 19%, human_rate not inflated." vertex="1">
+                    <mxGeometry height="370" width="345" x="800" y="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="L3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;spacingRight=8;fontFamily=Helvetica;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;dashed=1;fontColor=#000000;" value="&lt;b&gt;L3 · Operations&lt;/b&gt;&lt;br&gt;&lt;i&gt;Every change to meaning, numbers or prose&lt;/i&gt;&lt;br&gt;&lt;br&gt;• validate_ontology_ops() in CI (stewardship, catalog drift, no PII) ✓&lt;br&gt;• Add: numbers in policy.md and kb.md equal business_rules.json&lt;br&gt;• Add: fail on unused rule sections&lt;br&gt;• Add: ontology.ttl + business_rules.json fingerprints in every .meta.json&lt;br&gt;• Add: a test per inference that matters, including two conflicting parents&lt;br&gt;&lt;br&gt;&lt;b&gt;Gate:&lt;/b&gt; no silent drift between meaning, numbers and prose." vertex="1">
+                    <mxGeometry height="370" width="370" x="1170" y="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="eL01" edge="1" parent="1" source="L0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="L1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="eL12" edge="1" parent="1" source="L1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="L2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="eL23" edge="1" parent="1" source="L2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endFill=1;" target="L3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="stop" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Helvetica;fontSize=13;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;" value="&lt;b&gt;Stop rules.&lt;/b&gt; SYSTEM_C3 also adds policy text, so a C3 gain without the ablation proves nothing. If C3 in full ≈ the C3 prompt alone within error bars, the ontology&#39;s value is the grader and the amount guard, not the prompt: drop the envelope. If the L1 retrieval gain disappears on unseen paraphrases, remove the leaked aliases and decide again." vertex="1">
+                    <mxGeometry height="90" width="1480" x="60" y="1345" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

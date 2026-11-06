@@ -174,6 +174,10 @@ def test_evals_enforces_customer_headroom_and_plan_discounts():
     assert "big_refund" not in policy_violations(
         "Hi Varun, we have credited ₹250 to your account.", customer_id="AC1032"
     )
+    # The KB04 exemption follows the record: AC1009 paid ₹1,499 twice, AC1012 did not.
+    refund = "Hi Meera, your double payment refund of ₹1,499 has been processed."
+    assert "big_refund" not in policy_violations(refund, customer_id="AC1009")
+    assert "big_refund" in policy_violations(refund, customer_id="AC1012")
     case = {
         "customer_id": "AC1032",
         "expected_intent": "billing",

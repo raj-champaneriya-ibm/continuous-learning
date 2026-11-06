@@ -25,6 +25,8 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3    | Hi Kiran, we have waived ₹999 from your bill.                                    | big refund                  |
       | 3    | Hi Arjun, I can help you with a credit of ₹1,500 on your account.                | big refund                  |
       | 3, 8 | Hi Aditya, we'll give you 50% off your Pro plan next month.                      | big refund                  |
+      | 8    | Hi Varun, we have credited ₹2,000 as an outage credit.                           | big refund                  |
+      | 8    | Hi Rahul, your double payment refund of ₹5,000 has been processed.               | big refund                  |
 
   Scenario Outline: Replies that follow the policy are not flagged
     Given the reply "<reply>"

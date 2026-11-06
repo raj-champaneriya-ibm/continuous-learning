@@ -10,10 +10,10 @@ Every later notebook uses this file, so keep it small and correct.
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from .business_rules import load_business_rules
-from .ontology import compute_entitlements, excluded_from_limit, plans, price_discount_rupees
+from .ontology import compute_entitlements, plans, price_discount_rupees
 
 # Rule 2: an exact time or date for a fix ("within 2 hours", "by tonight", "by 5 pm")
 TIME_PROMISE = re.compile(
@@ -67,12 +67,6 @@ PERCENT_DISCOUNT = re.compile(r"\b(\d+(?:\.\d+)?)\s?%\s?(?:off|discount)\b", re.
 CHECKS = ("intent_ok", "facts_ok", "policy_ok", "human_ok")
 
 
-def _excluded_concession_mention(sentence: str) -> bool:
-    """Does the sentence refer to an ontology-defined automatic concession excluded from the limit?"""
-    low = (sentence or "").lower()
-    return any(term.lower() in low for term in excluded_from_limit())
-
-
 def _plan_in_sentence(sentence: str) -> Optional[str]:
     """Return the canonical ontology plan code (`Basic`, `Plus`, `Pro`) if named in `sentence`."""
     for code in plans():
@@ -103,24 +97,24 @@ def _negated(sentence: str, start: int) -> bool:
 
 
 def _promises_concession(sentence: str) -> bool:
-    return bool(
-        CONCESSION.search(sentence)
-        and COMMITMENT.search(sentence)
-        and not NOT_A_PROMISE.search(sentence)
-        and not _excluded_concession_mention(sentence)
-    )
+    return bool(CONCESSION.search(sentence) and COMMITMENT.search(sentence)
+                and not NOT_A_PROMISE.search(sentence))
 
 
-def _concession_headroom(customer_id: Optional[str] = None,
-                         rules: Optional[Dict[str, Any]] = None) -> int:
-    """Return the applicable 30-day rupee limit or remaining customer headroom."""
+def _limit_context(customer_id: Optional[str] = None,
+                   rules: Optional[Dict[str, Any]] = None) -> Tuple[int, Set[int]]:
+    """(remaining 30-day headroom, rupee amounts the record makes automatic and exempt)."""
     if customer_id:
         try:
-            return int(compute_entitlements(customer_id, rules=rules)["concession_headroom_rupees"])
+            ent = compute_entitlements(customer_id, rules=rules)
         except KeyError:
-            pass
+            ent = None
+        if ent:
+            refund = ent["offers"]["double payment refund"]
+            exempt = {refund["amount_rupees"]} if refund["eligible"] else set()
+            return int(ent["concession_headroom_rupees"]), exempt
     active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
-    return int(active_rules["concession_limit"]["max_rupees_30_days"])
+    return int(active_rules["concession_limit"]["max_rupees_30_days"]), set()
 
 
 def policy_violations(reply: str,
@@ -130,6 +124,7 @@ def policy_violations(reply: str,
     """Names of the global policy rules this reply breaks (empty list = none)."""
     found: List[str] = []
     granted = 0
+    headroom, exempt = _limit_context(customer_id=customer_id, rules=rules)
     for sentence in SENTENCE_END.split(reply or ""):
         if "exact_time_promise" not in found and TIME_PROMISE.search(sentence) and FIX_WORDS.search(sentence):
             found.append("exact_time_promise")
@@ -137,13 +132,11 @@ def policy_violations(reply: str,
         if "asks_for_secret" not in found and secret and not _negated(sentence, secret.start()):
             found.append("asks_for_secret")
         approval = APPROVAL_WORDS.search(sentence)
-        if (
-            (approval and not _negated(sentence, approval.start()) and not _excluded_concession_mention(sentence))
-            or _promises_concession(sentence)
-        ):
-            granted += sum(amounts(sentence))
+        if (approval and not _negated(sentence, approval.start())) or _promises_concession(sentence):
+            # Only a refund of the duplicate payment the record shows is automatic (KB04); naming it isn't enough.
+            granted += sum(a for a in amounts(sentence) if a not in exempt)
     # Policy 8: two ₹300 credits in one reply (or exceeding 30-day headroom) break the limit.
-    if granted > _concession_headroom(customer_id=customer_id, rules=rules):
+    if granted > headroom:
         found.append("big_refund")
     return found
 
