@@ -26,7 +26,7 @@ import json
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
-from .acme import DATA, INTENTS, conversation, customer_text, kb_by_id, load_customers
+from .acme import DATA, INTENTS, conversation, customer_text, intent_guide, kb_by_id, load_customers
 from .acme_tools import (
     TOOLS as BASE_TOOLS,
     escalate,
@@ -70,7 +70,10 @@ Follow every rule in the reply policy below. With the decision envelope, that me
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
   plan change asked by the account holder; a general question the help articles answer; a first
   disagreement with what the record shows.
+- Pick the intent with the intent guide below.
 When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}.
+
+{intent_guide()}
 
 {POLICY}"""
 
