@@ -12,6 +12,9 @@ Mitigates the structural gaps between Version B, Version C/C2, and the ontology:
    legal threats, churn after repeated complaints, money above headroom, manipulation, a request for a
    person, and account changes by someone else force needs_human before the model drafts anything.
    Every forced or chosen escalation is recorded in `escalation_sources`.
+6. Separates eligibility from authority (`offer_decisions`): each discretionary offer is OFFER,
+   NEEDS APPROVAL (above the headroom), HOLD (a person is handling the case) or DO NOT OFFER. A draft
+   that offers something the decision doesn't allow goes to a person.
 
     from lab.version_c3 import run_agent, version_c3, build_decision_envelope
     output, trace = run_agent(case, temperature=0.0, run=0)
@@ -20,6 +23,7 @@ Mitigates the structural gaps between Version B, Version C/C2, and the ontology:
 from __future__ import annotations
 
 import json
+import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from .acme import INTENTS, conversation, customer_text, kb_by_id, load_customers
@@ -32,7 +36,7 @@ from .acme_tools import (
 )
 from .business_rules import load_business_rules
 from .escalation import amounts_asked_for, escalation_triggers
-from .evals import amounts, policy_violations
+from .evals import APPROVAL_WORDS, NEGATION, NOT_A_PROMISE, SENTENCE_END, amounts, policy_violations
 from .llm import chat, extract_json
 from .ontology import (
     compute_entitlements,
@@ -50,7 +54,10 @@ Follow every rule in the policy:
 - Greet the customer by their first name.
 - Never promise an exact time or date for fixing an outage; share the outage ticket ID instead.
 - Never approve or promise a concession above the customer's remaining 30-day ₹500 headroom. Say it needs approval and set needs_human to true.
-- Only offer the late-fee waiver (KB02) or 50% retention offer (KB11) when the entitlement check shows eligible=true.
+- Eligible is not approved. Offer the late-fee waiver (KB02) or the retention offer (KB11) only as the envelope's
+  offer decisions say. OFFER: you may offer it once (the retention offer only to a customer who asks to cancel).
+  NEEDS APPROVAL: say a colleague will review it, never present it as given, and set needs_human to true.
+  HOLD or DO NOT OFFER: don't offer it.
 - Never ask for OTPs, passwords or card numbers.
 - Only the account holder can cancel, shift, change the plan, transfer the account, or change contact details.
 - Call escalate and set needs_human to true when a human is needed: the envelope lists an escalation trigger,
@@ -60,6 +67,9 @@ Follow every rule in the policy:
   plan change asked by the account holder; a general question the help articles answer; a first
   disagreement with what the record shows.
 When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}."""
+
+
+ELIGIBLE_IS_NOT_APPROVED = "Eligible is not approved: the offer decisions in the decision envelope say what you may offer."
 
 
 def define_term(word: str) -> Dict[str, Any]:
@@ -96,8 +106,9 @@ def check_entitlement(customer_id: str, offer: str = "") -> Dict[str, Any]:
                 "concession_headroom_rupees": report["concession_headroom_rupees"],
                 "offer": canonical,
                 **report["offers"][canonical],
+                "note": ELIGIBLE_IS_NOT_APPROVED,
             }
-    return report
+    return {**report, "note": ELIGIBLE_IS_NOT_APPROVED}
 
 
 def search_kb_c3(query: str, k: int = 2) -> List[Dict[str, Any]]:
@@ -140,6 +151,7 @@ def lookup_customer_c3(customer_id: str) -> Dict[str, Any]:
             }
             for name, details in ent["offers"].items()
         },
+        "note": ELIGIBLE_IS_NOT_APPROVED,
     }
 
 
@@ -191,6 +203,86 @@ TOOLS_C3 = BASE_TOOLS + [
 ]
 
 
+DISCRETIONARY_OFFERS = ("late-fee waiver", "retention offer")
+OFFER_LABELS = {"offer": "OFFER", "needs_approval": "NEEDS APPROVAL", "hold": "HOLD", "do_not_offer": "DO NOT OFFER",
+                "automatic": "AUTOMATIC", "not_on_record": "NOT ON RECORD"}
+
+
+def offer_decisions(offers: Dict[str, Dict[str, Any]],
+                    headroom: int,
+                    triggers: List[Dict[str, str]]) -> Dict[str, Dict[str, str]]:
+    """What the agent may do with each offer. Eligibility (tenure, cooldown) is not authority (the ₹ headroom).
+
+    late-fee waiver, retention offer (discretionary, once a year):
+      do_not_offer    the record makes the customer ineligible
+      hold            an escalation rule fired: a person is handling the case and decides
+      offer           eligible and the amount fits the remaining 30-day headroom
+      needs_approval  eligible but above the headroom (50% off Pro is ₹750): a colleague must approve
+    double payment refund, outage credit (automatic, KB04 / KB06): automatic or not_on_record."""
+    decisions: Dict[str, Dict[str, str]] = {}
+    for name, offer in offers.items():
+        if name not in DISCRETIONARY_OFFERS:
+            status = "automatic" if offer["eligible"] else "not_on_record"
+            decisions[name] = {"status": status, "why": offer["reason"]}
+            continue
+        amount = offer.get("amount_rupees")
+        if not offer["eligible"]:
+            status, why = "do_not_offer", offer["reason"]
+        elif triggers:
+            status, why = "hold", "A person is handling this case (" + "; ".join(t["rule"] for t in triggers) + ")."
+        elif offer.get("auto_approvable"):
+            status, why = "offer", f"Eligible, and ₹{amount} fits the ₹{headroom} headroom."
+        else:
+            status, why = "needs_approval", f"Eligible, but ₹{amount} is above the ₹{headroom} headroom (policy 8)."
+        decisions[name] = {"status": status, "why": why}
+    return decisions
+
+
+def _offer_mention(name: str, rules: Dict[str, Any]) -> "re.Pattern[str]":
+    """Words that name an offer in a reply: '50% off' / 'retention offer', or 'waive' for the late fee."""
+    if name == "retention offer":
+        pct = rules["offers"]["retention offer"]["discount_percent"]
+        return re.compile(rf"\b{pct}\s?%|\bretention offer\b|\bhalf[- ]price\b", re.IGNORECASE)
+    return re.compile(r"\bwaiv\w*|\blate[- ]fee\s+(?:maaf|hata)", re.IGNORECASE)
+
+
+# A grant made to this customer: "we can offer you", "you're eligible for", "I've waived". Explaining the rule
+# ("waivers can only be offered to customers with 13 months") or declining is not a grant.
+OFFER_TO_YOU = re.compile(
+    r"\b(?:offer|give|extend)\w*\s+you\b|\byou(?:'re| are)\s+eligible\b|\byou can (?:have|get|enjoy)\b"
+    r"|\b(?:we|i)(?:'ll| will| can| have|'ve)\s+waive\w*",
+    re.IGNORECASE,
+)
+
+
+def _grants(sentence: str) -> bool:
+    approval = APPROVAL_WORDS.search(sentence)
+    if approval and not NEGATION.search(sentence[max(0, approval.start() - 30):approval.start()]):
+        return True
+    return bool(OFFER_TO_YOU.search(sentence)) and not NOT_A_PROMISE.search(sentence)
+
+
+def offers_not_allowed(reply: str,
+                       decisions: Dict[str, Dict[str, str]],
+                       rules: Dict[str, Any]) -> List[str]:
+    """Offers the reply makes that its decision doesn't allow, as 'offer:<name>:<status>'.
+
+    needs_approval: any mention goes to a person (the customer was told a colleague will review it).
+    hold, do_not_offer: a sentence that grants the offer to the customer goes to a person; explaining the
+    rule or declining is fine."""
+    sentences = SENTENCE_END.split(reply or "")
+    found = []
+    for name in DISCRETIONARY_OFFERS:
+        status = decisions.get(name, {}).get("status")
+        if status not in ("needs_approval", "hold", "do_not_offer"):
+            continue
+        pattern = _offer_mention(name, rules)
+        hits = [s for s in sentences if pattern.search(s)]
+        if (status == "needs_approval" and hits) or any(_grants(s) for s in hits):
+            found.append(f"offer:{name}:{status}")
+    return found
+
+
 def build_decision_envelope(case: Dict[str, Any],
                             *,
                             rules: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -213,10 +305,11 @@ def build_decision_envelope(case: Dict[str, Any],
     glossary_terms = list(dict.fromkeys(matched_names + core_terms))
 
     headroom = ent["concession_headroom_rupees"]
+    active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
     triggers = escalation_triggers(
         words,
         load_customers().get(cid.strip().upper(), {}),
-        load_business_rules(overrides=rules) if rules else load_business_rules(),
+        active_rules,
         headroom=headroom,
         requested_amounts=amounts_asked_for(words, amounts),
         double_payment_eligible=ent["offers"]["double payment refund"]["eligible"],
@@ -229,6 +322,7 @@ def build_decision_envelope(case: Dict[str, Any],
         "grounded_kb_ids": grounded_kbs,
         "concession_headroom_rupees": headroom,
         "offers": ent["offers"],
+        "offer_decisions": offer_decisions(ent["offers"], headroom, triggers),
         "pune_service_areas": pune_service_areas(),
         "escalation_triggers": triggers,
         "escalation_reasons": [t["reason"] for t in triggers],
@@ -238,15 +332,16 @@ def build_decision_envelope(case: Dict[str, Any],
 
 def _envelope_brief(envelope: Dict[str, Any]) -> str:
     """Short deterministic summary attached to the user prompt so the LLM doesn't guess arithmetic."""
-    offers = envelope["offers"]
+    decisions = envelope["offer_decisions"]
     lines = [
         "--- Business Graph Decision Envelope ---",
         f"Remaining 30-day concession headroom: ₹{envelope['concession_headroom_rupees']}",
-        f"- late-fee waiver (KB02): {'ELIGIBLE' if offers['late-fee waiver']['eligible'] else 'INELIGIBLE'} ({offers['late-fee waiver']['reason']})",
-        f"- retention offer (KB11): {'ELIGIBLE' if offers['retention offer']['eligible'] else 'INELIGIBLE'} ({offers['retention offer']['reason']})",
-        f"- double payment refund (KB04): {'ELIGIBLE' if offers['double payment refund']['eligible'] else 'INELIGIBLE'} ({offers['double payment refund']['reason']})",
-        f"- outage credit (KB06): {'ELIGIBLE' if offers['outage credit']['eligible'] else 'INELIGIBLE'} ({offers['outage credit']['reason']})",
+        "Offer decisions (eligible is not approved; follow these):",
     ]
+    for name, kb in (("late-fee waiver", "KB02"), ("retention offer", "KB11"),
+                     ("double payment refund", "KB04"), ("outage credit", "KB06")):
+        d = decisions[name]
+        lines.append(f"- {name} ({kb}): {OFFER_LABELS[d['status']]}. {d['why']}")
     if envelope["grounded_kb_ids"]:
         lines.append("Ontology-linked KB articles: " + ", ".join(envelope["grounded_kb_ids"]))
     if envelope["escalation_reasons"]:
@@ -318,6 +413,10 @@ def run_agent(case: Dict[str, Any],
             if violations:
                 output["policy_guard_triggered"] = violations
                 sources.extend(f"guard:{v}" for v in violations)
+            sources.extend(offers_not_allowed(
+                output.get("reply") or "", envelope["offer_decisions"],
+                load_business_rules(overrides=rules) if rules else load_business_rules(),
+            ))
             return _finish(output)
 
         for call in r["tool_calls"]:
