@@ -1,4 +1,4 @@
-"""Step definitions for features/escalation_rules.feature."""
+"""Step definitions for features/escalation_rules.feature and features/offer_decisions.feature."""
 import json
 
 import pytest
@@ -7,7 +7,7 @@ from pytest_bdd import given, parsers, scenarios, then, when
 from lab.acme import DATA, load_cases
 from lab.version_c3 import build_decision_envelope, run_agent
 
-scenarios("features/escalation_rules.feature")
+scenarios("features/escalation_rules.feature", "features/offer_decisions.feature")
 
 CASE_FILES = ["cases.jsonl", "cases_abuse.jsonl", "cases_multiturn.jsonl", "cases_regional.jsonl"]
 
@@ -68,6 +68,11 @@ def rules_read_each(world):
     }
 
 
+@when("the envelope decides the offers")
+def envelope_decides(world):
+    world["decisions"] = build_decision_envelope(world["case"])["offer_decisions"]
+
+
 @when("the C3 agent finishes")
 def agent_finishes(world):
     world["output"], _ = run_agent(world["case"])
@@ -88,6 +93,11 @@ def no_false_triggers(world):
     fired = {case_id: rules for case_id, rules in world["false_triggers"].items() if rules}
     assert world["false_triggers"], "no cases labelled needs_human false were read"
     assert not fired, f"rules fired on {len(fired)} cases that need no human: {fired}"
+
+
+@then(parsers.parse('the {offer} decision is "{status}"'))
+def offer_decision_is(world, offer, status):
+    assert world["decisions"][offer]["status"] == status, world["decisions"][offer]
 
 
 @then(parsers.parse("needs_human is {expected}"))
