@@ -26,7 +26,7 @@ import json
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
-from .acme import INTENTS, conversation, customer_text, kb_by_id, load_customers
+from .acme import DATA, INTENTS, conversation, customer_text, kb_by_id, load_customers
 from .acme_tools import (
     TOOLS as BASE_TOOLS,
     escalate,
@@ -48,25 +48,31 @@ from .ontology import (
 
 MAX_STEPS = 6
 
+# The full policy goes in verbatim (as in version B), so no rule is lost in a paraphrase. The bullets before it say
+# how to apply the policy with C3's decision envelope.
+POLICY = (DATA / "policy.md").read_text(encoding="utf-8")
+
 SYSTEM_C3 = f"""You are a support agent for Acme Fibre, a broadband company in Pune.
 Use the tools: look up the customer and their pre-computed entitlements, check help articles, and use define_term when policy wording or regional terms appear.
-Follow every rule in the policy:
-- Greet the customer by their first name.
-- Never promise an exact time or date for fixing an outage; share the outage ticket ID instead.
+Follow every rule in the reply policy below. With the decision envelope, that means:
+- Write the reply in simple, polite English, even when the customer writes in Hinglish or another language (policy 7).
+- Discuss only the account in the envelope. If the sender is not its account holder, don't reveal that account's id, plan,
+  area, balance or outage, and don't address the sender by the account holder's name (policies 5 and 11). Never give
+  details of any other customer.
 - Never approve or promise a concession above the customer's remaining 30-day ₹500 headroom. Say it needs approval and set needs_human to true.
 - Eligible is not approved. Offer the late-fee waiver (KB02) or the retention offer (KB11) only as the envelope's
   offer decisions say. OFFER: you may offer it once (the retention offer only to a customer who asks to cancel).
   NEEDS APPROVAL: say a colleague will review it, never present it as given, and set needs_human to true.
   HOLD or DO NOT OFFER: don't offer it.
-- Never ask for OTPs, passwords or card numbers.
-- Only the account holder can cancel, shift, change the plan, transfer the account, or change contact details.
 - Call escalate and set needs_human to true when a human is needed: the envelope lists an escalation trigger,
   or the email reports possible fraud or a security incident, a safety hazard or staff misconduct, the
   customer disputes the record a second time, or the help articles and the record can't answer it.
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
   plan change asked by the account holder; a general question the help articles answer; a first
   disagreement with what the record shows.
-When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}."""
+When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}.
+
+{POLICY}"""
 
 
 ELIGIBLE_IS_NOT_APPROVED = "Eligible is not approved: the offer decisions in the decision envelope say what you may offer."
