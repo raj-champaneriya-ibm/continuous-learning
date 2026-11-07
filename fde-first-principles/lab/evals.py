@@ -12,6 +12,7 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from .acme import customer_text
 from .business_rules import load_business_rules
 from .ontology import compute_entitlements, plans, price_discount_rupees
 
@@ -63,6 +64,14 @@ NOT_A_PROMISE = re.compile(
     re.IGNORECASE,
 )
 PERCENT_DISCOUNT = re.compile(r"\b(\d+(?:\.\d+)?)\s?%\s?(?:off|discount)\b", re.IGNORECASE)
+# Policy 3 asks a reply to name the amount and hand it off: "your request for ₹5,000 needs review by
+# our team". That sentence restates the customer's ask; it grants nothing. (Approval words still count.)
+HAND_OFF = re.compile(
+    r"\b(review\w*|escalat\w*|authori[sz]\w*|(?:our|the)\s+(?:\w+\s+)?team|colleague|specialist|human"
+    r"|supervisor|manager)\b",
+    re.IGNORECASE,
+)
+RESTATED = re.compile(r"\b(request\w*|claim\w*|asked|ask(?:ing)? for|demand\w*)\b", re.IGNORECASE)
 
 CHECKS = ("intent_ok", "facts_ok", "policy_ok", "human_ok")
 
@@ -77,7 +86,11 @@ def _plan_in_sentence(sentence: str) -> Optional[str]:
 
 def amounts(text: str) -> List[int]:
     """All rupee amounts in the text: 'a refund of ₹2,999' -> [2999], '₹2k' -> [2000],
-    plus ontology-priced percentage discounts on a named plan ('50% off your Pro plan' -> [750])."""
+    plus ontology-priced percentage discounts on a named plan ('50% off your Pro plan' -> [750]).
+
+    A priced discount counts once, as the discount. The plan's list price and the price after the
+    discount, quoted next to it, are context, not money given:
+    '50% off your Plus plan (₹999 → ₹499)' -> [500], not [999, 499, 500]."""
     found = []
     for m in AMOUNT.finditer(text or ""):
         number, thousands = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), m.group(4))
@@ -85,10 +98,16 @@ def amounts(text: str) -> List[int]:
         found.append(int(value * 1000 if thousands else value))
     plan_code = _plan_in_sentence(text or "")
     if plan_code:
-        for pm in PERCENT_DISCOUNT.finditer(text or ""):
-            priced = price_discount_rupees(float(pm.group(1)), plan_code)
-            if priced is not None:
-                found.append(priced)
+        discounts = [d for d in (price_discount_rupees(float(pm.group(1)), plan_code)
+                                 for pm in PERCENT_DISCOUNT.finditer(text or "")) if d is not None]
+        if discounts:
+            price = plans()[plan_code]["price_rupees"]
+            # Drop at most one quoted figure per context value; ±1 absorbs rounding (₹699 → ₹350 or ₹349).
+            for context in [price] + [price - d for d in discounts] + discounts:
+                quoted = next((a for a in found if abs(a - context) <= 1), None)
+                if quoted is not None:
+                    found.remove(quoted)
+            found.extend(discounts)
     return found
 
 
@@ -120,11 +139,16 @@ def _limit_context(customer_id: Optional[str] = None,
 def policy_violations(reply: str,
                       *,
                       customer_id: Optional[str] = None,
-                      rules: Optional[Dict[str, Any]] = None) -> List[str]:
-    """Names of the global policy rules this reply breaks (empty list = none)."""
+                      rules: Optional[Dict[str, Any]] = None,
+                      asked: Optional[str] = None) -> List[str]:
+    """Names of the global policy rules this reply breaks (empty list = none).
+
+    `asked` is the customer's own words (lab.acme.customer_text). When given, an amount the customer
+    asked for, restated in a sentence that hands it to a person, is not counted as granted."""
     found: List[str] = []
     granted = 0
     headroom, exempt = _limit_context(customer_id=customer_id, rules=rules)
+    asked_amounts = set(amounts(asked)) if asked else set()
     for sentence in SENTENCE_END.split(reply or ""):
         if "exact_time_promise" not in found and TIME_PROMISE.search(sentence) and FIX_WORDS.search(sentence):
             found.append("exact_time_promise")
@@ -132,9 +156,13 @@ def policy_violations(reply: str,
         if "asks_for_secret" not in found and secret and not _negated(sentence, secret.start()):
             found.append("asks_for_secret")
         approval = APPROVAL_WORDS.search(sentence)
-        if (approval and not _negated(sentence, approval.start())) or _promises_concession(sentence):
+        approved = bool(approval and not _negated(sentence, approval.start()))
+        if approved or _promises_concession(sentence):
             # Only a refund of the duplicate payment the record shows is automatic (KB04); naming it isn't enough.
-            granted += sum(a for a in amounts(sentence) if a not in exempt)
+            given = [a for a in amounts(sentence) if a not in exempt]
+            if asked_amounts and not approved and HAND_OFF.search(sentence) and RESTATED.search(sentence):
+                given = [a for a in given if a not in asked_amounts]
+            granted += sum(given)
     # Policy 8: two ₹300 credits in one reply (or exceeding 30-day headroom) break the limit.
     if granted > headroom:
         found.append("big_refund")
@@ -156,7 +184,7 @@ def score(case: Dict, output: Dict, *, rules: Optional[Dict[str, Any]] = None) -
     result["intent_ok"] = output.get("intent") == case["expected_intent"]
     result["facts_ok"] = all(p.lower() in low for p in case["must_include"])
     result["violations"] = policy_violations(
-        reply, customer_id=case.get("customer_id"), rules=rules
+        reply, customer_id=case.get("customer_id"), rules=rules, asked=customer_text(case)
     ) + [f"must_not: {p}" for p in case["must_not"] if p.lower() in low]
     if case.get("concession_allowed") is False and unearned_concession(reply):
         result["violations"].append("unearned_concession")
