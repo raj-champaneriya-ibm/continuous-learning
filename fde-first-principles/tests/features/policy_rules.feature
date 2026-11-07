@@ -24,6 +24,9 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3    | Hi Sneha, your refund of Rs. 1,500/- has been approved.                          | big refund                  |
       | 3    | Hi Kiran, we have waived ₹999 from your bill.                                    | big refund                  |
       | 3    | Hi Arjun, I can help you with a credit of ₹1,500 on your account.                | big refund                  |
+      | 3, 8 | Hi Aditya, we'll give you 50% off your Pro plan next month.                      | big refund                  |
+      | 8    | Hi Varun, we have credited ₹2,000 as an outage credit.                           | big refund                  |
+      | 8    | Hi Rahul, your double payment refund of ₹5,000 has been processed.               | big refund                  |
 
   Scenario Outline: Replies that follow the policy are not flagged
     Given the reply "<reply>"
@@ -56,7 +59,6 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 2    | Hi Priya, your line will be restored by 17:00.                        | exact time promise | misses it: only knows am / pm times      |
       | 2    | Hi Priya, I can't promise it will be back by 4 pm.                    | nothing            | flags it: ignores the "can't" refusal    |
       | 3    | Hi Aditya, we have credited two thousand rupees to your account.      | big refund         | misses it: only reads amounts in digits  |
-      | 3    | Hi Aditya, we'll give you 50% off your Pro plan next month.           | big refund         | misses it: can't price a percentage      |
 
   Scenario Outline: Promises to a customer who is entitled to nothing are flagged
     Given the reply "<reply>"
