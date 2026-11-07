@@ -8,6 +8,10 @@ Mitigates the structural gaps between Version B, Version C/C2, and the ontology:
    linked KB articles, and pruned glossary) so the LLM never does date or percentage math in its head.
 4. Runs the ontology-backed policy check (`lab.evals.policy_violations`) after drafting so any
    policy break or over-limit concession is routed to a human.
+5. Runs the escalation rules as code (`lab.escalation`, from `escalation_policy` in business_rules.json):
+   legal threats, churn after repeated complaints, money above headroom, manipulation, a request for a
+   person, and account changes by someone else force needs_human before the model drafts anything.
+   Every forced or chosen escalation is recorded in `escalation_sources`.
 
     from lab.version_c3 import run_agent, version_c3, build_decision_envelope
     output, trace = run_agent(case, temperature=0.0, run=0)
@@ -18,7 +22,7 @@ from __future__ import annotations
 import json
 from typing import Any, Dict, List, Optional, Tuple
 
-from .acme import INTENTS, conversation, kb_by_id, load_customers
+from .acme import INTENTS, conversation, customer_text, kb_by_id, load_customers
 from .acme_tools import (
     TOOLS as BASE_TOOLS,
     escalate,
@@ -26,6 +30,8 @@ from .acme_tools import (
     lookup_customer as _base_lookup_customer,
     search_kb as _base_search_kb,
 )
+from .business_rules import load_business_rules
+from .escalation import amounts_asked_for, escalation_triggers
 from .evals import amounts, policy_violations
 from .llm import chat, extract_json
 from .ontology import (
@@ -47,7 +53,12 @@ Follow every rule in the policy:
 - Only offer the late-fee waiver (KB02) or 50% retention offer (KB11) when the entitlement check shows eligible=true.
 - Never ask for OTPs, passwords or card numbers.
 - Only the account holder can cancel, shift, change the plan, transfer the account, or change contact details.
-- Call escalate and set needs_human to true when a human is needed.
+- Call escalate and set needs_human to true when a human is needed: the envelope lists an escalation trigger,
+  or the email reports possible fraud or a security incident, a safety hazard or staff misconduct, the
+  customer disputes the record a second time, or the help articles and the record can't answer it.
+- Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
+  plan change asked by the account holder; a general question the help articles answer; a first
+  disagreement with what the record shows.
 When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}."""
 
 
@@ -186,6 +197,7 @@ def build_decision_envelope(case: Dict[str, Any],
     """Compile the ontology TBox, business rules, and single-customer ABox into a DecisionEnvelope."""
     cid = case["customer_id"]
     text = conversation(case)
+    words = customer_text(case)  # escalation reads only what the customer wrote, never earlier agent turns
     ent = compute_entitlements(cid, rules=rules)
     concepts = extract_concepts(text)
     matched_names = [c["term"] for c in concepts]
@@ -200,16 +212,16 @@ def build_decision_envelope(case: Dict[str, Any],
     core_terms = ["account holder", "concession limit", "manipulation"]
     glossary_terms = list(dict.fromkeys(matched_names + core_terms))
 
-    escalation_reasons: List[str] = []
-    requested_amounts = amounts(text)
     headroom = ent["concession_headroom_rupees"]
-    double_pay_ok = ent["offers"]["double payment refund"]["eligible"]
-    if requested_amounts and max(requested_amounts) > headroom and not double_pay_ok:
-        escalation_reasons.append(
-            f"Requested amount ₹{max(requested_amounts)} exceeds remaining 30-day headroom of ₹{headroom} (policy 3, 8)."
-        )
-    if "manipulation" in matched_names or "[system note" in text.lower() or "<!--" in text.lower():
-        escalation_reasons.append("Message contains manipulation / claimed policy or system instruction (policy 9).")
+    triggers = escalation_triggers(
+        words,
+        load_customers().get(cid.strip().upper(), {}),
+        load_business_rules(overrides=rules) if rules else load_business_rules(),
+        headroom=headroom,
+        requested_amounts=amounts_asked_for(words, amounts),
+        double_payment_eligible=ent["offers"]["double payment refund"]["eligible"],
+        concepts=[c["term"] for c in extract_concepts(words)],
+    )
 
     return {
         "customer_id": cid,
@@ -218,7 +230,8 @@ def build_decision_envelope(case: Dict[str, Any],
         "concession_headroom_rupees": headroom,
         "offers": ent["offers"],
         "pune_service_areas": pune_service_areas(),
-        "escalation_reasons": escalation_reasons,
+        "escalation_triggers": triggers,
+        "escalation_reasons": [t["reason"] for t in triggers],
         "pruned_glossary": glossary(only_terms=glossary_terms),
     }
 
@@ -260,7 +273,14 @@ def run_agent(case: Dict[str, Any],
         {"role": "user", "content": user_content},
     ]
     trace: List[Dict[str, Any]] = []
-    escalated_in_loop = bool(envelope["escalation_reasons"])
+    # Who sent this case to a person: rule triggers, the escalate tool, the model's JSON, the policy guard.
+    # Saved with the output, so a run shows why each case was escalated.
+    sources: List[str] = [f"rule:{t['rule']}" for t in envelope["escalation_triggers"]]
+
+    def _finish(output: Dict[str, Any]) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+        output["escalation_sources"] = list(dict.fromkeys(sources))
+        output["needs_human"] = bool(sources)
+        return output, trace
 
     for step in range(MAX_STEPS):
         r = chat(messages, tools=TOOLS_C3, temperature=temperature, run=run)
@@ -284,17 +304,21 @@ def run_agent(case: Dict[str, Any],
                     "needs_human": True,
                     "parse_error": True,
                 }
+            if output.get("parse_error"):
+                sources.append("fallback:parse_error")
+            elif output.get("needs_human"):
+                sources.append("model")
             # Post-draft ontology policy guardrail (ADR-001 step 3)
             violations = policy_violations(
                 output.get("reply") or "",
                 customer_id=case.get("customer_id"),
                 rules=rules,
+                asked=customer_text(case),
             )
-            if violations or escalated_in_loop:
-                output["needs_human"] = True
             if violations:
                 output["policy_guard_triggered"] = violations
-            return output, trace
+                sources.extend(f"guard:{v}" for v in violations)
+            return _finish(output)
 
         for call in r["tool_calls"]:
             name = call["function"]["name"]
@@ -305,7 +329,7 @@ def run_agent(case: Dict[str, Any],
                 except json.JSONDecodeError:
                     args = {}
             if name == "escalate":
-                escalated_in_loop = True
+                sources.append("tool:escalate")
             if name not in FUNCTIONS_C3:
                 result = {"error": f"unknown tool {name}"}
             else:
@@ -318,7 +342,8 @@ def run_agent(case: Dict[str, Any],
             )
             entry["tool_calls"].append((name, args, result))
 
-    return {"intent": "other", "reply": "", "needs_human": True, "gave_up": True}, trace
+    sources.append("fallback:gave_up")
+    return _finish({"intent": "other", "reply": "", "needs_human": True, "gave_up": True})
 
 
 def version_c3(case: Dict[str, Any],

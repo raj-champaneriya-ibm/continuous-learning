@@ -73,6 +73,15 @@ def conversation(case: Dict) -> str:
     return "\n\n".join(turns + [f"Customer: {case['message']}"]) if turns else case["message"]
 
 
+def customer_text(case: Dict) -> str:
+    """Only the customer's own words: earlier customer turns plus the latest message, no agent turns.
+
+    Escalation triggers and the grader's "restated request" check read this, so an amount or a phrase
+    the agent wrote in an earlier turn is never mistaken for something the customer asked for."""
+    turns = [t["text"] for t in case.get("history", []) if t.get("role") == "customer"]
+    return "\n\n".join(turns + [case.get("message") or ""]).strip()
+
+
 def outage_for(customer: Dict) -> Optional[Dict]:
     """The outage in the customer's area right now, or None."""
     return load_outages().get(customer["area"])

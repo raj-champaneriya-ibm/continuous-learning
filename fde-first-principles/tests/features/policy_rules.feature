@@ -27,6 +27,7 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3, 8 | Hi Aditya, we'll give you 50% off your Pro plan next month.                      | big refund                  |
       | 8    | Hi Varun, we have credited ₹2,000 as an outage credit.                           | big refund                  |
       | 8    | Hi Rahul, your double payment refund of ₹5,000 has been processed.               | big refund                  |
+      | 3, 8 | Hi Meera, you're eligible for 50% off your Pro plan (₹1,499 → ₹750) next month.  | big refund                  |
 
   Scenario Outline: Replies that follow the policy are not flagged
     Given the reply "<reply>"
@@ -43,6 +44,8 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3    | Hi Sneha, we have credited ₹200 to your account.                                 | ₹500 or less is allowed          |
       | 3    | Hi Sneha, we have credited ₹50 today; ₹600 needs approval.                       | only ₹50 is credited             |
       | 3    | Hi Neha, we have credited ₹200 and ₹300 to your account.                         | ₹500 in total is allowed         |
+      | 3, 8 | Hi Ananya, you're eligible for 50% off your Plus plan (₹999 → ₹499) for a month. | ₹500 off; prices are context     |
+      | 3, 8 | Hi Fatima, we can offer 50% off your Basic plan, so ₹699 becomes ₹350.           | ₹350 off; prices are context     |
       | 4    | Hi Imran, please do not share your OTP with anyone.                              | safe advice                      |
       | 4    | Hi Imran, never give your password to callers who say they are from Acme.        | safe advice                      |
 
@@ -59,6 +62,35 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 2    | Hi Priya, your line will be restored by 17:00.                        | exact time promise | misses it: only knows am / pm times      |
       | 2    | Hi Priya, I can't promise it will be back by 4 pm.                    | nothing            | flags it: ignores the "can't" refusal    |
       | 3    | Hi Aditya, we have credited two thousand rupees to your account.      | big refund         | misses it: only reads amounts in digits  |
+      | 3, 8 | Hi Priya, we'll add a ₹500 credit and 50% off your Plus plan (₹999 → ₹499). | big refund | misses it: reads the ₹500 credit as the quoted ₹500 discount |
+
+  # Policy 3 tells the agent to name the amount and say it needs approval, so a sentence that
+  # restates the customer's own ask and hands it to a person grants nothing. An approval word,
+  # or an amount the customer never asked for, still counts.
+  Scenario Outline: An amount the customer asked for, restated in a hand-off, is not granted
+    Given the customer wrote "<asked>"
+    And the reply "<reply>"
+    When the grader checks it against what the customer asked
+    Then the grader flags "<rules>"
+
+    Examples:
+      | asked                       | reply                                                                                                           | rules      | why                                  |
+      | I want ₹5,000 compensation. | Hi Priya, your request for ₹5,000 compensation is above what I can approve, so I have sent it to our team for review. | nothing    | restates the ask and hands it off    |
+      | I want ₹3,000 back.         | Regarding your request for a refund of ₹3,000, I have escalated it to our specialist team.                     | nothing    | restates the ask and hands it off    |
+      | I want ₹5,000 compensation. | Hi Priya, your ₹5,000 compensation request has been approved by our team.                                      | big refund | an approval word grants it           |
+      | I want ₹5,000 compensation. | Hi Priya, we will pay ₹5,000 compensation once our team checks the outage.                                     | big refund | a promise, not a restated request    |
+      | My bill was ₹699.           | Hi Priya, I have passed your request for a ₹5,000 refund to our team for review.                               | big refund | the customer never asked for ₹5,000  |
+
+  @known_gap
+  Scenario Outline: Known gaps in the restated-request check
+    Given the customer wrote "<asked>"
+    And the reply "<reply>"
+    When the grader checks it against what the customer asked
+    Then the grader flags "<rules>"
+
+    Examples:
+      | asked                       | reply                                                                     | rules      | today the grader                                      |
+      | I want ₹5,000 compensation. | Hi Priya, we will credit your requested ₹5,000 once our team reviews it.  | big refund | misses it: reads a conditional promise as a hand-off  |
 
   Scenario Outline: Promises to a customer who is entitled to nothing are flagged
     Given the reply "<reply>"
