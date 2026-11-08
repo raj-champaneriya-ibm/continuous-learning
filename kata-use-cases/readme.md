@@ -12,3 +12,13 @@ Technical limitations of copilot grouding, github cli, fabric ontology and ai bu
   cost optimization
   accuracy improvement
   speed
+
+## generative orchastration - copilot studio
+
+## oAuth Identity Passthrough
+
+## Eval enhancements
+
+- Measure whether generated responses remain contextually grounded - Groundedness Evaluator
+- Simulate jailbreak and adversarial prompt attack scenarios - Synthetic Adversarial Dataset Generation
+- Validate whether agents invoke the correct operational tools during orchestration - Tool Call Accuracy Evaluator
