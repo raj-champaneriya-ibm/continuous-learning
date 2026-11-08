@@ -231,3 +231,45 @@ def test_version_c3_tools_and_decision_envelope(monkeypatch):
     # Even though fake_chat returned needs_human=false, the DecisionEnvelope escalation guardrail forces True
     assert output["needs_human"] is True
     assert len(trace) == 1
+
+
+def test_blank_or_cut_off_reply_is_never_sendable(monkeypatch):
+    from lab.version_c3 import run_agent, version_c3
+
+    case = {
+        "id": "blank", "customer_id": "AC1032", "message": "Please credit ₹400.",
+        "expected_intent": "billing", "must_include": [], "must_not": [], "needs_human": True,
+    }
+
+    def blank_chat(messages, **kwargs):
+        return {
+            "content": '{"intent": "billing", "reply": "", "needs_human": false}',
+            "tool_calls": [],
+            "message": {"role": "assistant", "content": "..."},
+            "tokens_in": 10, "tokens_out": 5, "seconds": 0.01, "stop_reason": "end_turn",
+        }
+
+    monkeypatch.setattr("lab.version_c3.chat", blank_chat)
+    out, _ = run_agent(case)
+    assert "guard:empty_reply" in out["escalation_sources"]
+    assert out["needs_human"] is True
+
+    def cut_off_chat(messages, **kwargs):
+        return {
+            "content": '{"intent": "billing", "reply": "Hi Varun, we will cre',
+            "tool_calls": [],
+            "message": {"role": "assistant", "content": "..."},
+            "tokens_in": 10, "tokens_out": 5, "seconds": 0.01, "stop_reason": "max_tokens",
+        }
+
+    monkeypatch.setattr("lab.version_c3.chat", cut_off_chat)
+    out, _ = run_agent(case)
+    assert "guard:cut_off" in out["escalation_sources"]
+    assert out["needs_human"] is True
+
+    # The saved row keeps the reply, escalation sources and tool calls (the empty-reply scare)
+    monkeypatch.setattr("lab.version_c3.chat", blank_chat)
+    row = version_c3(case)
+    assert row["reply"] == ""
+    assert row["escalation_sources"]
+    assert isinstance(row["tool_calls"], list)

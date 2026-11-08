@@ -25,7 +25,7 @@ Feature: Escalation rules run as code before the model drafts a reply
       | AC1001   | I'd rather talk it through with a person. Could someone call me?                     | human_request                   | asks for a person                           |
       | AC1005   | Bot se baat nahi karni. Kisi insaan se baat karao please.                            | human_request                   | asks for a person, in Hinglish              |
       | AC1011   | Hi, I'm Kavya's husband. Please cancel the connection on her account.                | third_party_account_change      | policy 11: not the account holder           |
-      | AC1006   | I've sold my flat. Can you transfer the account to the new owner?                    | third_party_account_change      | policy 11: a new owner                      |
+      | AC1006   | I've sold my flat. Can you transfer the account to the new owner?                    | ownership_transfer              | policy 11: verify both parties              |
       | AC1013   | Please update my registered email to my new work address.                            | contact_detail_change           | policy 11: contact details                  |
 
   Scenario Outline: Routine emails are left to the model

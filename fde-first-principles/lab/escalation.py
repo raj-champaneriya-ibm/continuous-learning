@@ -127,7 +127,8 @@ def escalation_triggers(text: str,
 
     Codes follow the escalation_rule labels in data/acme/cases*.jsonl (E1 legal, E2 churn after
     repeated complaints, E3 money above the limit, E5 manipulation, E7 asks for a person,
-    E9 account change by someone else), so triggers can be scored against the labels."""
+    E9 account change by someone else or an ownership transfer), so triggers can be scored
+    against the labels."""
     text = text or ""
     policy = rules.get("escalation_policy", {})
     limit = rules.get("concession_limit", {})
@@ -161,9 +162,14 @@ def escalation_triggers(text: str,
         found.append(_trigger("E7", "human_request", "Customer asks to talk to a person."))
 
     if policy.get("third_party_account_change_escalates", True) and (
-            (THIRD_PARTY_SENDER.search(text) and ACCOUNT_CHANGE.search(text)) or OWNERSHIP_TRANSFER.search(text)):
+            THIRD_PARTY_SENDER.search(text) and ACCOUNT_CHANGE.search(text)):
         found.append(_trigger("E9", "third_party_account_change",
                               "Someone other than the account holder asks to change the account (policy 11)."))
+
+    if policy.get("ownership_transfer_escalates", True) and OWNERSHIP_TRANSFER.search(text):
+        found.append(_trigger("E9", "ownership_transfer",
+                              "An ownership transfer is asked for, by whoever asks; a person must verify both "
+                              "parties before anything changes (policy 11)."))
 
     if policy.get("contact_detail_change_always_escalates", True) and CONTACT_CHANGE.search(text):
         found.append(_trigger("E9", "contact_detail_change",
