@@ -1,830 +1,253 @@
-You should build a Business Ontology Explorer, not another generic RDF viewer. The tool should translate technical RDF/OWL constructs into business-friendly views such as Concept → Meaning → Rules → Evidence → Owner → Impact.
-
-1. The showcase outcome
-
-A business user selects Retention Offer and sees:
-
-Retention Offer
-│
-├── Business meaning
-│   └── 50% off for one month for an eligible customer
-│
-├── Eligibility
-│   ├── Customer tenure: 13+ months
-│   └── Not used in previous 12 months
-│
-├── Financial treatment
-│   └── Does not count toward the ₹500 concession limit
-│
-├── Governed by
-│   ├── Policy Rule 10
-│   └── Policy Rule 13
-│
-├── Documented in
-│   └── KB11
-│
-├── Business owner
-│   └── Customer Retention & Lifecycle
-│
-└── Lifecycle
-    └── Active
-
-
-This information already exists across ontology.txt, but the application needs to organize it around a selected business concept rather than showing every triple simultaneously.
-
-2. Recommended architecture
-
-For a showcase-quality tool, use:
-
-Layer	Technology	PurposeFront end	React + TypeScript	Business-facing interface
-Graph	Cytoscape.js	Interactive concept and relationship graph
-API	FastAPI	Parse ontology and expose business-oriented APIs
-RDF engine	RDFLib	Load Turtle and run SPARQL
-Reasoning	OWL-RL	Calculate inherited RDF/OWL relationships
-Validation	pySHACL	Validate ontology and business constraints
-Storage initially	In-memory RDFLib graph	Enough for your 450-line file
-Deployment	Docker Compose	Consistent local and showcase setup
-
-Cytoscape.js is an MIT-licensed graph visualization library with layouts, selectors, filtering, graph algorithms, touch support and JSON serialization. It is a library rather than a finished application, which makes it suitable for your custom business explorer.
-
-RDFLib parses Turtle and provides RDF graphs, namespaces and SPARQL 1.1 querying. It can operate entirely in memory for an ontology of this size.
-
-Architecture flow
-                            Business browser
-                                   │
-              ┌────────────────────┴────────────────────┐
-              │                                         │
-        Business cards                         Cytoscape graph
-              │                                         │
-              └────────────────────┬────────────────────┘
-                                   │
-                              React UI
-                                   │
-                              REST/JSON
-                                   │
-                              FastAPI API
-                                   │
-                 ┌─────────────────┼─────────────────┐
-                 │                 │                 │
-              RDFLib           OWL-RL           pySHACL
-                 │
-      ┌──────────┼───────────┬─────────────┐
-      │          │           │             │
-ontology.ttl  policy.md  business_rules  knowledge base
-                            .json             .md
-
-
-The current file explicitly separates ontology definitions from customer records and business-rule thresholds. The application should preserve that separation rather than merging all information into one uncontrolled graph.
-
-3. Build the MVP in two iterations
-Iteration 1: Ontology Explorer
-
-Build these five screens:
-
-Executive overview
-Concept explorer
-Rule explorer
-Knowledge lineage
-Governance and quality
-
-Do not start with ontology editing. Keep the first version read-only.
-
-Iteration 2: Rule and evidence integration
-
-Later, ingest:
-
-policy.md
-business_rules.json
-kb.md
-optionally anonymized example customer scenarios
-
-This produces the level-down view missing from WebVOWL.
+---
+title: Semantic explorer for the Acme model
+description: A read-only Meaning tab in Acme Review Studio that shows one business concept at a time, where each fact lives, and where the files disagree
+ms.date: 2026-11-09
+---
+
+## The problem
+
+The Acme semantic model is small (about 600 lines across four files), but one business fact lives in
+several places. Nobody can review or change it with confidence, because the reviewer has to read
+Turtle, JSON and two Markdown files and join them in their head.
+
+Take the retention offer. Its facts are spread like this:
+
+| Fact                                | Where it is written today                                                                |
+|-------------------------------------|------------------------------------------------------------------------------------------|
+| 50% off for 1 month                 | `policy.md` rule 13, `kb.md` KB11, `ontology.ttl` definition, `business_rules.json`      |
+| Tenure of 13 months or more         | `policy.md` rule 10, `ontology.ttl` definition, `business_rules.json`                    |
+| At most once in 12 months           | `policy.md` rule 10, `ontology.ttl` (`acme:oncePerMonths` and definition), `business_rules.json` |
+| Doesn't count toward the ₹500 limit | `policy.md` rules 8 and 13, `ontology.ttl` (`acme:countsTowardLimit` and definition)     |
+| Governed by which rules             | `ontology.ttl` (`acme:enforcesRule` and the `acme:source` string), `business_rules.json` |
+| Customer-facing wording             | `kb.md` KB11                                                                             |
+| Owner                               | `ontology.ttl` (`acme:ownedBy`)                                                          |
+
+The explorer exists to answer three questions for a business reviewer:
+
+1. What does this concept mean, and what governs it?
+2. Which file do I edit to change it?
+3. Do the files agree?
+
+## Build on what already exists
+
+The lab already loads, reasons over and checks this model. The agent the lab measures (Version C3)
+reads the model through `lab/ontology.py`. The explorer must show the model the agent sees, so it
+reuses that module instead of building a second pipeline.
+
+| Need                                   | Already in the repository                                     |
+|----------------------------------------|---------------------------------------------------------------|
+| Load `ontology.ttl` and run SPARQL     | `lab/ontology.py` `_store()` (pyoxigraph)                     |
+| Inheritance down the class hierarchy   | `reason_owl_rl()` (defeasible inheritance, inverse, domain)   |
+| Concept with rules, articles, owner    | `terms()`, `domain_edges()`                                   |
+| Search by English or regional label    | `define("paisa wapas")`, `extract_concepts()`                 |
+| Thresholds                             | `lab/business_rules.py` `load_business_rules()`               |
+| Help articles                          | `lab/acme.py` `kb_by_id()`                                    |
+| Cross-file governance checks           | `validate_ontology_ops()`                                     |
+| A UI the domain expert already uses    | Acme Review Studio (Shiny), Knowledge page                    |
+| Importing the lab from the studio      | `acme/providers.py` `LAB_ROOT` (used by the C3 provider)      |
+
+> [!WARNING]
+> Don't swap in RDFLib with the `owlrl` package. Standard OWL 2 RL does not copy values stated on a
+> class (such as `acme:countsTowardLimit` or `acme:enforcesRule`) down to its subclasses, so the
+> explorer would show fewer facts than the agent uses. It also applies `rdfs:domain` to the class IRIs
+> themselves and adds noise such as `acme:RetentionOffer a acme:Concession`. `reason_owl_rl()` filters
+> that out on purpose.
+
+## Drift that exists today
+
+`validate_ontology_ops()` returns `ok: True` on the current files, yet these disagreements exist:
+
+* `business_rules.json` lists rules 8 and 10 for the retention offer; `ontology.ttl` states rules 10 and 13.
+* `acme:PolicyRule` and `acme:ruleNumber` say "rules 1 to 11"; `policy.md` and the ontology have 13 rules.
+* The `ontology.ttl` header says thresholds live in `business_rules.json`, but `acme:oncePerMonths 12`
+  and definitions with ₹500, ₹100, 13 months, 50% and 24 hours are also in the ontology.
+* `acme:source` strings repeat the `acme:documentedIn` and `acme:enforcesRule` edges by hand and
+  already differ from them (for example, `acme:Concession` says "policy 8" but enforces rules 3 and 8).
+* `business_rules.json` names its owner "Billing & Policy Operations", which is not one of the
+  ontology's operational owners.
+* After reasoning, the retention offer is governed by rules 3, 8, 10 and 13. Rules 3 and 8 come from
+  `acme:Concession`. A view that shows only stated edges (rules 10 and 13) hides half the picture.
+
+These are the explorer's first demo, and the first checks to add.
+
+## Design: a Meaning tab in Acme Review Studio
+
+Add one read-only sub-tab, **Meaning**, to the studio's Knowledge page next to *Help articles & policy*.
+No new service, front end or container.
+
+```mermaid
+flowchart LR
+    TTL[ontology.ttl] --> ONT[lab/ontology.py]
+    JSON[business_rules.json] --> BR[lab/business_rules.py]
+    KB[kb.md] --> ACME[lab/acme.py]
+    POL[policy.md] --> RULES[policy_rules: numbered list parser]
+    ONT --> TAB[Studio: Knowledge, Meaning tab]
+    BR --> TAB
+    ACME --> TAB
+    RULES --> TAB
+    ONT --> C3[Version C3 agent]
+    BR --> C3
+```
+
+The tab has three views.
+
+### Concept card
+
+Pick a concept by any label (English or regional). The card shows each fact once, with where it
+came from and which file to edit:
+
+```text
+retention offer                    also called: 50% off, loyalty discount
+
+Meaning      50% off for 1 month, offered once and politely ...           edit: ontology.ttl
+Is a         discount > concession; once-only offer                       edit: ontology.ttl
+Numbers      50% for 1 month, tenure 13+ months, once per 12 months       edit: business_rules.json
+₹500 limit   doesn't count (stated here; overrides concession's "counts") edit: ontology.ttl
+Rules        10, 13 stated; 3, 8 inherited from concession                edit: ontology.ttl
+             click a rule to read its text                                edit: policy.md
+Help         KB11 · Retention offer                                       edit: kb.md
+Owner        Customer Retention & Lifecycle                               edit: ontology.ttl
+Checks       business_rules.json lists rules 8, 10; ontology says 10, 13
+```
 
-4. Project structure
-business-ontology-explorer/
-├── backend/
-│   ├── app/
-│   │   ├── main.py
-│   │   ├── ontology.py
-│   │   ├── services/
-│   │   │   ├── concept_service.py
-│   │   │   ├── rule_service.py
-│   │   │   ├── lineage_service.py
-│   │   │   └── validation_service.py
-│   │   └── models/
-│   │       └── api_models.py
-│   ├── data/
-│   │   ├── ontology.ttl
-│   │   ├── policy.md
-│   │   ├── business_rules.json
-│   │   └── shapes.ttl
-│   ├── tests/
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ConceptGraph.tsx
-│   │   │   ├── ConceptCard.tsx
-│   │   │   ├── RulePanel.tsx
-│   │   │   ├── EvidencePanel.tsx
-│   │   │   └── GovernancePanel.tsx
-│   │   ├── pages/
-│   │   │   ├── Overview.tsx
-│   │   │   ├── Explorer.tsx
-│   │   │   ├── Rules.tsx
-│   │   │   └── Quality.tsx
-│   │   └── api.ts
-│   └── package.json
-├── docker-compose.yml
-└── README.md
+Leave out lifecycle (all 27 classes are `active`), IRIs and datatypes. Put those behind a
+*Technical details* toggle if anyone asks.
 
-5. Bootstrap the project
-Backend
-mkdir business-ontology-explorer
-cd business-ontology-explorer
+### Rule view
 
-mkdir -p backend/app/services backend/app/models backend/data backend/tests
-cd backend
+Pick a rule number. Show its text from `policy.md` and every concept that enforces it, stated or
+inherited. This is the impact check before changing a rule: rule 10 touches tenure, once-only offer,
+late-fee waiver and retention offer.
 
-python3 -m venv .venv
-source .venv/bin/activate
-
-pip install fastapi uvicorn rdflib owlrl pyshacl pydantic python-multipart
-pip freeze > requirements.txt
-
-
-pySHACL validates RDF graphs against SHACL shapes and uses RDFLib and OWL-RL for RDF processing and inference.
-
-Copy the file:
-
-cp /path/to/ontology.txt data/ontology.ttl
-
-Front end
-
-From the project root:
-
-npm create vite@latest frontend -- --template react-ts
-cd frontend
-
-npm install
-npm install cytoscape
-npm install -D @types/cytoscape
-
-6. Load and index the ontology
-
-Create backend/app/ontology.py:
-
-from pathlib import Path
-
-from rdflib import Graph, Namespace
-from owlrl import DeductiveClosure, OWLRL_Semantics
-
-ACME = Namespace("https://acme.example/ontology#")
-DATA_PATH = Path(__file__).parent.parent / "data" / "ontology.ttl"
-
-
-class OntologyStore:
-    def __init__(self) -> None:
-        self.asserted = Graph()
-        self.asserted.parse(DATA_PATH, format="turtle")
-
-        # Keep asserted and inferred graphs conceptually separate.
-        self.inferred = Graph()
-
-        for triple in self.asserted:
-            self.inferred.add(triple)
-
-        DeductiveClosure(OWLRL_Semantics).expand(self.inferred)
-
-
-store = OntologyStore()
-
-
-Keeping asserted and inferred facts distinguishable matters. A business user should be able to see:
-
-countsTowardLimit = false
-Source: directly declared on RetentionOffer
-
-
-versus:
-
-oncePerMonths = 12
-Source: inherited from OnceOnlyOffer
-
-
-Without this distinction, the presentation may suggest that inherited information was explicitly authored on the selected concept.
-
-7. Create business-oriented API models
-
-Your API should not expose raw RDF triples as its main output.
-
-Return this shape:
-
-{
-  "id": "RetentionOffer",
-  "label": "retention offer",
-  "type": "BusinessConcept",
-  "definition": "50% off for 1 month...",
-  "parents": [
-    {
-      "id": "Discount",
-      "label": "discount"
-    },
-    {
-      "id": "OnceOnlyOffer",
-      "label": "once-only offer"
-    }
-  ],
-  "businessAttributes": [
-    {
-      "name": "Counts toward concession limit",
-      "value": false,
-      "source": "asserted"
-    },
-    {
-      "name": "Offer frequency",
-      "value": "Once every 12 months",
-      "source": "inherited from OnceOnlyOffer"
-    }
-  ],
-  "rules": [
-    {
-      "id": "PolicyRule10",
-      "number": 10
-    },
-    {
-      "id": "PolicyRule13",
-      "number": 13
-    }
-  ],
-  "evidence": [
-    {
-      "id": "KB11",
-      "type": "KnowledgeArticle"
-    }
-  ],
-  "owner": "Customer Retention & Lifecycle",
-  "lifecycle": "active"
-}
-
-
-This is the most important transformation in the application:
-
-RDF representation
-        ↓
-semantic interpretation
-        ↓
-business-oriented JSON
-        ↓
-business-readable interface
-
-8. Implement the principal SPARQL queries
-List classes
-PREFIX owl:  <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT ?class ?label ?definition
-WHERE {
-    ?class a owl:Class .
-    OPTIONAL { ?class skos:prefLabel ?label }
-    OPTIONAL { ?class skos:definition ?definition }
-}
-ORDER BY ?label
-
-Show parents and children
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT ?direction ?related ?label
-WHERE {
-    {
-        BIND("parent" AS ?direction)
-        <CONCEPT_IRI> rdfs:subClassOf ?related .
-    }
-    UNION
-    {
-        BIND("child" AS ?direction)
-        ?related rdfs:subClassOf <CONCEPT_IRI> .
-    }
-
-    OPTIONAL { ?related skos:prefLabel ?label }
-}
-
-Find rules enforced by a concept
-PREFIX acme: <https://acme.example/ontology#>
-
-SELECT ?rule ?number
-WHERE {
-    <CONCEPT_IRI> acme:enforcesRule ?rule .
-    OPTIONAL { ?rule acme:ruleNumber ?number }
-}
-ORDER BY ?number
-
-Find concepts governed by a rule
-PREFIX acme: <https://acme.example/ontology#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-SELECT ?concept ?label ?definition
-WHERE {
-    ?concept acme:enforcesRule <RULE_IRI> .
-    OPTIONAL { ?concept skos:prefLabel ?label }
-    OPTIONAL { ?concept skos:definition ?definition }
-}
-ORDER BY ?label
-
-Trace knowledge evidence
-PREFIX acme: <https://acme.example/ontology#>
-
-SELECT ?article ?articleId
-WHERE {
-    <CONCEPT_IRI> acme:documentedIn ?article .
-    OPTIONAL { ?article acme:articleId ?articleId }
-}
-ORDER BY ?articleId
-
-9. Implement FastAPI endpoints
-
-Create backend/app/main.py:
-
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from rdflib import RDF, RDFS, OWL, SKOS, URIRef
-
-from .ontology import store, ACME
-
-app = FastAPI(
-    title="Business Ontology Explorer",
-    version="0.1.0",
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-def local_name(value: URIRef) -> str:
-    text = str(value)
-    return text.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
-
-
-def first_value(graph, subject, predicate):
-    return next(iter(graph.objects(subject, predicate)), None)
-
-
-@app.get("/api/health")
-def health():
-    return {
-        "status": "ok",
-        "assertedTriples": len(store.asserted),
-        "inferredTriples": len(store.inferred),
-    }
-
-
-@app.get("/api/concepts")
-def concepts():
-    results = []
-
-    for concept in store.asserted.subjects(RDF.type, OWL.Class):
-        label = first_value(store.asserted, concept, SKOS.prefLabel)
-        definition = first_value(store.asserted, concept, SKOS.definition)
-
-        results.append({
-            "id": local_name(concept),
-            "iri": str(concept),
-            "label": str(label) if label else local_name(concept),
-            "definition": str(definition) if definition else None,
-        })
-
-    return sorted(results, key=lambda item: item["label"].lower())
-
-
-@app.get("/api/concepts/{concept_id}")
-def concept_detail(concept_id: str):
-    concept = ACME[concept_id]
-
-    if (concept, RDF.type, OWL.Class) not in store.asserted:
-        raise HTTPException(status_code=404, detail="Concept not found")
-
-    label = first_value(store.asserted, concept, SKOS.prefLabel)
-    definition = first_value(store.asserted, concept, SKOS.definition)
-    lifecycle = first_value(store.asserted, concept, ACME.lifecycleStatus)
-
-    parents = []
-    for parent in store.asserted.objects(concept, RDFS.subClassOf):
-        parent_label = first_value(store.asserted, parent, SKOS.prefLabel)
-        parents.append({
-            "id": local_name(parent),
-            "label": str(parent_label) if parent_label else local_name(parent),
-        })
-
-    children = []
-    for child in store.asserted.subjects(RDFS.subClassOf, concept):
-        child_label = first_value(store.asserted, child, SKOS.prefLabel)
-        children.append({
-            "id": local_name(child),
-            "label": str(child_label) if child_label else local_name(child),
-        })
-
-    rules = []
-    for rule in store.asserted.objects(concept, ACME.enforcesRule):
-        number = first_value(store.asserted, rule, ACME.ruleNumber)
-        rules.append({
-            "id": local_name(rule),
-            "number": int(number) if number else None,
-        })
-
-    articles = []
-    for article in store.asserted.objects(concept, ACME.documentedIn):
-        article_id = first_value(store.asserted, article, ACME.articleId)
-        articles.append({
-            "id": local_name(article),
-            "articleId": str(article_id) if article_id else None,
-        })
-
-    owners = []
-    for owner in store.asserted.objects(concept, ACME.ownedBy):
-        owner_label = first_value(store.asserted, owner, SKOS.prefLabel)
-        owners.append({
-            "id": local_name(owner),
-            "label": str(owner_label) if owner_label else local_name(owner),
-        })
-
-    return {
-        "id": concept_id,
-        "iri": str(concept),
-        "label": str(label) if label else concept_id,
-        "definition": str(definition) if definition else None,
-        "lifecycle": str(lifecycle) if lifecycle else None,
-        "parents": parents,
-        "children": children,
-        "rules": rules,
-        "knowledgeArticles": articles,
-        "owners": owners,
-    }
-
-
-Run it:
-
-cd backend
-source .venv/bin/activate
-
-uvicorn app.main:app --reload --port 8000
-
-
-Test:
-
-http://localhost:8000/docs
-
-10. Build a focused graph, not a graph of everything
-
-The primary graph should display only:
-
-selected concept
-direct parents
-direct children
-associated rules
-knowledge articles
-owner
-selected business attributes
-
-Use colors that convey meaning:
-
-Node	Color	ShapeSelected concept	Dark blue	Rounded rectangle
-Parent class	Purple	Rectangle
-Child concept	Light blue	Rectangle
-Policy rule	Orange	Diamond
-Knowledge article	Green	Document-like rectangle
-Owner	Teal	Hexagon
-Literal/business value	Grey	Pill
-
-Avoid putting xsd:string, owl:Thing and every datatype property on the main business view. Put those behind a Technical details toggle.
-
-The graph should have two modes:
-
-Business view: meaning, rules, evidence, owner
-Technical view: classes, properties, RDF/OWL axioms, IRIs
-
-11. Cytoscape component
-
-Create frontend/src/components/ConceptGraph.tsx:
-
-import { useEffect, useRef } from "react";
-import cytoscape, { ElementDefinition } from "cytoscape";
-
-type Props = {
-  elements: ElementDefinition[];
-  onSelect: (id: string) => void;
-};
-
-export function ConceptGraph({ elements, onSelect }: Props) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const cy = cytoscape({
-      container: containerRef.current,
-      elements,
-      layout: {
-        name: "breadthfirst",
-        directed: true,
-        spacingFactor: 1.4,
-      },
-      style: [
-        {
-          selector: "node",
-          style: {
-            label: "data(label)",
-            "font-size": 12,
-            "text-wrap": "wrap",
-            "text-max-width": 130,
-            "background-color": "#4f6bed",
-            color: "#ffffff",
-            width: 70,
-            height: 45,
-            shape: "round-rectangle",
-          },
-        },
-        {
-          selector: 'node[type = "selected"]',
-          style: {
-            "background-color": "#0f3b5f",
-            width: 95,
-            height: 60,
-            "font-weight": "bold",
-          },
-        },
-        {
-          selector: 'node[type = "rule"]',
-          style: {
-            "background-color": "#c55a11",
-            shape: "diamond",
-          },
-        },
-        {
-          selector: 'node[type = "article"]',
-          style: {
-            "background-color": "#39825a",
-          },
-        },
-        {
-          selector: 'node[type = "owner"]',
-          style: {
-            "background-color": "#007f8b",
-            shape: "hexagon",
-          },
-        },
-        {
-          selector: "edge",
-          style: {
-            label: "data(label)",
-            "font-size": 10,
-            width: 2,
-            "line-color": "#a7a7a7",
-            "target-arrow-color": "#a7a7a7",
-            "target-arrow-shape": "triangle",
-            "curve-style": "bezier",
-          },
-        },
-      ],
-    });
-
-    cy.on("tap", "node", event => {
-      onSelect(event.target.id());
-    });
-
-    return () => cy.destroy();
-  }, [elements, onSelect]);
-
-  return <div ref={containerRef} style={{ width: "100%", height: "650px" }} />;
-}
-
-
-Cytoscape.js supports selectors, layouts, style mappings and interactive graph events, which fit this focused semantic-neighborhood approach.
-
-12. Add the missing rule content
-
-The current ontology only gives rule identifiers and numbers:
-
-acme:PolicyRule10 a acme:PolicyRule ;
-    acme:ruleNumber 10 .
-
-
-It does not contain the complete Rule 10 statement. The detailed rules are expected in data/acme/policy.md.
-
-Parse policy.md into a structure like:
-
-{
-  "10": {
-    "title": "Once-only offer eligibility",
-    "statement": "The offer is available only...",
-    "conditions": [
-      "Tenure must be at least 13 months",
-      "Offer must not have been used in the last 12 months"
-    ],
-    "outcome": "Offer may be proposed",
-    "source": "policy.md"
-  }
-}
-
-
-Avoid claiming that this example wording is the real policy until it has been extracted from the actual file.
-
-The UI then displays:
-
-Rule 10
-
-Purpose
-Controls eligibility for once-only offers.
-
-Applies to
-• Late-fee waiver
-• Retention offer
-• Tenure
-• Once-only offer
-
-Evidence
-• policy.md
-• KB02
-• KB11
-
-13. Add SHACL validation
-
-Create backend/data/shapes.ttl:
-
-@prefix acme: <https://acme.example/ontology#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-acme:PolicyRuleShape
-    a sh:NodeShape ;
-    sh:targetClass acme:PolicyRule ;
-    sh:property [
-        sh:path acme:ruleNumber ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:datatype xsd:integer ;
-        sh:minInclusive 1 ;
-    ] .
-
-acme:PlanShape
-    a sh:NodeShape ;
-    sh:targetClass acme:Plan ;
-    sh:property [
-        sh:path acme:planCode ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:datatype xsd:string ;
-    ] ;
-    sh:property [
-        sh:path acme:monthlyPriceRupees ;
-        sh:minCount 1 ;
-        sh:datatype xsd:integer ;
-        sh:minExclusive 0 ;
-    ] .
-
-
-Show the result in business language:
-
-Ontology quality
-
-✓ All policy rules have a numeric identifier
-✓ All plans have a plan code
-✓ All plan prices are positive integers
-⚠ PolicyRule description says rules 1–11, but rules 12 and 13 exist
-
-
-The final warning requires a custom lint rule because it compares narrative metadata with declared instances. In the current ontology, PolicyRule12 and PolicyRule13 exist even though the class and property definitions refer to rules 1 through 11.
-
-14. Add explainability
-
-Every business statement should have a Why am I seeing this? action.
-
-For example:
-
-Retention Offer does not count toward the ₹500 limit.
-
-Why?
-
-Direct assertion:
-RetentionOffer → countsTowardLimit → false
-
-Source:
-ontology.ttl
-
-Related policy:
-Policy Rule 13
-
-Related knowledge:
-KB11
-
-
-For inherited values:
-
-Retention Offer may be used once every 12 months.
-
-Why?
-
-RetentionOffer → subclassOf → OnceOnlyOffer
-OnceOnlyOffer → oncePerMonths → 12
-
-Status:
-Inferred through class inheritance
-
-
-This provenance view will make the tool credible to architecture, governance and business stakeholders.
-
-15. The business showcase script
-
-Use a six-minute demonstration.
-
-Minute 1: Business problem
-
-“Policies, product definitions and support knowledge exist across different files. Business users cannot easily see how a policy affects a customer action or which source supports a decision.”
-
-Minute 2: Executive overview
-
-Show:
-
-active concepts
-policy rules
-knowledge articles
-owners
-quality warnings
-concepts without owners
-rules without detailed text
-Minutes 3–4: Retention-offer journey
-
-Select:
-
-Retention Offer
-
-
-Demonstrate:
-
-business definition
-parent concepts
-inherited 12-month cadence
-13-month tenure dependency
-Policy Rules 10 and 13
-KB11 evidence
-Customer Retention ownership
-effect on the ₹500 concession limit
-Minute 5: Impact analysis
-
-Click Rule 10 and show all affected concepts:
-
-Rule 10
-├── Tenure
-├── OnceOnlyOffer
-├── LateFeeWaiver
-└── RetentionOffer
-
-
-Then say:
-
-“Before changing Rule 10, the business can see every concept and customer outcome potentially affected.”
-
-Minute 6: Governance
-
-Show:
-
-asserted versus inferred values
-missing source or owner warnings
-Rule 1–11 versus Rule 12/13 inconsistency
-SHACL validation results
-
-Finish with:
-
-“This turns ontology from a technical RDF artifact into a traceable business decision map.”
-
-16. Practical delivery plan
-Period	DeliverableDays 1–2	RDFLib loader, namespace handling and APIs
-Days 3–4	Concept page and focused Cytoscape graph
-Day 5	Rule, article and owner panels
-Days 6–7	Search, filters and impact analysis
-Day 8	SHACL validation and custom lint warnings
-Day 9	Business styling and sample journeys
-Day 10	Docker packaging, testing and demo rehearsal
-MVP acceptance criteria
-
-The first showcase is ready when the tool can:
-
-load a .ttl file without code changes
-list ontology concepts
-search by preferred or alternative label
-show parents and children
-display definitions in business language
-show linked policy rules
-show linked knowledge articles
-show operational owners
-distinguish asserted and inferred information
-navigate from concept to rule and from rule to affected concepts
-report ontology-quality findings
-export a selected concept as PNG or PDF for presentations
-
-The key design principle is: never make the audience interpret raw triples. Present a decision-oriented story and retain the RDF/OWL detail as drill-down evidence.
+### Checks
+
+A table from `validate_ontology_ops()`, one row per finding, each with the file to fix.
+
+## Code changes
+
+All changes are small additions to `lab/ontology.py`, one parser and one Shiny panel.
+
+### Stated versus inherited
+
+Keep an unreasoned copy of the ontology next to the reasoned one, and compare.
+
+```python
+@lru_cache(maxsize=1)
+def _asserted() -> Store:
+    store = Store()
+    store.load(path=str(ONTOLOGY), format=RdfFormat.TURTLE)
+    return store
+
+
+def provenance(word: str) -> List[Dict[str, str]]:
+    """Every fact about a concept, marked 'stated' or 'inherited'."""
+    iri = define(word)["iri"]
+    q = PREFIXES + f"SELECT ?p ?o WHERE {{ <{iri}> ?p ?o FILTER(?p != rdf:type) }}"
+    stated = {(r["p"].value, r["o"].value) for r in _asserted().query(q)}
+    return [
+        {"property": r["p"].value, "value": r["o"].value,
+         "origin": "stated" if (r["p"].value, r["o"].value) in stated else "inherited"}
+        for r in _store().query(q)
+    ]
+```
+
+To name the ancestor ("inherited from concession"), check which entry in
+`domain_edges(word)["superclasses"]` states the same property and value in `_asserted()`.
+
+### Policy rule text
+
+`policy.md` is a numbered list, so a regular expression is enough:
+
+```python
+def policy_rules() -> Dict[int, str]:
+    text = (DATA / "policy.md").read_text(encoding="utf-8")
+    return {int(n): " ".join(body.split())
+            for n, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |^## |\Z)", text, re.M | re.S)}
+```
+
+### New checks in `validate_ontology_ops()`
+
+Compare stated edges (from `_asserted()`), not reasoned ones, so inherited rules don't hide a gap.
+
+| Check                                                                                    | Catches today          |
+|------------------------------------------------------------------------------------------|------------------------|
+| Each `business_rules.json` entry's `policy_rules` equals its concept's stated `acme:enforcesRule` | Retention offer 8, 10 versus 10, 13 |
+| Rule numbers in `policy.md` equal the `acme:PolicyRuleN` individuals                    | Future drift           |
+| Every `KBnn` heading in `kb.md` has an `acme:KBnn` individual, and the reverse          | Future drift           |
+| Each `kb_article` in `business_rules.json` is among its concept's `acme:documentedIn`   | Future drift           |
+| A number in `business_rules.json` (tenure, cooldown, amount) appears in the concept's definition | Prose falling behind the JSON |
+
+Add a scenario per check to `tests/test_ontology.py`, so a pull request that edits one file and forgets
+another fails in CI rather than in a customer reply.
+
+### Studio panel
+
+```python
+from acme.providers import LAB_ROOT  # the C3 provider already puts this on sys.path
+from lab.ontology import terms, define, domain_edges, provenance, policy_rules, validate_ontology_ops
+
+ui.nav_panel("Meaning",
+             ui.input_selectize("concept", None, choices=sorted(terms())),
+             ui.output_ui("concept_card"),
+             ui.output_data_frame("ontology_checks"))
+```
+
+> [!IMPORTANT]
+> The studio's other Knowledge tabs edit the workbook copy of articles and policy. The Meaning tab reads
+> `fde-first-principles/data/acme`, the files the C3 agent uses. Keep it read-only and label the
+> source on screen, so nobody edits the workbook expecting the ontology to change.
+
+## Simplify the model itself
+
+The explorer makes drift visible; fewer copies make it rarer. Give each kind of fact one home:
+
+| Kind of fact                               | Home                  | Remove from                                   |
+|--------------------------------------------|-----------------------|-----------------------------------------------|
+| What was agreed, in words                  | `policy.md`           |                                               |
+| What the customer is told                  | `kb.md`               |                                               |
+| Vocabulary, hierarchy, links, owner        | `ontology.ttl`        | `policy_rules` and `kb_article` in `business_rules.json` (derive them through `concept`) |
+| Numbers: rupees, months, hours, percent    | `business_rules.json` | `acme:oncePerMonths` in `ontology.ttl`         |
+| Which sources back a concept               | edges in `ontology.ttl` | `acme:source` strings (derive from the edges) |
+
+Numbers inside `skos:definition` stay, because `glossary()` puts them in the model's prompt. The
+last check in the table above keeps them honest.
+
+These removals change what `compute_entitlements()` and C3 read, so they need the grader and the BDD
+suite rerun (`../.venv/bin/python -m pytest -v` from `fde-first-principles/`) before and after.
+
+## What the first draft proposed and why it's dropped
+
+| First draft                                  | Decision | Reason                                                                   |
+|----------------------------------------------|----------|--------------------------------------------------------------------------|
+| React and TypeScript front end               | Drop     | The domain expert already works in the Shiny studio                      |
+| FastAPI service and REST models              | Drop     | The studio imports the lab in process                                    |
+| RDFLib with `owlrl`                          | Drop     | Infers a different model from the one the agent uses (see warning above) |
+| pySHACL and `shapes.ttl`                     | Drop     | The real gaps are cross-file; Python checks in `validate_ontology_ops()` cover them |
+| Cytoscape graph                              | Later    | A card answers the three questions; add a Mermaid view if a picture is needed |
+| Docker Compose                               | Drop     | `shiny run app.py` is the deployment                                     |
+| Lifecycle panel                              | Drop     | Every concept is `active`                                                |
+| PNG or PDF export                            | Drop     | A browser screenshot is enough for a demo                                |
+| Ten-day plan                                 | Replace  | Three steps below                                                        |
+
+## Plan
+
+1. Add `_asserted()`, `provenance()`, `policy_rules()` and the five checks to `lab/ontology.py`, with tests.
+2. Add the Meaning tab with the concept card, rule view and checks table.
+3. Agree the one-home table with the policy owner, fix the drift found, and remove the duplicates.
+
+## Demo in three minutes
+
+1. Open **Meaning** and type "छूट" (Hindi for discount). The card resolves it to *discount* and shows
+   that its rupee value counts toward the limit, inherited from *concession*.
+2. Switch to *retention offer*. Show the override ("doesn't count"), the inherited rules 3 and 8, and
+   the check that `business_rules.json` disagrees with the ontology on its rules.
+3. Open rule 10 and show the four concepts it touches: "Before changing this rule, here is everything
+   it affects, and here is the file to edit."
+
+## Done when
+
+* Any concept can be found by an English or regional label
+* Each fact on the card shows whether it is stated or inherited, and the file to edit
+* A rule shows its `policy.md` text and every concept it touches
+* The checks report the retention-offer rule mismatch and the "rules 1 to 11" text until they are fixed
+* The card shows the same facts that C3 receives, because both read `lab/ontology.py`
