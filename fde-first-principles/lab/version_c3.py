@@ -76,6 +76,8 @@ Follow every rule in the reply policy below. With the decision envelope, that me
   customer disputes the record a second time, or the help articles and the record can't answer it.
 - When a person will take over, still answer what the customer asked, from the record and help articles; only the
   decision waits. Don't bring up other things from the record that the customer didn't ask about.
+- Search the help articles at most twice for one question. If they don't cover it, stop searching and say so
+  plainly; don't guess either way.
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
   plan change asked by the account holder; internet down with no outage in the area (the first checks, then
   offer a free technician visit: KB07, KB08); a general question the help articles answer; a first
@@ -94,6 +96,9 @@ def system_prompt() -> str:
 
 
 ELIGIBLE_IS_NOT_APPROVED = "Eligible is not approved: the offer decisions in the decision envelope say what you may offer."
+OUT_OF_STEPS = ("You have used all your tool calls. Don't call any more tools: answer now with the JSON, from "
+                "what the record and the help articles showed. If they don't answer the question, say so plainly "
+                "and don't guess.")
 
 
 def define_term(word: str) -> Dict[str, Any]:
@@ -445,6 +450,40 @@ def run_agent(case: Dict[str, Any],
         return output, trace
 
     deadline = time.monotonic() + timeout if timeout is not None else None
+
+    def _answer(r: Dict[str, Any]) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+        """The model's final turn: parse the JSON, then the post-draft checks."""
+        if r.get("stop_reason") == "max_tokens":
+            sources.append("guard:cut_off")
+        try:
+            output = extract_json(r["content"])
+        except ValueError:
+            output = {
+                "intent": "other",
+                "reply": r["content"],
+                "needs_human": True,
+                "parse_error": True,
+            }
+        if output.get("parse_error"):
+            sources.append("fallback:parse_error")
+        elif output.get("needs_human"):
+            sources.append("model")
+        # Post-draft ontology policy guardrail (ADR-001 step 3)
+        violations = policy_violations(
+            output.get("reply") or "",
+            customer_id=case.get("customer_id"),
+            rules=rules,
+            asked=customer_text(case),
+        )
+        if violations:
+            output["policy_guard_triggered"] = violations
+            sources.extend(f"guard:{v}" for v in violations)
+        sources.extend(offers_not_allowed(
+            output.get("reply") or "", envelope["offer_decisions"],
+            load_business_rules(overrides=rules) if rules else load_business_rules(),
+        ))
+        return _finish(output)
+
     for step in range(max_steps):
         remaining = deadline - time.monotonic() if deadline is not None else None
         if remaining is not None and remaining <= 0:
@@ -466,36 +505,7 @@ def run_agent(case: Dict[str, Any],
         messages.append(r["message"])
 
         if not r["tool_calls"]:
-            if r.get("stop_reason") == "max_tokens":
-                sources.append("guard:cut_off")
-            try:
-                output = extract_json(r["content"])
-            except ValueError:
-                output = {
-                    "intent": "other",
-                    "reply": r["content"],
-                    "needs_human": True,
-                    "parse_error": True,
-                }
-            if output.get("parse_error"):
-                sources.append("fallback:parse_error")
-            elif output.get("needs_human"):
-                sources.append("model")
-            # Post-draft ontology policy guardrail (ADR-001 step 3)
-            violations = policy_violations(
-                output.get("reply") or "",
-                customer_id=case.get("customer_id"),
-                rules=rules,
-                asked=customer_text(case),
-            )
-            if violations:
-                output["policy_guard_triggered"] = violations
-                sources.extend(f"guard:{v}" for v in violations)
-            sources.extend(offers_not_allowed(
-                output.get("reply") or "", envelope["offer_decisions"],
-                load_business_rules(overrides=rules) if rules else load_business_rules(),
-            ))
-            return _finish(output)
+            return _answer(r)
 
         for call in r["tool_calls"]:
             name = call["function"]["name"]
@@ -518,6 +528,25 @@ def run_agent(case: Dict[str, Any],
                 {"role": "tool", "tool_name": name, "content": json.dumps(result, ensure_ascii=False)}
             )
             entry["tool_calls"].append((name, args, result))
+
+    # Out of steps: one more turn that has to answer from what the model has. c84 spent all six steps
+    # searching the help articles for a data cap they don't mention and never replied. The tools stay
+    # defined (the history holds tool calls); calling one now still means the model gave up.
+    messages.append({"role": "user", "content": OUT_OF_STEPS})
+    remaining = deadline - time.monotonic() if deadline is not None else None
+    if remaining is not None and remaining <= 0:
+        raise TimeoutError("C3 agent exceeded its run timeout")
+    options = {} if persist_cache else {"use_cache": False, "write_cache": False}
+    r = chat(messages, tools=TOOLS_C3, temperature=temperature, run=run, model=model, timeout=remaining,
+             **options)
+    trace.append({"step": max_steps, "tokens_in": r["tokens_in"], "tokens_out": r["tokens_out"],
+                  "seconds": r["seconds"], "stop_reason": r.get("stop_reason"), "tool_calls": [],
+                  "out_of_steps": True})
+    messages.append(r["message"])
+    if not r["tool_calls"] and str(r.get("content") or "").strip():
+        output, trace = _answer(r)
+        output["out_of_steps"] = True
+        return output, trace
 
     sources.append("fallback:gave_up")
     return _finish({"intent": "other", "reply": "", "needs_human": True, "gave_up": True})
