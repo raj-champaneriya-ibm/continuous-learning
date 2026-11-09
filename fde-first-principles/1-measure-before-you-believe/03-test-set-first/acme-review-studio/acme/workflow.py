@@ -202,7 +202,9 @@ class Workflow:
             t = time.time()
             provider = deps.provider
             res = provider.draft(s["system_prompt"], s["user_prompt"],
-                                 {"message": s["message"], "customer": s["customer"], "outage": s.get("outage")})
+                                 {"message": s["message"], "customer": s["customer"], "outage": s.get("outage"),
+                                  "case_id": s.get("case_id"), "customer_id": s.get("customer_id"),
+                                  "history": s.get("history") or []})
             llm = {"provider": provider.name, "model": getattr(provider, "model", ""), "latency_s": res["latency_s"],
                    "cost_usd": res["cost_usd"], "error": res["error"]}
             if res["error"]:

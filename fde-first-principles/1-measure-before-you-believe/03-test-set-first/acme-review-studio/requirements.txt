@@ -6,6 +6,9 @@ pandas>=2.2
 matplotlib>=3.8
 pytest>=8
 pytest-bdd>=8
+# C3 ontology agent as the drafter (the lab's lab/version_c3.py)
+pyoxigraph>=0.5
+requests>=2.31
 # Quarto reports (reports/); Quarto itself installs separately, see reports/README.md
 pyyaml>=6.0
 plotly>=5.24
