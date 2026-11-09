@@ -67,6 +67,7 @@ Follow every rule in the reply policy below. With the decision envelope, that me
 - Call escalate and set needs_human to true when a human is needed: the envelope lists an escalation trigger,
   or the email reports possible fraud or a security incident, a safety hazard or staff misconduct, the
   customer disputes the record a second time, or the help articles and the record can't answer it.
+- When a person will take over, still answer everything the record and help articles answer; only the decision waits.
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
   plan change asked by the account holder; a general question the help articles answer; a first
   disagreement with what the record shows.
@@ -382,6 +383,9 @@ def run_agent(case: Dict[str, Any],
     sources: List[str] = [f"rule:{t['rule']}" for t in envelope["escalation_triggers"]]
 
     def _finish(output: Dict[str, Any]) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+        # A blank or cut-off reply must never look sendable.
+        if not str(output.get("reply") or "").strip():
+            sources.append("guard:empty_reply")
         output["escalation_sources"] = list(dict.fromkeys(sources))
         output["needs_human"] = bool(sources)
         return output, trace
@@ -393,12 +397,15 @@ def run_agent(case: Dict[str, Any],
             "tokens_in": r["tokens_in"],
             "tokens_out": r["tokens_out"],
             "seconds": r["seconds"],
+            "stop_reason": r.get("stop_reason"),
             "tool_calls": [],
         }
         trace.append(entry)
         messages.append(r["message"])
 
         if not r["tool_calls"]:
+            if r.get("stop_reason") == "max_tokens":
+                sources.append("guard:cut_off")
             try:
                 output = extract_json(r["content"])
             except ValueError:
@@ -464,6 +471,10 @@ def version_c3(case: Dict[str, Any],
     return {
         **output,
         "steps": len(trace),
+        "tool_calls": [
+            {"step": t["step"], "name": c[0], "args": c[1], "result": c[2]}
+            for t in trace for c in t["tool_calls"]
+        ],
         "tokens_in": sum(t["tokens_in"] for t in trace),
         "tokens_out": sum(t["tokens_out"] for t in trace),
         "seconds": round(sum(t["seconds"] for t in trace), 3),
