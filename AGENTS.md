@@ -22,6 +22,32 @@ python3 -m venv .venv
 
 `--group` needs pip 25.1 or later. The `dev` group in `fde-first-principles/pyproject.toml` installs `pytest` and `pytest-bdd`.
 
+## Codebase knowledge graph
+
+Graphify is installed as a `uv` tool. To install it and initialize the project-scoped
+Claude Code skill and hooks, run these commands from the repository root:
+
+```bash
+uv tool install graphifyy
+graphify install --project
+```
+
+Build the knowledge graph when you need broad codebase navigation or cross-file
+relationships:
+
+```bash
+graphify .
+```
+
+The initial build may use model-based extraction for documentation and other
+non-code files. It is not run automatically during installation.
+
+When `graphify-out/graph.json` exists, query it before broad source searches, use
+`graphify path` or `graphify explain` for focused questions, and run
+`graphify update .` after code changes. Without a graph, use targeted searches for
+small questions. Graphify's Claude Code guidance is in `CLAUDE.md` and its
+project-scoped skill and hooks are under `.claude/`.
+
 ## Running the tests
 
 Always run pytest from `fde-first-principles/`. The pytest settings (`pythonpath`, `testpaths`) live in its `pyproject.toml`, so running from the repository root fails with import errors and also collects the `acme-review-studio` tests.
