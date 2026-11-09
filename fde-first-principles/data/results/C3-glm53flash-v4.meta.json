@@ -1,0 +1,8 @@
+{
+  "version": "C3-glm53flash-v4",
+  "saved_at": "2026-11-09T09:32:11",
+  "n": 84,
+  "cases_sha": "0bef56a28703",
+  "model": "anthropic:glm-5.3-flash",
+  "temperature": 0.0
+}
