@@ -873,9 +873,16 @@ def server(input, output, session):
     @reactive.event(input.meaning_rule)
     def _meaning_rule_changed():
         selected_rule = input.meaning_rule()
+        if not selected_rule:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            return
         affected = {
             name: name for name, info in ontology_terms().items()
-            if selected_rule and int(selected_rule) in info["policy_rules"]
+            if int(selected_rule) in info["policy_rules"]
         }
         if not affected:
             ui.update_select(
@@ -906,9 +913,16 @@ def server(input, output, session):
         )
         if rule != current_rule:
             ui.update_select("meaning_rule", selected=rule)
+        if not rule:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            return
         affected = {
             name: name for name, info in ontology_terms().items()
-            if rule and int(rule) in info["policy_rules"]
+            if int(rule) in info["policy_rules"]
         }
         ui.update_select("meaning_affected_concept", choices=affected, selected=concept_name)
 
@@ -950,6 +964,8 @@ def server(input, output, session):
                 "altLabel": "Also known as",
                 "countsTowardLimit": "Counts toward concession limit",
                 "oncePerMonths": "Offer cadence (months)",
+                "scopeNote": "Business note",
+                "requiresRole": "Required role",
                 "documentedIn": "Help article",
                 "ownedBy": "Business owner",
             }
@@ -962,6 +978,8 @@ def server(input, output, session):
                     value = f"{value} · {article.get('title', '')}"
                 if property_name == "subClassOf":
                     value = terms_by_id.get(value, value)
+                if property_name == "requiresRole":
+                    value = terms_by_id.get(value, value)
                 if property_name == "ownedBy":
                     value = concept.get("owner_team") or value
                 origin = fact["origin"]
@@ -972,7 +990,7 @@ def server(input, output, session):
                     f"<strong>{html.escape(value)}</strong> "
                     f"<span class='muted'>({html.escape(origin)}; ontology.ttl)</span></li>"
                 )
-            return "".join(rows) or "<li class='muted'>None recorded</li>"
+            return "".join(rows)
 
         rules = [fact for fact in facts if fact["property"] == "enforcesRule"]
         rule_rows = "".join(
@@ -996,6 +1014,7 @@ def server(input, output, session):
             f"<div class='row'><div class='col-md-6'><h5>Hierarchy and business facts</h5><ul>"
             f"{fact_rows('subClassOf')}{fact_rows('altLabel')}"
             f"{fact_rows('countsTowardLimit')}{fact_rows('oncePerMonths')}"
+            f"{fact_rows('scopeNote')}{fact_rows('requiresRole')}"
             f"</ul><h5>Business-rule parameters</h5><ul>{parameter_rows}</ul></div>"
             f"<div class='col-md-6'><h5>Policy rules</h5><ul>{rule_rows}</ul>"
             f"<h5>Evidence</h5><ul>{fact_rows('documentedIn')}"

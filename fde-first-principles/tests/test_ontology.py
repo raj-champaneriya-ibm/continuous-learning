@@ -218,6 +218,31 @@ def test_policy_rules_and_semantic_drift_are_visible():
     )
 
 
+def test_all_concept_aliases_and_policy_rule_impacts_are_consistent():
+    catalog = terms()
+    rules = policy_rules()
+    aliases = concept_labels()
+
+    assert set(rules) == set(range(1, 14))
+    assert all(canonical in catalog for canonical in aliases.values())
+    for alias, canonical in aliases.items():
+        assert define(alias)["term"] == canonical
+
+    for name, info in catalog.items():
+        assert set(info["policy_rules"]) <= set(rules)
+        facts = concept_provenance(name)
+        fact_rules = {
+            int(fact["value"].removeprefix("PolicyRule"))
+            for fact in facts or []
+            if fact["property"] == "enforcesRule"
+        }
+        assert fact_rules == set(info["policy_rules"]), name
+
+    for number in rules:
+        affected = {name for name, info in catalog.items() if number in info["policy_rules"]}
+        assert all(number in catalog[name]["policy_rules"] for name in affected)
+
+
 def test_evals_enforces_customer_headroom_and_plan_discounts():
     # AC1032 has ₹200 in credits_last_30_days, leaving ₹300 headroom
     assert "big_refund" in policy_violations(

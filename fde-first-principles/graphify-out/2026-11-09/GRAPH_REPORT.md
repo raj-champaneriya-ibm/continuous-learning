@@ -1,7 +1,7 @@
 # Graph Report - fde-first-principles  (2026-11-09)
 
 ## Corpus Check
-- 52 files · ~61,742 words
+- 52 files · ~61,759 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 55 file(s) not represented in the graph (top: .feature 13, .drawio 11, .jsonl 11)
 - WARNING: 55 of 140 files seen (39%) have no supported extractor and are missing from this graph entirely. It may look complete while representing only part of the codebase.
