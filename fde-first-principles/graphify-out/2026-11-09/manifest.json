@@ -1,0 +1,522 @@
+{
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/__init__.py": {
+    "mtime": 1792644561.6236036,
+    "seen": 1794200490.19446,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/checks.py": {
+    "mtime": 1792644561.6237884,
+    "seen": 1794200490.1945448,
+    "ast_hash": "fb8be9fad4e0d6f8285d9c19c68c8cd9",
+    "semantic_hash": "fb8be9fad4e0d6f8285d9c19c68c8cd9"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/lab.py": {
+    "mtime": 1792915394.911449,
+    "seen": 1794200490.194591,
+    "ast_hash": "862369a374f929cc0781593227f394b6",
+    "semantic_hash": "862369a374f929cc0781593227f394b6"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/providers.py": {
+    "mtime": 1794198857.1505198,
+    "seen": 1794200490.194636,
+    "ast_hash": "9922c619e7025beee00cf68f34140ab8",
+    "semantic_hash": "9922c619e7025beee00cf68f34140ab8"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/review.py": {
+    "mtime": 1792644561.6262302,
+    "seen": 1794200490.194679,
+    "ast_hash": "f42e5e79711a599f4af2f7e2db608b87",
+    "semantic_hash": "f42e5e79711a599f4af2f7e2db608b87"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/store.py": {
+    "mtime": 1792644561.6263635,
+    "seen": 1794200490.19472,
+    "ast_hash": "c939c785491bc19e02ec7007c8152e2e",
+    "semantic_hash": "c939c785491bc19e02ec7007c8152e2e"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/ui_bits.py": {
+    "mtime": 1792915394.9115534,
+    "seen": 1794200490.194762,
+    "ast_hash": "6e98071c9efb11a18eac8bf6afd3c28f",
+    "semantic_hash": "6e98071c9efb11a18eac8bf6afd3c28f"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/workflow.py": {
+    "mtime": 1794198857.1511276,
+    "seen": 1794200490.194806,
+    "ast_hash": "3fc0c2bc5d19e4369a167420724f3b60",
+    "semantic_hash": "3fc0c2bc5d19e4369a167420724f3b60"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/app.py": {
+    "mtime": 1794216912.3293648,
+    "seen": 1794216965.379039,
+    "ast_hash": "3ba94495937373d8ba80225cbf54d8c7",
+    "semantic_hash": ""
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/import_cases.py": {
+    "mtime": 1793250549.7902396,
+    "seen": 1794200490.194887,
+    "ast_hash": "735bb1a5b7b60470077f6b5597eb9765",
+    "semantic_hash": "735bb1a5b7b60470077f6b5597eb9765"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/judge_round1.py": {
+    "mtime": 1792644561.6279337,
+    "seen": 1794200490.194926,
+    "ast_hash": "83f2b7cd6eeb5ed6260782a50899d593",
+    "semantic_hash": "83f2b7cd6eeb5ed6260782a50899d593"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/acme_metrics.py": {
+    "mtime": 1792644561.6289968,
+    "seen": 1794200490.195005,
+    "ast_hash": "ad1aaf128386867fcc33d1b58e48f886",
+    "semantic_hash": "ad1aaf128386867fcc33d1b58e48f886"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/scripts/copy_plotly.py": {
+    "mtime": 1792644561.6300402,
+    "seen": 1794200490.195044,
+    "ast_hash": "dbb444af536583b1bf63d34f11b38861",
+    "semantic_hash": "dbb444af536583b1bf63d34f11b38861"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/scripts/make_demo_runs.py": {
+    "mtime": 1792915394.9116359,
+    "seen": 1794200490.1950889,
+    "ast_hash": "7422fb8529eeeb8dbcba131e16c4d16b",
+    "semantic_hash": "7422fb8529eeeb8dbcba131e16c4d16b"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/thresholds.yml": {
+    "mtime": 1792644561.6303945,
+    "seen": 1794200490.1951308,
+    "ast_hash": "5e9aa5cc985d6662e4bbb3757c06d3a6",
+    "semantic_hash": "5e9aa5cc985d6662e4bbb3757c06d3a6"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/tests/test_c3_provider.py": {
+    "mtime": 1794198857.1526325,
+    "seen": 1794200490.195172,
+    "ast_hash": "467e49c222a49cca12b17c78752e4959",
+    "semantic_hash": "467e49c222a49cca12b17c78752e4959"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/tests/test_guardrails.py": {
+    "mtime": 1792644561.631566,
+    "seen": 1794200490.195214,
+    "ast_hash": "9fa288ff4f8ace268a0561f37cf69283",
+    "semantic_hash": "9fa288ff4f8ace268a0561f37cf69283"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/tests/test_report_metrics.py": {
+    "mtime": 1792644561.6317525,
+    "seen": 1794200490.1952581,
+    "ast_hash": "e5033d65980df21a6e9caf4245c42fd9",
+    "semantic_hash": "e5033d65980df21a6e9caf4245c42fd9"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/tests/test_review_flow.py": {
+    "mtime": 1792644561.6318731,
+    "seen": 1794200490.1953018,
+    "ast_hash": "f85538858cf9272a472c938a618b0868",
+    "semantic_hash": "f85538858cf9272a472c938a618b0868"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/tests/test_ui_bits.py": {
+    "mtime": 1792644561.6319864,
+    "seen": 1794200490.195344,
+    "ast_hash": "1e55b8a7f586172f629759161ce2f946",
+    "semantic_hash": "1e55b8a7f586172f629759161ce2f946"
+  },
+  "data/acme/business_rules.json": {
+    "mtime": 1794198857.154279,
+    "seen": 1794200490.195389,
+    "ast_hash": "02507a8473a8da753c4c4b53b1e72d84",
+    "semantic_hash": "02507a8473a8da753c4c4b53b1e72d84",
+    "ast_empty": true
+  },
+  "data/acme/customers.json": {
+    "mtime": 1792914444.6631873,
+    "seen": 1794200490.19539,
+    "ast_hash": "378a80ad4190ca93a32e08ad9ed64fb5",
+    "semantic_hash": "378a80ad4190ca93a32e08ad9ed64fb5",
+    "ast_empty": true
+  },
+  "data/acme/outages.json": {
+    "mtime": 1792644561.63511,
+    "seen": 1794200490.195391,
+    "ast_hash": "b0d7c5c011ffa4012b855dd01297dd68",
+    "semantic_hash": "b0d7c5c011ffa4012b855dd01297dd68",
+    "ast_empty": true
+  },
+  "data/results/A.meta.json": {
+    "mtime": 1793418050.9037147,
+    "seen": 1794200490.195392,
+    "ast_hash": "f6a72a389ccfaa2a3f6ac821f236f218",
+    "semantic_hash": "f6a72a389ccfaa2a3f6ac821f236f218",
+    "ast_empty": true
+  },
+  "data/results/B.meta.json": {
+    "mtime": 1793418050.9037461,
+    "seen": 1794200490.1953971,
+    "ast_hash": "cb35ce4f538e0008cc71656d57be4921",
+    "semantic_hash": "cb35ce4f538e0008cc71656d57be4921",
+    "ast_empty": true
+  },
+  "data/results/C.meta.json": {
+    "mtime": 1793418050.9150615,
+    "seen": 1794200490.1953979,
+    "ast_hash": "04efcfad8d215e00ef6d69e51dfda1f4",
+    "semantic_hash": "04efcfad8d215e00ef6d69e51dfda1f4",
+    "ast_empty": true
+  },
+  "data/results/C2.meta.json": {
+    "mtime": 1793526001.9149141,
+    "seen": 1794200490.1953988,
+    "ast_hash": "a3f4f85040988dd15e106107596a594f",
+    "semantic_hash": "a3f4f85040988dd15e106107596a594f",
+    "ast_empty": true
+  },
+  "data/results/C3-glm53flash-v2.meta.json": {
+    "mtime": 1794198857.1565344,
+    "seen": 1794200490.1954,
+    "ast_hash": "98b5b52e2e9967e6dbbccb5162993a10",
+    "semantic_hash": "98b5b52e2e9967e6dbbccb5162993a10",
+    "ast_empty": true
+  },
+  "data/results/C3-glm53flash-v3.meta.json": {
+    "mtime": 1794198857.1572018,
+    "seen": 1794200490.195401,
+    "ast_hash": "bc1d3ad258a6aa115b09a108cacd40b7",
+    "semantic_hash": "bc1d3ad258a6aa115b09a108cacd40b7",
+    "ast_empty": true
+  },
+  "data/results/C3-glm53flash.meta.json": {
+    "mtime": 1794198857.1574972,
+    "seen": 1794200490.195402,
+    "ast_hash": "b312b8d084813f20245c3f3107ea4c32",
+    "semantic_hash": "b312b8d084813f20245c3f3107ea4c32",
+    "ast_empty": true
+  },
+  "lab/__init__.py": {
+    "mtime": 1792644561.6355731,
+    "seen": 1794200490.195403,
+    "ast_hash": "fa6329f3f91e55a12e3bd0a76a4daf71",
+    "semantic_hash": "fa6329f3f91e55a12e3bd0a76a4daf71"
+  },
+  "lab/acme.py": {
+    "mtime": 1794198857.157957,
+    "seen": 1794200490.19544,
+    "ast_hash": "42f744f12b0d2609fd57d65038c07450",
+    "semantic_hash": "42f744f12b0d2609fd57d65038c07450"
+  },
+  "lab/acme_tools.py": {
+    "mtime": 1793163454.184819,
+    "seen": 1794200490.195477,
+    "ast_hash": "1b1a9598892cc9a33a5364da1d75c348",
+    "semantic_hash": "1b1a9598892cc9a33a5364da1d75c348"
+  },
+  "lab/agent.py": {
+    "mtime": 1793406657.9012172,
+    "seen": 1794200490.195511,
+    "ast_hash": "52b3598606c19b023d0b4b5786a2953d",
+    "semantic_hash": "52b3598606c19b023d0b4b5786a2953d"
+  },
+  "lab/business_rules.py": {
+    "mtime": 1793964569.6032634,
+    "seen": 1794200490.195544,
+    "ast_hash": "29667ada6ababf0a3aeee0a011e598eb",
+    "semantic_hash": "29667ada6ababf0a3aeee0a011e598eb"
+  },
+  "lab/escalation.py": {
+    "mtime": 1794198857.1581757,
+    "seen": 1794200490.195575,
+    "ast_hash": "69a7178c40481a48625b31eb2f656c7f",
+    "semantic_hash": "69a7178c40481a48625b31eb2f656c7f"
+  },
+  "lab/evals.py": {
+    "mtime": 1794202038.052172,
+    "seen": 1794213887.926456,
+    "ast_hash": "8b6b1b22b1651677f380284fc49f4ceb",
+    "semantic_hash": "8b6b1b22b1651677f380284fc49f4ceb"
+  },
+  "lab/llm.py": {
+    "mtime": 1794198857.1590002,
+    "seen": 1794200490.195638,
+    "ast_hash": "9e418445b0590c4a435b592338bbb916",
+    "semantic_hash": "9e418445b0590c4a435b592338bbb916"
+  },
+  "lab/ontology.py": {
+    "mtime": 1794216521.1957526,
+    "seen": 1794216823.5491872,
+    "ast_hash": "30215e9c0884a48fcb5b6690857a67a2",
+    "semantic_hash": ""
+  },
+  "lab/version_b.py": {
+    "mtime": 1793406657.901445,
+    "seen": 1794200490.195698,
+    "ast_hash": "8e951f1b12370057e3a231a5e31bac24",
+    "semantic_hash": "8e951f1b12370057e3a231a5e31bac24"
+  },
+  "lab/version_c3.py": {
+    "mtime": 1794198857.1601534,
+    "seen": 1794200490.1957319,
+    "ast_hash": "0d2954a9ff6a533f91f66f9443749b40",
+    "semantic_hash": "0d2954a9ff6a533f91f66f9443749b40"
+  },
+  "pyproject.toml": {
+    "mtime": 1793250549.8336098,
+    "seen": 1794200490.1957629,
+    "ast_hash": "016952d1f4b1375fe858afbba241d6fb",
+    "semantic_hash": "016952d1f4b1375fe858afbba241d6fb"
+  },
+  "tests/conftest.py": {
+    "mtime": 1792647512.4081705,
+    "seen": 1794200490.195795,
+    "ast_hash": "f6c14fe33099425b7e85851c3d6ac9fe",
+    "semantic_hash": "f6c14fe33099425b7e85851c3d6ac9fe"
+  },
+  "tests/test_cases_data.py": {
+    "mtime": 1793250549.7840972,
+    "seen": 1794200490.195829,
+    "ast_hash": "3eb42bac6657e4a12e6c963e86cde13a",
+    "semantic_hash": "3eb42bac6657e4a12e6c963e86cde13a"
+  },
+  "tests/test_escalation_metrics.py": {
+    "mtime": 1793418050.8941774,
+    "seen": 1794200490.19586,
+    "ast_hash": "aaec5c6d9df68046202332602d5ef174",
+    "semantic_hash": "aaec5c6d9df68046202332602d5ef174"
+  },
+  "tests/test_escalation_rules.py": {
+    "mtime": 1794198857.1622808,
+    "seen": 1794200490.19589,
+    "ast_hash": "e2d29ed14eea26d3a8eb38a4208bfc6e",
+    "semantic_hash": "e2d29ed14eea26d3a8eb38a4208bfc6e"
+  },
+  "tests/test_expert_review.py": {
+    "mtime": 1794198857.162398,
+    "seen": 1794200490.19592,
+    "ast_hash": "05c6bd5ec8d061e16238ad0d25f89f4c",
+    "semantic_hash": "05c6bd5ec8d061e16238ad0d25f89f4c"
+  },
+  "tests/test_grader_mutations.py": {
+    "mtime": 1793968228.1389794,
+    "seen": 1794200490.195953,
+    "ast_hash": "98a86593736f3b2f59922e95d46b0207",
+    "semantic_hash": "98a86593736f3b2f59922e95d46b0207"
+  },
+  "tests/test_intent_guide.py": {
+    "mtime": 1794198857.1625125,
+    "seen": 1794200490.1959832,
+    "ast_hash": "67378347082c9ff7ec1e0d4d5abd1012",
+    "semantic_hash": "67378347082c9ff7ec1e0d4d5abd1012"
+  },
+  "tests/test_ontology.py": {
+    "mtime": 1794216521.1957676,
+    "seen": 1794216823.549199,
+    "ast_hash": "62e9f863d81d7c19b2c910a7f1e65b2f",
+    "semantic_hash": ""
+  },
+  "tests/test_outage_scope.py": {
+    "mtime": 1794198857.163137,
+    "seen": 1794200490.196042,
+    "ast_hash": "c76d6da39399bd9d8ac52c819871b4b2",
+    "semantic_hash": "c76d6da39399bd9d8ac52c819871b4b2"
+  },
+  "tests/test_policy_rules.py": {
+    "mtime": 1794198857.1635044,
+    "seen": 1794200490.1960719,
+    "ast_hash": "58a5f42e6a825ef7c370176719263e05",
+    "semantic_hash": "58a5f42e6a825ef7c370176719263e05"
+  },
+  "1-measure-before-you-believe/01-an-llm-call-is-http/README.md": {
+    "mtime": 1792644561.6131675,
+    "seen": 1794202013.644693,
+    "ast_hash": "b40d26631ed909825e2b769f03b969aa",
+    "semantic_hash": "b40d26631ed909825e2b769f03b969aa"
+  },
+  "1-measure-before-you-believe/02-workflow-or-agent/README.md": {
+    "mtime": 1792644561.614252,
+    "seen": 1794202013.644694,
+    "ast_hash": "16fa7554bb2e64913dd6e8d0aad4cef0",
+    "semantic_hash": "16fa7554bb2e64913dd6e8d0aad4cef0"
+  },
+  "1-measure-before-you-believe/03-test-set-first/README.md": {
+    "mtime": 1792644561.6228354,
+    "seen": 1794202013.6446981,
+    "ast_hash": "555490e82d97df767a28ae061339471f",
+    "semantic_hash": "555490e82d97df767a28ae061339471f"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/README.md": {
+    "mtime": 1794198857.1495984,
+    "seen": 1794202013.6446998,
+    "ast_hash": "4abb3154e86464a4707c1a3010d5eb13",
+    "semantic_hash": "4abb3154e86464a4707c1a3010d5eb13"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/REVIEW.md": {
+    "mtime": 1792644561.62346,
+    "seen": 1794202013.644701,
+    "ast_hash": "614a025ef59907e5f64996b746ae9a53",
+    "semantic_hash": "614a025ef59907e5f64996b746ae9a53"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/README.md": {
+    "mtime": 1792644561.628708,
+    "seen": 1794202013.644701,
+    "ast_hash": "c468b98d194195eee32c2da1e6278107",
+    "semantic_hash": "c468b98d194195eee32c2da1e6278107"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/dataset-card.qmd": {
+    "mtime": 1792644561.6291993,
+    "seen": 1794202013.644702,
+    "ast_hash": "a015561c15a1fffd93f3028fa8f71591",
+    "semantic_hash": "a015561c15a1fffd93f3028fa8f71591"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/evaluation-report.qmd": {
+    "mtime": 1792644561.6294093,
+    "seen": 1794202013.644703,
+    "ast_hash": "504c9f580d67187894101f0402af56ec",
+    "semantic_hash": "504c9f580d67187894101f0402af56ec"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/index.qmd": {
+    "mtime": 1792644561.629528,
+    "seen": 1794202013.644704,
+    "ast_hash": "980a4b94af32b7c21dd99ca48fdafe8c",
+    "semantic_hash": "980a4b94af32b7c21dd99ca48fdafe8c"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/review-dashboard.qmd": {
+    "mtime": 1792644561.6296902,
+    "seen": 1794202013.644705,
+    "ast_hash": "fba58074202efcf26080f51f00ce54ef",
+    "semantic_hash": "fba58074202efcf26080f51f00ce54ef"
+  },
+  "1-measure-before-you-believe/03-test-set-first/acme-review-studio/reports/round1-principal-engineer-review.md": {
+    "mtime": 1792644561.6298554,
+    "seen": 1794202013.644706,
+    "ast_hash": "c6898a657e694175dabbb14498c7c191",
+    "semantic_hash": "c6898a657e694175dabbb14498c7c191"
+  },
+  "1-measure-before-you-believe/04-rules-baseline/README.md": {
+    "mtime": 1792644561.6331637,
+    "seen": 1794202013.644707,
+    "ast_hash": "f75471e495363f818842b63c3db862e7",
+    "semantic_hash": "f75471e495363f818842b63c3db862e7"
+  },
+  "1-measure-before-you-believe/05-a-grader-you-can-trust/README.md": {
+    "mtime": 1792714129.82566,
+    "seen": 1794202013.6447082,
+    "ast_hash": "3d9de273ff3453d365db4fabf23ce710",
+    "semantic_hash": "3d9de273ff3453d365db4fabf23ce710"
+  },
+  "1-measure-before-you-believe/05-a-grader-you-can-trust/later.md": {
+    "mtime": 1792645795.2726974,
+    "seen": 1794202013.6447082,
+    "ast_hash": "383af5029fdbcb32804371e87af69aea",
+    "semantic_hash": "383af5029fdbcb32804371e87af69aea"
+  },
+  "1-measure-before-you-believe/06-one-llm-call/README.md": {
+    "mtime": 1792888744.0296934,
+    "seen": 1794202013.644709,
+    "ast_hash": "4f6b9bc55b0c22f478aab1e6032a6742",
+    "semantic_hash": "4f6b9bc55b0c22f478aab1e6032a6742"
+  },
+  "1-measure-before-you-believe/07-error-bars/README.md": {
+    "mtime": 1793163454.1821616,
+    "seen": 1794202013.6447098,
+    "ast_hash": "98cff833896e9cc1d58a47aa077275aa",
+    "semantic_hash": "98cff833896e9cc1d58a47aa077275aa"
+  },
+  "1-measure-before-you-believe/08-agent-loop-from-scratch/README.md": {
+    "mtime": 1793245581.3961577,
+    "seen": 1794202013.644711,
+    "ast_hash": "6195812b76eda6db46bd8296ea2e7d27",
+    "semantic_hash": "6195812b76eda6db46bd8296ea2e7d27"
+  },
+  "1-measure-before-you-believe/08-agent-loop-from-scratch/later.md": {
+    "mtime": 1793250549.7799509,
+    "seen": 1794202013.644712,
+    "ast_hash": "41f6eb76180b337792e46501f93c04f4",
+    "semantic_hash": "41f6eb76180b337792e46501f93c04f4"
+  },
+  "1-measure-before-you-believe/09-success-cost-latency/README.md": {
+    "mtime": 1793418050.9344807,
+    "seen": 1794202013.644713,
+    "ast_hash": "49b63b428861f26b81361e97401e40e6",
+    "semantic_hash": "49b63b428861f26b81361e97401e40e6"
+  },
+  "1-measure-before-you-believe/10-read-the-failures/README.md": {
+    "mtime": 1794198857.1533623,
+    "seen": 1794202013.6447139,
+    "ast_hash": "86b5e024666b83e686054ba62b0f74d7",
+    "semantic_hash": "86b5e024666b83e686054ba62b0f74d7"
+  },
+  "1-measure-before-you-believe/11-recommendation-first-draft/README.md": {
+    "mtime": 1793437513.3109007,
+    "seen": 1794202013.6447139,
+    "ast_hash": "c7577bc344e3ca00195e3f7d522ab4ea",
+    "semantic_hash": "c7577bc344e3ca00195e3f7d522ab4ea"
+  },
+  "1-measure-before-you-believe/11-recommendation-first-draft/decision.md": {
+    "mtime": 1793533020.5080411,
+    "seen": 1794202013.644715,
+    "ast_hash": "2d4fe87bb36ec1e36894cb51f8b7217c",
+    "semantic_hash": "2d4fe87bb36ec1e36894cb51f8b7217c"
+  },
+  "1-measure-before-you-believe/11-recommendation-first-draft/pitch.md": {
+    "mtime": 1793599914.3905132,
+    "seen": 1794202013.644716,
+    "ast_hash": "fcbb87640d6d26d4a92cb62ee9c07c15",
+    "semantic_hash": "fcbb87640d6d26d4a92cb62ee9c07c15"
+  },
+  "1-measure-before-you-believe/11-recommendation-first-draft/presentation.md": {
+    "mtime": 1793599914.3917787,
+    "seen": 1794202013.644717,
+    "ast_hash": "b7221c268bc239ef28a8ed891f983735",
+    "semantic_hash": "b7221c268bc239ef28a8ed891f983735"
+  },
+  "1-measure-before-you-believe/12-article/README.md": {
+    "mtime": 1793437513.311797,
+    "seen": 1794202013.6447182,
+    "ast_hash": "472b47f63ebe313cb1c4b97c5ef3cea3",
+    "semantic_hash": "472b47f63ebe313cb1c4b97c5ef3cea3"
+  },
+  "1-measure-before-you-believe/12-article/article.md": {
+    "mtime": 1793532978.8503904,
+    "seen": 1794202013.6447191,
+    "ast_hash": "f6e0388803aea8150b77a8c5bc59f9f1",
+    "semantic_hash": "f6e0388803aea8150b77a8c5bc59f9f1"
+  },
+  "README.md": {
+    "mtime": 1794198857.153759,
+    "seen": 1794202013.64472,
+    "ast_hash": "07d52d6acf4399dcff662ec95bfcff8c",
+    "semantic_hash": "07d52d6acf4399dcff662ec95bfcff8c"
+  },
+  "data/acme/README.md": {
+    "mtime": 1793253159.2449293,
+    "seen": 1794202013.6447208,
+    "ast_hash": "8c20131be1946fde4047cfc357a349f2",
+    "semantic_hash": "8c20131be1946fde4047cfc357a349f2"
+  },
+  "data/acme/kb.md": {
+    "mtime": 1794198857.15496,
+    "seen": 1794202013.644722,
+    "ast_hash": "4fc7fc778db3562f83bdd67548566c74",
+    "semantic_hash": "4fc7fc778db3562f83bdd67548566c74"
+  },
+  "data/acme/policy.md": {
+    "mtime": 1794198857.1561215,
+    "seen": 1794202013.644723,
+    "ast_hash": "69dffa0b7f696e44198e04d647bee823",
+    "semantic_hash": "69dffa0b7f696e44198e04d647bee823"
+  },
+  "1-measure-before-you-believe/02-workflow-or-agent/acme_fiber_storyboard.png": {
+    "mtime": 1792644561.6162977,
+    "seen": 1794202013.644723,
+    "ast_hash": "9f414b5617d75d7f732a113fb600c7be",
+    "semantic_hash": "9f414b5617d75d7f732a113fb600c7be"
+  },
+  "1-measure-before-you-believe/03-test-set-first/Iterative Critique Shadowing Workflow.png": {
+    "mtime": 1792644561.622601,
+    "seen": 1794202013.644724,
+    "ast_hash": "af128cfcad4ad1ac4161d5d6b7dde5b3",
+    "semantic_hash": "af128cfcad4ad1ac4161d5d6b7dde5b3"
+  },
+  "1-measure-before-you-believe/11-recommendation-first-draft/diagram.svg": {
+    "mtime": 1793438552.7787566,
+    "seen": 1794202013.644725,
+    "ast_hash": "26290812fb506b94c419801ee6024627",
+    "semantic_hash": "26290812fb506b94c419801ee6024627"
+  }
+}

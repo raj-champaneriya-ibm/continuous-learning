@@ -1,0 +1,12 @@
+# Duplicates of each day's README and the tutor's working state
+**/video/
+.learn/
+
+# Generated or duplicate renderings
+1-measure-before-you-believe/11-recommendation-first-draft/presentation.html
+data/results/monitor.html
+
+# Config and assets with no concepts
+**/_quarto.yml
+**/requirements*.txt
+1-measure-before-you-believe/03-test-set-first/acme-review-studio/acme/icons/

@@ -9,6 +9,7 @@ import html
 import os
 import re
 import sqlite3
+import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -30,6 +31,21 @@ from acme.ui_bits import CSS, JS, chip, highlight, icon, pipeline  # noqa: E402
 from acme.workflow import PORTALS, Deps, Workflow, to_record  # noqa: E402
 
 ROOT = Path(__file__).parent
+LAB_ROOT = ROOT.parents[2]
+if str(LAB_ROOT) not in sys.path:
+    sys.path.append(str(LAB_ROOT))
+
+from lab.acme import kb_by_id as lab_kb_by_id  # noqa: E402
+from lab.business_rules import load_business_rules  # noqa: E402
+from lab.ontology import (  # noqa: E402
+    concept_provenance,
+    concept_labels,
+    define,
+    policy_rules,
+    terms as ontology_terms,
+    validate_ontology_ops,
+)
+
 XLSX = Path(os.environ.get("ACME_XLSX", ROOT / "data" / "Acme_Fibre_Grounded_Draft_Eval.xlsx"))
 RUNS = ROOT / "runs"
 RUNS.mkdir(exist_ok=True)
@@ -173,6 +189,23 @@ def knowledge_page():
                          ui.input_text("kb_title", "Title", width="100%"),
                          ui.input_text_area("kb_text", "Text", rows=6, width="100%"),
                          ui.input_action_button("kb_save", "Save article", class_="btn-primary")),
+            ui.nav_panel("Meaning",
+                         ui.div("A concept lists its governing rules. A rule lists affected concepts; select one to open its card.",
+                                class_="hint"),
+                         ui.layout_columns(
+                             ui.input_select("meaning_rule", "Policy rule",
+                                             {"": "No linked rule", **{
+                                                 str(number): f"Rule {number}" for number in policy_rules()
+                                             }}, selected="10"),
+                             ui.input_select("meaning_affected_concept", "Concepts affected by rule",
+                                             sorted(ontology_terms()), selected="retention offer"),
+                             ui.input_selectize("meaning_concept", "Business concept",
+                                                sorted(concept_labels()), selected="retention offer",
+                                                options={"placeholder": "Search any label"}),
+                             col_widths=(4, 4, 4)),
+                         ui.output_ui("meaning_concept_card"),
+                         ui.output_ui("meaning_rule_detail"),
+                         ui.output_data_frame("meaning_checks")),
             ui.nav_panel("Escalation guards",
                          ui.div("Code rules checked at step 7. They escalate whatever the model said.", class_="muted mb-2"),
                          ui.output_data_frame("guards_grid"),
@@ -836,6 +869,192 @@ def server(input, output, session):
         ui.notification_show(f"{c['id']} updated. 'Save to Excel' writes it to the workbook.")
 
     # ------------------------------------------------ knowledge
+    @reactive.effect
+    @reactive.event(input.meaning_rule)
+    def _meaning_rule_changed():
+        selected_rule = input.meaning_rule()
+        if not selected_rule:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            return
+        affected = {
+            name: name for name, info in ontology_terms().items()
+            if int(selected_rule) in info["policy_rules"]
+        }
+        if not affected:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            ui.update_selectize("meaning_concept", selected="")
+            return
+        current_concept = input.meaning_concept()
+        selected_concept = current_concept if current_concept in affected else next(iter(affected), "")
+        ui.update_select("meaning_affected_concept", choices=affected, selected=selected_concept)
+        if selected_concept and selected_concept != current_concept:
+            ui.update_selectize("meaning_concept", selected=selected_concept)
+
+    @reactive.effect
+    @reactive.event(input.meaning_concept)
+    def _meaning_concept_changed():
+        selected_concept = input.meaning_concept()
+        concept = define(selected_concept) if selected_concept else None
+        if not concept:
+            return
+        concept_name = concept["term"]
+        rule_numbers = concept["policy_rules"]
+        current_rule = input.meaning_rule()
+        rule = current_rule if current_rule and int(current_rule) in rule_numbers else (
+            str(rule_numbers[0]) if rule_numbers else ""
+        )
+        if rule != current_rule:
+            ui.update_select("meaning_rule", selected=rule)
+        if not rule:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            return
+        affected = {
+            name: name for name, info in ontology_terms().items()
+            if int(rule) in info["policy_rules"]
+        }
+        ui.update_select("meaning_affected_concept", choices=affected, selected=concept_name)
+
+    @reactive.effect
+    @reactive.event(input.meaning_affected_concept)
+    def _meaning_affected_concept_changed():
+        selected_concept = input.meaning_affected_concept()
+        if selected_concept and selected_concept != input.meaning_concept():
+            ui.update_selectize("meaning_concept", selected=selected_concept)
+
+    @render.ui
+    def meaning_concept_card():
+        selected = input.meaning_concept()
+        concept = define(selected) if selected else None
+        if not concept:
+            return ui.div("Select a concept to inspect its meaning and sources.", class_="muted")
+
+        facts = concept_provenance(concept["term"]) or []
+        articles = lab_kb_by_id()
+        terms_by_id = {info["iri"].rsplit("#", 1)[-1]: name for name, info in ontology_terms().items()}
+        config = load_business_rules()
+        parameters = []
+        for section in ("concession_limit", "offers"):
+            entries = config.get(section, {})
+            candidates = [entries] if section == "concession_limit" else entries.values()
+            for entry in candidates:
+                if entry.get("concept") == concept["term"]:
+                    parameters.extend(
+                        f"{key.replace('_', ' ')}: {value}"
+                        for key, value in entry.items()
+                        if key not in ("concept", "policy_rules", "kb_article", "cooldown_field",
+                                       "customer_ledger_field")
+                    )
+
+        def fact_rows(property_name):
+            rows = []
+            labels = {
+                "subClassOf": "Is a",
+                "altLabel": "Also known as",
+                "countsTowardLimit": "Counts toward concession limit",
+                "oncePerMonths": "Offer cadence (months)",
+                "scopeNote": "Business note",
+                "requiresRole": "Required role",
+                "documentedIn": "Help article",
+                "ownedBy": "Business owner",
+            }
+            for fact in facts:
+                if fact["property"] != property_name:
+                    continue
+                value = fact["value"]
+                if property_name == "documentedIn":
+                    article = articles.get(value, {})
+                    value = f"{value} · {article.get('title', '')}"
+                if property_name == "subClassOf":
+                    value = terms_by_id.get(value, value)
+                if property_name == "requiresRole":
+                    value = terms_by_id.get(value, value)
+                if property_name == "ownedBy":
+                    value = concept.get("owner_team") or value
+                origin = fact["origin"]
+                if fact["inherited_from"]:
+                    origin += f" from {fact['inherited_from']}"
+                rows.append(
+                    f"<li>{html.escape(labels.get(property_name, property_name))}: "
+                    f"<strong>{html.escape(value)}</strong> "
+                    f"<span class='muted'>({html.escape(origin)}; ontology.ttl)</span></li>"
+                )
+            return "".join(rows)
+
+        rules = [fact for fact in facts if fact["property"] == "enforcesRule"]
+        rule_rows = "".join(
+            f"<li>Rule {html.escape(fact['value'].removeprefix('PolicyRule'))} "
+            f"<span class='muted'>({html.escape(fact['origin'])}" +
+            (f" from {html.escape(fact['inherited_from'])}" if fact["inherited_from"] else "") +
+            "; policy.md)</span></li>"
+            for fact in rules
+        ) or "<li class='muted'>No linked policy rules</li>"
+        definition = html.escape(concept["definition"] or "No definition recorded")
+        parameter_rows = "".join(
+            f"<li>{html.escape(item)} <span class='muted'>(business_rules.json)</span></li>"
+            for item in parameters
+        )
+        if not parameter_rows:
+            parameter_rows = "<li class='muted'>No linked parameters</li>"
+        return ui.HTML(
+            f"<section class='mt-3'><h4>{html.escape(concept['term'])}</h4>"
+            f"<p>{definition} <span class='muted'>(ontology.ttl)</span></p>"
+            "<p class='muted'>Semantic source: fde-first-principles/data/acme</p>"
+            f"<div class='row'><div class='col-md-6'><h5>Hierarchy and business facts</h5><ul>"
+            f"{fact_rows('subClassOf')}{fact_rows('altLabel')}"
+            f"{fact_rows('countsTowardLimit')}{fact_rows('oncePerMonths')}"
+            f"{fact_rows('scopeNote')}{fact_rows('requiresRole')}"
+            f"</ul><h5>Business-rule parameters</h5><ul>{parameter_rows}</ul></div>"
+            f"<div class='col-md-6'><h5>Policy rules</h5><ul>{rule_rows}</ul>"
+            f"<h5>Evidence</h5><ul>{fact_rows('documentedIn')}"
+            f"<li><span class='muted'>Article text: kb.md</span></li></ul>"
+            f"<h5>Owner</h5><ul>{fact_rows('ownedBy')}</ul></div></div></section>"
+        )
+
+    @render.ui
+    def meaning_rule_detail():
+        selected = input.meaning_rule()
+        if not selected:
+            return ui.div()
+        number = int(selected)
+        text = policy_rules().get(number)
+        if text is None:
+            return ui.div("Policy text is missing for this rule.", class_="text-warning")
+        affected = []
+        for name, info in ontology_terms().items():
+            if number not in info["policy_rules"]:
+                continue
+            facts = concept_provenance(name) or []
+            edge = next((fact for fact in facts
+                         if fact["property"] == "enforcesRule" and fact["value"] == f"PolicyRule{number}"), {})
+            suffix = f" ({edge['origin']})" if edge else ""
+            affected.append(f"<li>{html.escape(name)}{html.escape(suffix)}</li>")
+        affected_rows = "".join(affected) or "<li class='muted'>No Business concepts linked to this rule</li>"
+        return ui.HTML(
+            f"<section class='mt-4'><h5>Rule {number}</h5><p>{html.escape(text)}</p>"
+            f"<h6>Concepts affected</h6><ul>{affected_rows}</ul></section>"
+        )
+
+    @render.data_frame
+    def meaning_checks():
+        health = validate_ontology_ops()
+        rows = ([{"type": "Operational", "finding": finding} for finding in health["drift_errors"]]
+                + [{"type": "Semantic", "finding": finding} for finding in health["semantic_findings"]])
+        if not rows:
+            rows = [{"type": "Status", "finding": "No cross-file findings"}]
+        return render.DataGrid(pd.DataFrame(rows), height="auto", width="100%")
+
     CUST_COLS = ["id", "name", "area", "plan", "status", "tenure_months", "balance_due", "complaints_30d",
                  "credits_30d", "late_fee_waived_on", "retention_offer_used_on", "payments_this_cycle"]
 

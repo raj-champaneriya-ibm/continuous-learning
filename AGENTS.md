@@ -22,6 +22,44 @@ python3 -m venv .venv
 
 `--group` needs pip 25.1 or later. The `dev` group in `fde-first-principles/pyproject.toml` installs `pytest` and `pytest-bdd`.
 
+## Codebase knowledge graph
+
+Graphify is installed as a `uv` tool. To install it and initialize the project-scoped
+Claude Code skill and hooks, run these commands from the repository root:
+
+```bash
+uv tool install graphifyy
+graphify install --project
+```
+
+The graph for the Python project lives in `fde-first-principles/graphify-out/`. Run
+Graphify commands from `fde-first-principles/`:
+
+| Goal                                   | Command                                             |
+|----------------------------------------|-----------------------------------------------------|
+| Answer a broad question                | `graphify query "how does the grader check rule 8"` |
+| Trace how two things connect           | `graphify path "Day 5 · A grader you can trust" "Rule 8 · ₹500 limit is per customer over 30 days"` |
+| Explain one node and its neighbours    | `graphify explain "policy_violations()"`            |
+| Refresh code nodes after a code change | `graphify update .`                                 |
+
+`/graphify` is an assistant slash command, not a shell command. In a terminal,
+`graphify extract . --code-only` builds a code-only graph; a full build also needs
+semantic extraction for documents and images, which the `/graphify` skill runs.
+
+The graph combines code, notebooks, documents, `.feature` specs and `.drawio`
+diagrams. Graphify cannot read `.ipynb`, `.feature` or `.drawio` files, so those
+nodes came from a one-off extraction. `graphify update .` keeps them while their
+source files exist, but neither it nor `/graphify --update` refreshes them. After
+a notebook, spec or diagram changes, ask the assistant to rebuild the
+fde-first-principles graph including notebooks, specs and diagrams.
+`fde-first-principles/.graphifyignore` excludes video copy, generated HTML, icons
+and dependency pins.
+
+When `graphify-out/graph.json` exists, query it before broad source searches.
+Without a graph, use targeted searches for small questions. Graphify's Claude Code
+guidance is in `CLAUDE.md` and its project-scoped skill and hooks are under
+`.claude/`.
+
 ## Running the tests
 
 Always run pytest from `fde-first-principles/`. The pytest settings (`pythonpath`, `testpaths`) live in its `pyproject.toml`, so running from the repository root fails with import errors and also collects the `acme-review-studio` tests.

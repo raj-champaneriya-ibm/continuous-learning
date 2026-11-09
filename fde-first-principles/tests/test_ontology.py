@@ -8,12 +8,15 @@ from lab.evals import policy_violations, score
 from lab.ontology import (
     _store,
     compute_entitlements,
+    concept_labels,
+    concept_provenance,
     customer_subgraph,
     define,
     domain_edges,
     excluded_from_limit,
     glossary,
     plans,
+    policy_rules,
     pune_service_areas,
     terms,
     validate_ontology_ops,
@@ -164,6 +167,80 @@ def test_domain_edges_and_ephemeral_subgraph_isolation():
     sub = customer_subgraph("AC1032")
     assert len(sub) > base_size
     assert len(_store()) == base_size
+
+
+def test_concept_provenance_distinguishes_stated_and_inherited_facts():
+    facts = concept_provenance("retention offer")
+    assert facts is not None
+    assert {
+        (fact["property"], fact["value"], fact["origin"])
+        for fact in facts
+    } >= {
+        ("countsTowardLimit", "false", "stated"),
+        ("enforcesRule", "PolicyRule10", "stated"),
+        ("enforcesRule", "PolicyRule3", "inherited"),
+        ("enforcesRule", "PolicyRule8", "inherited"),
+    }
+    assert any(
+        fact["property"] == "oncePerMonths"
+        and fact["origin"] == "inherited"
+        and fact["inherited_from"] == "once-only offer"
+        for fact in facts
+    )
+    assert next(fact for fact in facts
+                if fact["property"] == "enforcesRule" and fact["value"] == "PolicyRule8")["inherited_from"] == "discount"
+    assert next(fact for fact in facts
+                if fact["property"] == "enforcesRule" and fact["value"] == "PolicyRule3")["inherited_from"] == "concession"
+    assert concept_provenance("unknown concept") is None
+
+
+def test_policy_rules_and_semantic_drift_are_visible():
+    labels = concept_labels()
+    assert labels["छूट"] == "discount"
+    assert labels["late fee maaf"] == "late-fee waiver"
+
+    policy = policy_rules()
+    assert set(policy) == set(range(1, 14))
+    assert "More than 12 months" in policy[10]
+
+    health = validate_ontology_ops()
+    assert health["ok"] is True
+    assert health["drift_errors"] == []
+    assert any(
+        "retention offer policy rules differ" in finding
+        and "[8, 10]" in finding
+        and "[10, 13]" in finding
+        for finding in health["semantic_findings"]
+    )
+    assert any(
+        "Ontology rule description says 1 to 11" in finding
+        for finding in health["semantic_findings"]
+    )
+
+
+def test_all_concept_aliases_and_policy_rule_impacts_are_consistent():
+    catalog = terms()
+    rules = policy_rules()
+    aliases = concept_labels()
+
+    assert set(rules) == set(range(1, 14))
+    assert all(canonical in catalog for canonical in aliases.values())
+    for alias, canonical in aliases.items():
+        assert define(alias)["term"] == canonical
+
+    for name, info in catalog.items():
+        assert set(info["policy_rules"]) <= set(rules)
+        facts = concept_provenance(name)
+        fact_rules = {
+            int(fact["value"].removeprefix("PolicyRule"))
+            for fact in facts or []
+            if fact["property"] == "enforcesRule"
+        }
+        assert fact_rules == set(info["policy_rules"]), name
+
+    for number in rules:
+        affected = {name for name, info in catalog.items() if number in info["policy_rules"]}
+        assert all(number in catalog[name]["policy_rules"] for name in affected)
 
 
 def test_evals_enforces_customer_headroom_and_plan_discounts():
