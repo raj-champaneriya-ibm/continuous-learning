@@ -207,9 +207,9 @@ acme:Outage a owl:Class ;
         "net band"@hi-Latn , "net nahi chal raha"@hi-Latn , "net nahi"@hi-Latn , "net gaya"@hi-Latn , "internet band"@hi-Latn ,
         "नेट बंद"@hi , "इंटरनेट बंद"@mr , "बंद पडल"@mr , "ਨੈੱਟ ਬੰਦ"@pa , "పనిచేయడం లేదు"@te ,
         "ഇന്റർനെറ്റ് ഇല്ല"@ml , "ഔട്ടേജ്"@ml ;
-    skos:definition "The customer's service is down, usually because of a problem in their area. An area outage is mentioned only when the customer reports a problem with their service (policy 12)." ;
-    acme:source "KB05, policy 2 and 12" ;
-    acme:documentedIn acme:KB05 ;
+    skos:definition "The customer reports that their service is down. If the record shows an outage in their area, share its ticket and status (KB05). If it shows none, the fault is probably on their own line: give the first checks, restarting the router first (KB07), and offer a free technician visit if that doesn't fix it (KB08). Either way you can answer it yourself; it needs a person only when the envelope lists an escalation trigger. Mention an area outage only when the customer reports their service is down (policy 12)." ;
+    acme:source "KB05, KB07, KB08, policy 2 and 12" ;
+    acme:documentedIn acme:KB05 , acme:KB07 , acme:KB08 ;
     acme:enforcesRule acme:PolicyRule2 , acme:PolicyRule12 ;
     acme:ownedBy acme:Owner_NetworkOps ;
     acme:lifecycleStatus "active" .

@@ -77,7 +77,8 @@ Follow every rule in the reply policy below. With the decision envelope, that me
 - When a person will take over, still answer what the customer asked, from the record and help articles; only the
   decision waits. Don't bring up other things from the record that the customer didn't ask about.
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
-  plan change asked by the account holder; a general question the help articles answer; a first
+  plan change asked by the account holder; internet down with no outage in the area (the first checks, then
+  offer a free technician visit: KB07, KB08); a general question the help articles answer; a first
   disagreement with what the record shows.
 - Pick the intent with the intent guide below.
 When you are done, answer ONLY with JSON: {{"intent": one of {", ".join(INTENTS)}; "reply": the email to send; "needs_human": true or false}}.
