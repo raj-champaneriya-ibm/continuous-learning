@@ -324,7 +324,7 @@ def glossary(only_terms: Optional[List[str]] = None) -> str:
 
 
 def excluded_from_limit() -> List[str]:
-    """Kinds of money that don't count toward the ₹500 limit (automatic ones)."""
+    """Kinds of money that don't count toward the ₹500 limit: the automatic ones and the pre-approved retention offer."""
     return [row["label"].value for row in _store().query(EXCLUDED_FROM_LIMIT)]
 
 
@@ -404,6 +404,17 @@ def extract_concepts(text: str) -> List[Dict[str, Any]]:
             matched_terms.append(canonical)
     all_terms = terms()
     return [all_terms[c] for c in matched_terms if c in all_terms]
+
+
+OUTAGE_TERMS = ("outage", "outage credit")
+
+
+def customer_reported_outage(text: str) -> bool:
+    """Policy 12: does the customer's own text report that their service is down?
+
+    True when the text names an Outage or OutageCredit concept in any language the ontology labels
+    ("no internet", "net band", "इंटरनेट बंद", ...). A slow-speed or billing email is not an outage report."""
+    return any(c["term"] in OUTAGE_TERMS for c in extract_concepts(text))
 
 
 def customer_subgraph(customer: Union[str, Dict[str, Any]],
@@ -617,7 +628,7 @@ def compute_entitlements(customer: Union[str, Dict[str, Any]],
             "retention offer": {
                 "eligible": ro_eligible,
                 "auto_approvable": ro_eligible and ro_within_limit,
-                "exceeds_500_limit": ro_amount > headroom_rupees,
+                "exceeds_500_limit": ro_counts and ro_amount > headroom_rupees,
                 "discount_percent": ro_pct,
                 "amount_rupees": ro_amount,
                 "counts_toward_limit": ro_counts,

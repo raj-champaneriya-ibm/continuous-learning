@@ -204,7 +204,8 @@ def score_page():
 
 settings_popover = ui.popover(
     ui.input_action_link("open_settings", "Model", icon=icon("settings")),
-    ui.input_radio_buttons("provider", "Drafting model", {"claude-code": "Claude Code", "offline": "Offline stand-in"},
+    ui.input_radio_buttons("provider", "Drafting model",
+                           {"claude-code": "Claude Code", "c3": "C3 ontology agent (lab)", "offline": "Offline stand-in"},
                            selected=SETTINGS.provider),
     ui.input_select("model", "Claude model", {"sonnet": "Sonnet", "opus": "Opus", "haiku": "Haiku"}, selected=SETTINGS.model),
     ui.input_numeric("round", "Review round", SETTINGS.round, min=1, step=1),

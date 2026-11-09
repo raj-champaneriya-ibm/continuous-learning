@@ -15,6 +15,8 @@ Mitigates the structural gaps between Version B, Version C/C2, and the ontology:
 6. Separates eligibility from authority (`offer_decisions`): each discretionary offer is OFFER,
    NEEDS APPROVAL (above the headroom), HOLD (a person is handling the case) or DO NOT OFFER. A draft
    that offers something the decision doesn't allow goes to a person.
+7. Keeps the area outage out of scope unless the customer reported that their service is down
+   (policy 12): the envelope and the lookup_customer / check_entitlement tools withhold it.
 
     from lab.version_c3 import run_agent, version_c3, build_decision_envelope
     output, trace = run_agent(case, temperature=0.0, run=0)
@@ -40,6 +42,7 @@ from .evals import APPROVAL_WORDS, NEGATION, NOT_A_PROMISE, SENTENCE_END, amount
 from .llm import chat, extract_json
 from .ontology import (
     compute_entitlements,
+    customer_reported_outage,
     define,
     extract_concepts,
     glossary,
@@ -59,15 +62,18 @@ Follow every rule in the reply policy below. With the decision envelope, that me
 - Discuss only the account in the envelope. If the sender is not its account holder, don't reveal that account's id, plan,
   area, balance or outage, and don't address the sender by the account holder's name (policies 5 and 11). Never give
   details of any other customer.
-- Never approve or promise a concession above the customer's remaining 30-day ₹500 headroom. Say it needs approval and set needs_human to true.
+- Never approve or promise a concession above the customer's remaining 30-day headroom. Don't quote the limit or explain
+  approvals: say a customer representative will call about it, and set needs_human to true (policy 3).
 - Eligible is not approved. Offer the late-fee waiver (KB02) or the retention offer (KB11) only as the envelope's
   offer decisions say. OFFER: you may offer it once (the retention offer only to a customer who asks to cancel).
-  NEEDS APPROVAL: say a colleague will review it, never present it as given, and set needs_human to true.
+  NEEDS APPROVAL: say a customer representative will call about it, never present it as given, and set needs_human
+  to true.
   HOLD or DO NOT OFFER: don't offer it.
 - Call escalate and set needs_human to true when a human is needed: the envelope lists an escalation trigger,
   or the email reports possible fraud or a security incident, a safety hazard or staff misconduct, the
   customer disputes the record a second time, or the help articles and the record can't answer it.
-- When a person will take over, still answer everything the record and help articles answer; only the decision waits.
+- When a person will take over, still answer what the customer asked, from the record and help articles; only the
+  decision waits. Don't bring up other things from the record that the customer didn't ask about.
 - Answer these yourself without a human: anger, urgency or Hinglish on their own; a cancellation, shift or
   plan change asked by the account holder; a general question the help articles answer; a first
   disagreement with what the record shows.
@@ -226,8 +232,8 @@ def offer_decisions(offers: Dict[str, Dict[str, Any]],
     late-fee waiver, retention offer (discretionary, once a year):
       do_not_offer    the record makes the customer ineligible
       hold            an escalation rule fired: a person is handling the case and decides
-      offer           eligible and the amount fits the remaining 30-day headroom
-      needs_approval  eligible but above the headroom (50% off Pro is ₹750): a colleague must approve
+      offer           eligible, and pre-approved (the retention offer, policy 13) or within the 30-day headroom
+      needs_approval  eligible but above the headroom (a ₹100 waiver with ₹50 left): a colleague must approve
     double payment refund, outage credit (automatic, KB04 / KB06): automatic or not_on_record."""
     decisions: Dict[str, Dict[str, str]] = {}
     for name, offer in offers.items():
@@ -240,6 +246,8 @@ def offer_decisions(offers: Dict[str, Dict[str, Any]],
             status, why = "do_not_offer", offer["reason"]
         elif triggers:
             status, why = "hold", "A person is handling this case (" + "; ".join(t["rule"] for t in triggers) + ")."
+        elif offer.get("auto_approvable") and offer.get("counts_toward_limit") is False:
+            status, why = "offer", f"Eligible and pre-approved: ₹{amount} doesn't count toward the limit (policy 13)."
         elif offer.get("auto_approvable"):
             status, why = "offer", f"Eligible, and ₹{amount} fits the ₹{headroom} headroom."
         else:
@@ -293,6 +301,35 @@ def offers_not_allowed(reply: str,
     return found
 
 
+OUTAGE_WITHHELD = "Withheld: the customer didn't report that their service is down (policy 12)."
+
+
+def _without_outage(result: Any) -> Any:
+    """A tool result with the area outage removed, so the model can't bring it up unasked."""
+    if not isinstance(result, dict):
+        return result
+    if result.get("offer") == "outage credit":
+        return {"customer_id": result.get("customer_id"), "offer": "outage credit", "note": OUTAGE_WITHHELD}
+    out = dict(result)
+    if "current_outage" in out:
+        out["current_outage"] = OUTAGE_WITHHELD
+    for key in ("offer_eligibility", "offers"):
+        if isinstance(out.get(key), dict) and "outage credit" in out[key]:
+            out[key] = {k: v for k, v in out[key].items() if k != "outage credit"}
+    return out
+
+
+def scoped_functions(envelope: Dict[str, Any]) -> Dict[str, Any]:
+    """The tools for this email: the customer-record tools drop the outage when it is out of scope."""
+    if envelope.get("outage_in_scope"):
+        return FUNCTIONS_C3
+    return {
+        **FUNCTIONS_C3,
+        "lookup_customer": lambda customer_id: _without_outage(lookup_customer_c3(customer_id)),
+        "check_entitlement": lambda customer_id, offer="": _without_outage(check_entitlement(customer_id, offer)),
+    }
+
+
 def build_decision_envelope(case: Dict[str, Any],
                             *,
                             rules: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -333,6 +370,7 @@ def build_decision_envelope(case: Dict[str, Any],
         "concession_headroom_rupees": headroom,
         "offers": ent["offers"],
         "offer_decisions": offer_decisions(ent["offers"], headroom, triggers),
+        "outage_in_scope": customer_reported_outage(words),
         "pune_service_areas": pune_service_areas(),
         "escalation_triggers": triggers,
         "escalation_reasons": [t["reason"] for t in triggers],
@@ -350,6 +388,8 @@ def _envelope_brief(envelope: Dict[str, Any]) -> str:
     ]
     for name, kb in (("late-fee waiver", "KB02"), ("retention offer", "KB11"),
                      ("double payment refund", "KB04"), ("outage credit", "KB06")):
+        if name == "outage credit" and not envelope["outage_in_scope"]:
+            continue  # policy 12: the customer didn't report that their service is down
         d = decisions[name]
         lines.append(f"- {name} ({kb}): {OFFER_LABELS[d['status']]}. {d['why']}")
     if envelope["grounded_kb_ids"]:
@@ -378,6 +418,7 @@ def run_agent(case: Dict[str, Any],
         {"role": "user", "content": user_content},
     ]
     trace: List[Dict[str, Any]] = []
+    functions = scoped_functions(envelope)
     # Who sent this case to a person: rule triggers, the escalate tool, the model's JSON, the policy guard.
     # Saved with the output, so a run shows why each case was escalated.
     sources: List[str] = [f"rule:{t['rule']}" for t in envelope["escalation_triggers"]]
@@ -445,11 +486,11 @@ def run_agent(case: Dict[str, Any],
                     args = {}
             if name == "escalate":
                 sources.append("tool:escalate")
-            if name not in FUNCTIONS_C3:
+            if name not in functions:
                 result = {"error": f"unknown tool {name}"}
             else:
                 try:
-                    result = FUNCTIONS_C3[name](**args)
+                    result = functions[name](**args)
                 except TypeError as e:
                     result = {"error": f"bad arguments for {name}: {e}"}
             messages.append(

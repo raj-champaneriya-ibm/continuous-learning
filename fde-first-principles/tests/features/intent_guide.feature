@@ -40,6 +40,8 @@ Feature: One written convention decides the intent label
       | r41  | other      | a safety hazard no shift caused                     |
       | c84  | other      | a data-cap question                                 |
       | c77  | other      | a question about another customer                   |
+      | c39  | other      | staff misconduct (expert, round 2)                  |
+      | c70  | other      | an account ownership transfer (expert, round 2)     |
 
   @known_gap
   Scenario Outline: Labels that disagree with the guide (for the domain expert to rule on)
@@ -48,6 +50,4 @@ Feature: One written convention decides the intent label
     Examples:
       | case | guide      | labelled   | why the guide disagrees                                      | same kind, labelled as the guide says |
       | c38  | billing    | speed      | the request is ₹3,000 back for slow speed                    | p01a to p06a, r05, r36, r42           |
-      | c39  | other      | speed      | staff misconduct (a technician asking for cash)              | m22, r39                              |
-      | c70  | other      | relocation | an account ownership transfer to a flat's new owner          | p36a, m32, r07                        |
       | p35a | other      | billing    | a question about another customer's bill                     | c77, m31, r24                         |

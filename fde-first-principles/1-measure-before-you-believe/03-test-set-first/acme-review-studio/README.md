@@ -102,6 +102,24 @@ Claude subscription it counts against your plan's usage. **Parallel drafts** (âš
 On Windows, prefer the native Claude Code installer (`claude.exe`). With the npm `claude.cmd`, the app
 can't pass the JSON schema safely, so it asks for JSON in the prompt instead.
 
+## Reviewing the C3 agent's drafts
+
+Pick **C3 ontology agent (lab)** under âš™ Model to have the lab's Version C3
+(`fde-first-principles/lab/version_c3.py`) write the drafts, so your verdicts are about the agent the
+lab measures rather than this studio's own drafter. Step 5 then calls `version_c3(case)` with the case
+id, customer id, message and earlier turns; everything else in the workflow is unchanged.
+
+- C3 builds its own decision envelope and calls its own tools, so it doesn't use the prompts step 4 builds.
+- It reads customers, policy, help articles and the ontology from `fde-first-principles/data/acme`, not
+  from the workbook: an edit in the Data tab doesn't reach it. Make policy and label changes in both.
+- The model is `ACME_C3_MODEL` (default `anthropic:glm-5.3-flash`), with the key in
+  `fde-first-principles/.env`. The Claude model setting doesn't apply.
+- The draft's escalation reason lists C3's escalation sources (`rule:money_above_headroom`,
+  `guard:reveals_limit`, `model`), so you can see why C3 handed an email to a person.
+- The lab caches answers, so drafting the same email again is free. Each case is up to 6 model calls;
+  the lab stops at 500 calls per session (`LLM_MAX_CALLS`).
+- It needs `pyoxigraph` and `requests` (in `requirements.txt`).
+
 ## Tests
 
 The guardrails are specified as BDD scenarios in `tests/features/guardrails.feature` and run against a
@@ -131,7 +149,7 @@ Set-up, parameters, demo data and what each page answers: [`reports/README.md`](
 app.py               Shiny app (Review, Simulator, Cases, Knowledge, Scoreboard)
 acme/workflow.py     LangGraph graph: the 9 steps + human interrupt
 acme/checks.py       step 6 claim checks, step 7 guards, eval checks for the Review page
-acme/providers.py    Claude Code (claude -p) and the offline stand-in
+acme/providers.py    Claude Code (claude -p), the C3 lab agent and the offline stand-in
 acme/lab.py          load the workbook; export edits and reviews back into it
 acme/store.py        runs/reviews.json and runs/settings.json
 acme/ui_bits.py      CSS, keyboard shortcuts, the pipeline diagram
