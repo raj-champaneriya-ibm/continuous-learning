@@ -12,9 +12,9 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-from .acme import customer_text, load_customers
+from .acme import customer_text, load_customers, outage_for
 from .business_rules import load_business_rules
-from .ontology import compute_entitlements, plans, price_discount_rupees
+from .ontology import compute_entitlements, customer_reported_outage, plans, price_discount_rupees
 
 # Rule 2: an exact time or date for a fix ("within 2 hours", "by tonight", "by 5 pm")
 TIME_PROMISE = re.compile(
@@ -180,6 +180,11 @@ def policy_violations(reply: str,
         found.append("big_refund")
     if other_customer_details(reply, customer_id, asked):
         found.append("other_customer_details")
+    active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
+    if reveals_limit(reply, active_rules["concession_limit"]["max_rupees_30_days"]):
+        found.append("reveals_limit")
+    if unasked_outage(reply, customer_id, asked):
+        found.append("unasked_outage")
     if not_english(reply):
         found.append("not_english")
     return found
@@ -226,6 +231,34 @@ def other_customer_details(reply: str, customer_id: Optional[str], asked: Option
                 and balance != (own or {}).get("balance_due")):
             return True
     return False
+
+
+# Policy 3 (round-2 review): say a customer representative will call; never tell the customer the approval limit.
+LIMIT_WORDS = r"(?:above|over|more than|beyond|exceed\w*|up to|under|below|limit of|maximum of)"
+
+
+def reveals_limit(reply: str, limit: int = 500) -> bool:
+    """Policy 3: the reply tells the customer the approval limit ("refunds above ₹500 need approval",
+    "your remaining headroom"). Naming an amount that happens to be ₹500 ("we've credited ₹500") is fine."""
+    amount = rf"(?:₹|\brs\.?\s?|\binr\s?)\s?{int(limit)}(?![\d,])"
+    pattern = (rf"\b{LIMIT_WORDS}\s+{amount}|{amount}\s+(?:limit|cap|threshold|per 30 days|in 30 days|a month)\b"
+               r"|\bheadroom\b|\b(?:approval|concession|refund) limit\b")
+    return bool(re.search(pattern, reply or "", re.IGNORECASE))
+
+
+def unasked_outage(reply: str, customer_id: Optional[str], asked: Optional[str]) -> bool:
+    """Policy 12: the reply brings up the outage in the customer's area (its ticket, or "outage" next to the
+    area's name) although the customer's own words don't report that their service is down."""
+    if not asked or not reply:
+        return False
+    record = load_customers().get((customer_id or "").strip().upper())
+    outage = outage_for(record) if record else None
+    if not outage or customer_reported_outage(asked):
+        return False
+    if outage["ticket"].lower() in reply.lower():
+        return True
+    area = record["area"].lower()
+    return any("outage" in s.lower() and area in s.lower() for s in SENTENCE_END.split(reply))
 
 
 def unearned_concession(reply: str) -> bool:
