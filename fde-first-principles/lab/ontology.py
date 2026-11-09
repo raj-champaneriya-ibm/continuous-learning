@@ -240,6 +240,13 @@ def _store() -> Store:
     return store
 
 
+@lru_cache(maxsize=1)
+def _asserted_store() -> Store:
+    store = Store()
+    store.load(path=str(ONTOLOGY), format=RdfFormat.TURTLE)
+    return store
+
+
 def _value(term) -> Optional[str]:
     return term.value if term is not None else None
 
@@ -313,6 +320,11 @@ def _alias_index() -> Dict[str, str]:
     return {row["name"].value.strip().casefold(): row["label"].value for row in _store().query(LABELS)}
 
 
+def concept_labels() -> Dict[str, str]:
+    """Map searchable English and regional labels to canonical concept names."""
+    return dict(_alias_index())
+
+
 def glossary(only_terms: Optional[List[str]] = None) -> str:
     """One line per term, ready to paste into a prompt as a 'Definitions' block."""
     all_terms = terms()
@@ -382,6 +394,81 @@ def domain_edges(word_or_term: str) -> Optional[Dict[str, Any]]:
         **info,
         "superclasses": [r["parentLabel"].value for r in store.query(parents_q)],
         "subclasses": [r["childLabel"].value for r in store.query(children_q)],
+    }
+
+
+def concept_provenance(word_or_term: str) -> Optional[List[Dict[str, str]]]:
+    """Return business-facing facts with direct or inherited origin and source concept."""
+    info = define(word_or_term)
+    if not info:
+        return None
+
+    iri = info["iri"]
+    subject = f"<{iri}>"
+    query = PREFIXES + f"""
+    SELECT ?predicate ?value WHERE {{
+      {subject} ?predicate ?value .
+      FILTER(?predicate != rdf:type && ?predicate != acme:source && ?predicate != acme:lifecycleStatus)
+    }}
+    """
+    asserted = _asserted_store()
+    asserted_rows = {
+        (row["predicate"], row["value"])
+        for row in asserted.query(query)
+    }
+    asserted_triples = {(quad.subject, quad.predicate, quad.object) for quad in asserted}
+    hierarchy = PREFIXES + """
+    SELECT DISTINCT ?child ?parent ?label WHERE {
+      ?child rdfs:subClassOf ?parent .
+      OPTIONAL {
+        ?parent skos:prefLabel ?label .
+        FILTER(LANG(?label) = "en" || LANG(?label) = "")
+      }
+    }
+    """
+    parents: Dict[NamedNode, List[tuple[NamedNode, str]]] = {}
+    for row in asserted.query(hierarchy):
+        parent = row["parent"]
+        label = row["label"].value if row["label"] else parent.value.rsplit("#", 1)[-1]
+        parents.setdefault(row["child"], []).append((parent, label))
+    for parent_list in parents.values():
+        parent_list.sort(key=lambda item: item[1].casefold())
+
+    facts = []
+    for row in _store().query(query):
+        predicate, value = row["predicate"], row["value"]
+        source = None
+        origin = "stated" if (predicate, value) in asserted_rows else "inherited"
+        if origin == "inherited":
+            queue = [(parent, label) for parent, label in parents.get(NamedNode(iri), [])]
+            visited = set()
+            while queue:
+                ancestor, label = queue.pop(0)
+                if ancestor in visited:
+                    continue
+                visited.add(ancestor)
+                if (ancestor, predicate, value) in asserted_triples:
+                    source = label
+                    break
+                queue.extend(parents.get(ancestor, []))
+        display_value = value.value if isinstance(value, Literal) else value.value.rsplit("#", 1)[-1]
+        facts.append({
+            "property": predicate.value.rsplit("#", 1)[-1],
+            "value": display_value,
+            "origin": origin,
+            "inherited_from": source or "",
+        })
+    return sorted(facts, key=lambda fact: (fact["property"], fact["value"]))
+
+
+def policy_rules() -> Dict[int, str]:
+    """Read numbered customer policy statements from policy.md."""
+    text = (DATA / "policy.md").read_text(encoding="utf-8")
+    return {
+        int(number): " ".join(body.split())
+        for number, body in re.findall(
+            r"^(\d+)\.\s+(.+?)(?=^\d+\.\s+|^##\s|\Z)", text, re.MULTILINE | re.DOTALL
+        )
     }
 
 
@@ -661,6 +748,119 @@ def compute_entitlements(customer: Union[str, Dict[str, Any]],
     }
 
 
+def _semantic_model_findings(rules: Dict[str, Any]) -> List[str]:
+    findings: List[str] = []
+    asserted = _asserted_store()
+    all_terms = terms()
+    policy_numbers = set(policy_rules())
+    ontology_rule_numbers = {
+        int(row["number"].value)
+        for row in asserted.query(PREFIXES + """
+            SELECT ?number WHERE { ?rule a acme:PolicyRule ; acme:ruleNumber ?number }
+        """)
+    }
+    if policy_numbers != ontology_rule_numbers:
+        findings.append(
+            "Policy rule numbers differ: policy.md has "
+            f"{sorted(policy_numbers)}, ontology.ttl has {sorted(ontology_rule_numbers)}"
+        )
+
+    kb_ids = set(kb_by_id())
+    ontology_kb_ids = {
+        row["id"].value
+        for row in asserted.query(PREFIXES + """
+            SELECT ?id WHERE { ?article a acme:KnowledgeArticle ; acme:articleId ?id }
+        """)
+    }
+    if kb_ids != ontology_kb_ids:
+        findings.append(
+            f"Knowledge article IDs differ: kb.md has {sorted(kb_ids)}, "
+            f"ontology.ttl has {sorted(ontology_kb_ids)}"
+        )
+
+    for offer_name, config in rules.get("offers", {}).items():
+        concept_name = config.get("concept")
+        concept = all_terms.get(concept_name)
+        if not concept:
+            continue
+        concept_iri = f"<{concept['iri']}>"
+        direct_rules = {
+            int(row["number"].value)
+            for row in asserted.query(PREFIXES + f"""
+                SELECT ?number WHERE {{
+                  {concept_iri} acme:enforcesRule ?rule .
+                  ?rule acme:ruleNumber ?number
+                }}
+            """)
+        }
+        configured_rules = set(config.get("policy_rules", []))
+        if direct_rules != configured_rules:
+            findings.append(
+                f"{offer_name} policy rules differ: business_rules.json has "
+                f"{sorted(configured_rules)}, ontology.ttl has {sorted(direct_rules)}"
+            )
+
+        article = config.get("kb_article")
+        if article:
+            linked_articles = {
+                row["id"].value
+                for row in asserted.query(PREFIXES + f"""
+                    SELECT ?id WHERE {{
+                      {concept_iri} acme:documentedIn ?kb .
+                      ?kb acme:articleId ?id
+                    }}
+                """)
+            }
+            if article not in linked_articles:
+                findings.append(
+                    f"{offer_name} links {article} in business_rules.json, "
+                    f"but ontology.ttl links {sorted(linked_articles)}"
+                )
+
+        definition = concept["definition"]
+        for key in ("discount_percent", "duration_months", "min_tenure_months",
+                    "cooldown_months", "fixed_amount_rupees", "min_outage_hours"):
+            value = config.get(key)
+            if isinstance(value, (int, float)) and not re.search(rf"(?<!\d){re.escape(str(value))}(?!\d)", definition):
+                findings.append(
+                    f"{offer_name} {key} is {value} in business_rules.json, "
+                    "but that number is absent from the ontology definition"
+                )
+
+    limit = rules.get("concession_limit", {})
+    limit_concept = all_terms.get(limit.get("concept"))
+    if limit_concept:
+        for key in ("max_rupees_30_days", "window_days"):
+            value = limit.get(key)
+            if isinstance(value, (int, float)) and not re.search(
+                rf"(?<!\d){re.escape(str(value))}(?!\d)", limit_concept["definition"]
+            ):
+                findings.append(
+                    f"Concession limit {key} is {value} in business_rules.json, "
+                    "but that number is absent from the ontology definition"
+                )
+
+    definitions = " ".join(
+        row["definition"].value
+        for row in asserted.query(PREFIXES + """
+            SELECT ?definition WHERE {
+              VALUES ?subject { acme:PolicyRule acme:ruleNumber }
+              ?subject skos:definition ?definition
+            }
+        """)
+    )
+    declared_range = re.search(r"rules?\s+(\d+)\s+to\s+(\d+)", definitions, re.IGNORECASE)
+    if declared_range:
+        declared_numbers = set(range(int(declared_range.group(1)), int(declared_range.group(2)) + 1))
+        if declared_numbers != ontology_rule_numbers:
+            findings.append(
+                "Ontology rule description says "
+                f"{declared_range.group(1)} to {declared_range.group(2)}, "
+                f"but rule instances are {sorted(ontology_rule_numbers)}"
+            )
+    return findings
+
+
 def validate_ontology_ops(rules_path: Optional[Path] = None) -> Dict[str, Any]:
     """Operational governance check: verify zero schema drift across ontology.ttl,
     business_rules.json, customers.json, outages.json, and kb.md.
@@ -716,4 +916,5 @@ def validate_ontology_ops(rules_path: Optional[Path] = None) -> Dict[str, Any]:
             (len(all_terms) - len(unowned)) / max(1, len(all_terms)), 3
         ),
         "drift_errors": drift_errors,
+        "semantic_findings": _semantic_model_findings(rules),
     }
