@@ -26,11 +26,14 @@ def given_test_case(world, case_id):
 
 
 @given(parsers.parse('a draft that says "{reply}" and hands the email to a person'))
-def a_draft(world, reply):
-    # The verdicts are about what the reply says, so the intent and the hand-off match the label.
-    case = world["case"]
-    assert case["needs_human"], f"{case['id']} is not a hand-off case; this step doesn't fit it"
-    world["draft"] = {"intent": case["expected_intent"], "reply": reply, "needs_human": True}
+def a_draft_handed_off(world, reply):
+    # The verdicts are about what the reply says and where it goes, so the intent matches the label.
+    world["draft"] = {"intent": world["case"]["expected_intent"], "reply": reply, "needs_human": True}
+
+
+@given(parsers.parse('a draft that says "{reply}" and sends it'))
+def a_draft_sent(world, reply):
+    world["draft"] = {"intent": world["case"]["expected_intent"], "reply": reply, "needs_human": False}
 
 
 @when("the grader scores the draft")

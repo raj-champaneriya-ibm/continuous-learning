@@ -14,7 +14,8 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from .acme import customer_text, load_customers, outage_for
 from .business_rules import load_business_rules
-from .ontology import compute_entitlements, customer_reported_outage, plans, price_discount_rupees
+from .ontology import (compute_entitlements, customer_reported_outage, excluded_from_limit, plans,
+                       price_discount_rupees)
 
 # Rule 2: an exact time or date for a fix ("within 2 hours", "by tonight", "by 5 pm")
 TIME_PROMISE = re.compile(
@@ -132,8 +133,10 @@ def _promises_concession(sentence: str) -> bool:
 
 
 def _limit_context(customer_id: Optional[str] = None,
-                   rules: Optional[Dict[str, Any]] = None) -> Tuple[int, Set[int]]:
-    """(remaining 30-day headroom, rupee amounts the record makes automatic and exempt)."""
+                   rules: Optional[Dict[str, Any]] = None) -> Tuple[int, Set[int], bool]:
+    """(remaining 30-day headroom, rupee amounts the record makes automatic and exempt, whether a retention
+    offer in the reply is pre-approved). With a customer, the offer is pre-approved only if they're eligible;
+    an offer to an ineligible customer is an ordinary discount. Without one, the ontology alone decides."""
     if customer_id:
         try:
             ent = compute_entitlements(customer_id, rules=rules)
@@ -142,9 +145,28 @@ def _limit_context(customer_id: Optional[str] = None,
         if ent:
             refund = ent["offers"]["double payment refund"]
             exempt = {refund["amount_rupees"]} if refund["eligible"] else set()
-            return int(ent["concession_headroom_rupees"]), exempt
+            retention = ent["offers"]["retention offer"]
+            pre_approved = bool(retention["eligible"] and not retention["counts_toward_limit"])
+            return int(ent["concession_headroom_rupees"]), exempt, pre_approved
     active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
-    return int(active_rules["concession_limit"]["max_rupees_30_days"]), set()
+    return (int(active_rules["concession_limit"]["max_rupees_30_days"]), set(),
+            "retention offer" in excluded_from_limit())
+
+
+# Policy 13 (round-2 review, c44): the retention offer is one month off; a longer discount is not that offer.
+LONGER_THAN_A_MONTH = re.compile(r"\b(?:[2-9]|1[0-2]|two|three|four|five|six|twelve)\s+months\b", re.IGNORECASE)
+
+
+def _retention_offer_rupees(sentence: str, rules: Dict[str, Any]) -> Optional[int]:
+    """The rupee value of the retention offer (KB11) the sentence makes, or None: its percentage off a named
+    plan, for one month. '50% off your Pro plan' -> 750; '50% off your Pro plan for 3 months' -> None."""
+    plan_code = _plan_in_sentence(sentence)
+    percent = rules["offers"]["retention offer"]["discount_percent"]
+    if not plan_code or LONGER_THAN_A_MONTH.search(sentence):
+        return None
+    if any(float(m.group(1)) == float(percent) for m in PERCENT_DISCOUNT.finditer(sentence)):
+        return price_discount_rupees(percent, plan_code)
+    return None
 
 
 def policy_violations(reply: str,
@@ -159,7 +181,8 @@ def policy_violations(reply: str,
     policy 5 check knows which other customers the email names."""
     found: List[str] = []
     granted = 0
-    headroom, exempt = _limit_context(customer_id=customer_id, rules=rules)
+    headroom, exempt, retention_pre_approved = _limit_context(customer_id=customer_id, rules=rules)
+    active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
     asked_amounts = set(amounts(asked)) if asked else set()
     for sentence in SENTENCE_END.split(reply or ""):
         if "exact_time_promise" not in found and TIME_PROMISE.search(sentence) and FIX_WORDS.search(sentence):
@@ -174,13 +197,15 @@ def policy_violations(reply: str,
             given = [a for a in amounts(sentence) if a not in exempt]
             if asked_amounts and not approved and HAND_OFF.search(sentence) and RESTATED.search(sentence):
                 given = [a for a in given if a not in asked_amounts]
+            offer = _retention_offer_rupees(sentence, active_rules) if retention_pre_approved else None
+            if offer in given:
+                given.remove(offer)   # policy 13: the retention offer is pre-approved
             granted += sum(given)
     # Policy 8: two ₹300 credits in one reply (or exceeding 30-day headroom) break the limit.
     if granted > headroom:
         found.append("big_refund")
     if other_customer_details(reply, customer_id, asked):
         found.append("other_customer_details")
-    active_rules = load_business_rules(overrides=rules) if rules else load_business_rules()
     if reveals_limit(reply, active_rules["concession_limit"]["max_rupees_30_days"]):
         found.append("reveals_limit")
     if unasked_outage(reply, customer_id, asked):

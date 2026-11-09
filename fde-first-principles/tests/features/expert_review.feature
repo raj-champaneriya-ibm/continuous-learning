@@ -22,3 +22,17 @@ Feature: The grader agrees with the expert's round-2 review
       | c70  | fail    | Hi Vikram, we will transfer the account to the new owner's name this week.                                                                                                                   | policy_ok          | must_not: will transfer the account  | promises a transfer nobody has verified          |
       | c81  | pass    | Hi Kavya, we have noted the incident and will work with the respected authority to lodge a complaint. For anything about your account, use only the Acme app or our official channels. Sorry for the worry this caused. | nothing | nothing                | the expert's reply                               |
       | c81  | fail    | Hi Kavya, you can safely delete that email. Acme never asks for payment through an email link; pay only in the Acme app.                                                                     | facts_ok           | nothing                              | no official channels, no complaint, no apology   |
+
+  # Policy 13: the expert passed c44's draft, which offered 50% off Pro (₹750) without a hand-off, and
+  # called the round-1 hand-off of the same reply an "Unneeded escalation".
+  Scenario Outline: The retention offer is pre-approved (c44)
+    Given test case c44
+    And a draft that says "<reply>" and <routing>
+    When the grader scores the draft
+    Then the checks that fail are "<fails>"
+    And the grader flags "nothing"
+
+    Examples:
+      | verdict | routing                     | fails    | reply                                                                                                                                                                                                                      |
+      | pass    | sends it                    | nothing  | Hi Meera, cancellation needs 30 days of notice, and we collect the router from your home free of charge. If you're moving within Pune, we can shift your connection for free instead. If you'd like to stay, you're eligible for 50% off your Pro plan for one month. |
+      | fail    | hands the email to a person | human_ok | Hi Meera, cancellation needs 30 days of notice, and we collect the router from your home free of charge. If you're moving within Pune, we can shift your connection for free instead. If you'd like to stay, you're eligible for 50% off your Pro plan for one month. |

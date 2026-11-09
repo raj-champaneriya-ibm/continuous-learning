@@ -228,7 +228,7 @@ acme:Discount a owl:Class ;
     rdfs:subClassOf acme:Concession ;
     skos:prefLabel "discount"@en ;
     skos:altLabel "छूट"@hi , "सूट"@mr , "ರಿಯಾಯಿತಿ"@kn ;
-    skos:definition "A reduced price. Its rupee value counts: 50% of Pro (₹1,499) is about ₹750." ;
+    skos:definition "A reduced price. Its rupee value counts toward the limit: ₹200 off is ₹200. The retention offer is the exception (policy 13)." ;
     acme:source "policy 8" ;
     acme:enforcesRule acme:PolicyRule8 ;
     acme:lifecycleStatus "active" .
@@ -237,10 +237,11 @@ acme:RetentionOffer a owl:Class ;
     rdfs:subClassOf acme:Discount , acme:OnceOnlyOffer ;
     skos:prefLabel "retention offer"@en ;
     skos:altLabel "50% off"@en , "loyalty discount"@en ;
-    skos:definition "50% off for 1 month, offered once and politely to a customer who asks to cancel. Only for tenure of 13 months or more, and only if the record shows no retention offer in the last 12 months (retention_offer_used_on)." ;
-    acme:source "KB11, policy 10" ;
+    skos:definition "50% off for 1 month, offered once and politely to a customer who asks to cancel. Only for tenure of 13 months or more, and only if the record shows no retention offer in the last 12 months (retention_offer_used_on). Pre-approved: it doesn't count toward the ₹500 limit, whatever the plan (policy 13)." ;
+    acme:countsTowardLimit false ;
+    acme:source "KB11, policy 10, policy 13" ;
     acme:documentedIn acme:KB11 ;
-    acme:enforcesRule acme:PolicyRule10 ;
+    acme:enforcesRule acme:PolicyRule10 , acme:PolicyRule13 ;
     acme:ownedBy acme:Owner_CustomerRetention ;
     acme:lifecycleStatus "active" .
 
@@ -432,3 +433,4 @@ acme:PolicyRule9  a acme:PolicyRule ; acme:ruleNumber 9 .
 acme:PolicyRule10 a acme:PolicyRule ; acme:ruleNumber 10 .
 acme:PolicyRule11 a acme:PolicyRule ; acme:ruleNumber 11 .
 acme:PolicyRule12 a acme:PolicyRule ; acme:ruleNumber 12 .
+acme:PolicyRule13 a acme:PolicyRule ; acme:ruleNumber 13 .

@@ -232,8 +232,8 @@ def offer_decisions(offers: Dict[str, Dict[str, Any]],
     late-fee waiver, retention offer (discretionary, once a year):
       do_not_offer    the record makes the customer ineligible
       hold            an escalation rule fired: a person is handling the case and decides
-      offer           eligible and the amount fits the remaining 30-day headroom
-      needs_approval  eligible but above the headroom (50% off Pro is ₹750): a colleague must approve
+      offer           eligible, and pre-approved (the retention offer, policy 13) or within the 30-day headroom
+      needs_approval  eligible but above the headroom (a ₹100 waiver with ₹50 left): a colleague must approve
     double payment refund, outage credit (automatic, KB04 / KB06): automatic or not_on_record."""
     decisions: Dict[str, Dict[str, str]] = {}
     for name, offer in offers.items():
@@ -246,6 +246,8 @@ def offer_decisions(offers: Dict[str, Dict[str, Any]],
             status, why = "do_not_offer", offer["reason"]
         elif triggers:
             status, why = "hold", "A person is handling this case (" + "; ".join(t["rule"] for t in triggers) + ")."
+        elif offer.get("auto_approvable") and offer.get("counts_toward_limit") is False:
+            status, why = "offer", f"Eligible and pre-approved: ₹{amount} doesn't count toward the limit (policy 13)."
         elif offer.get("auto_approvable"):
             status, why = "offer", f"Eligible, and ₹{amount} fits the ₹{headroom} headroom."
         else:

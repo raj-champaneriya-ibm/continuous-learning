@@ -29,7 +29,7 @@ Plans: Basic 100 Mbps for ₹699 per month, Plus 300 Mbps for ₹999 per month, 
 Cancellation needs 30 days of notice. The router is collected from home free of charge. The final bill includes charges up to the end of the notice period. If the customer is cancelling because they're moving, ask whether the new address is in one of our Pune service areas: shifting there is free (KB12).
 
 # KB11 · Retention offer
-Customers with more than 12 months of tenure who ask to cancel can be offered 50% off for 1 month. Offer it once, politely, and do not push if they still want to cancel.
+Customers with more than 12 months of tenure who ask to cancel can be offered 50% off for 1 month. The offer is pre-approved on every plan, so no approval is needed. Offer it once, politely, and do not push if they still want to cancel.
 
 # KB12 · Shifting your connection
 Shifting the connection is free within our Pune service areas: Kothrud, Baner, Aundh, Hinjewadi, Wakad, Viman Nagar, Kharadi and Hadapsar. Re-installation happens within 48 hours of the requested date. Outside these areas, the connection has to be cancelled with 30 days of notice.

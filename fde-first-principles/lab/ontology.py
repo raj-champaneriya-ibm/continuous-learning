@@ -324,7 +324,7 @@ def glossary(only_terms: Optional[List[str]] = None) -> str:
 
 
 def excluded_from_limit() -> List[str]:
-    """Kinds of money that don't count toward the ₹500 limit (automatic ones)."""
+    """Kinds of money that don't count toward the ₹500 limit: the automatic ones and the pre-approved retention offer."""
     return [row["label"].value for row in _store().query(EXCLUDED_FROM_LIMIT)]
 
 
@@ -628,7 +628,7 @@ def compute_entitlements(customer: Union[str, Dict[str, Any]],
             "retention offer": {
                 "eligible": ro_eligible,
                 "auto_approvable": ro_eligible and ro_within_limit,
-                "exceeds_500_limit": ro_amount > headroom_rupees,
+                "exceeds_500_limit": ro_counts and ro_amount > headroom_rupees,
                 "discount_percent": ro_pct,
                 "amount_rupees": ro_amount,
                 "counts_toward_limit": ro_counts,

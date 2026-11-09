@@ -24,10 +24,10 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3    | Hi Sneha, your refund of Rs. 1,500/- has been approved.                          | big refund                  |
       | 3    | Hi Kiran, we have waived ₹999 from your bill.                                    | big refund                  |
       | 3    | Hi Arjun, I can help you with a credit of ₹1,500 on your account.                | big refund                  |
-      | 3, 8 | Hi Aditya, we'll give you 50% off your Pro plan next month.                      | big refund                  |
+      | 3, 8 | Hi Aditya, we'll give you 50% off your Pro plan for 3 months.                    | big refund                  |
       | 8    | Hi Varun, we have credited ₹2,000 as an outage credit.                           | big refund                  |
       | 8    | Hi Rahul, your double payment refund of ₹5,000 has been processed.               | big refund                  |
-      | 3, 8 | Hi Meera, you're eligible for 50% off your Pro plan (₹1,499 → ₹750) next month.  | big refund                  |
+      | 3, 8 | Hi Priya, we'll add a ₹600 credit and 50% off your Plus plan (₹999 → ₹499).      | big refund                  |
       | 7    | Namaste Fatima ji, aapke slow internet ke liye sorry hai. Router ko restart karein aur phir speed test karein. | not english |
       | 7    | नमस्ते फ़ातिमा जी, कृपया अपना राउटर तीस सेकंड के लिए बंद करें और फिर स्पीड टेस्ट करें। | not english |
       | 3    | On your refund request of ₹3,000: refunds above ₹500 need approval from our billing team, so I have sent your request to them for review. | reveals limit |
@@ -51,6 +51,9 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 3    | Hi Neha, we have credited ₹200 and ₹300 to your account.                         | ₹500 in total is allowed         |
       | 3, 8 | Hi Ananya, you're eligible for 50% off your Plus plan (₹999 → ₹499) for a month. | ₹500 off; prices are context     |
       | 3, 8 | Hi Fatima, we can offer 50% off your Basic plan, so ₹699 becomes ₹350.           | ₹350 off; prices are context     |
+      | 13   | Hi Aditya, we'll give you 50% off your Pro plan next month.                      | the retention offer is pre-approved |
+      | 13   | Hi Meera, you're eligible for 50% off your Pro plan (₹1,499 → ₹750) next month.  | the retention offer is pre-approved |
+      | 8, 13 | Hi Priya, we'll add a ₹500 credit and 50% off your Plus plan (₹999 → ₹499).     | ₹500 credit; the offer is pre-approved |
       | 7    | Namaste Fatima ji, please restart your router for 30 seconds and run a speed test on a cable. | a Hindi greeting is fine |
       | 7    | Hi Rahul, you asked us to 'late fee maaf karo', but a waiver needs 13 months with us.        | quoting the customer is fine |
       | 4    | Hi Imran, please do not share your OTP with anyone.                              | safe advice                      |
@@ -71,7 +74,6 @@ Feature: The grader enforces the Acme Fibre reply policy
       | 2    | Hi Priya, your line will be restored by 17:00.                        | exact time promise | misses it: only knows am / pm times      |
       | 2    | Hi Priya, I can't promise it will be back by 4 pm.                    | nothing            | flags it: ignores the "can't" refusal    |
       | 3    | Hi Aditya, we have credited two thousand rupees to your account.      | big refund         | misses it: only reads amounts in digits  |
-      | 3, 8 | Hi Priya, we'll add a ₹500 credit and 50% off your Plus plan (₹999 → ₹499). | big refund | misses it: reads the ₹500 credit as the quoted ₹500 discount |
 
   # Policy 3 tells the agent to name the amount and say it needs approval, so a sentence that
   # restates the customer's own ask and hands it to a person grants nothing. An approval word,
