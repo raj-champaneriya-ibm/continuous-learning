@@ -17,9 +17,29 @@ def the_reply(world, reply):
     world["reply"] = reply
 
 
+@given(parsers.parse('the customer wrote "{asked}"'))
+def the_customer_wrote(world, asked):
+    world["asked"] = asked
+
+
+@given(parsers.parse('customer {customer} wrote "{asked}"'))
+def customer_wrote(world, customer, asked):
+    world["customer"], world["asked"] = customer, asked
+
+
 @when("the grader checks it")
 def grader_checks(world):
     world["found"] = policy_violations(world["reply"])
+
+
+@when("the grader checks it for that customer")
+def grader_checks_for_customer(world):
+    world["found"] = policy_violations(world["reply"], customer_id=world["customer"], asked=world["asked"])
+
+
+@when("the grader checks it against what the customer asked")
+def grader_checks_against_ask(world):
+    world["found"] = policy_violations(world["reply"], asked=world["asked"])
 
 
 @when("the grader scores it for a customer entitled to no concession")

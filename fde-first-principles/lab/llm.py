@@ -350,6 +350,7 @@ def _chat_anthropic(messages: List[Dict[str, Any]], *, model: str, temperature: 
         "tokens_out": int(usage.get("output_tokens") or 0),
         "seconds": round(time.perf_counter() - started, 3),
         "model": model,
+        "stop_reason": (data or {}).get("stop_reason"),
     }
     _api_usage["tokens_in"] += result["tokens_in"]
     _api_usage["tokens_out"] += result["tokens_out"]

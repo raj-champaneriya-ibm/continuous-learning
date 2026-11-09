@@ -200,6 +200,20 @@ acme:OutageCredit a owl:Class ;
     acme:ownedBy acme:Owner_NetworkOps ;
     acme:lifecycleStatus "active" .
 
+acme:Outage a owl:Class ;
+    skos:prefLabel "outage"@en ;
+    skos:altLabel "no internet"@en , "internet down"@en , "internet is down"@en , "down since"@en , "still down"@en ,
+        "internet stopped"@en , "stopped working"@en , "not working"@en , "internet dead"@en , "no connection"@en ,
+        "net band"@hi-Latn , "net nahi chal raha"@hi-Latn , "net nahi"@hi-Latn , "net gaya"@hi-Latn , "internet band"@hi-Latn ,
+        "नेट बंद"@hi , "इंटरनेट बंद"@mr , "बंद पडल"@mr , "ਨੈੱਟ ਬੰਦ"@pa , "పనిచేయడం లేదు"@te ,
+        "ഇന്റർനെറ്റ് ഇല്ല"@ml , "ഔട്ടേജ്"@ml ;
+    skos:definition "The customer's service is down, usually because of a problem in their area. An area outage is mentioned only when the customer reports a problem with their service (policy 12)." ;
+    acme:source "KB05, policy 2 and 12" ;
+    acme:documentedIn acme:KB05 ;
+    acme:enforcesRule acme:PolicyRule2 , acme:PolicyRule12 ;
+    acme:ownedBy acme:Owner_NetworkOps ;
+    acme:lifecycleStatus "active" .
+
 acme:LateFeeWaiver a owl:Class ;
     rdfs:subClassOf acme:Concession , acme:OnceOnlyOffer ;
     skos:prefLabel "late-fee waiver"@en ;
@@ -214,7 +228,7 @@ acme:Discount a owl:Class ;
     rdfs:subClassOf acme:Concession ;
     skos:prefLabel "discount"@en ;
     skos:altLabel "छूट"@hi , "सूट"@mr , "ರಿಯಾಯಿತಿ"@kn ;
-    skos:definition "A reduced price. Its rupee value counts: 50% of Pro (₹1,499) is about ₹750." ;
+    skos:definition "A reduced price. Its rupee value counts toward the limit: ₹200 off is ₹200. The retention offer is the exception (policy 13)." ;
     acme:source "policy 8" ;
     acme:enforcesRule acme:PolicyRule8 ;
     acme:lifecycleStatus "active" .
@@ -223,10 +237,11 @@ acme:RetentionOffer a owl:Class ;
     rdfs:subClassOf acme:Discount , acme:OnceOnlyOffer ;
     skos:prefLabel "retention offer"@en ;
     skos:altLabel "50% off"@en , "loyalty discount"@en ;
-    skos:definition "50% off for 1 month, offered once and politely to a customer who asks to cancel. Only for tenure of 13 months or more, and only if the record shows no retention offer in the last 12 months (retention_offer_used_on)." ;
-    acme:source "KB11, policy 10" ;
+    skos:definition "50% off for 1 month, offered once and politely to a customer who asks to cancel. Only for tenure of 13 months or more, and only if the record shows no retention offer in the last 12 months (retention_offer_used_on). Pre-approved: it doesn't count toward the ₹500 limit, whatever the plan (policy 13)." ;
+    acme:countsTowardLimit false ;
+    acme:source "KB11, policy 10, policy 13" ;
     acme:documentedIn acme:KB11 ;
-    acme:enforcesRule acme:PolicyRule10 ;
+    acme:enforcesRule acme:PolicyRule10 , acme:PolicyRule13 ;
     acme:ownedBy acme:Owner_CustomerRetention ;
     acme:lifecycleStatus "active" .
 
@@ -417,3 +432,5 @@ acme:PolicyRule8  a acme:PolicyRule ; acme:ruleNumber 8 .
 acme:PolicyRule9  a acme:PolicyRule ; acme:ruleNumber 9 .
 acme:PolicyRule10 a acme:PolicyRule ; acme:ruleNumber 10 .
 acme:PolicyRule11 a acme:PolicyRule ; acme:ruleNumber 11 .
+acme:PolicyRule12 a acme:PolicyRule ; acme:ruleNumber 12 .
+acme:PolicyRule13 a acme:PolicyRule ; acme:ruleNumber 13 .

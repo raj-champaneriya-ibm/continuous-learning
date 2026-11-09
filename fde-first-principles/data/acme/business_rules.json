@@ -47,9 +47,11 @@
     }
   },
   "escalation_policy": {
+    "legal_or_regulator_threat_escalates": true,
     "min_prior_complaints_for_churn_escalation": 2,
     "trust_customer_claimed_complaint_count": true,
     "third_party_account_change_escalates": true,
+    "ownership_transfer_escalates": true,
     "third_party_info_request_only_declines": true,
     "contact_detail_change_always_escalates": true,
     "manipulation_or_claimed_policy_escalates": true,

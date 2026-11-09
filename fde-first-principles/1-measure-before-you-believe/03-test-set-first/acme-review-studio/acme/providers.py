@@ -3,13 +3,17 @@
 * ClaudeCodeProvider — calls `claude -p` (Claude Code headless mode) with your Claude Code login.
 * OfflineProvider    — a rule-based stand-in so you can try the app with no model. It has deliberate
                        flaws (promises fix times, offers 50% to everyone) so the checks have work to do.
+* C3Provider         — the lab's ontology-grounded agent (fde-first-principles/lab/version_c3.py), so the
+                       expert reviews the drafts of the agent the lab measures.
 """
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -179,5 +183,101 @@ class OfflineProvider:
                        latency=0.15)
 
 
+# fde-first-principles/, the folder that holds the lab package (lab/version_c3.py).
+LAB_ROOT = Path(__file__).resolve().parents[4]
+C3_DEFAULT_MODEL = "anthropic:glm-5.3-flash"
+
+
+def c3_output(row: dict, outage: dict | None = None) -> dict:
+    """Map one lab version_c3 result row onto the draft the workflow expects (DRAFT_SCHEMA).
+
+    escalation_reason lists C3's escalation_sources ("rule:money_above_headroom", "guard:reveals_limit",
+    "model", ...), so the reviewer sees why C3 handed the email to a person. cited_sources comes from the
+    tools C3 called: CRM for the customer lookup, KB ids for the help articles it read, OUTAGE when the
+    reply names the area's outage ticket."""
+    cited = []
+    for call in row.get("tool_calls") or []:
+        name, result = call.get("name"), call.get("result")
+        if name == "lookup_customer":
+            cited.append("CRM")
+        elif name == "search_kb" and isinstance(result, list):
+            cited += [r.get("id") for r in result if isinstance(r, dict)]
+        elif name == "get_article" and isinstance(result, dict):
+            cited.append(result.get("id"))
+        elif name == "define_term" and isinstance(result, dict):
+            cited += result.get("kb_articles") or []
+    reply = row.get("reply") or ""
+    if outage and outage.get("ticket") and outage["ticket"] in reply:
+        cited.append("OUTAGE")
+    intent = row.get("intent") if row.get("intent") in INTENTS else "other"
+    return {"intent": intent, "reply": reply, "needs_human": bool(row.get("needs_human")),
+            "escalation_reason": ", ".join(row.get("escalation_sources") or []),
+            "cited_sources": list(dict.fromkeys(c for c in cited if c))}
+
+
+class C3Provider:
+    """The lab's ontology-grounded agent (fde-first-principles/lab/version_c3.py) writes the draft.
+
+    C3 builds its own decision envelope from the case (entitlements, concepts, escalation triggers, offer
+    decisions, the outage gate) and calls its own tools, so it ignores the prompts step 4 builds. It reads
+    customers, policy, help articles and the ontology from fde-first-principles/data/acme, not from the
+    workbook: edits made in the studio's Data tab don't reach it. The model comes from ACME_C3_MODEL
+    (default anthropic:glm-5.3-flash) and its key from fde-first-principles/.env; the studio's Claude model
+    setting doesn't apply. Answers are cached by the lab, so drafting the same email again is free."""
+    name = "c3"
+    label = "C3 ontology agent"
+
+    def __init__(self, model: str | None = None, lab_root: Path | None = None, runner=None):
+        self.model = model or os.environ.get("ACME_C3_MODEL") or C3_DEFAULT_MODEL
+        self.lab_root = Path(lab_root or os.environ.get("ACME_LAB_ROOT") or LAB_ROOT)
+        self._runner = runner      # tests pass a stand-in for lab.version_c3.version_c3
+        self._llm = None
+
+    def _load(self):
+        if self._runner is None:
+            if str(self.lab_root) not in sys.path:
+                sys.path.append(str(self.lab_root))   # appended: the studio's own modules win any name clash
+            from lab import llm
+            from lab.version_c3 import version_c3
+            self._llm, self._runner = llm, version_c3
+        if self._llm is not None:
+            self._llm.use(self.model)
+        return self._runner
+
+    def status(self) -> tuple[bool, str]:
+        try:
+            self._load()
+        except ModuleNotFoundError as exc:
+            if exc.name == "lab":
+                return False, f"No lab package in {self.lab_root}. Set ACME_LAB_ROOT to your fde-first-principles folder."
+            return False, f"The C3 agent needs {exc.name}: pip install -r requirements.txt"
+        except Exception as exc:  # noqa: BLE001 - surface anything to the UI
+            return False, (f"Couldn't load the lab from {self.lab_root}: {exc}. "
+                           "Install the C3 packages: pip install -r requirements.txt")
+        if self._llm is not None and self.model.startswith("anthropic:") and not (
+                self._llm._env("LLM_ANTHROPIC_KEY") or self._llm._env("LLM_API_KEY")):
+            return False, "Set LLM_ANTHROPIC_KEY in fde-first-principles/.env for the C3 model."
+        return True, f"Lab agent from {self.lab_root.name}/lab. Model: {self.model}."
+
+    def draft(self, system: str, user: str, ctx: dict | None = None) -> dict:
+        ctx = ctx or {}
+        customer = ctx.get("customer") or {}
+        case = {"id": ctx.get("case_id") or "custom", "customer_id": ctx.get("customer_id") or customer.get("id"),
+                "message": ctx.get("message") or "", "history": ctx.get("history") or []}
+        if not case["customer_id"]:
+            return _result(error="C3 needs a customer id, and this email has none.")
+        started = time.time()
+        try:
+            row = self._load()(case)
+        except Exception as exc:  # noqa: BLE001 - an API limit or a lab error becomes a model error in step 5
+            return _result(error=f"C3 failed: {exc}"[:400], latency=time.time() - started)
+        return _result(output=c3_output(row, ctx.get("outage")), latency=time.time() - started,
+                       raw=json.dumps(row, ensure_ascii=False, default=str))
+
+
 def make_provider(name: str, model: str = "sonnet"):
-    return ClaudeCodeProvider(model=model) if name == "claude-code" else OfflineProvider()
+    if name == "claude-code":
+        return ClaudeCodeProvider(model=model)
+    if name == "c3":
+        return C3Provider()
+    return OfflineProvider()

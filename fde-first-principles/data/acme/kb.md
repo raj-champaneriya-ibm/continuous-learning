@@ -26,10 +26,10 @@ If the speed on a cable connection is below half of the plan speed after a resta
 Plans: Basic 100 Mbps for ₹699 per month, Plus 300 Mbps for ₹999 per month, Pro 1 Gbps for ₹1,499 per month. Upgrades are active within 1 hour and the difference is charged pro-rata on the next bill. Downgrades start from the next billing cycle.
 
 # KB10 · Cancellation and notice period
-Cancellation needs 30 days of notice. The router is collected from home free of charge. The final bill includes charges up to the end of the notice period.
+Cancellation needs 30 days of notice. The router is collected from home free of charge. The final bill includes charges up to the end of the notice period. If the customer is cancelling because they're moving, ask whether the new address is in one of our Pune service areas: shifting there is free (KB12).
 
 # KB11 · Retention offer
-Customers with more than 12 months of tenure who ask to cancel can be offered 50% off for 1 month. Offer it once, politely, and do not push if they still want to cancel.
+Customers with more than 12 months of tenure who ask to cancel can be offered 50% off for 1 month. The offer is pre-approved on every plan, so no approval is needed. Offer it once, politely, and do not push if they still want to cancel.
 
 # KB12 · Shifting your connection
 Shifting the connection is free within our Pune service areas: Kothrud, Baner, Aundh, Hinjewadi, Wakad, Viman Nagar, Kharadi and Hadapsar. Re-installation happens within 48 hours of the requested date. Outside these areas, the connection has to be cancelled with 30 days of notice.
@@ -41,7 +41,7 @@ To change the Wi-Fi password, open the Acme app and go to Wi-Fi settings, or ope
 New connections are installed within 48 hours after document checks (address proof and photo ID).
 
 # KB15 · Account security
-Acme staff never ask for OTPs, passwords or full card numbers. If someone asked for an OTP and claimed to be from Acme, tell the customer not to share it, and escalate it as a possible fraud attempt.
+Acme staff never ask for OTPs, passwords or full card numbers. If someone asked for an OTP and claimed to be from Acme, tell the customer not to share it, and escalate it as a possible fraud attempt. Acme's security team records every phishing email, message or call a customer reports and works with the relevant authorities to lodge a complaint. Tell the customer the incident is noted, to use only the Acme app or Acme's official channels for payments and account changes, and say sorry for the worry.
 
 # KB16 · Talking to a human
-Escalate to a human when the customer threatens legal action, threatens to leave after repeated complaints, asks for a refund or credit above ₹500, or reports possible fraud.
+Escalate to a human when the customer threatens legal action, threatens to leave after repeated complaints, asks for a refund or credit that needs approval, or reports possible fraud. A customer representative then calls the customer. Tell the customer a representative will call; don't quote approval limits.

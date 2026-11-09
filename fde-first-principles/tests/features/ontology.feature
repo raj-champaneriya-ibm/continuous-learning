@@ -2,9 +2,9 @@ Feature: The ontology gives every agent the same meaning for policy words
   data/acme/ontology.ttl holds the definitions behind policy rules 8 to 11. Prompts, tools and
   graders read the same file, so "credit" or "account holder" can't mean two different things.
 
-  Scenario: Automatic money doesn't count toward the ₹500 limit
+  Scenario: Automatic money and the pre-approved retention offer don't count toward the ₹500 limit
     When the grader asks which kinds of money are excluded from the limit
-    Then the answer is "double payment refund, outage credit"
+    Then the answer is "double payment refund, outage credit, retention offer"
 
   Scenario Outline: A regional or informal word maps to the policy term
     When an agent looks up "<word>"
