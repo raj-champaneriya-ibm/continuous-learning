@@ -33,8 +33,11 @@ The daily drop, deadlines and this table are managed by
 | 10 | 2026-10-30 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) |  | ❌ missed |
 | 10 | 2026-11-02 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 2) |  | ❌ missed |
 | 10 | 2026-11-03 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 3) |  | ❌ missed |
-| 10 | 2026-11-07 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 4) |  | ❌ missed |
-| 10 | 2026-11-09 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 5) |  | ⏳ open |
+| 10 | 2026-11-04 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 4) |  | ❌ missed |
+| 10 | 2026-11-05 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 5) |  | ❌ missed |
+| 10 | 2026-11-06 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 6) |  | ❌ missed |
+| 10 | 2026-11-07 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 7) |  | ❌ missed |
+| 10 | 2026-11-09 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 8) |  | ⏳ open |
 
 **9 of 66 topics shipped.**
 <!-- /learn:progress -->

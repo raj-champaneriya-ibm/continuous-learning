@@ -8,7 +8,7 @@
 
 **Time:** minimum scope, 1 morning (about 105 minutes for the full topic)
 
-**Attempt 5: minimum scope.** Ship at least this: 10 failures labelled and counted.
+**Attempt 8: minimum scope.** Ship at least this: 10 failures labelled and counted.
 
 ### 1 · Learn (about 30 minutes)
 - [A Field Guide to Rapidly Improving AI Products (Hamel Husain)](https://hamel.dev/blog/posts/field-guide/) · 20 min. Read 'The Most Common Mistake: Skipping Error Analysis' and 'A Simple Data Viewer'. Stop there.
