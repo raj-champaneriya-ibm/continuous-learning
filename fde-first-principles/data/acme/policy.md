@@ -32,3 +32,9 @@ Every reply to a customer must follow these rules. Your grader (`lab/evals.py`, 
     the plan or transfer the account, or anyone asks to change the registered phone number or email,
     don't do it and set `needs_human` to true. If someone only asks about another customer, decline
     politely (rule 5); no escalation is needed.
+
+## Decisions from the round-2 expert review (2026-11-09)
+
+12. Mention an outage in the customer's area only when the customer reports that their service is
+    down ("no internet", "net band", "outage"). Slow speed, a bill, a move or a complaint about
+    something else is not a report of an outage, so don't bring the outage up in those replies.

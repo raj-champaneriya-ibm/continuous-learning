@@ -406,6 +406,17 @@ def extract_concepts(text: str) -> List[Dict[str, Any]]:
     return [all_terms[c] for c in matched_terms if c in all_terms]
 
 
+OUTAGE_TERMS = ("outage", "outage credit")
+
+
+def customer_reported_outage(text: str) -> bool:
+    """Policy 12: does the customer's own text report that their service is down?
+
+    True when the text names an Outage or OutageCredit concept in any language the ontology labels
+    ("no internet", "net band", "इंटरनेट बंद", ...). A slow-speed or billing email is not an outage report."""
+    return any(c["term"] in OUTAGE_TERMS for c in extract_concepts(text))
+
+
 def customer_subgraph(customer: Union[str, Dict[str, Any]],
                       outage: Optional[Dict[str, Any]] = None) -> Store:
     """Create an isolated per-request Store containing the reasoned TBox + ONE customer's ABox triples.

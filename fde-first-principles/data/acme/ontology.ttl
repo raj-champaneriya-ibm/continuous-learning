@@ -200,6 +200,20 @@ acme:OutageCredit a owl:Class ;
     acme:ownedBy acme:Owner_NetworkOps ;
     acme:lifecycleStatus "active" .
 
+acme:Outage a owl:Class ;
+    skos:prefLabel "outage"@en ;
+    skos:altLabel "no internet"@en , "internet down"@en , "internet is down"@en , "down since"@en , "still down"@en ,
+        "internet stopped"@en , "stopped working"@en , "not working"@en , "internet dead"@en , "no connection"@en ,
+        "net band"@hi-Latn , "net nahi chal raha"@hi-Latn , "net nahi"@hi-Latn , "net gaya"@hi-Latn , "internet band"@hi-Latn ,
+        "नेट बंद"@hi , "इंटरनेट बंद"@mr , "बंद पडल"@mr , "ਨੈੱਟ ਬੰਦ"@pa , "పనిచేయడం లేదు"@te ,
+        "ഇന്റർനെറ്റ് ഇല്ല"@ml , "ഔട്ടേജ്"@ml ;
+    skos:definition "The customer's service is down, usually because of a problem in their area. An area outage is mentioned only when the customer reports a problem with their service (policy 12)." ;
+    acme:source "KB05, policy 2 and 12" ;
+    acme:documentedIn acme:KB05 ;
+    acme:enforcesRule acme:PolicyRule2 , acme:PolicyRule12 ;
+    acme:ownedBy acme:Owner_NetworkOps ;
+    acme:lifecycleStatus "active" .
+
 acme:LateFeeWaiver a owl:Class ;
     rdfs:subClassOf acme:Concession , acme:OnceOnlyOffer ;
     skos:prefLabel "late-fee waiver"@en ;
@@ -417,3 +431,4 @@ acme:PolicyRule8  a acme:PolicyRule ; acme:ruleNumber 8 .
 acme:PolicyRule9  a acme:PolicyRule ; acme:ruleNumber 9 .
 acme:PolicyRule10 a acme:PolicyRule ; acme:ruleNumber 10 .
 acme:PolicyRule11 a acme:PolicyRule ; acme:ruleNumber 11 .
+acme:PolicyRule12 a acme:PolicyRule ; acme:ruleNumber 12 .
