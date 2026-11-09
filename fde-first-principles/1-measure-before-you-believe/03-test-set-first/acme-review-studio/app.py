@@ -877,6 +877,14 @@ def server(input, output, session):
             name: name for name, info in ontology_terms().items()
             if selected_rule and int(selected_rule) in info["policy_rules"]
         }
+        if not affected:
+            ui.update_select(
+                "meaning_affected_concept",
+                choices={"": "No Business concepts linked to this rule"},
+                selected="",
+            )
+            ui.update_selectize("meaning_concept", selected="")
+            return
         current_concept = input.meaning_concept()
         selected_concept = current_concept if current_concept in affected else next(iter(affected), "")
         ui.update_select("meaning_affected_concept", choices=affected, selected=selected_concept)
@@ -1013,7 +1021,7 @@ def server(input, output, session):
                          if fact["property"] == "enforcesRule" and fact["value"] == f"PolicyRule{number}"), {})
             suffix = f" ({edge['origin']})" if edge else ""
             affected.append(f"<li>{html.escape(name)}{html.escape(suffix)}</li>")
-        affected_rows = "".join(affected) or "<li class='muted'>None linked</li>"
+        affected_rows = "".join(affected) or "<li class='muted'>No Business concepts linked to this rule</li>"
         return ui.HTML(
             f"<section class='mt-4'><h5>Rule {number}</h5><p>{html.escape(text)}</p>"
             f"<h6>Concepts affected</h6><ul>{affected_rows}</ul></section>"

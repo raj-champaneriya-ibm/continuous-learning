@@ -1,7 +1,7 @@
 # Graph Report - fde-first-principles  (2026-11-09)
 
 ## Corpus Check
-- 52 files · ~61,742 words
+- 52 files · ~61,759 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 55 file(s) not represented in the graph (top: .feature 13, .drawio 11, .jsonl 11)
 - WARNING: 55 of 140 files seen (39%) have no supported extractor and are missing from this graph entirely. It may look complete while representing only part of the codebase.
@@ -12,7 +12,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `31807413`
+- Built from commit: `64e7efe7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -105,10 +105,10 @@
   1-measure-before-you-believe/06-one-llm-call/notebook.ipynb → lab/version_b.py
 - `ask()` --semantically_similar_to--> `chat()`  [INFERRED] [semantically similar]
   1-measure-before-you-believe/01-an-llm-call-is-http/notebook.ipynb → lab/llm.py
-- `problems()` --semantically_similar_to--> `_problems()`  [INFERRED] [semantically similar]
-  1-measure-before-you-believe/03-test-set-first/notebook.ipynb → tests/test_cases_data.py
 - `run_agent()` --semantically_similar_to--> `run_agent()`  [INFERRED] [semantically similar]
-  1-measure-before-you-believe/08-agent-loop-from-scratch/notebook.ipynb → lab/agent.py
+  1-measure-before-you-believe/08-agent-loop-from-scratch/notebook.ipynb → lab/version_c3.py
+- `run_agent()` --semantically_similar_to--> `run_agent()`  [INFERRED] [semantically similar]
+  1-measure-before-you-believe/09-success-cost-latency/notebook.ipynb → lab/version_c3.py
 
 ## Import Cycles
 - None detected.
@@ -391,6 +391,8 @@ Nodes (5): KnowledgeArticle and PolicyRule IRIs (documentedIn, enforcesRule), Co
   1-measure-before-you-believe/11-recommendation-first-draft/day11-adr.drawio · relation: conceptually_related_to
 - `ADR-001: How Acme Fibre should answer customer emails` → `Pitch claim: drafts cut handle time 40-60% in Phase 1`  [AMBIGUOUS]
   1-measure-before-you-believe/11-recommendation-first-draft/pitch.md · relation: conceptually_related_to
+- `ADR-001 evidence table (day 9 runs)` → `Pitch claim: Option A missed 40 of 40 (0% safety)`  [AMBIGUOUS]
+  1-measure-before-you-believe/11-recommendation-first-draft/pitch.md · relation: conceptually_related_to
 - `Build a workflow, not an agent: B + safety router + policy verifier` → `Pitch claim: deterministic workflow topology with hard guarantees`  [AMBIGUOUS]
   1-measure-before-you-believe/11-recommendation-first-draft/pitch.md · relation: conceptually_related_to
 - `Build a workflow, not an agent: B + safety router + policy verifier` → `Phased rollout: shadow mode, then automated egress per intent`  [AMBIGUOUS]
@@ -399,13 +401,11 @@ Nodes (5): KnowledgeArticle and PolicyRule IRIs (documentedIn, enforcesRule), Co
   1-measure-before-you-believe/12-article/article.md · relation: conceptually_related_to
 - `Pitch claim: drafts cut handle time 40-60% in Phase 1` → `Phased rollout: shadow mode, then automated egress per intent`  [AMBIGUOUS]
   1-measure-before-you-believe/11-recommendation-first-draft/presentation.md · relation: conceptually_related_to
-- `ADR-001 evidence table (day 9 runs)` → `Pitch claim: Option A missed 40 of 40 (0% safety)`  [AMBIGUOUS]
-  1-measure-before-you-believe/11-recommendation-first-draft/pitch.md · relation: conceptually_related_to
 - `Cost is not the issue (B ≈ ₹1.60/day, C ≈ ₹10/day)` → `Pitch claim: agent fails unit economics`  [AMBIGUOUS]
   1-measure-before-you-believe/11-recommendation-first-draft/pitch.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **28 isolated node(s):** `fde-first-principles`, `Fixed monthly costs spread over all emails`, `Costs hidden inside today's estimate`, `Latency not counted (tool time, network, queues, cold start)`, `Per-email costs beyond tokens` (+23 more)
+- **28 isolated node(s):** `fde-first-principles`, `KB03 · Payment methods`, `KB13 · Router and Wi-Fi password`, `Fixed monthly costs spread over all emails`, `Costs hidden inside today's estimate` (+23 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 304 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -413,10 +413,10 @@ Nodes (5): KnowledgeArticle and PolicyRule IRIs (documentedIn, enforcesRule), Co
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `server()` connect `Review Studio server` to `load_customers`, `evals.py`, `define`, `ontology.py`, `app.py`, `Studio UI cards`, `Studio workflow and demo runs`, `Studio scoring rounds`, `Studio review flow and verdicts`, `Studio workbook import and lab`, `Expert reviews data and errors are fixed`, `Safety router`, `ReviewStore`, `validate_ontology_ops`?**
-  _High betweenness centrality (0.100) - this node is a cross-community bridge._
+  _High betweenness centrality (0.106) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `server()` (e.g. with `.all()` and `Expert reviews data and errors are fixed`) actually correct?**
   _`server()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `fde-first-principles`, `Fixed monthly costs spread over all emails`, `Costs hidden inside today's estimate` to the rest of the system?**
+- **What connects `fde-first-principles`, `KB03 · Payment methods`, `KB13 · Router and Wi-Fi password` to the rest of the system?**
   _28 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `chat` be split into smaller, more focused modules?**
   _Cohesion score 0.14035087719298245 - nodes in this community are weakly interconnected._
