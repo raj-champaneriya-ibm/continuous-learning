@@ -1,0 +1,9 @@
+name: offline-direct
+label: 1.0.0
+implementation: custom
+adapter: offline
+inputs: [customer_id, message, portal, history]
+config:
+  provider: offline
+  model: rules
+  timeout_s: 180

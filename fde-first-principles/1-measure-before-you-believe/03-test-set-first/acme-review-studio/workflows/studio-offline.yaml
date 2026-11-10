@@ -1,0 +1,10 @@
+name: studio-offline
+label: 1.0.0
+implementation: orchestrated
+adapter: studio-langgraph
+inputs: [customer_id, message, portal, history]
+config:
+  provider: offline
+  model: rules
+  temperature: 0.0
+  timeout_s: 180

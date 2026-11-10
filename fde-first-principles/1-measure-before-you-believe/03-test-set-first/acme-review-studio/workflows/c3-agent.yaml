@@ -1,0 +1,11 @@
+name: c3-agent
+label: 1.0.0
+implementation: agent_loop
+adapter: lab-c3
+inputs: [customer_id, message, history]
+config:
+  provider: c3
+  model: anthropic:glm-5.3-flash
+  temperature: 0.0
+  max_steps: 6
+  timeout_s: 180
