@@ -17,13 +17,13 @@ single-customer subgraphs at request time.
 from __future__ import annotations
 
 import re
-from functools import lru_cache
+from functools import lru_cache, wraps
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
 from pyoxigraph import Literal, NamedNode, Quad, RdfFormat, Store
 
-from .acme import DATA, RECORD_DATE, kb_by_id, load_customers, load_outages, outage_for
+from .acme import DATA, RECORD_DATE, data_root, kb_by_id, load_customers, load_outages, outage_for
 from .business_rules import (
     duplicate_payment_amount,
     load_business_rules,
@@ -232,18 +232,32 @@ def reason_owl_rl(store: Store, max_iterations: int = 10) -> int:
     return len(store) - initial_count
 
 
-@lru_cache(maxsize=1)
+def _data_cache(fn):
+    @lru_cache(maxsize=32)
+    def cached(path: Path, modified_ns: int):
+        return fn()
+
+    @wraps(fn)
+    def get():
+        path = data_root() / "ontology.ttl"
+        return cached(path, path.stat().st_mtime_ns)
+
+    get.cache_clear = cached.cache_clear
+    return get
+
+
+@_data_cache
 def _store() -> Store:
     store = Store()
-    store.load(path=str(ONTOLOGY), format=RdfFormat.TURTLE)
+    store.load(path=str(data_root() / "ontology.ttl"), format=RdfFormat.TURTLE)
     reason_owl_rl(store)
     return store
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def _asserted_store() -> Store:
     store = Store()
-    store.load(path=str(ONTOLOGY), format=RdfFormat.TURTLE)
+    store.load(path=str(data_root() / "ontology.ttl"), format=RdfFormat.TURTLE)
     return store
 
 
@@ -263,7 +277,7 @@ def _int_value(term) -> Optional[int]:
     return int(term.value)
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def _edge_metadata() -> Dict[str, Dict[str, Any]]:
     meta: Dict[str, Dict[str, Any]] = {}
     for row in _store().query(EDGES_QUERY):
@@ -290,7 +304,7 @@ def _edge_metadata() -> Dict[str, Dict[str, Any]]:
     return meta
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def terms() -> Dict[str, Dict[str, Any]]:
     """Every defined class term by its canonical English label, enriched with reasoned edges."""
     edges = _edge_metadata()
@@ -314,7 +328,7 @@ def terms() -> Dict[str, Dict[str, Any]]:
     return out
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def _alias_index() -> Dict[str, str]:
     """O(1) casefolded lookup from any English or regional label to its canonical English term."""
     return {row["name"].value.strip().casefold(): row["label"].value for row in _store().query(LABELS)}
@@ -348,7 +362,7 @@ def define(word: str) -> Optional[Dict[str, Any]]:
     return terms().get(canonical) if canonical else None
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def plans() -> Dict[str, Dict[str, Any]]:
     """Broadband plan catalog queried from the ontology (`Basic`, `Plus`, `Pro`)."""
     out: Dict[str, Dict[str, Any]] = {}
@@ -363,7 +377,7 @@ def plans() -> Dict[str, Dict[str, Any]]:
     return out
 
 
-@lru_cache(maxsize=1)
+@_data_cache
 def pune_service_areas() -> List[str]:
     """The eight Pune neighbourhoods served by Acme Fibre (queried from `acme:PuneServiceArea`)."""
     return [row["name"].value for row in _store().query(AREAS_QUERY)]
@@ -463,7 +477,7 @@ def concept_provenance(word_or_term: str) -> Optional[List[Dict[str, str]]]:
 
 def policy_rules() -> Dict[int, str]:
     """Read numbered customer policy statements from policy.md."""
-    text = (DATA / "policy.md").read_text(encoding="utf-8")
+    text = (data_root() / "policy.md").read_text(encoding="utf-8")
     return {
         int(number): " ".join(body.split())
         for number, body in re.findall(

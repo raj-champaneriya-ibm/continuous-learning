@@ -227,10 +227,17 @@ class C3Provider:
     name = "c3"
     label = "C3 ontology agent"
 
-    def __init__(self, model: str | None = None, lab_root: Path | None = None, runner=None):
+    def __init__(self, model: str | None = None, lab_root: Path | None = None, runner=None,
+                 data_root: Path | None = None, temperature: float = 0.0, max_steps: int = 6,
+                 timeout: float = 180, persist_cache: bool = True):
         self.model = model or os.environ.get("ACME_C3_MODEL") or C3_DEFAULT_MODEL
         self.lab_root = Path(lab_root or os.environ.get("ACME_LAB_ROOT") or LAB_ROOT)
-        self._runner = runner      # tests pass a stand-in for lab.version_c3.version_c3
+        self.data_root = Path(data_root) if data_root else None
+        self.temperature, self.max_steps = temperature, max_steps
+        self.timeout = timeout
+        self.persist_cache = persist_cache
+        self._runner = runner
+        self._native = runner is None
         self._llm = None
 
     def _load(self):
@@ -238,10 +245,8 @@ class C3Provider:
             if str(self.lab_root) not in sys.path:
                 sys.path.append(str(self.lab_root))   # appended: the studio's own modules win any name clash
             from lab import llm
-            from lab.version_c3 import version_c3
-            self._llm, self._runner = llm, version_c3
-        if self._llm is not None:
-            self._llm.use(self.model)
+            from lab.version_c3 import run_agent
+            self._llm, self._runner = llm, run_agent
         return self._runner
 
     def status(self) -> tuple[bool, str]:
@@ -268,7 +273,22 @@ class C3Provider:
             return _result(error="C3 needs a customer id, and this email has none.")
         started = time.time()
         try:
-            row = self._load()(case)
+            runner = self._load()
+            if self._native:
+                from lab.acme import use_data_root
+                from lab.version_c3 import build_decision_envelope
+                with use_data_root(self.data_root or self.lab_root / "data" / "acme"):
+                    envelope = build_decision_envelope(case)
+                    output, turns = runner(case, temperature=self.temperature, run=ctx.get("sample", 0),
+                                           model=self.model, max_steps=self.max_steps, envelope=envelope,
+                                           timeout=self.timeout, persist_cache=self.persist_cache)
+                row = {**output, "envelope": envelope, "turns": turns, "steps": len(turns),
+                       "tool_calls": [{"step": turn["step"], "name": call[0], "args": call[1], "result": call[2]}
+                                      for turn in turns for call in turn["tool_calls"]],
+                       "tokens_in": sum(turn["tokens_in"] for turn in turns),
+                       "tokens_out": sum(turn["tokens_out"] for turn in turns)}
+            else:
+                row = runner(case)
         except Exception as exc:  # noqa: BLE001 - an API limit or a lab error becomes a model error in step 5
             return _result(error=f"C3 failed: {exc}"[:400], latency=time.time() - started)
         return _result(output=c3_output(row, ctx.get("outage")), latency=time.time() - started,

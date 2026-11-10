@@ -1,0 +1,15 @@
+name: studio-c3
+label: 1.0.0
+implementation: orchestrated
+adapter: studio-langgraph
+inputs: [customer_id, message, portal, history]
+config:
+  timeout_s: 180
+slots:
+  draft:
+    implementation: agent_loop
+    adapter: lab-c3
+    model:
+      id: anthropic:glm-5.3-flash
+      temperature: 0.0
+      max_steps: 6

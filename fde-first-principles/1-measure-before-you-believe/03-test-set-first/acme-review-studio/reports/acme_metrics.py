@@ -29,6 +29,8 @@ if str(ROOT) not in sys.path:
 
 from acme.checks import eval_checks  # noqa: E402
 from acme.lab import INTENTS, load_lab  # noqa: E402
+from acme.sim.versions import label_hash  # noqa: E402
+from acme.store import ReviewStore  # noqa: E402
 
 WORKBOOK = Path(os.environ.get("ACME_XLSX", ROOT / "data" / "Acme_Fibre_Grounded_Draft_Eval.xlsx"))
 RUNS = Path(os.environ.get("ACME_RUNS", ROOT / "runs" / "reviews.json"))
@@ -114,6 +116,8 @@ class Evidence:
     workbook: Path
     runs: Path
     demo: bool
+    version: str | None = None
+    versions: list[str] = field(default_factory=list)
     thresholds: dict = field(default_factory=load_thresholds)
 
     # --- denominators -------------------------------------------------
@@ -241,17 +245,18 @@ class Evidence:
              ra.n > 0 and len(self.missed()) <= g["missed_escalations"]),
             ("Unsafe auto-sends", f"≤ {g['unsafe_auto_sends']}", str(len(self.unsafe_sends())) if ra.n else "—",
              ra.n > 0 and len(self.unsafe_sends()) <= g["unsafe_auto_sends"]),
-            ("Cases run in this round", f"= {len(self.frame)}", str(ra.n), ra.n == len(self.frame)),
+            ("Cases run in this version", f"= {len(self.frame)}", str(ra.n), ra.n == len(self.frame)),
         ]
         return pd.DataFrame(rows, columns=["gate", "target", "actual", "met"])
 
     def provenance(self) -> dict:
         r = self.run
         models = sorted({f"{p} {m}".strip() for p, m in zip(r.provider.fillna(""), r.model.fillna("")) if p})
-        return {"round": self.round, "rounds in file": ", ".join(map(str, self.rounds)) or "none",
+        return {"version": self.version, "versions in file": ", ".join(self.versions) or "none",
+                "round": self.round, "rounds in file": ", ".join(map(str, self.rounds)) or "none",
                 "drafting model": ", ".join(models) or "—", "workbook": self.workbook.name,
-                "workbook sha256": sha256(self.workbook)[:16], "runs file": str(self.runs.name),
-                "runs sha256": sha256(self.runs)[:16], "demo data": "yes" if self.demo else "no"}
+                "workbook sha256": sha256(self.workbook), "runs file": str(self.runs.name),
+                "runs sha256": sha256(self.runs), "demo data": "yes" if self.demo else "no"}
 
 
 def build_frame(lab, records: dict[str, dict]) -> pd.DataFrame:
@@ -279,20 +284,37 @@ def build_frame(lab, records: dict[str, dict]) -> pd.DataFrame:
             "all_flags": [f["check"] for f in flags],
             "provider": rec.get("provider"), "model": rec.get("model"), "latency_s": rec.get("latency_s"),
             "cost_usd": rec.get("cost_usd"), "error": rec.get("error"),
+            "stale_label": bool(rec.get("label_hash") and rec["label_hash"] != label_hash(case)),
         })
     return pd.DataFrame(rows)
 
 
-def load(review_round: int | None = None) -> Evidence:
-    """Load the workbook and the saved runs for one round (default: the latest round in the file)."""
+def load(review_round: int | None = None, *, version: str | None = None) -> Evidence:
+    """Load one version; review_round remains an alias for old reports and saved rounds."""
     lab = load_lab(WORKBOOK)
     raw = json.loads(RUNS.read_text(encoding="utf-8")) if RUNS.exists() else {}
-    rounds = sorted({int(v["round"]) for v in raw.values()})
-    rnd = int(review_round) if review_round else (rounds[-1] if rounds else None)
-    records = {v["case_id"]: v for v in raw.values() if rnd is not None and int(v["round"]) == rnd}
+    entries = [(ReviewStore._record_version(key, record), record) for key, record in raw.items()]
+    versions = sorted({version_id for version_id, _ in entries})
+    rounds = sorted({int(record["round"]) for _, record in entries if record.get("round")})
+    rnd = None if version else (int(review_round) if review_round else (rounds[-1] if rounds else None))
+    if version:
+        selected = ReviewStore.version_id(version)
+        if selected not in versions:
+            raise ValueError(f"No reviews found for version {selected!r}")
+    elif rnd is not None:
+        matches = {version_id for version_id, record in entries if int(record.get("round") or 0) == rnd}
+        if len(matches) > 1:
+            raise ValueError(f"Round {rnd} identifies multiple versions; select a version explicitly")
+        selected = next(iter(matches), None)
+    else:
+        selected = entries[-1][0] if entries else None
+    records = {record["case_id"]: record for version_id, record in entries if version_id == selected}
+    selected_rounds = {int(record["round"]) for record in records.values() if record.get("round")}
+    if version and len(selected_rounds) == 1:
+        rnd = next(iter(selected_rounds))
     demo = any(v.get("verdict_source") == "demo-auto" for v in records.values())
     return Evidence(lab=lab, frame=build_frame(lab, records), round=rnd, rounds=rounds, workbook=WORKBOOK,
-                    runs=RUNS, demo=demo)
+                    runs=RUNS, demo=demo, version=selected, versions=versions)
 
 
 # ------------------------------------------------------------------ workbook-only views (dataset card)
@@ -338,19 +360,29 @@ def html_table(df: pd.DataFrame, columns: dict[str, str] | None = None, escape: 
                       classes="table table-sm table-hover compact")
 
 
-def banner(ev: "Evidence") -> str:
+def provenance_table(ev: "Evidence", extra: dict | None = None) -> str:
+    provenance = {**ev.provenance(), **(extra or {})}
+    table = html_table(pd.DataFrame({"input": list(provenance), "value": list(provenance.values())}))
+    return f'<div class="provenance">{table}</div>'
+
+
+def banner(ev: "Evidence", *, include_progress: bool = True) -> str:
     """Markdown callouts explaining what the data can and can't say. Print with `output: asis`."""
     out = []
     if ev.demo:
         out.append("::: {.callout-warning}\n## Demo data\nDrafts come from the offline stand-in and verdicts were "
                    "derived from the automatic checks, not from an expert. Use this to preview the report, "
                    "never as evidence.\n:::")
-    if ev.round is None:
+    if include_progress and ev.version is None:
         out.append("::: {.callout-note}\n## No runs yet\nRun cases in Acme Review Studio, review them, then render "
                    "again. The numbers below fill in as runs and verdicts are saved.\n:::")
-    elif len(ev.run) < len(ev.frame) or len(ev.reviewed) < len(ev.frame):
-        out.append(f"::: {{.callout-note}}\n## Partial round\n{len(ev.run)} of {len(ev.frame)} cases have been run "
+    elif include_progress and (len(ev.run) < len(ev.frame) or len(ev.reviewed) < len(ev.frame)):
+        out.append(f"::: {{.callout-note}}\n## Partial version\n{len(ev.run)} of {len(ev.frame)} cases have been run "
                    f"and {len(ev.reviewed)} reviewed. Every rate shows its denominator; read small ones with care.\n:::")
+    stale = int(ev.frame.stale_label.sum())
+    if stale:
+        out.append(f"::: {{.callout-warning}}\n## Earlier labels\n{stale} saved runs were graded against earlier "
+                   "labels. Current report checks use the current workbook labels.\n:::")
     return "\n\n".join(out)
 
 

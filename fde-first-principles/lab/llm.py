@@ -102,7 +102,8 @@ def _key(payload: Dict[str, Any]) -> str:
 
 def chat(messages: List[Dict[str, Any]], *, model: Optional[str] = None, temperature: float = 0.0,
          seed: Optional[int] = None, tools: Optional[List[Dict]] = None, schema: Optional[Dict] = None,
-         think: Optional[bool] = None, run: int = 0, use_cache: bool = True) -> Dict[str, Any]:
+         think: Optional[bool] = None, run: int = 0, use_cache: bool = True,
+         timeout: Optional[float] = None, write_cache: bool = True) -> Dict[str, Any]:
     """One chat call. Returns a dict with:
     content, tool_calls, message (the raw assistant message), tokens_in, tokens_out,
     seconds (of the original call, even when cached) and cached (True/False)."""
@@ -111,10 +112,10 @@ def chat(messages: List[Dict[str, Any]], *, model: Optional[str] = None, tempera
         if schema is not None:
             raise RuntimeError("The anthropic: route does not support json schemas (tools and plain calls only).")
         return _chat_anthropic(messages, model=model, temperature=temperature, tools=tools,
-                               run=run, use_cache=use_cache)
+                               run=run, use_cache=use_cache, timeout=timeout, write_cache=write_cache)
     if model.startswith(API_PREFIX):
         return _chat_api(messages, model=model, temperature=temperature, seed=seed, tools=tools, schema=schema,
-                         run=run, use_cache=use_cache)
+                         run=run, use_cache=use_cache, timeout=timeout, write_cache=write_cache)
     body: Dict[str, Any] = {"model": model, "messages": messages, "stream": False,
                             "options": {"temperature": temperature}}
     if seed is not None:
@@ -131,7 +132,7 @@ def chat(messages: List[Dict[str, Any]], *, model: Optional[str] = None, tempera
     if use_cache and key in _load("chat"):
         return dict(_load("chat")[key], cached=True)
     started = time.perf_counter()
-    response = requests.post(f"{OLLAMA}/api/chat", json=body, timeout=600)
+    response = requests.post(f"{OLLAMA}/api/chat", json=body, timeout=timeout if timeout is not None else 600)
     response.raise_for_status()
     data = response.json()
     message = data.get("message") or {}
@@ -144,7 +145,8 @@ def chat(messages: List[Dict[str, Any]], *, model: Optional[str] = None, tempera
         "seconds": round(time.perf_counter() - started, 3),
         "model": model,
     }
-    _store("chat", key, result)
+    if write_cache:
+        _store("chat", key, result)
     return dict(result, cached=False)
 
 
@@ -182,7 +184,7 @@ def _to_openai(messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return out
 
 
-def _post_api(url: str, body: Dict[str, Any]) -> Dict[str, Any]:
+def _post_api(url: str, body: Dict[str, Any], *, timeout: Optional[float] = None) -> Dict[str, Any]:
     """POST with a retry on rate limits and server errors, and a fallback when JSON schemas are not supported."""
     headers = {"Authorization": f"Bearer {_env('LLM_API_KEY') or 'none'}"}
     for attempt in range(4):
@@ -190,7 +192,7 @@ def _post_api(url: str, body: Dict[str, Any]) -> Dict[str, Any]:
             raise RuntimeError(f"API call limit reached ({API_CALL_LIMIT} requests). If your estimate allows more, "
                                f"raise llm.API_CALL_LIMIT; if not, something is looping.")
         _api_usage["calls"] += 1
-        response = requests.post(url, json=body, headers=headers, timeout=300)
+        response = requests.post(url, json=body, headers=headers, timeout=timeout if timeout is not None else 300)
         if response.status_code in (429, 500, 502, 503, 504) and attempt < 3:
             time.sleep(2 * (attempt + 1) ** 2)
             continue
@@ -206,7 +208,8 @@ def _post_api(url: str, body: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _chat_api(messages: List[Dict[str, Any]], *, model: str, temperature: float, seed: Optional[int],
-              tools: Optional[List[Dict]], schema: Optional[Dict], run: int, use_cache: bool) -> Dict[str, Any]:
+              tools: Optional[List[Dict]], schema: Optional[Dict], run: int, use_cache: bool,
+              timeout: Optional[float], write_cache: bool) -> Dict[str, Any]:
     base = _env("LLM_BASE_URL").rstrip("/")
     if not base:
         raise RuntimeError("Set LLM_BASE_URL (and LLM_API_KEY) in .env in your fde-first-principles folder. "
@@ -223,7 +226,7 @@ def _chat_api(messages: List[Dict[str, Any]], *, model: str, temperature: float,
     if use_cache and key in _load("chat"):
         return dict(_load("chat")[key], cached=True)
     started = time.perf_counter()
-    data = _post_api(f"{base}/chat/completions", body)
+    data = _post_api(f"{base}/chat/completions", body, timeout=timeout)
     reply = (data.get("choices") or [{}])[0].get("message") or {}
     calls = []
     for call in reply.get("tool_calls") or []:
@@ -249,7 +252,8 @@ def _chat_api(messages: List[Dict[str, Any]], *, model: str, temperature: float,
     }
     _api_usage["tokens_in"] += result["tokens_in"]
     _api_usage["tokens_out"] += result["tokens_out"]
-    _store("chat", key, result)
+    if write_cache:
+        _store("chat", key, result)
     return dict(result, cached=False)
 
 
@@ -293,7 +297,8 @@ def _to_anthropic(messages: List[Dict[str, Any]]) -> tuple:
 
 
 def _chat_anthropic(messages: List[Dict[str, Any]], *, model: str, temperature: float,
-                    tools: Optional[List[Dict]], run: int, use_cache: bool) -> Dict[str, Any]:
+                    tools: Optional[List[Dict]], run: int, use_cache: bool,
+                    timeout: Optional[float], write_cache: bool) -> Dict[str, Any]:
     """One chat call through an Anthropic-format /v1/messages endpoint (e.g. z.ai's anthropic route).
     Supports plain messages and tool calls; no json schemas, no seed."""
     base = (_env("LLM_ANTHROPIC_BASE") or "https://api.z.ai/api/anthropic").rstrip("/")
@@ -318,7 +323,8 @@ def _chat_anthropic(messages: List[Dict[str, Any]], *, model: str, temperature: 
             raise RuntimeError(f"API call limit reached ({API_CALL_LIMIT} requests). Something may be looping.")
         _api_usage["calls"] += 1
         try:
-            response = requests.post(f"{base}/v1/messages", json=body, headers=headers, timeout=300)
+            response = requests.post(f"{base}/v1/messages", json=body, headers=headers,
+                                     timeout=timeout if timeout is not None else 300)
         except requests.RequestException as e:  # dropped connections are routine on long runs: retry
             if attempt == 3:
                 raise RuntimeError(f"{base} unreachable after retries: {e}") from e
@@ -354,7 +360,8 @@ def _chat_anthropic(messages: List[Dict[str, Any]], *, model: str, temperature: 
     }
     _api_usage["tokens_in"] += result["tokens_in"]
     _api_usage["tokens_out"] += result["tokens_out"]
-    _store("chat", key_hash, result)
+    if write_cache:
+        _store("chat", key_hash, result)
     return dict(result, cached=False)
 
 

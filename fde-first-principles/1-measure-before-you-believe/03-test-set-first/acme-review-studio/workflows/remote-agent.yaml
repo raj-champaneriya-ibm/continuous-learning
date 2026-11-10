@@ -1,0 +1,12 @@
+name: remote-agent
+label: 0.1.0
+implementation: api
+adapter: http-json
+inputs: [customer_id, message, history]
+config:
+  provider: http-json
+  model: remote
+  endpoint: https://agent.example.com/acme/draft
+  auth: env:ACME_REMOTE_AGENT_TOKEN
+  output_schema: draft-v1
+  timeout_s: 60

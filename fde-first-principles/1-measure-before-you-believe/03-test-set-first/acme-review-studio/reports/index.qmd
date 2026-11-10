@@ -5,12 +5,18 @@ toc: false
 ---
 
 ```{python}
+#| tags: [parameters]
+version = ""
+review_round = 0
+```
+
+```{python}
 #| include: false
 from IPython.display import HTML, display
 
 import acme_metrics as m
 
-ev = m.load()
+ev = m.load(review_round or None, version=version or None)
 ```
 
 ```{python}
@@ -20,7 +26,7 @@ print(m.banner(ev))
 
 ```{python}
 display(HTML(m.tiles([
-    ("Round", str(ev.round or "—"), f"rounds in file: {', '.join(map(str, ev.rounds)) or 'none'}"),
+    ("Version", str(ev.version or "—"), f"versions in file: {len(ev.versions)}"),
     ("Cases run", f"{len(ev.run)}/{len(ev.frame)}", "with a workflow decision"),
     ("Reviewed", f"{len(ev.reviewed)}/{len(ev.frame)}", "Pass or Fail from the expert"),
     ("Drafting model", ev.provenance()["drafting model"], "from the saved runs"),
@@ -35,11 +41,17 @@ display(HTML(m.tiles([
 
 : {tbl-colwidths="[22,53,25]"}
 
+## Input provenance
+
+```{python}
+display(HTML(m.provenance_table(ev)))
+```
+
 **Refreshing.** These pages only read files. After reviewing in the Studio, re-render from `acme-review-studio/`:
 
 ```bash
 quarto render reports                                  # whole site → reports/_site/
-quarto render reports/evaluation-report.qmd -P review_round:2
+quarto render reports/evaluation-report.qmd -P version:legacy-round-1  # replace with your version id
 ```
 
 The definitions live in one place, `reports/acme_metrics.py`, and the release gates and error costs in `reports/thresholds.yml`.

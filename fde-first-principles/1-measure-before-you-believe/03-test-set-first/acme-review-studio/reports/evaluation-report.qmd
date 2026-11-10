@@ -7,7 +7,8 @@ date: today
 
 ```{python}
 #| tags: [parameters]
-review_round = 0          # 0 = the latest round in the runs file; render another with -P review_round:2
+version = ""              # empty = latest saved version
+review_round = 0          # legacy round alias; ignored when version is supplied
 ```
 
 ```{python}
@@ -18,7 +19,7 @@ from IPython.display import HTML, display
 
 import acme_metrics as m
 
-ev = m.load(review_round or None)
+ev = m.load(review_round or None, version=version or None)
 pr, ra, esc = ev.pass_rate(), ev.routing_accuracy(), ev.escalation_rate()
 missed, unsafe, unneeded, saves = ev.missed(), ev.unsafe_sends(), ev.unneeded(), ev.code_saves()
 gates = ev.thresholds["gates"]
@@ -36,7 +37,7 @@ print(m.banner(ev))
 
 ## Summary
 
-Round **`{python} ev.round or "—"`** · `{python} len(ev.run)` of `{python} len(ev.frame)` cases run · `{python} len(ev.reviewed)` reviewed by the domain expert · drafted by `{python} ev.provenance()["drafting model"]`.
+Version **`{python} ev.version or "—"`** · `{python} len(ev.run)` of `{python} len(ev.frame)` cases run · `{python} len(ev.reviewed)` reviewed by the domain expert · drafted by `{python} ev.provenance()["drafting model"]`.
 
 ```{python}
 show(m.tiles([
@@ -152,7 +153,7 @@ if len(unsafe):
 
 ## What the errors cost
 
-Each error type is weighted by a placeholder cost from `thresholds.yml`, so one missed escalation isn't counted the same as one unneeded escalation. *Per 1,000 emails* assumes production looks like this test set, which it doesn't: the set is balanced 50/50 on escalation on purpose. Use the column to compare rounds, not to forecast.
+Each error type is weighted by a placeholder cost from `thresholds.yml`, so one missed escalation isn't counted the same as one unneeded escalation. *Per 1,000 emails* assumes production has the same mix as this test set; real traffic may differ. Use the column to compare versions, not to forecast.
 
 ```{python}
 c = ev.error_cost()
@@ -191,7 +192,7 @@ show(html or '<p class="muted">No verdicts with critiques yet.</p>')
 
 ## Method and provenance
 
-- **Expert pass rate**: Pass verdicts ÷ cases with a Pass or Fail verdict in this round.
+- **Expert pass rate**: Pass verdicts ÷ cases with a Pass or Fail verdict in this version.
 - **Routing accuracy**: cases where the workflow's decision (human or send) matches the label ÷ cases run in the app.
 - **Missed escalation**: labelled *should go to a human*, sent automatically. **Unneeded escalation**: the reverse.
 - **Unsafe auto-send**: sent automatically with a must-not phrase from the case, or a blocking step-6 flag.
@@ -199,11 +200,11 @@ show(html or '<p class="muted">No verdicts with critiques yet.</p>')
 - Drafts imported from the workbook without a workflow run count as reviewed but not as run.
 
 ```{python}
-p = ev.provenance()
-show(m.html_table(pd.DataFrame({"input": list(p), "value": list(p.values())})))
-repro = f"quarto render reports/evaluation-report.qmd -P review_round:{ev.round or 1}"
+show(m.provenance_table(ev))
+repro = f"quarto render reports/evaluation-report.qmd -P version:{ev.version}" if ev.version else \
+    "quarto render reports/evaluation-report.qmd"
 show(f'<p>To reproduce, run from <code>acme-review-studio/</code> against the same workbook and runs file: '
-     f'<code>{repro}</code>. The hashes above show whether those inputs have changed since.</p>')
+     f'<code>{m.esc(repro)}</code>. The hashes above show whether those inputs have changed since.</p>')
 ```
 
 

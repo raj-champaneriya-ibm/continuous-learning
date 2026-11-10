@@ -24,4 +24,5 @@ $border-radius: 8px;
 .muted { color: #5B6B80; font-size: .85rem; }
 table.compact { font-size: .88rem; }
 table.compact td, table.compact th { padding: .3rem .5rem; }
+.provenance td { overflow-wrap: anywhere; }
 .chip { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .78rem; background: #EEF5FC; color: #1F3A5F; border: 1px solid #dbe6f3; margin: 0 4px 4px 0; }

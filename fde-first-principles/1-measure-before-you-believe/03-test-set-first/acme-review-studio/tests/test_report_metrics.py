@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
+from acme.store import ReviewStore
 
 sys.path.insert(0, str(Path(__file__).parents[1] / "reports"))
 import acme_metrics as m  # noqa: E402
@@ -143,3 +144,61 @@ def no_gate(ev):
     gates = ev.gates()
     assert not gates.met.any()
     assert (gates.set_index("gate").loc["Expert pass rate (lower end of 95% CI)", "actual"]) == "—"
+
+
+def test_reports_select_versions_and_keep_the_round_alias(runs):
+    store = ReviewStore(runs["path"])
+    store.save_run("legacy-round-1", "c02", {"decision": "send", "reply": "Earlier draft"})
+    store.save_run("abcdef123456", "c02", {"decision": "escalate", "reply": "New draft",
+                                            "label_hash": "an-earlier-label"})
+    selected = m.load(1, version="abcdef123456")
+    assert selected.version == "abcdef123456" and selected.round == 2
+    assert selected.run.iloc[0]["reply"] == "New draft"
+    assert "## Earlier labels" in m.banner(selected)
+    assert m.load(1).version == "legacy-round-1"
+    assert m.load(2).version == "abcdef123456"
+    assert m.load().version == "abcdef123456"
+    with pytest.raises(ValueError, match="No reviews found"):
+        m.load(version="missing")
+
+
+def test_ambiguous_round_requires_an_explicit_version(runs):
+    runs["path"].write_text(json.dumps({
+        "first:c02": {"version_id": "first", "round": 1, "case_id": "c02"},
+        "second:c02": {"version_id": "second", "round": 1, "case_id": "c02"},
+    }), encoding="utf-8")
+    with pytest.raises(ValueError, match="multiple versions"):
+        m.load(1)
+    assert m.load(version="second").version == "second"
+
+
+def test_provenance_uses_full_hashes_and_escapes_values(runs):
+    store = ReviewStore(runs["path"])
+    store.save_run("sample-v2", "c02", {"decision": "send", "provider": "scripted",
+                                         "model": "<script>alert(1)</script>"})
+    ev = m.load(version="sample-v2")
+    provenance = ev.provenance()
+    assert provenance["workbook sha256"] == m.sha256(m.WORKBOOK)
+    assert provenance["runs sha256"] == m.sha256(runs["path"])
+    assert len(provenance["workbook sha256"]) == len(provenance["runs sha256"]) == 64
+    table = m.provenance_table(ev, {"cases": 1})
+    assert provenance["workbook sha256"] in table and provenance["runs sha256"] in table
+    assert "&lt;script&gt;" in table and "<script>" not in table
+
+
+def test_dataset_banner_omits_run_progress_but_keeps_warnings(runs):
+    store = ReviewStore(runs["path"])
+    store.save_run("sample-v2", "c02", {"decision": "send", "label_hash": "earlier"})
+    store.save_review("sample-v2", "c02", verdict="Pass", verdict_source="demo-auto")
+    ev = m.load(version="sample-v2")
+    assert "## Partial version" in m.banner(ev)
+    banner = m.banner(ev, include_progress=False)
+    assert "## Partial version" not in banner
+    assert "## Demo data" in banner and "## Earlier labels" in banner
+
+
+@pytest.mark.parametrize("page", ["index", "evaluation-report", "dataset-card", "review-dashboard"])
+def test_report_pages_show_warnings_and_provenance(page):
+    text = (Path(__file__).parents[1] / "reports" / f"{page}.qmd").read_text(encoding="utf-8")
+    assert "m.banner(ev" in text
+    assert "m.provenance_table(ev" in text

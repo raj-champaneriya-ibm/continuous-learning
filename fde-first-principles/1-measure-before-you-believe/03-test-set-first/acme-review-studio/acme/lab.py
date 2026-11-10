@@ -128,12 +128,14 @@ def load_lab(path: str | Path) -> Lab:
 def read_review_log(path: str | Path) -> list[dict]:
     """Reviews already typed into the workbook (e.g. the c01 example row)."""
     ws = load_workbook(path)["Review_Log"]
+    version_column = next((i for i, cell in enumerate(ws[1]) if cell.value == "version_id"), None)
     out = []
     for row in ws.iter_rows(min_row=2, values_only=True):
         rnd, cid, draft, m_intent, m_nh, verdict, mode, critique, judge = (
             row[0], row[1], row[7], row[8], row[9], row[14], row[15], row[16], row[17])
         if cid and (draft or verdict):
-            out.append({"round": int(rnd or 1), "case_id": cid, "reply": draft, "model_intent": m_intent,
+            version_id = row[version_column] if version_column is not None and version_column < len(row) else None
+            out.append({"round": int(rnd or 1), "version_id": version_id, "case_id": cid, "reply": draft, "model_intent": m_intent,
                         "model_needs_human": None if m_nh in (None, "") else _bool(m_nh), "verdict": verdict, "failure_mode": mode,
                         "critique": critique, "judge_verdict": judge})
     return out
@@ -248,11 +250,20 @@ def export_to_excel(lab: Lab, reviews: list[dict], path: str | Path | None = Non
             _put(pk, r, 3, a["text"])
 
     rl = wb["Review_Log"]
-    where = {(rl.cell(row=r, column=1).value, rl.cell(row=r, column=2).value): r for r in range(2, rl.max_row + 1)}
+    version_col = next((cell.column for cell in rl[1] if cell.value == "version_id"), None)
+    if version_col is None:
+        version_col = rl.max_column + 1
+        _put(rl, 1, version_col, "version_id")
+    where = {(rl.cell(row=r, column=1).value, rl.cell(row=r, column=2).value,
+              rl.cell(row=r, column=version_col).value): r for r in range(2, rl.max_row + 1)}
     next_row = rl.max_row + 1
     for rev in reviews:
-        key = (int(rev["round"]), rev["case_id"])
+        version_id = rev.get("version_id") or f"legacy-round-{int(rev['round'])}"
+        legacy = version_id == f"legacy-round-{int(rev['round'])}"
+        key = (int(rev["round"]), rev["case_id"], version_id)
         r = where.get(key)
+        if r is None and legacy:
+            r = where.get((key[0], key[1], None))
         if r is None:
             r = next_row
             next_row += 1
@@ -260,6 +271,7 @@ def export_to_excel(lab: Lab, reviews: list[dict], path: str | Path | None = Non
             _put(rl, r, 2, key[1])
             for c, f in _review_row_formulas(r).items():
                 _put(rl, r, c, f)
+        _put(rl, r, version_col, version_id)
         if rev.get("reply") is not None:
             _put(rl, r, 8, rev.get("reply"))
             _put(rl, r, 9, rev.get("model_intent"))
