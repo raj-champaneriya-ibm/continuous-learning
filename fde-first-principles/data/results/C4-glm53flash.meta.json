@@ -1,0 +1,21 @@
+{
+  "version": "C4-glm53flash",
+  "saved_at": "2026-11-10T19:56:03",
+  "n": 256,
+  "cases_sha": "0bef56a28703",
+  "model": "anthropic:glm-5.3-flash",
+  "temperature": 0.0,
+  "files": [
+    "cases.jsonl",
+    "cases_abuse.jsonl",
+    "cases_multiturn.jsonl",
+    "cases_regional.jsonl"
+  ],
+  "n_total": 256,
+  "wall_seconds": 3111.3,
+  "api_usage": {
+    "calls": 140,
+    "tokens_in": 337569,
+    "tokens_out": 128456
+  }
+}
