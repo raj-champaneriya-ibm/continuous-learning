@@ -1,0 +1,23 @@
+name: studio-declarative
+label: 1.0.0
+implementation: declarative
+adapter: spec-langgraph
+inputs: [customer_id, message, portal, history]
+config:
+  provider: offline
+  model: rules
+  timeout_s: 180
+spec:
+  nodes: [receive, route, verify, fetch, draft, check, decide, human, send, log]
+  edges:
+    - [receive, route]
+    - [route, verify]
+    - [verify, fetch, {when: verified}]
+    - [verify, decide, {when: not_verified}]
+    - [fetch, draft]
+    - [draft, check]
+    - [check, decide]
+    - [decide, human, {when: escalate}]
+    - [decide, send, {when: send}]
+    - [human, send]
+    - [send, log]

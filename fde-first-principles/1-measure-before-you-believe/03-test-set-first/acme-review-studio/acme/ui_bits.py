@@ -197,6 +197,19 @@ body:has(#tab-nav-0.active)>.container-fluid{padding-left:0;padding-right:0}
 #tab-nav-4 .value-box-title{font-size:14px;min-height:2.5em}
 #tab-nav-4 .value-box-value{font-size:32px}
 @media(max-width:767px){#tab-nav-4 .card-body:has(#score_plot){overflow-x:auto}#score_plot{min-width:520px}#tab-nav-3,#tab-nav-4{padding:16px 4px}#tab-nav-3 .nav{gap:4px;flex-wrap:wrap}}
+.sim-topology{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.sim-span{display:flex;flex-direction:column;text-align:left;border:1px solid #c4cfdc;border-radius:8px;
+  padding:9px 12px;background:#edf1f6;color:inherit;min-width:120px;max-width:100%;font-size:12px}
+.sim-span span{font-size:11px;color:var(--muted)}
+.sim-span.selected{outline:2px solid var(--blue)}.sim-span:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.sim-span.st-error,.sim-span.st-stop{border-left:4px solid var(--red)}
+.sim-span.st-waiting,.sim-span.st-escalate,.sim-span.st-flag{border-left:4px solid var(--amber)}
+.sim-span.st-ok{border-left:4px solid var(--green)}
+.sim-tree ul{list-style:none;padding-left:18px;border-left:1px solid var(--line);margin:8px 0}
+.sim-tree li{margin:8px 0}.sim-compare pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:36em}
+.sim-comparison-views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sim-warning{border-left:4px solid var(--amber);background:#fdf3e1;padding:8px 12px;margin:8px 0}
+@media(max-width:767px){.sim-comparison-views{grid-template-columns:1fr}.sim-topology{flex-direction:column}}
 """
 
 JS = """

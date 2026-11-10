@@ -16,14 +16,19 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from .acme import DATA, RECORD_DATE
+from .acme import DATA, RECORD_DATE, data_root
 
 RULES_FILE = DATA / "business_rules.json"
 
 
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=32)
+def _rules_at(path: Path, modified_ns: int) -> Dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def _default_rules() -> Dict[str, Any]:
-    return json.loads(RULES_FILE.read_text(encoding="utf-8"))
+    path = data_root() / "business_rules.json"
+    return _rules_at(path, path.stat().st_mtime_ns)
 
 
 def load_business_rules(path: Optional[Path] = None,

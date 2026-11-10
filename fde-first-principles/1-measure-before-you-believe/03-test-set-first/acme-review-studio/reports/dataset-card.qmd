@@ -6,6 +6,12 @@ date: today
 ---
 
 ```{python}
+#| tags: [parameters]
+version = ""
+review_round = 0
+```
+
+```{python}
 #| include: false
 import pandas as pd
 import plotly.graph_objects as go
@@ -13,7 +19,7 @@ from IPython.display import HTML, display
 
 import acme_metrics as m
 
-ev = m.load()
+ev = m.load(review_round or None, version=version or None)
 f = ev.frame
 rules = m.workbook_sheet("Escalation_Rules")
 refs = m.workbook_sheet("Kaggle_Refs")
@@ -35,18 +41,23 @@ def split(col, order=None):
     return t
 ```
 
+```{python}
+#| output: asis
+print(m.banner(ev, include_progress=False))
+```
+
 ## At a glance
 
 ```{python}
 show(m.tiles([
     ("Cases", str(len(f)), f"{f.intent.nunique()} intents · {f.customer_id.nunique()} CRM customers"),
-    ("Should go to a human", f"{f.expected_human.mean():.0%}", f"{int(f.expected_human.sum())} of {len(f)}, balanced on purpose"),
+    ("Should go to a human", f"{f.expected_human.mean():.0%}", f"{int(f.expected_human.sum())} of {len(f)} cases"),
     ("Hinglish", str(int((f.language == 'Hinglish').sum())), "on both sides of the label"),
     ("Escalations on proposed rules", f"{len(on_proposed)} of {len(human)}", "rules the policy doesn't state yet"),
 ]))
 ```
 
-The set tests one thing: the grounded draft (step 5) and the routing decision after it (step 7). Each case is an incoming email from one of the CRM customers, labelled with the intent, whether a person must see the reply, facts a good reply contains and phrases it must never contain. Escalation is 50% on purpose so the judge can be measured on both outcomes; real traffic escalates far less.
+The set tests one thing: the grounded draft (step 5) and the routing decision after it (step 7). Each case is an incoming email from one of the CRM customers, labelled with the intent, whether a person must see the reply, facts a good reply contains and phrases it must never contain. `{python} len(human)` of `{python} len(f)` cases are labelled to go to a human; the test-set mix may not match real traffic.
 
 ## Composition
 
@@ -132,7 +143,7 @@ show(m.html_table(o, {"id": "Case", "tag": "Why it's open", "label": "Current la
 words = f.message.str.split().map(len)
 easy = f[f.difficulty == "Easy"]
 items = [
-    f"**{len(on_proposed)} of {len(human)} escalations** rest on proposed rules. If the expert rejects one, its cases flip label and the 50/50 balance shifts.",
+    f"**{len(on_proposed)} of {len(human)} escalations** rest on proposed rules. If the expert rejects one, its cases flip label and the test-set mix shifts.",
     f"**Difficulty is tangled with the label**: {int((~easy.expected_human).sum())} of {len(easy)} *Easy* cases are don't-escalate, so pass rate by difficulty partly re-measures escalation.",
     f"**The emails are short and clean**: median {int(words.median())} words. Real support email has quoted threads, signatures, typos and several issues at once.",
     "**One annotator.** Every label and verdict comes from one expert, so there is no inter-rater agreement yet.",
@@ -145,7 +156,5 @@ print("\n".join(f"- {i}" for i in items))
 ## Provenance
 
 ```{python}
-p = ev.provenance()
-show(m.html_table(pd.DataFrame({"input": ["workbook", "workbook sha256", "cases"],
-                                "value": [p["workbook"], p["workbook sha256"], len(f)]})))
+show(m.provenance_table(ev, {"cases": len(f)}))
 ```

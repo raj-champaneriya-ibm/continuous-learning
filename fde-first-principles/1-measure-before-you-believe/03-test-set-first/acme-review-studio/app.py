@@ -5,7 +5,9 @@
 from __future__ import annotations
 
 import asyncio
+import copy
 import html
+import json
 import os
 import re
 import sqlite3
@@ -19,16 +21,19 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
-from langgraph.checkpoint.sqlite import SqliteSaver  # noqa: E402
 from shiny import App, reactive, render, ui  # noqa: E402
 
 from acme.checks import eval_checks, guard_hits  # noqa: E402
 from acme.lab import INTENTS, export_to_excel, load_lab, read_review_log  # noqa: E402
 from acme.providers import make_provider  # noqa: E402
 from acme.review import initial_mode, suggest_mode, validate_verdict  # noqa: E402
+from acme.sim.render import render_comparison, render_detail, render_result  # noqa: E402
+from acme.sim.service import SimulationService, compare_reviews, review_record, sample_spread  # noqa: E402
+from acme.sim.trace import RunInput  # noqa: E402
+from acme.sim.versions import label_hash  # noqa: E402
 from acme.store import AppSettings, ReviewStore  # noqa: E402
-from acme.ui_bits import CSS, JS, chip, highlight, icon, pipeline  # noqa: E402
-from acme.workflow import PORTALS, Deps, Workflow, to_record  # noqa: E402
+from acme.ui_bits import CSS, JS, chip, highlight, icon  # noqa: E402
+from acme.workflow import PORTALS  # noqa: E402
 
 ROOT = Path(__file__).parent
 LAB_ROOT = ROOT.parents[2]
@@ -47,27 +52,45 @@ from lab.ontology import (  # noqa: E402
 )
 
 XLSX = Path(os.environ.get("ACME_XLSX", ROOT / "data" / "Acme_Fibre_Grounded_Draft_Eval.xlsx"))
-RUNS = ROOT / "runs"
-RUNS.mkdir(exist_ok=True)
+RUNS = Path(os.environ.get("ACME_RUNS_DIR", ROOT / "runs"))
+RUNS.mkdir(parents=True, exist_ok=True)
 
 LAB = load_lab(XLSX)
 STORE = ReviewStore(RUNS / "reviews.json")
 if not STORE.all():
     STORE.import_rows(read_review_log(XLSX))
 SETTINGS = AppSettings(RUNS / "settings.json")
-DEPS = Deps(lab=LAB, provider=make_provider(SETTINGS.provider, SETTINGS.model), settings=SETTINGS.workflow,
-            log_path=RUNS / "runs.jsonl")
-WF = Workflow(DEPS, SqliteSaver(sqlite3.connect(RUNS / "checkpoints.sqlite", check_same_thread=False)))
+SIM = SimulationService(ROOT, LAB, SETTINGS, runs_dir=RUNS)
+SIM.registry.import_legacy_rounds([int(v.removeprefix("legacy-round-")) for v in STORE.versions()
+                                   if v.startswith("legacy-round-") and v.removeprefix("legacy-round-").isdigit()])
+SIM.seed_manifests()
 BATCH = {"running": False, "done": 0, "total": 0, "errors": 0}
-CASE_IDS = [c["id"] for c in LAB.cases]
+BATCH_LOCK = threading.Lock()
+def version_choices() -> dict[str, str]:
+    versions = SIM.registry.list()
+    named = [v for v in versions if v.label or v.status == "legacy"]
+    recent = [v for v in versions if not v.label and v.status == "snapshot"][:20]
+    return {"working": "Working copy · auto-snapshot", **{
+        v.id: f"{v.name}{'@' + v.label if v.label and v.label != v.name else ''} · {v.status} · {v.id}"
+        for v in named + recent}}
 
 
-def run_case(case: dict, rnd: int, portal: str = "email") -> dict:
-    view = WF.start(customer_id=case["customer_id"], message=case["message"], portal=portal, case_id=case["id"],
-                    history=case.get("history"))
-    rec = to_record(view)
-    STORE.save_run(rnd, case["id"], rec)
-    return view
+def case_choices() -> dict[str, str]:
+    return {"": "Write my own", **{c["id"]: f"{c['id']} · {c['message'][:46]}…" for c in LAB.cases}}
+
+
+def default_sim_step(result):
+    if result.state == "waiting_for_human":
+        return "step-H"
+    return next((span.id for span in result.spans if span.status == "error"),
+                next((span.id for span in result.spans if span.id == "step-5"),
+                     result.spans[0].id if result.spans else None))
+
+
+def run_case(case: dict, version_id: str, portal: str = "email"):
+    result = SIM.run(version_id, RunInput.from_case(case, portal))
+    STORE.save_run(version_id, case["id"], review_record(result))
+    return result
 
 
 def customer_chips(cust: dict | None) -> str:
@@ -138,19 +161,28 @@ def simulator_page():
     return ui.layout_columns(
         ui.card(
             ui.card_header("Incoming email"),
-            ui.input_select("sim_case", "Start from a case", {"": "Write my own", **{
-                c["id"]: f"{c['id']} · {c['message'][:46]}…" for c in LAB.cases}}, width="100%"),
+            ui.input_select("sim_version", "Workflow version", version_choices(), selected="working", width="100%"),
+            ui.output_ui("sim_version_status"),
+            ui.input_select("sim_case", "Start from a case", case_choices(), width="100%"),
             ui.input_select("sim_customer", "Customer", cust_choices, width="100%"),
-            ui.input_select("sim_portal", "Portal", {k: v["label"] for k, v in PORTALS.items()}, width="100%"),
+            ui.output_ui("sim_optional_inputs"),
             ui.input_text_area("sim_message", "Message", rows=7, width="100%"),
-            ui.input_action_button("sim_run", "Run the workflow", icon=icon("play"), class_="btn-primary w-100"),
+            ui.input_numeric("sim_samples", "Samples", 1, min=1, max=100, step=1),
+            ui.output_ui("sim_replay_options"),
+            ui.input_select("sim_compare_version", "Compare with", {"": "No comparison", **version_choices()},
+                            selected="", width="100%"),
+            ui.input_switch("sim_audit", "Run as audit", False),
+            ui.output_ui("sim_run_control"),
+            ui.output_ui("sim_history_controls"),
             ui.div("Runs of a dataset case also become that case's draft on the Review page.", class_="muted mt-2"),
         ),
         ui.div(
-            ui.card(ui.card_header("Workflow · click a step to see what it did"), ui.output_ui("sim_pipe"),
+            ui.output_ui("sim_version_banner"),
+            ui.card(ui.card_header("Run view · select a span to inspect it"), ui.output_ui("sim_pipe"),
                     ui.output_ui("sim_step_detail")),
             ui.output_ui("sim_human"),
             ui.output_ui("sim_outcome"),
+            ui.output_ui("sim_comparison"),
         ),
         col_widths=(4, 8),
     )
@@ -214,6 +246,7 @@ def knowledge_page():
                          ui.input_text_area("guard_try", "Try a message", rows=2, width="100%",
                                             placeholder="I'll take this to consumer court"),
                          ui.output_ui("guard_try_result")),
+            ui.nav_panel("Workflow spec", ui.output_ui("workflow_spec")),
         ),
     )
 
@@ -229,9 +262,18 @@ def score_page():
         ui.layout_columns(
             ui.card(ui.card_header("Failure modes"), ui.output_ui("score_modes")),
             ui.card(ui.card_header("By escalation rule"), ui.output_ui("score_rules")),
-            ui.card(ui.card_header("By round"), ui.output_ui("score_rounds")),
+            ui.card(ui.card_header("By version"), ui.output_ui("score_rounds")),
             col_widths=(4, 5, 3),
         ),
+        ui.card(ui.card_header("Compare versions and release evidence"),
+                ui.input_select("score_compare", "Compare selected review version with",
+                                {"": "Choose a version", **version_choices()}, selected=""),
+                ui.output_ui("score_regressions"),
+                ui.input_text("candidate_label", "Name a working-copy snapshot", placeholder="1.0.0"),
+                ui.input_action_button("name_candidate", "Name snapshot", class_="btn-outline-primary btn-sm"),
+                ui.input_text("release_signoff", "Reviewer sign-off", placeholder="Reviewer name"),
+                ui.input_action_button("release_version", "Release candidate", class_="btn-primary btn-sm"),
+                ui.input_action_button("retire_version", "Retire version", class_="btn-outline-secondary btn-sm ms-2")),
     )
 
 
@@ -241,9 +283,11 @@ settings_popover = ui.popover(
                            {"claude-code": "Claude Code", "c3": "C3 ontology agent (lab)", "offline": "Offline stand-in"},
                            selected=SETTINGS.provider),
     ui.input_select("model", "Claude model", {"sonnet": "Sonnet", "opus": "Opus", "haiku": "Haiku"}, selected=SETTINGS.model),
-    ui.input_numeric("round", "Review round", SETTINGS.round, min=1, step=1),
+    ui.input_select("review_version", "Review version", version_choices(), selected="working", width="100%"),
     ui.input_switch("critique_first", "Critique-first review (mode optional on Fail)", SETTINGS.critique_first),
     ui.input_slider("concurrency", "Parallel drafts", 1, 10, SETTINGS.concurrency),
+    ui.input_numeric("retention_days", "Run retention in days (0 keeps runs)", SETTINGS.run_retention_days, min=0, step=1),
+    ui.input_action_button("apply_retention", "Apply retention", class_="btn-outline-secondary btn-sm"),
     ui.output_ui("provider_status"),
     title="Settings", placement="bottom",
 )
@@ -271,9 +315,15 @@ def server(input, output, session):
     local = reactive.value(0)            # bumped after saves in this session
     settings_rev = reactive.value(0)
     data_rev = reactive.value(0)          # cases / knowledge edits
-    current = reactive.value(CASE_IDS[0])
+    current = reactive.value(LAB.cases[0]["id"])
     sim_view = reactive.value(None)
-    sim_step = reactive.value("5")
+    sim_compare_view = reactive.value(None)
+    sim_samples_view = reactive.value([])
+    sim_step = reactive.value("step-5")
+    sim_compare_step = reactive.value(None)
+    sim_loaded_input = reactive.value(None)
+    sim_replay_mode = reactive.value("fresh")
+    working_review_version = reactive.value(None)
     review_step = reactive.value(None)
 
     @reactive.poll(lambda: (len(STORE.all()), STORE.path.stat().st_mtime_ns if STORE.path.exists() else 0), 1)
@@ -284,41 +334,92 @@ def server(input, output, session):
     def batch_rev():
         return dict(BATCH)
 
-    def rnd() -> int:
+    def version_token():
+        return tuple((row["id"], row["label"], row["status"]) for row in SIM.store.versions())
+
+    @reactive.poll(version_token, 2)
+    def versions_rev():
+        return version_token()
+
+    def rnd() -> str | None:
         settings_rev()
-        return SETTINGS.round
+        selected = input.review_version()
+        return working_review_version() if selected == "working" else selected
 
     @reactive.calc
     def round_data() -> dict[str, dict]:
         store_rev(), local()
-        return STORE.round(rnd())
+        version_id = rnd()
+        return STORE.version(version_id) if version_id else {}
+
+    def refresh_versions():
+        choices = version_choices()
+        ui.update_select("review_version", choices=choices, selected=input.review_version())
+        ui.update_select("sim_version", choices=choices, selected=input.sim_version())
+        ui.update_select("sim_compare_version", choices={"": "No comparison", **choices},
+                         selected=input.sim_compare_version())
+        ui.update_select("score_compare", choices={"": "Choose a version", **choices},
+                         selected=input.score_compare())
+
+    @reactive.effect
+    def _refresh_shared_versions():
+        versions_rev()
+        with reactive.isolate():
+            refresh_versions()
+
+    def selected_review_version():
+        if input.review_version() == "working":
+            version = SIM.freeze_working()
+            working_review_version.set(version.id)
+            refresh_versions()
+            return version
+        return SIM.registry.get(input.review_version())
 
     def case_of(cid):
         data_rev()
         return LAB.case(cid)
 
+    @reactive.effect
+    def _refresh_case_choices():
+        data_rev()
+        with reactive.isolate():
+            ui.update_select("sim_case", choices=case_choices(), selected=input.sim_case())
+
     # ------------------------------------------------ settings
     @reactive.effect
-    @reactive.event(input.provider, input.model, input.round, input.concurrency, input.critique_first,
+    @reactive.event(input.provider, input.model, input.concurrency, input.critique_first, input.retention_days,
                     ignore_init=True)
     def _settings():
         SETTINGS.provider, SETTINGS.model = input.provider(), input.model()
-        SETTINGS.round = int(input.round() or 1)
         SETTINGS.concurrency = int(input.concurrency())
         SETTINGS.critique_first = input.critique_first()
-        DEPS.provider = make_provider(SETTINGS.provider, SETTINGS.model)
+        SETTINGS.run_retention_days = max(0, int(input.retention_days() or 0))
         SETTINGS.save()
         settings_rev.set(settings_rev() + 1)
 
     @render.ui
     def provider_status():
         settings_rev()
-        ok, msg = DEPS.provider.status()
+        ok, msg = make_provider(SETTINGS.provider, SETTINGS.model).status()
         return ui.div(ui.HTML(chip("ready" if ok else "not ready", "ok" if ok else "bad")), ui.span(msg, class_="muted"))
+
+    @reactive.effect
+    @reactive.event(input.apply_retention)
+    def _apply_retention():
+        try:
+            days = SETTINGS.run_retention_days
+            deleted, logs = SIM.apply_retention(days) if days else (0, 0)
+            collected = SIM.registry.collect_unreferenced_snapshots(STORE.versions())
+            refresh_versions()
+            local.set(local() + 1)
+            ui.notification_show(f"Removed {deleted} expired runs, {logs} log entries and {collected} unreferenced snapshots.")
+        except (ValueError, OSError, sqlite3.Error) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
 
     # ------------------------------------------------ review: list + navigation
     @reactive.calc
     def visible_ids() -> list[str]:
+        data_rev()
         data, show, intent = round_data(), input.show(), input.intent_filter()
         out = []
         for c in LAB.cases:
@@ -335,7 +436,7 @@ def server(input, output, session):
         return out
 
     def move(step: int):
-        ids = visible_ids() or CASE_IDS
+        ids = visible_ids() or [case["id"] for case in LAB.cases]
         cid = current()
         idx = ids.index(cid) if cid in ids else -1
         current.set(ids[max(0, min(len(ids) - 1, idx + step))] if idx >= 0 else ids[0])
@@ -350,8 +451,9 @@ def server(input, output, session):
 
     @reactive.effect
     def _deeplink():
+        data_rev()
         m = re.search(r"[?&]case=(c\d+)", input[".clientdata_url_search"]() or "")
-        if m and m.group(1) in CASE_IDS:
+        if m and m.group(1) in {case["id"] for case in LAB.cases}:
             deeplinked.set(True)
             current.set(m.group(1))
             ui.update_radio_buttons("show", selected="all")
@@ -379,12 +481,14 @@ def server(input, output, session):
 
     @render.ui
     def progress():
+        data_rev()
         data = round_data()
-        drafted = sum(1 for c in CASE_IDS if data.get(c, {}).get("reply") or data.get(c, {}).get("decision"))
-        reviewed = sum(1 for c in CASE_IDS if data.get(c, {}).get("verdict"))
-        pct = int(100 * reviewed / len(CASE_IDS))
+        ids = [case["id"] for case in LAB.cases]
+        drafted = sum(1 for c in ids if data.get(c, {}).get("reply") or data.get(c, {}).get("decision"))
+        reviewed = sum(1 for c in ids if data.get(c, {}).get("verdict"))
+        pct = int(100 * reviewed / len(ids)) if ids else 0
         return ui.div(
-            ui.div(ui.strong(f"Round {rnd()}"), ui.span(f" · {reviewed}/{len(CASE_IDS)} reviewed · {drafted} drafted",
+            ui.div(ui.strong(f"Version {rnd() or 'working copy'}"), ui.span(f" · {reviewed}/{len(ids)} reviewed · {drafted} drafted",
                                                          class_="muted")),
             ui.HTML(f'<div class="progress my-2" style="height:6px"><div class="progress-bar" '
                     f'style="width:{pct}%;background:#2E6DB4"></div></div>'))
@@ -414,6 +518,7 @@ def server(input, output, session):
             return ui.div()
         state = "Drafting" if b["running"] else "Done"
         return ui.div(f"{state}: {b['done']}/{b['total']}" + (f" · {b['errors']} errors" if b["errors"] else ""),
+                      ui.div(b.get("last_error", ""), class_="text-danger") if b.get("last_error") else None,
                       class_="muted mt-2")
 
     @reactive.effect
@@ -421,32 +526,46 @@ def server(input, output, session):
     def _run_missing():
         if BATCH["running"]:
             return
-        r, data = rnd(), round_data()
-        todo = [c for c in LAB.cases if not data.get(c["id"], {}).get("decision")]   # imported rows count as not run
-        if not todo:
-            ui.notification_show("Every case in this round has been run. Use Re-run on a case, or start a new round.")
+        try:
+            version = selected_review_version()
+            ready, msg = SIM.status(version.id)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
             return
-        ok, msg = DEPS.provider.status()
-        if not ok:
+        if not ready:
             ui.notification_show(msg, type="error", duration=8)
             return
-        BATCH.update(running=True, done=0, total=len(todo), errors=0)
+        data = STORE.version(version.id)
+        todo = [copy.deepcopy(c) for c in LAB.cases if not data.get(c["id"], {}).get("decision")]
+        if not todo:
+            ui.notification_show("Every case in this version has been run. Re-run a case or select another version.")
+            return
+        concurrency = SETTINGS.concurrency
+        BATCH.update(running=True, done=0, total=len(todo), errors=0, last_error="", version_id=version.id)
 
         def worker():
             def one(case):
                 try:
-                    view = run_case(case, r)
-                    if (view.get("llm") or {}).get("error"):
+                    result = run_case(case, version.id)
+                    if result.state == "failed":
+                        with BATCH_LOCK:
+                            BATCH["errors"] += 1
+                            BATCH["last_error"] = review_record(result).get("error") or "A run failed."
+                except Exception as exc:  # surface a failure even if persistence itself failed
+                    with BATCH_LOCK:
                         BATCH["errors"] += 1
-                except Exception:  # noqa: BLE001
-                    BATCH["errors"] += 1
-                BATCH["done"] += 1
-            with ThreadPoolExecutor(SETTINGS.concurrency) as pool:
-                list(pool.map(one, todo))
-            BATCH["running"] = False
+                        BATCH["last_error"] = str(exc)
+                finally:
+                    with BATCH_LOCK:
+                        BATCH["done"] += 1
+            try:
+                with ThreadPoolExecutor(concurrency) as pool:
+                    list(pool.map(one, todo))
+            finally:
+                BATCH["running"] = False
 
         threading.Thread(target=worker, daemon=True).start()
-        ui.notification_show(f"Drafting {len(todo)} cases with {DEPS.provider.label}. You can start reviewing now.")
+        ui.notification_show(f"Drafting {len(todo)} cases with {version.name} · {version.id}.")
 
     # ------------------------------------------------ review: case panels
     @reactive.calc
@@ -507,8 +626,10 @@ def server(input, output, session):
         label = {"escalate": "Routed to a human", "send": "Sent automatically"}.get(routed, "Imported from Excel")
         meta = " ".join(str(x) for x in (rec.get("provider"), rec.get("model"),
                                          f"{rec['latency_s']}s" if rec.get("latency_s") else None) if x)
+        stale = rec.get("label_hash") and rec["label_hash"] != label_hash(cur()[0])
         return ui.HTML(f'Workflow run · <span style="font-weight:500">{label}</span>'
-                       + (f' <span class="muted">· {html.escape(meta)}</span>' if meta else ""))
+                       + (f' <span class="muted">· {html.escape(meta)}</span>' if meta else "")
+                       + (' <span class="text-warning">· graded against an earlier label</span>' if stale else ""))
 
     @render.ui
     def run_card():
@@ -519,7 +640,7 @@ def server(input, output, session):
                          class_="mt-2")
         if not rec.get("trace"):
             note = ("Draft imported from the workbook; run it to see the workflow." if rec.get("reply")
-                    else "No draft yet for this round.")
+                    else "No draft yet for this version.")
             return ui.div(ui.div(note, class_="muted"), buttons)
         mismatch = eval_checks(c, rec)["routing_ok"] is False
         reasons = (chip(f"Expected human review · rule {c['rule']}", "bad")
@@ -551,21 +672,39 @@ def server(input, output, session):
     @reactive.event(input.run_one)
     async def _run_one():
         c, _ = cur()
-        r = rnd()
-        ok, msg = DEPS.provider.status()
-        if not ok:
+        try:
+            version = selected_review_version()
+            ready, msg = SIM.status(version.id)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
+            return
+        if not ready:
             ui.notification_show(msg, type="error", duration=8)
             return
-        ui.notification_show(f"Drafting {c['id']} with {DEPS.provider.label}…", id="drafting", duration=None)
-        await asyncio.to_thread(run_case, c, r)
-        ui.notification_remove("drafting")
+        ui.notification_show(f"Drafting {c['id']} with {version.name}…", id="drafting", duration=None)
+        try:
+            result = await asyncio.to_thread(run_case, copy.deepcopy(c), version.id)
+            if result.state == "failed":
+                ui.notification_show(review_record(result).get("error") or "Run failed.", type="error", duration=8)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
+        finally:
+            ui.notification_remove("drafting")
         local.set(local() + 1)
 
     @reactive.effect
     @reactive.event(input.to_sim)
     def _to_sim():
-        c, _ = cur()
-        ui.update_select("sim_case", selected=c["id"])
+        c, rec = cur()
+        if rec.get("run_id"):
+            try:
+                result, run_input = SIM.store.get(rec["run_id"])
+                show_saved_run(result, run_input)
+            except KeyError:
+                ui.notification_show("The saved simulator run is no longer available.", type="warning")
+                ui.update_select("sim_case", selected=c["id"])
+        else:
+            ui.update_select("sim_case", selected=c["id"])
         ui.update_navs("nav", selected="simulator")
 
     @render.ui
@@ -672,14 +811,148 @@ def server(input, output, session):
                 current.set(ids[0])
 
     # ------------------------------------------------ simulator
+    def selected_sim_version():
+        selected = input.sim_version()
+        return None if selected == "working" else SIM.registry.get(selected)
+
+    def sim_fields() -> set[str]:
+        version = selected_sim_version()
+        if version is None:
+            return {"customer_id", "message", "portal", "history"}
+        if version.status == "legacy":
+            return set()
+        return set(SIM.adapter(version).input_schema(version)["properties"])
+
+    def replay_sources(version):
+        return {result.run_id: f"{result.run_id[:8]} · {result.state}"
+                for result in SIM.store.list(version_id=version.id, limit=100)
+                if any("recorded_response" in span.attrs for span in result.spans)}
+
+    def show_saved_run(result, run_input):
+        sim_loaded_input.set(run_input)
+        sim_view.set(result)
+        sim_samples_view.set([result])
+        sim_compare_view.set(None)
+        sim_step.set(default_sim_step(result))
+        ui.update_select("sim_version", selected=result.version_id)
+        ui.update_select("sim_case", selected=run_input.case_id if run_input.case else "")
+        ui.update_select("sim_customer", selected=run_input.customer_id)
+        ui.update_text_area("sim_message", value=run_input.message)
+
+    @render.ui
+    def workflow_spec():
+        version = selected_sim_version()
+        if version is None or version.implementation != "declarative":
+            return ui.div("Select a declarative version in the Simulator to inspect its frozen spec.", class_="muted")
+        return ui.div(ui.div(f"{version.name} · {version.id}", class_="muted"),
+                      ui.pre(json.dumps(version.content["spec"], ensure_ascii=False, indent=2)))
+
+    @render.ui
+    def sim_version_status():
+        settings_rev(), data_rev(), local()
+        try:
+            version = selected_sim_version()
+            if version is None:
+                ready, message = make_provider(SETTINGS.provider, SETTINGS.model).status()
+                drift = []
+            else:
+                recorded = (version.status != "legacy" and SIM.adapter(version).capabilities(version).recorded_replay
+                            and sim_replay_mode() == "recorded")
+                ready, message = SIM.status(version.id, audit=input.sim_audit(), recorded=recorded)
+                if recorded and not replay_sources(version):
+                    ready, message = False, "No recorded model response is available for this version."
+                drift = [] if version.status == "legacy" else SIM.drift(version)
+            return ui.div(ui.HTML(chip("ready" if ready else "not ready", "ok" if ready else "bad")),
+                          ui.span(message, class_="muted"),
+                          ui.div("Changed since freeze: " + ", ".join(drift), class_="sim-warning") if drift else None)
+        except (ValueError, KeyError, OSError) as exc:
+            return ui.div(str(exc), class_="text-danger")
+
+    @render.ui
+    def sim_run_control():
+        settings_rev(), data_rev(), local()
+        try:
+            version = selected_sim_version()
+            if version is None:
+                ready = make_provider(SETTINGS.provider, SETTINGS.model).status()[0]
+            else:
+                recorded = (version.status != "legacy" and SIM.adapter(version).capabilities(version).recorded_replay
+                            and sim_replay_mode() == "recorded")
+                ready = SIM.status(version.id, audit=input.sim_audit(), recorded=recorded)[0]
+                if recorded and not replay_sources(version):
+                    ready = False
+        except (ValueError, KeyError, OSError):
+            ready = False
+        return ui.input_action_button("sim_run", "Run the workflow", icon=icon("play"),
+                                      class_="btn-primary w-100", disabled=not ready)
+
+    @render.ui
+    def sim_optional_inputs():
+        fields = sim_fields()
+        cid = input.sim_case()
+        case = case_of(cid) if cid else None
+        loaded = sim_loaded_input()
+        matches = loaded and ((case and loaded.case_id == cid) or (not case and loaded.case_id == "custom"))
+        portal = loaded.portal if matches else "email"
+        history = loaded.history if matches else (case.get("history") or [] if case else [])
+        return ui.div(
+            ui.input_select("sim_portal", "Portal", {k: v["label"] for k, v in PORTALS.items()},
+                            selected=portal, width="100%") if "portal" in fields else None,
+            ui.input_text_area("sim_history", "Earlier turns (JSON)", rows=3, width="100%",
+                               value=json.dumps(history, ensure_ascii=False)) if "history" in fields else None,
+        )
+
+    @render.ui
+    def sim_replay_options():
+        local()
+        version = selected_sim_version()
+        if version is None or version.status == "legacy":
+            return ui.div()
+        try:
+            if not SIM.adapter(version).capabilities(version).recorded_replay:
+                return ui.div()
+        except (ValueError, OSError):
+            return ui.div()
+        choices = replay_sources(version)
+        selected = sim_view().run_id if sim_view() and sim_view().run_id in choices else None
+        return ui.div(ui.input_select("sim_mode", "Replay mode", {"fresh": "Fresh", "recorded": "Recorded"},
+                                      selected=sim_replay_mode()),
+                      ui.input_select("sim_replay_source", "Recorded run", choices, selected=selected, width="100%") if choices else
+                      ui.div("Run this version once to make a recording available.", class_="muted"))
+
+    @reactive.effect
+    @reactive.event(input.sim_mode)
+    def _sim_mode():
+        sim_replay_mode.set(input.sim_mode())
+
+    @render.ui
+    def sim_history_controls():
+        local()
+        version = selected_sim_version()
+        runs = SIM.store.list(version_id=version.id if version else None, limit=30)
+        choices = {}
+        for result in runs:
+            _, run_input = SIM.store.get(result.run_id)
+            choices[result.run_id] = f"{run_input.case_id} · {result.state} · {result.version_id} · {result.run_id[:8]}"
+        if not choices:
+            return ui.div("No saved simulator runs yet.", class_="muted mt-2")
+        return ui.div(ui.input_select("sim_history_pick", "Run history", choices, width="100%"),
+                      ui.input_action_button("sim_load", "Open saved run", class_="btn-outline-secondary btn-sm"))
+
     @reactive.effect
     @reactive.event(input.sim_case)
     def _sim_case():
         cid = input.sim_case()
         if cid:
             c = case_of(cid)
-            ui.update_select("sim_customer", selected=c["customer_id"])
-            ui.update_text_area("sim_message", value=c["message"])
+            loaded = sim_loaded_input()
+            if loaded and loaded.case_id == cid:
+                ui.update_select("sim_customer", selected=loaded.customer_id)
+                ui.update_text_area("sim_message", value=loaded.message)
+            else:
+                sim_loaded_input.set(None)
+                ui.update_select("sim_customer", selected=c["customer_id"])
+                ui.update_text_area("sim_message", value=c["message"])
 
     @reactive.effect
     @reactive.event(input.sim_run)
@@ -688,72 +961,141 @@ def server(input, output, session):
         if not msg:
             ui.notification_show("Write a message first.", type="warning")
             return
-        ok, status = DEPS.provider.status()
-        if not ok:
-            ui.notification_show(status, type="error", duration=8)
+        fields = sim_fields()
+        try:
+            history = json.loads(input.sim_history() or "[]") if "history" in fields else []
+            portal = input.sim_portal() if "portal" in fields else "email"
+            version = selected_sim_version() or SIM.freeze_working()
+            comparison_id = input.sim_compare_version()
+            comparison = (SIM.freeze_working() if comparison_id == "working" else
+                          SIM.registry.get(comparison_id) if comparison_id else None)
+            caps = SIM.adapter(version).capabilities(version)
+            mode = (sim_replay_mode() if input.sim_version() != "working" and caps.recorded_replay else "fresh")
+            if mode == "recorded" and not replay_sources(version):
+                raise ValueError("No recorded model response is available for this version.")
+            replay_of = input.sim_replay_source() if mode == "recorded" else None
+            if mode == "recorded" and not replay_of:
+                raise ValueError("Choose a recorded run first.")
+            count = int(input.sim_samples() or 1)
+            if replay_of and count != 1:
+                raise ValueError("Recorded replay uses one sample.")
+            ready, status = SIM.status(version.id, audit=input.sim_audit(), recorded=bool(replay_of))
+            if not ready:
+                raise ValueError(status)
+            if comparison:
+                ready, status = SIM.status(comparison.id, audit=input.sim_audit())
+                if not ready:
+                    raise ValueError(f"Comparison version: {status}")
+        except (ValueError, KeyError, OSError, json.JSONDecodeError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
             return
         cid = input.sim_case()
         case = case_of(cid) if cid else None
-        same = case and case["message"] == msg and case["customer_id"] == input.sim_customer()
-        r, portal, customer = rnd(), input.sim_portal(), input.sim_customer()
+        same = bool(case and case["message"] == msg and case["customer_id"] == input.sim_customer()
+                    and (case.get("history") or []) == history)
+        run_input = RunInput(customer_id=input.sim_customer(), message=msg, portal=portal,
+                             case_id=cid if same else "custom", history=history,
+                             case=copy.deepcopy(case) if same else None)
+        audit = input.sim_audit()
+        if input.sim_version() == "working":
+            working_review_version.set(version.id)
+        refresh_versions()
         ui.notification_show("Running the workflow…", id="sim", duration=None)
-        view = await asyncio.to_thread(WF.start, customer_id=customer, message=msg, portal=portal,
-                                       case_id=cid if same else "custom")
-        ui.notification_remove("sim")
-        if same:
-            STORE.save_run(r, cid, to_record(view))
+        try:
+            if replay_of:
+                results = [await asyncio.to_thread(SIM.run, version.id, run_input, audit=audit, replay_of=replay_of)]
+            else:
+                results = await asyncio.to_thread(SIM.run_samples, version.id, run_input, count, audit=audit)
+            result = results[0]
+            sim_view.set(result)
+            sim_samples_view.set(results)
+            sim_compare_view.set(None)
+            sim_step.set(default_sim_step(result))
+            if same:
+                STORE.save_run(version.id, cid, review_record(result))
+                if input.sim_version() != "working":
+                    ui.update_select("review_version", selected=version.id)
+                local.set(local() + 1)
+            if result.state == "failed":
+                ui.notification_show(review_record(result).get("error") or "Run failed.", type="error", duration=8)
+            if comparison:
+                other_results = await asyncio.to_thread(SIM.run_samples, comparison.id, run_input, count, audit=audit)
+                other = other_results[0]
+                sim_compare_view.set(other)
+                if same:
+                    STORE.save_run(comparison.id, cid, review_record(other))
+                    local.set(local() + 1)
+                if other.state == "failed":
+                    ui.notification_show(review_record(other).get("error") or "Comparison run failed.",
+                                         type="error", duration=8)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
+        finally:
+            ui.notification_remove("sim")
             local.set(local() + 1)
-        sim_view.set({**view, "_case": cid if same else None, "_round": r})
-        sim_step.set("H" if view.get("waiting_for_human") else "5")
+
+    @reactive.effect
+    @reactive.event(input.sim_load)
+    def _sim_load():
+        try:
+            result, run_input = SIM.store.get(input.sim_history_pick())
+            show_saved_run(result, run_input)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
 
     @reactive.effect
     @reactive.event(input.sim_step_click)
     def _sim_click():
         sim_step.set(input.sim_step_click())
 
+    @reactive.effect
+    @reactive.event(input.sim_compare_step_click)
+    def _sim_compare_click():
+        sim_compare_step.set(input.sim_compare_step_click())
+
+    @render.ui
+    def sim_version_banner():
+        data_rev(), settings_rev()
+        result = sim_view()
+        if not result:
+            return ui.div()
+        version = SIM.registry.get(result.version_id)
+        drift = SIM.drift(version)
+        return ui.card(ui.card_header(f"{version.name} · {version.implementation} · {version.status} · {version.id}"),
+                       ui.div(f"Code, model, prompts, guards and {len(version.pins.get('lab_files', {}))} lab files pinned."),
+                       ui.div("Changed since freeze: " + ", ".join(drift), class_="sim-warning") if drift else
+                       ui.div("Pinned files are current.", class_="muted"),
+                       ui.div("This run was made as an audit.", class_="muted") if result.audit else None)
+
     @render.ui
     def sim_pipe():
-        v = sim_view()
-        if not v:
-            return ui.div(ui.HTML(pipeline([], False, None, "sim_step_click")),
-                          ui.div("Pick a case or write an email, then run the workflow.", class_="muted"))
-        return ui.HTML(pipeline(v.get("trace", []), v.get("waiting_for_human"), sim_step(), "sim_step_click"))
+        result = sim_view()
+        if not result:
+            return ui.div("Pick a version and a case or write an email, then run the workflow.", class_="muted")
+        version = SIM.registry.get(result.version_id)
+        return ui.HTML(render_result(result, SIM.adapter(version).topology(version), version.implementation, sim_step()))
 
     @render.ui
     def sim_step_detail():
-        v, s = sim_view(), sim_step()
-        if not v:
+        result = sim_view()
+        if not result:
             return ui.div()
-        t = next((t for t in reversed(v.get("trace", [])) if t["step"] == s), None)
-        waiting = s == "H" and v.get("waiting_for_human")
-        what = (f"{html.escape(t['detail'])} · {t['ms']} ms" if t else
-                "waiting for your decision below" if waiting else "did not run")
-        head = f'<div class="mt-2"><b>Step {s}</b> · {what}</div>'
-        body = ""
-        if s == "4" and v.get("user_prompt"):
-            body = f'<pre class="prompt">{html.escape(v["user_prompt"])}</pre>'
-        elif s == "5":
-            d = v.get("draft") or {}
-            body = (f'<pre class="prompt">{html.escape(str(d) if d else "no draft")}</pre>'
-                    f'<details><summary class="muted">System prompt sent to the model</summary>'
-                    f'<pre class="prompt">{html.escape(v.get("system_prompt") or "")}</pre></details>')
-        elif s == "6":
-            body = "".join(f'<div>{chip(f["check"], "bad" if f["severity"] == "high" else "warn")} '
-                           f'<span class="muted">{html.escape(f["detail"])}</span></div>' for f in v.get("flags", [])) \
-                   or '<div class="muted">No problems found.</div>'
-        elif s == "7":
-            body = "".join(chip(r, "warn") for r in v.get("reasons", [])) or chip("safe to send", "ok")
-        return ui.HTML(head + f'<div class="mt-2">{body}</div>')
+        version = SIM.registry.get(result.version_id)
+        return ui.HTML(render_detail(result, sim_step(), SIM.adapter(version).capabilities(version)))
 
     @render.ui
     def sim_human():
-        v = sim_view()
-        if not v or not v.get("waiting_for_human"):
+        result = sim_view()
+        if not result or result.state != "waiting_for_human":
             return ui.div()
-        draft = (v.get("draft") or {}).get("reply") or ""
+        version = SIM.registry.get(result.version_id)
+        if version.status == "retired":
+            return ui.card(ui.card_header("Run held for review"),
+                           ui.div("This version was retired; the held run is read-only."))
+        draft = (result.output or {}).get("reply") or ""
         return ui.card(
             ui.card_header("You are the human agent · this reply was held for review"),
-            ui.HTML('<div class="chips">' + "".join(chip(r, "warn") for r in v.get("reasons", [])) + "</div>"),
+            ui.HTML('<div class="chips">' + "".join(chip(r, "warn") for r in (result.output or {}).get("reasons", [])) + "</div>"),
             ui.input_text_area("human_reply", "Reply to send", value=draft, rows=8, width="100%"),
             ui.div(ui.input_action_button("h_approve", "Send the draft as is", class_="btn-pass"),
                    ui.input_action_button("h_edit", "Send my edited reply", class_="btn-primary ms-2"),
@@ -761,14 +1103,21 @@ def server(input, output, session):
         )
 
     async def resume(action: str):
-        v = sim_view()
-        view = await asyncio.to_thread(WF.resume, v["thread_id"], action,
-                                       input.human_reply() if action == "edit" else None)
-        if v.get("_case"):
-            STORE.save_run(v["_round"], v["_case"], to_record(view))
-            local.set(local() + 1)
-        sim_view.set({**view, "_case": v.get("_case"), "_round": v.get("_round")})
-        sim_step.set("8")
+        result = sim_view()
+        try:
+            resumed = await asyncio.to_thread(SIM.resume, result.run_id,
+                                               {"action": action, "reply": input.human_reply() if action == "edit" else None})
+            _, run_input = SIM.store.get(result.run_id)
+            if run_input.case:
+                STORE.save_run(resumed.version_id, run_input.case_id, review_record(resumed))
+                local.set(local() + 1)
+            sim_view.set(resumed)
+            sim_samples_view.set([resumed if item.run_id == resumed.run_id else item for item in sim_samples_view()])
+            sim_step.set(default_sim_step(resumed) if resumed.state == "failed" else "step-8")
+            if resumed.state == "failed":
+                ui.notification_show(review_record(resumed).get("error") or "Resume failed.", type="error", duration=8)
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
 
     @reactive.effect
     @reactive.event(input.h_approve)
@@ -787,14 +1136,41 @@ def server(input, output, session):
 
     @render.ui
     def sim_outcome():
-        v = sim_view()
-        if not v or not v.get("outcome"):
+        result = sim_view()
+        if not result:
             return ui.div()
+        output = result.output or {}
         label = {"sent": "Sent automatically", "sent_after_review": "Sent after human review",
-                 "held": "Held: nothing was sent"}[v["outcome"]]
-        final = v.get("final_reply")
+                 "held": "Held: nothing was sent"}.get(output.get("outcome"), result.state.replace("_", " "))
+        final = output.get("final_reply")
+        spread = sample_spread(sim_samples_view())
+        summary = (f"{spread['passed']}/{spread['graded']} graded samples passed · "
+                   f"95% interval {spread['interval'][0]:.0%}–{spread['interval'][1]:.0%}"
+                   if spread["interval"] else f"{spread['graded']}/{spread['total']} samples graded")
         return ui.card(ui.card_header(f"Outcome · {label}"),
-                       ui.HTML(f'<div class="reply">{html.escape(final)}</div>' if final else '<div class="muted">—</div>'))
+                       ui.div(review_record(result).get("error"), class_="text-danger") if result.state == "failed" else None,
+                       ui.HTML(f'<div class="reply">{html.escape(final)}</div>' if final else '<div class="muted">—</div>'),
+                       ui.pre(json.dumps(result.grade, ensure_ascii=False, indent=2)) if result.grade else
+                       ui.div("Grade is available after the run completes.", class_="muted"),
+                       ui.div(summary, class_="muted"),
+                       ui.div(f"Latency: {result.usage.get('latency_s')} s · Cost: {result.usage.get('cost_usd')}",
+                              class_="muted"))
+
+    @render.ui
+    def sim_comparison():
+        left, right = sim_view(), sim_compare_view()
+        if not left or not right:
+            return ui.div()
+        a, b = SIM.registry.get(left.version_id), SIM.registry.get(right.version_id)
+        left_view = render_result(left, SIM.adapter(a).topology(a), a.implementation, sim_step())
+        right_view = render_result(right, SIM.adapter(b).topology(b), b.implementation, sim_compare_step(),
+                                   target="sim_compare_step_click")
+        right_detail = render_detail(right, sim_compare_step(), SIM.adapter(b).capabilities(b),
+                                     target="sim_compare_step_click")
+        return ui.card(ui.card_header("Version comparison"),
+                       ui.HTML(render_comparison(left, right, a, b)),
+                       ui.HTML(f'<div class="sim-comparison-views"><section><h4>{html.escape(a.name)}</h4>{left_view}</section>'
+                               f'<section><h4>{html.escape(b.name)}</h4>{right_view}{right_detail}</section></div>'))
 
     # ------------------------------------------------ cases
     @render.data_frame
@@ -1077,8 +1453,10 @@ def server(input, output, session):
             value = str(value or "").strip()[:10] or None
         if key == "payments_this_cycle":
             cust[key] = [int(p) for p in str(value or "").replace(",", " ").split() if p.isdigit()]
+            data_rev.set(data_rev() + 1)
             return ", ".join(map(str, cust[key]))
         cust[key] = value
+        data_rev.set(data_rev() + 1)
         return value
 
     OUT_COLS = ["ticket", "area", "since", "cause", "status"]
@@ -1092,6 +1470,7 @@ def server(input, output, session):
     @outages_grid.set_patch_fn
     def _(*, patch):
         LAB.outages[patch["row_index"]][OUT_COLS[patch["column_index"]]] = patch["value"]
+        data_rev.set(data_rev() + 1)
         return patch["value"]
 
     @reactive.effect
@@ -1122,6 +1501,7 @@ def server(input, output, session):
     @reactive.event(input.kb_save)
     def _kb_save():
         LAB.kb[input.kb_pick()].update(title=input.kb_title(), text=input.kb_text())
+        data_rev.set(data_rev() + 1)
         ui.notification_show(f"{input.kb_pick()} saved. The next run uses it.")
 
     GUARD_COLS = ["name", "enabled", "pattern"]
@@ -1142,6 +1522,7 @@ def server(input, output, session):
         else:
             g[key] = value
         SETTINGS.save()
+        settings_rev.set(settings_rev() + 1)
         return value
 
     @reactive.effect
@@ -1149,6 +1530,7 @@ def server(input, output, session):
     def _block():
         SETTINGS.workflow.block_on_high_flags = input.block_high()
         SETTINGS.save()
+        settings_rev.set(settings_rev() + 1)
 
     @render.ui
     def guard_try_result():
@@ -1161,6 +1543,7 @@ def server(input, output, session):
     # ------------------------------------------------ scoreboard
     @reactive.calc
     def scored():
+        data_rev()
         data = round_data()
         rows = []
         for c in LAB.cases:
@@ -1239,7 +1622,7 @@ def server(input, output, session):
         rows = []
         for rule, g in d.groupby("rule"):
             ok = int(g.routing_ok.sum())
-            rows.append(f'<tr><td>{rule}</td><td>{ok}/{len(g)}</td><td>{chip("✓", "ok") if ok == len(g) else chip("check", "bad")}</td></tr>')
+            rows.append(f'<tr><td>{html.escape(str(rule))}</td><td>{ok}/{len(g)}</td><td>{chip("✓", "ok") if ok == len(g) else chip("check", "bad")}</td></tr>')
         return ui.HTML('<table class="table table-sm" style="font-size:13px"><thead><tr><th>Rule</th><th>Routed right</th>'
                        f'<th></th></tr></thead><tbody>{"".join(rows)}</tbody></table>')
 
@@ -1247,13 +1630,77 @@ def server(input, output, session):
     def score_rounds():
         store_rev(), local()
         rows = []
-        for r in STORE.rounds():
-            data = STORE.round(r)
+        for version_id in STORE.versions():
+            data = STORE.version(version_id)
             rev = [v for v in data.values() if v.get("verdict")]
             rate = f"{sum(v['verdict'] == 'Pass' for v in rev) / len(rev):.0%}" if rev else "—"
-            rows.append(f"<tr><td>Round {r}</td><td>{len(rev)} reviewed</td><td><b>{rate}</b></td></tr>")
+            rows.append(f"<tr><td>{html.escape(version_id)}</td><td>{len(rev)} reviewed</td><td><b>{rate}</b></td></tr>")
         return ui.HTML(f'<table class="table table-sm" style="font-size:13px"><tbody>{"".join(rows)}</tbody></table>'
                        if rows else '<div class="muted">No reviews yet.</div>')
+
+    @render.ui
+    def score_regressions():
+        store_rev(), local(), data_rev()
+        current_id = rnd()
+        baseline_id = input.score_compare()
+        if baseline_id == "working":
+            baseline_id = working_review_version()
+        if not current_id or not baseline_id:
+            return ui.div("Select two versions with saved runs to compare.", class_="muted")
+        rows = compare_reviews(LAB.cases, STORE.version(current_id), STORE.version(baseline_id))
+        if not rows:
+            return ui.div("Neither version has saved evidence yet.", class_="muted")
+        body = "".join(
+            "<tr>" + "".join(f"<td>{html.escape(str(row[key]))}</td>" for key in
+                              ("case_id", "change", "baseline", "current", "baseline_decision", "decision")) + "</tr>"
+            for row in rows
+        )
+        return ui.HTML('<div class="table-responsive"><table class="table table-sm"><thead><tr>'
+                       '<th>Case</th><th>Change</th><th>Baseline verdict</th><th>Selected verdict</th>'
+                       '<th>Baseline routing</th><th>Selected routing</th></tr></thead>'
+                       f'<tbody>{body}</tbody></table></div>')
+
+    @reactive.effect
+    @reactive.event(input.name_candidate)
+    def _name_candidate():
+        try:
+            version_id = rnd()
+            if not version_id:
+                raise ValueError("Run the working copy first to create a snapshot.")
+            version = SIM.registry.name(version_id, input.candidate_label())
+            refresh_versions()
+            settings_rev.set(settings_rev() + 1)
+            ui.notification_show(f"Named {version.id} as {version.label}.")
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
+
+    @reactive.effect
+    @reactive.event(input.release_version)
+    def _release_version():
+        try:
+            version_id = rnd()
+            if not version_id:
+                raise ValueError("Select a candidate version first.")
+            version = SIM.registry.release(version_id, LAB.cases, input.release_signoff())
+            refresh_versions()
+            settings_rev.set(settings_rev() + 1)
+            ui.notification_show(f"Released {version.name} · {version.id}.")
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
+
+    @reactive.effect
+    @reactive.event(input.retire_version)
+    def _retire_version():
+        try:
+            version_id = rnd()
+            if not version_id:
+                raise ValueError("Select a candidate or released version first.")
+            version = SIM.registry.retire(version_id)
+            refresh_versions()
+            settings_rev.set(settings_rev() + 1)
+            ui.notification_show(f"Retired {version.name} · {version.id}; saved runs remain available.")
+        except (ValueError, KeyError, OSError) as exc:
+            ui.notification_show(str(exc), type="error", duration=8)
 
     # ------------------------------------------------ export
     @reactive.effect

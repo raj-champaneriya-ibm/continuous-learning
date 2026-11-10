@@ -8,13 +8,30 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, Iterator, List, Optional
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "acme"
 RESULTS = ROOT / "data" / "results"
+_DATA_ROOT: ContextVar[Optional[Path]] = ContextVar("acme_data_root", default=None)
+
+
+def data_root() -> Path:
+    return _DATA_ROOT.get() or DATA
+
+
+@contextmanager
+def use_data_root(path: Path) -> Iterator[None]:
+    """Use one run's data snapshot without changing another run's data."""
+    token = _DATA_ROOT.set(Path(path))
+    try:
+        yield
+    finally:
+        _DATA_ROOT.reset(token)
 
 INTENTS = ["billing", "outage", "speed", "cancel", "upgrade", "relocation", "other"]
 
@@ -71,22 +88,22 @@ INTENT_KB = {
 
 
 def load_cases(path: Optional[Path] = None) -> List[Dict]:
-    lines = (path or DATA / "cases.jsonl").read_text(encoding="utf-8").splitlines()
+    lines = (path or data_root() / "cases.jsonl").read_text(encoding="utf-8").splitlines()
     return [json.loads(line) for line in lines if line.strip()]
 
 
 def load_customers() -> Dict[str, Dict]:
-    return {c["id"]: c for c in json.loads((DATA / "customers.json").read_text(encoding="utf-8"))}
+    return {c["id"]: c for c in json.loads((data_root() / "customers.json").read_text(encoding="utf-8"))}
 
 
 def load_outages() -> Dict[str, Dict]:
-    return {o["area"]: o for o in json.loads((DATA / "outages.json").read_text(encoding="utf-8"))}
+    return {o["area"]: o for o in json.loads((data_root() / "outages.json").read_text(encoding="utf-8"))}
 
 
 def load_kb() -> List[Dict]:
     """[{"id": "KB01", "title": "Billing cycle and due dates", "text": "..."}, ...]"""
     articles = []
-    for block in re.split(r"^# ", (DATA / "kb.md").read_text(encoding="utf-8"), flags=re.M):
+    for block in re.split(r"^# ", (data_root() / "kb.md").read_text(encoding="utf-8"), flags=re.M):
         if not block.strip():
             continue
         head, _, body = block.partition("\n")

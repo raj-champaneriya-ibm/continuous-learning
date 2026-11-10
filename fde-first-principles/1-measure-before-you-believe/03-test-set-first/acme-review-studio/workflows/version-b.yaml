@@ -1,0 +1,10 @@
+name: version-b
+label: 1.0.0
+implementation: custom
+adapter: lab-version-b
+inputs: [customer_id, message, history]
+config:
+  provider: version-b
+  model: qwen3:4b
+  temperature: 0.0
+  timeout_s: 180

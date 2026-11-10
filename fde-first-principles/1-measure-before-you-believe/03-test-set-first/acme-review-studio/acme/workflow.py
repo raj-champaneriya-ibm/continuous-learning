@@ -42,6 +42,8 @@ PORTALS = {
                  "style": "Reply to a web-form ticket. Greet by first name, short paragraphs, sign off as 'Acme Fibre Support'."},
 }
 
+_LOG_LOCK = threading.Lock()
+
 DEFAULT_GUARDS = [
     {"name": "legal threat", "kind": "regex", "enabled": True,
      "pattern": r"legal notice|lawyer|advocate|consumer (court|forum)|\bcourt\b|\bTRAI\b|\bsue\b"},
@@ -64,15 +66,19 @@ class Settings:
 
 @dataclass
 class Deps:
-    """Everything the nodes need. The UI swaps these at runtime (provider, edited data, guards)."""
+    """Dependencies bound to a workflow instance."""
     lab: Lab
     provider: object
     settings: Settings = field(default_factory=Settings)
     log_path: Path | None = None
+    version_id: str | None = None
+    cancelled: threading.Event | None = None
 
 
 class State(TypedDict, total=False):
     case_id: str
+    version_id: str
+    sample: int
     customer_id: str
     portal: str
     raw_message: str
@@ -151,9 +157,10 @@ def user_prompt(customer: dict, outage: dict | None, message: str, portal: str,
 
 
 class Workflow:
-    def __init__(self, deps: Deps, checkpointer):
+    def __init__(self, deps: Deps, checkpointer, spec: dict | None = None):
         self.deps = deps
-        self._log_lock = threading.Lock()
+        self.spec = spec
+        self._log_lock = _LOG_LOCK
         self.graph = self._build().compile(checkpointer=checkpointer)
 
     # ------------------------------------------------------------- nodes
@@ -204,9 +211,9 @@ class Workflow:
             res = provider.draft(s["system_prompt"], s["user_prompt"],
                                  {"message": s["message"], "customer": s["customer"], "outage": s.get("outage"),
                                   "case_id": s.get("case_id"), "customer_id": s.get("customer_id"),
-                                  "history": s.get("history") or []})
+                                  "history": s.get("history") or [], "sample": s.get("sample", 0)})
             llm = {"provider": provider.name, "model": getattr(provider, "model", ""), "latency_s": res["latency_s"],
-                   "cost_usd": res["cost_usd"], "error": res["error"]}
+                   "cost_usd": res["cost_usd"], "error": res["error"], "raw": res.get("raw")}
             if res["error"]:
                 return {"draft": None, "llm": llm, "model_called": True, "issues": [f"model error: {res['error'][:120]}"],
                         "trace": _trace("5", "error", res["error"][:160], t)}
@@ -279,41 +286,95 @@ class Workflow:
             t = time.time()
             llm = s.get("llm") or {}
             record = {"at": datetime.now().isoformat(timespec="seconds"), "case_id": s.get("case_id"),
+                      "version_id": s.get("version_id"),
                       "customer_id": s.get("customer_id"), "portal": s.get("portal"),
                       "provider": llm.get("provider"), "model": llm.get("model"), "latency_s": llm.get("latency_s"),
                       "cost_usd": llm.get("cost_usd"), "intent": (s.get("draft") or {}).get("intent"),
                       "model_needs_human": (s.get("draft") or {}).get("needs_human"), "decision": s.get("decision"),
                       "reasons": s.get("reasons"), "flags": [f["check"] for f in s.get("flags", [])],
                       "outcome": s.get("outcome")}
-            if deps.log_path:
+            if deps.log_path and not (deps.cancelled and deps.cancelled.is_set()):
+                from .sim.privacy import redact, secret_values
                 deps.log_path.parent.mkdir(parents=True, exist_ok=True)
                 with self._log_lock, open(deps.log_path, "a", encoding="utf-8") as fh:
-                    fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                    fh.write(json.dumps(redact(record, secrets=secret_values("LLM_API_KEY", "LLM_ANTHROPIC_KEY")),
+                                        ensure_ascii=False) + "\n")
             return {"trace": _trace("9", "ok", f"Logged · outcome {s.get('outcome')}", t)}
 
-        for name, fn in [("receive", receive), ("route", route), ("verify", verify), ("fetch", fetch),
-                         ("draft", draft), ("check", check), ("decide", decide), ("human", human),
-                         ("send", send), ("log", log)]:
-            g.add_node(name, fn)
-        g.add_edge(START, "receive")
-        g.add_edge("receive", "route")
-        g.add_edge("route", "verify")
-        g.add_conditional_edges("verify", lambda s: "fetch" if s.get("verified") else "decide", ["fetch", "decide"])
-        g.add_edge("fetch", "draft")
-        g.add_edge("draft", "check")
-        g.add_edge("check", "decide")
-        g.add_conditional_edges("decide", lambda s: "human" if s["decision"] == "escalate" else "send", ["human", "send"])
-        g.add_edge("human", "send")
-        g.add_edge("send", "log")
+        library = {"receive": receive, "route": route, "verify": verify, "fetch": fetch, "draft": draft,
+                   "check": check, "decide": decide, "human": human, "send": send, "log": log}
+        spec = self.spec if self.spec is not None else {
+            "nodes": list(library),
+            "edges": [
+                ["receive", "route"], ["route", "verify"],
+                ["verify", "fetch", {"when": "verified"}], ["verify", "decide", {"when": "not_verified"}],
+                ["fetch", "draft"], ["draft", "check"], ["check", "decide"],
+                ["decide", "human", {"when": "escalate"}], ["decide", "send", {"when": "send"}],
+                ["human", "send"], ["send", "log"],
+            ],
+        }
+        self._validate_spec(spec)
+        for name in spec["nodes"]:
+            g.add_node(name, library[name])
+        entry = next(name for name in spec["nodes"] if name not in {edge[1] for edge in spec["edges"]})
+        g.add_edge(START, entry)
+        conditional: dict[str, dict[str, str]] = {}
+        for edge in spec["edges"]:
+            source, target = edge[:2]
+            condition = edge[2].get("when") if len(edge) == 3 else None
+            if condition:
+                conditional.setdefault(source, {})[condition] = target
+            else:
+                g.add_edge(source, target)
+        selectors = {
+            "verify": lambda s: "verified" if s.get("verified") else "not_verified",
+            "decide": lambda s: "escalate" if s["decision"] == "escalate" else "send",
+        }
+        for source, targets in conditional.items():
+            g.add_conditional_edges(source, selectors[source], targets)
         g.add_edge("log", END)
         return g
 
+    @staticmethod
+    def _validate_spec(spec: dict) -> None:
+        nodes = {"receive", "route", "verify", "fetch", "draft", "check", "decide", "human", "send", "log"}
+        required = {
+            ("verify", "fetch", "verified"),
+            ("verify", "decide", "not_verified"), ("fetch", "draft", ""), ("draft", "check", ""),
+            ("check", "decide", ""), ("decide", "human", "escalate"), ("decide", "send", "send"),
+            ("human", "send", ""), ("send", "log", ""),
+        }
+        if (not isinstance(spec, dict) or not isinstance(spec.get("nodes"), list)
+                or not all(isinstance(node, str) for node in spec["nodes"])
+                or len(spec["nodes"]) != len(nodes) or set(spec["nodes"]) != nodes):
+            raise ValueError("Declarative spec must use the allowlisted workflow nodes")
+        edges = spec.get("edges")
+        if not isinstance(edges, list):
+            raise ValueError("Declarative spec must contain edges")
+        actual = set()
+        for edge in edges:
+            if (not isinstance(edge, list) or len(edge) not in (2, 3)
+                    or not all(isinstance(node, str) and node in nodes for node in edge[:2])):
+                raise ValueError("Each declarative edge needs a source, target and optional condition")
+            condition = edge[2] if len(edge) == 3 else {}
+            if (not isinstance(condition, dict) or set(condition) - {"when"}
+                    or not isinstance(condition.get("when", ""), str)):
+                raise ValueError("Only allowlisted edge conditions are supported")
+            actual.add((edge[0], edge[1], condition.get("when", "")))
+        prefixes = [
+            {("receive", "route", ""), ("route", "verify", "")},
+            {("route", "receive", ""), ("receive", "verify", "")},
+        ]
+        if len(actual) != len(edges) or not any(actual == required | prefix for prefix in prefixes):
+            raise ValueError("Declarative edges must preserve verification, checks and human routing")
+
     # ------------------------------------------------------------- API
     def start(self, *, customer_id: str, message: str, portal: str = "email", case_id: str = "custom",
-              history: list[dict] | None = None) -> dict:
-        thread_id = f"{case_id}-{uuid.uuid4().hex[:8]}"
+              history: list[dict] | None = None, run_id: str | None = None, sample: int = 0) -> dict:
+        thread_id = (f"{self.deps.version_id}:{run_id}" if self.deps.version_id and run_id
+                     else f"{case_id}-{uuid.uuid4().hex[:8]}")
         self.graph.invoke({"case_id": case_id, "customer_id": customer_id, "portal": portal, "raw_message": message,
-                           "history": history or []},
+                           "history": history or [], "version_id": self.deps.version_id, "sample": sample},
                           {"configurable": {"thread_id": thread_id}})
         return self.view(thread_id)
 
@@ -334,7 +395,8 @@ def to_record(v: dict) -> dict:
     d = v.get("draft") or {}
     llm = v.get("llm") or {}
     return {
-        "thread_id": v.get("thread_id"), "provider": llm.get("provider"), "model": llm.get("model"),
+        "thread_id": v.get("thread_id"), "version_id": v.get("version_id"),
+        "provider": llm.get("provider"), "model": llm.get("model"),
         "latency_s": llm.get("latency_s"), "cost_usd": llm.get("cost_usd"), "error": llm.get("error"),
         "model_intent": d.get("intent"), "model_needs_human": d.get("needs_human"),
         "escalation_reason": d.get("escalation_reason"), "reply": d.get("reply"),
