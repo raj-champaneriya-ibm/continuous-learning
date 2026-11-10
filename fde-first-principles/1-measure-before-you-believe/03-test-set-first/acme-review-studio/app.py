@@ -66,13 +66,32 @@ SIM.registry.import_legacy_rounds([int(v.removeprefix("legacy-round-")) for v in
 SIM.seed_manifests()
 BATCH = {"running": False, "done": 0, "total": 0, "errors": 0}
 BATCH_LOCK = threading.Lock()
+VERSION_DESCRIPTIONS = {
+    "studio-c3": "Studio 9-step workflow, drafted by the C3 agent (glm-5.3-flash, ontology-grounded)",
+    "studio-offline": "Studio 9-step workflow, drafted by offline rules — no model, deliberate flaws for demos",
+    "studio-declarative": "Studio workflow built from the spec (declarative graph), full checks + human review",
+    "c3-agent": "C3 agent loop run directly — no studio graph, no step checks",
+    "version-b": "Version B — one LLM call, no tools, no loop",
+    "offline-direct": "Offline rules run directly — no model, no graph",
+    "remote-agent": "Agent behind an HTTP endpoint (remote deployment)",
+}
+
+
 def version_choices() -> dict[str, str]:
     versions = SIM.registry.list()
     named = [v for v in versions if v.label or v.status == "legacy"]
     recent = [v for v in versions if not v.label and v.status == "snapshot"][:20]
-    return {"working": "Working copy · auto-snapshot", **{
-        v.id: f"{v.name}{'@' + v.label if v.label and v.label != v.name else ''} · {v.status} · {v.id}"
-        for v in named + recent}}
+
+    def label_for(v) -> str:
+        if v.status == "legacy":
+            return f"Round {v.name.removeprefix('legacy-round-')} reviews — imported from the workbook"
+        description = VERSION_DESCRIPTIONS.get(v.name)
+        if description:
+            return f"{v.name} (v{v.label}) — {description}"
+        return f"{v.name} (v{v.label}) — {v.status} snapshot {v.id[:8]}"
+
+    return {"working": "Working copy — editable current config, auto-snapshots on change", **{
+        v.id: label_for(v) for v in named + recent}}
 
 
 def case_choices() -> dict[str, str]:

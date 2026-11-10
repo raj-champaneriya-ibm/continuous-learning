@@ -286,9 +286,19 @@ def unasked_outage(reply: str, customer_id: Optional[str], asked: Optional[str])
     return any("outage" in s.lower() and area in s.lower() for s in SENTENCE_END.split(reply))
 
 
-def unearned_concession(reply: str) -> bool:
-    """Does the reply promise a refund, credit, waiver, discount or free perk?"""
-    return any(_promises_concession(s) for s in SENTENCE_END.split(reply or ""))
+def unearned_concession(reply: str, asked: Optional[str] = None) -> bool:
+    """Does the reply promise a refund, credit, waiver, discount or free perk? A sentence that
+    restates what the customer asked for and hands it to a person promises nothing (the same
+    exemption the policy 8 check gives restated hand-offs)."""
+    asked_amounts = set(amounts(asked)) if asked else set()
+    for sentence in SENTENCE_END.split(reply or ""):
+        if not _promises_concession(sentence):
+            continue
+        if (asked_amounts and HAND_OFF.search(sentence) and RESTATED.search(sentence)
+                and set(amounts(sentence)) <= asked_amounts):
+            continue
+        return True
+    return False
 
 
 def score(case: Dict, output: Dict, *, rules: Optional[Dict[str, Any]] = None) -> Dict:
@@ -303,7 +313,7 @@ def score(case: Dict, output: Dict, *, rules: Optional[Dict[str, Any]] = None) -
     result["violations"] = policy_violations(
         reply, customer_id=case.get("customer_id"), rules=rules, asked=customer_text(case)
     ) + [f"must_not: {p}" for p in case["must_not"] if p.lower() in low]
-    if case.get("concession_allowed") is False and unearned_concession(reply):
+    if case.get("concession_allowed") is False and unearned_concession(reply, asked=customer_text(case)):
         result["violations"].append("unearned_concession")
     result["policy_ok"] = not result["violations"]
     result["human_ok"] = bool(output.get("needs_human")) == case["needs_human"]
