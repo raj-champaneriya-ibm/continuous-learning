@@ -13,12 +13,19 @@ keywords:
   - azure ai foundry
   - github copilot
   - evaluation
-estimated_reading_time: 12
+  - graph engineering
+  - durable execution
+  - human in the loop
+  - ai governance
+estimated_reading_time: 22
 ---
 
 ## 1. Executive Summary
 
 Nov 9, 2026 · @Raj Champaneriya
+
+> [!NOTE]
+> Revised 11 November 2026. Adds graph engineering (Module E), hybrid routing to a human (Module F), and a governance spine (Module G). Project 4 splits into 4a and 4b, and remaining work moves from 90 to about 103 hours. Section 10 holds the review notes behind the revision.
 
 Keep the spine, move the hours. About half of the original plan (66 of 128 hours, projects 3 to 5) teaches how models are trained from scratch. Nothing the major cloud and AI vendors shipped since May 2026, and nothing in U.S. Forward-Deployed Engineer (FDE) or Full-Stack Development Engineer job postings, pays for pretraining mechanics. Employers pay for what Project 1 already does well: measuring systems rigorously, grounding them in enterprise context, building production full-stack and agentic interfaces, governing them with policy as code, and delivering them into customer environments within weeks.
 
@@ -30,6 +37,9 @@ Across the U.S. market, the boundary between Forward-Deployed Engineer, Full-Sta
 | Keep, widen  | Project 2, Meaning as numbers           | Combine vector retrieval with ontology work. The enterprise context layer is where Microsoft IQ, AWS, and Google now compete.               |
 | Add          | Evals that run without you              | Calibrated LLM judges against human labels, simulated multi-turn users, OpenTelemetry trace grading, CI gates, and drift monitoring.        |
 | Add          | A production-shaped full-stack agent    | Managed agent runtime, MCP servers, Agent Skills, streaming React/Next.js agent UI, identity, Cedar policy as code, and HITL approvals.     |
+| Add (11 Nov) | Graph engineering                       | The plan swaps free-form loops for workflow state machines but never teaches the graph. Add control flow, durability and replay, and durable human waits as Project 4a. |
+| Add (11 Nov) | Hybrid routing to a human               | Escalation today is rules only. Add a calibrated signal, a check on when that signal can be trusted, a divergence signal, and a loop that learns from reviewer decisions. |
+| Add (11 Nov) | A governance spine                      | Identity, policy, audit, and handover sit in separate projects. Organize them under five first-principles questions and one evidence ledger. |
 | Compress     | Projects 3 to 5 (from 66h to 11h)       | Retain 6 decision-driving topics: tokens/cost, temperature, context degradation, hallucination origins, training basics, and RAG vs FT.     |
 | Rebuild      | Project 6, Back to the customer         | Rehearse a 6-week enterprise engagement: technical discovery, threat modeling and security review, executive readout, and handover.         |
 | Deprioritize | Scratch micrograd and tiny GPT          | Retain only as an optional weekend track for personal curiosity or video channel content; remove from the core 90-day hiring critical path. |
@@ -57,10 +67,11 @@ Major platform providers converged on a unified production stack in 2026: manage
 | Theme                              | 2026 Platform Releases                                                                                                                                                                                                                            | Curriculum Impact                                                                                                                                                       |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Managed agent loops as products    | AWS [AgentCore managed harness][aws-harness] GA (Jun). Microsoft [Foundry hosted agents][ms-foundry] (Jun). Google [Gemini Enterprise Agent Platform][gcp-agent] ADK (Apr). OpenAI [Agents API][oai-devday] (Sep). Anthropic [Claude Managed Agents][ant-managed] (May). | Your hand-built loop (Day 8) builds foundational intuition. Next, port C3 to one managed cloud runtime and benchmark on the identical dataset.                          |
+| Graph workflows and durable execution | Microsoft Agent Framework [durable workflows][maf-durable] (graph of executors, checkpoints, request ports, Durable Task backend). [Foundry workflows][foundry-workflows] visual designer and YAML. LangGraph [durable execution][lg-durable] with checkpointers and interrupts. Google graph-based ADK. | Added 11 Nov. Learn one graph runtime deeply (Agent Framework on Azure), build the durability mechanism once by hand, and map the others by primitive (Module E). |
 | Evaluation as a platform primitive | AWS [AgentCore Evaluations][aws-evals] GA (Mar). Microsoft Foundry Rubric evaluator and trace optimizer (Jun). Google [Agent Evaluations][gcp-evals] GA (Jul) with user simulation and pytest CI. Anthropic Outcomes beta.                        | Expand Project 1 methods into automated pipelines: judge calibration against human labels, user simulation, OpenTelemetry trace grading, and CI gating.                  |
 | Enterprise context layers          | Microsoft [IQ family][ms-iq] (Work, Fabric, Foundry IQ) and [Fabric IQ][fabric-iq] ontology preview. AWS AgentCore [knowledge layers][aws-knowledge] (Jun). Google [Gemini enterprise agent][gcp-work] (Oct).                                     | Formalize your ontology experiment as a controlled benchmark: evaluate ontology glossary alone vs. vector retrieval alone vs. hybrid grounding on identical test cases. |
 | Open interoperability standards    | Anthropic donated Agent Skills to the [Agentic AI Foundation][aaif-skills] (Oct), joining MCP, A2A, and `AGENTS.md`. Microsoft Foundry Toolboxes aggregate tools behind one MCP endpoint. OpenAI proposed MCP Events.                             | Expose Acme domain tools via an MCP server with OAuth/scoped auth and package the evaluation grader as a portable Agent Skill.                                          |
-| Identity, security, and policy     | Microsoft [Agent 365][ms-agent365] registry and RBAC. AWS AgentCore Policy GA using Cedar. Google agent identity, gateway, and dedicated workspace principals.                                                                                    | Add non-human identity management, least-privilege tool scoping, prompt injection defense, and Cedar/OPA policy-as-code enforcement.                                    |
+| Identity, security, and policy     | Microsoft [Agent 365][ms-agent365-ga] (generally available since 1 May 2026) registry, Entra Agent ID, and RBAC. AWS AgentCore Policy GA using Cedar. Google agent identity, gateway, and dedicated workspace principals.                                                                                    | Add non-human identity management, least-privilege tool scoping, prompt injection defense, and Cedar/OPA policy-as-code enforcement.                                    |
 | Constrained routing decisions      | OpenAI [Decisions API][oai-devday] preview for deterministic classification and routing across fixed action sets.                                                                                                                                 | Validates your Day 2 workflow-first architecture. Keep intent classification and escalation deterministic or strictly schema-constrained.                               |
 | Stateful long-running memory       | OpenAI Dots, Google coworker agents, Anthropic dreaming research preview, and Microsoft Foundry procedural memory.                                                                                                                                | Cover at the architectural awareness level (state persistence diagrams and session checkpointing) without over-investing build hours.                                   |
 
@@ -92,8 +103,8 @@ quadrantChart
     title Curriculum Topics by U.S. Employer Demand vs Current Coverage
     x-axis Low Current Coverage --> High Current Coverage
     y-axis Low Employer Demand --> High Employer Demand
-    quadrant-1 Maintain and Showcase (Strong Fit)
-    quadrant-2 Priority Additions (Critical Gaps)
+    quadrant-1 Maintain and Showcase - Strong Fit
+    quadrant-2 Priority Additions - Critical Gaps
     quadrant-3 Cut or Move to Optional Track
     quadrant-4 Keep Lean and Time-Boxed
     Baseline Evals and Error Analysis: [0.85, 0.92]
@@ -103,6 +114,9 @@ quadrantChart
     Managed Cloud Runtime and CI Evals: [0.18, 0.94]
     Full-Stack Agent UI and HITL Approvals: [0.15, 0.84]
     Security Review and Client Handover: [0.20, 0.89]
+    Durable Graph Workflows and HITL Waits: [0.25, 0.86]
+    Calibrated Routing to a Human: [0.28, 0.78]
+    Governance Spine and Evidence Ledger: [0.32, 0.82]
     Inference Economics and Context Limits: [0.35, 0.76]
     Scratch Backprop and Micrograd: [0.75, 0.15]
     Pretraining Tiny GPT from Scratch: [0.70, 0.12]
@@ -114,12 +128,13 @@ quadrantChart
 
 ### Structural Reallocation of Hours
 
-Remaining curriculum work drops from 110 hours to 90 hours, pulling the completion date forward to late January 2027 at an 8-hour weekly pace. Model training mechanics drop from 66 hours to 11 hours, while automated evaluations, full-stack production engineering, DevSecOps governance, and customer delivery expand from 17 hours to 52 hours.
+Remaining curriculum work drops from 110 hours to about 103 hours (90 before the 11 November revision), with completion in mid-February 2027 at an 8-hour weekly pace. Model training mechanics drop from 66 hours to 11 hours, while automated evaluations, graph and production engineering, governance, and customer delivery expand from 17 hours to 65 hours.
 
 1. Shift from model building to platform integration and full-stack delivery. Replace scratch neural network construction with deploying C3 onto a managed cloud runtime (Azure AI Foundry or AWS Bedrock AgentCore), exposing domain tools over MCP, and wiring a lightweight TypeScript/React streaming interface for human-in-the-loop (HITL) refund approvals.
 2. Elevate AI-assisted software engineering to a first-class workflow. Standardize all repository labs around `AGENTS.md`, reusable Agent Skills, and GitHub Copilot multi-file edit and test-generation workflows to match modern enterprise engineering velocity.
 3. Enforce DevSecOps and observability by default. Every evaluation run must emit OpenTelemetry traces and record cryptographic hashes for the prompt, grader, model configuration, and test dataset.
 4. Integrate communication and executive readiness. Fold your Impromptu framework (headline-first executive synthesis followed by evidence) directly into Project 6 technical discovery, security sign-off, and client handover deliverables.
+5. Make the workflow graph the organizing artifact (added 11 November). Control flow, durability, human approval, routing thresholds, and governance evidence all attach to one explicit graph of C3. Build the graph first (Project 4a), then the platform around it (Project 4b).
 
 ### Rule Changes for the Learning System
 
@@ -146,13 +161,14 @@ The stall on Day 10 occurred because high-value engineering happened outside the
 * OpenTelemetry trace grading: instrumenting agent steps with OpenTelemetry GenAI semantic conventions and grading intermediate tool selection, not only final prose.
 * Continuous Integration quality gates: enforcing regression thresholds in GitHub Actions with `pytest-bdd` so pull requests fail automatically when safety or accuracy drops.
 * Production drift monitoring: replaying shadow traffic and configuring automated alerts when intent distributions or rubric scores shift.
+* Routing signals, offline (added 11 November): calibrated confidence, meta-confidence, and sketch divergence measured on saved runs. See Module F1 to F3.
 
-### Module B: Production Agent Architecture, MCP, and Full-Stack HITL (Added to Project 4)
+### Module B: Production Agent Architecture, MCP, and Full-Stack HITL (Project 4b)
 
 * Model Context Protocol (MCP) server engineering: wrapping Acme order, policy, and refund APIs in a standardized MCP server with strict JSON Schema validation and idempotency keys.
-* Portable Agent Skills and `AGENTS.md`: packaging the evaluation grader and repository conventions into reusable skills compliant with Agentic AI Foundation specifications.
-* Managed cloud runtime migration: deploying C3 onto Azure AI Foundry Agent Service (or AWS Bedrock AgentCore) and running parity benchmarks against the hand-built hexagonal loop.
-* Full-stack streaming UI and Human-in-the-Loop (HITL) control: building a concise TypeScript/React (Next.js) operator console that renders real-time agent tool calls, trace citations, and an approval queue for high-value `issue_refund` actions.
+* Portable Agent Skills and `AGENTS.md`: packaging the evaluation grader and repository conventions into reusable skills compliant with Agentic AI Foundation specifications. Moved to Nice to Have in the 11 November revision.
+* Managed cloud runtime migration: deploying the Project 4a graph onto Azure AI Foundry Agent Service (or AWS Bedrock AgentCore) and running parity benchmarks against the hand-built hexagonal loop. Now part of Module E6.
+* Thin approval UI over a durable request: a small TypeScript/React approval queue for high-value `issue_refund` actions that shows the evidence, the router signals, and approve, edit, or reject with a reason. The durable pause and resume behind it are built in Module E3. The full streaming operator console is a Should Have extension.
 * Non-human identity and Policy as Code: assigning scoped managed identities to agents and encoding deterministic refund caps and escalation rules in Cedar or Open Policy Agent (OPA).
 * Adversarial security and prompt injection defense: executing indirect prompt injection attacks via poisoned customer tickets and verifying deterministic policy barriers (from old Day 61).
 
@@ -166,6 +182,186 @@ The stall on Day 10 occurred because high-value engineering happened outside the
 * Structured technical discovery: qualifying high-ROI agent use cases, defining latency/cost/accuracy SLAs, and establishing deterministic fallback boundaries with customer stakeholders.
 * Enterprise security review pack: data flow diagrams, PII redaction pipelines, RBAC/identity matrix, prompt injection test reports, and audit log retention schemas.
 * Operational handover kit: production runbooks, on-call escalation playbooks, CI evaluation dashboards, and client champion enablement sessions.
+
+### Module E: Graph Engineering (New Project 4a, added 11 November)
+
+A loop lets the model pick the next step. A graph declares which steps are possible and lets the model choose only where you allow it. C3 already contains a graph hidden in its code: escalation rules run before drafting. Module E makes that graph explicit, then makes it survive crashes and human delays. Each facet has the same four parts: a first-principles question, a build, an explanation artifact, and a pass condition.
+
+```mermaid
+flowchart TD
+    A["Ticket in"] --> B["Classify intent"]
+    B --> C{"Policy rules<br/>code decides"}
+    C -- "must escalate" --> H["Human review<br/>durable wait"]
+    C -- "allowed" --> D["Ground: ontology + vector<br/>fan-out, fan-in"]
+    D --> E["Draft agent<br/>model decides inside the node"]
+    E --> F{"Router<br/>calibrated signal"}
+    F -- "confident" --> G["Act: reply or refund<br/>idempotent"]
+    F -- "uncertain" --> H
+    H -- "approve or edit" --> G
+    H -- "reject" --> X["Close with reason"]
+    G --> L[("History and checkpoints")]
+    H --> L
+```
+
+#### E1. Control flow
+
+* Question: which decisions belong to code, which to the model, and which to a person?
+* Concepts: nodes, typed state, sequence, conditional edges, fan-out and fan-in, bounded cycles, sub-workflows.
+* Build: redraw C3 as an explicit graph in Microsoft Agent Framework workflows. Keep the domain logic behind the existing hexagonal ports so each node is a thin adapter.
+* Explain: one before-and-after diagram (loop versus graph) with every edge labeled code, model, or human.
+* Done when: the graph version scores within the confidence interval of the hand-built C3 on the same eval set, and every edge has a `pytest-bdd` scenario.
+
+#### E2. Durability and replay
+
+* Question: what must be written down so a run survives the death of its process without doing any side effect twice?
+* Concepts: two mechanisms. A snapshot checkpoint saves state at step boundaries. An event history records every completed step and rebuilds state by re-running the orchestration code against that record. The second mechanism forces two rules: orchestration code must be deterministic (no clock, random values, or direct I/O), and every side-effecting step must be idempotent because it can run more than once.
+* "Replay" means three different things. Learn to tell them apart:
+
+| Replay kind         | What runs again                                                                 | Used for                              |
+|---------------------|---------------------------------------------------------------------------------|---------------------------------------|
+| Recovery replay     | Orchestration code only; finished model and tool calls return recorded results  | Crash recovery ([Durable Task][dt-agents]) |
+| Time travel or fork | Every node after the chosen checkpoint, including model calls, so answers can differ | Debugging and what-if ([LangGraph][lg-timetravel]) |
+| Audit replay        | Nothing; the history is read back                                               | Explaining one decision to a reviewer |
+
+* Build, in three steps: (1) by hand, about 100 lines: an append-only event log and a replay function for one C3 run; (2) the same run with the framework's checkpoint storage; (3) the same run on a Durable Task backend running locally. Then run a kill test: stop the worker at every step boundary and restart it.
+* Explain: an animation or stepper of the event log filling up, the crash, and the replay skipping finished steps.
+* Done when: this scenario passes at every kill point. Given a refund run killed after `issue_refund` returned, when the worker restarts, then the run completes and exactly one refund exists.
+* Caveat worth a paragraph in your write-up: checkpointing is not the same as durable execution. Microsoft's [own comparison][dt-agents] describes Agent Framework workflows as developer-controlled checkpointing with manual failure recovery, and Durable Task as automatic. [Diagrid's critique][diagrid-durable] makes the same point about several frameworks.
+
+#### E3. Human in the loop
+
+* Question: how do you place a slow, expensive, authoritative step inside a graph?
+* Concepts: a durable wait that consumes no compute; a request payload that carries the evidence; a typed response (approve, edit, reject, plus a reason); timeout and escalation; idempotent resume; the decision stored as a label.
+* Build: model the `issue_refund` approval as a request port (Agent Framework) or interrupt (LangGraph). Restart the worker while the request is pending. Add a timeout path. Write each decision to a review log with case ID, router signals, and reason.
+* Explain: a timeline diagram showing the run parked for a day at zero compute, then resuming.
+* Done when: an approval submitted after a restart resumes the run, an unanswered request escalates on timeout, and every decision lands in the review log that Module F reads.
+
+#### E4. Agent native
+
+* Question: does the runtime treat an agent (model, tools, conversation thread) as a first-class node, or do you build the agent loop yourself on a general workflow engine?
+* Concepts: an agent-directed loop nested inside a code-directed graph; agent as node; streaming events; tool approval; the trade against general engines such as Durable Task, Temporal, or Logic Apps, which are stronger on durability and weaker on agent primitives.
+* Build: an ablation. Move the escalation decision from a coded edge into the agent's instructions and rerun the eval set.
+* Explain: two diagrams of the same workflow, one with the decision on an edge and one inside the agent, with the measured difference between them.
+* Done when: one quantified sentence, with a confidence interval, states what the coded edge buys in policy compliance. That sentence is your evidence for the workflow-first position.
+
+#### E5. Visual authoring
+
+* Question: who needs to read or change the graph, and can they?
+* Concepts: declarative YAML and a visual designer as two views of one graph; a graph that is diffable in a pull request; the limits of declarative logic; a diagram generated from code so it never drifts.
+* Build: express the C3 routing skeleton as a [declarative workflow][maf-declarative], open it in the [Foundry workflow designer][foundry-workflows], and add a CI step that generates a Mermaid diagram from the code-first graph.
+* Explain: the generated diagram becomes the opening slide of the client SME session.
+* Done when: both versions pass the same eval gate, and your buddy playing the client SME finds a seeded wrong edge from the diagram alone.
+* Caveats to verify after Ignite: the Foundry designer does not support hosted agents, and the visual round trip exists for declarative YAML, not for a code-first builder chain.
+
+#### E6. Azure native
+
+* Question: which Azure primitive carries which responsibility, and which would you choose for a given client?
+
+| Responsibility         | Azure primitive                                         | Portable equivalent                  |
+|------------------------|---------------------------------------------------------|--------------------------------------|
+| Graph and control flow | Agent Framework workflows                               | LangGraph, Google ADK                |
+| Durability             | Durable Task Scheduler, Durable Functions extension     | Temporal, a Postgres checkpointer    |
+| Hosting                | Foundry Agent Service (hosted and workflow agents)      | Bedrock AgentCore, a container       |
+| Visual and low-code    | Foundry workflow designer, Logic Apps agent loop        | Awareness only                       |
+| Identity and registry  | Entra Agent ID, Agent 365                               | Cloud IAM, workload identity         |
+| Observability          | OpenTelemetry into Azure Monitor and Foundry            | Any OpenTelemetry backend            |
+
+* Build: deploy the Project 4a graph to Foundry and rerun the parity benchmark (this absorbs the earlier "managed cloud runtime migration" topic). Write a one-page client decision note: Durable Task versus Agent Framework workflows versus Logic Apps.
+* Explain: the primitive map above as a single diagram, reusable in discovery calls.
+* Done when: one traced cloud run exists, the parity table is filled, and the primitive map is committed. This facet runs in Project 4b, after the post-Ignite radar check.
+
+### Module F: Hybrid Routing to a Human (Projects 3 and 4b, added 11 November)
+
+Routing is a decision under uncertainty with a budget. A wrong autonomous refund costs money and trust. A human review costs minutes. Reviewer time is the scarce resource, so the router exists to spend it on the cases most likely to be wrong. "Hybrid" has two layers: rules first (policy says this category always goes to a person), then a statistical signal for everything the rules allow.
+
+```mermaid
+flowchart LR
+    A["Draft and proposed action"] --> B{"Rules:<br/>must escalate?"}
+    B -- "yes" --> H["Human"]
+    B -- "no" --> C["Raw signals:<br/>judge score, logprob,<br/>sketch divergence"]
+    C --> D["Calibrator:<br/>signal to P(correct)"]
+    D --> E{"Meta-confidence:<br/>is this case like the<br/>calibration data?"}
+    E -- "no" --> H
+    E -- "yes" --> F{"Expected error cost<br/>above review cost?"}
+    F -- "yes" --> H
+    F -- "no" --> G["Act"]
+    G --> R["Random audit sample"]
+    R --> H
+    H --> L["Review log:<br/>decision and reason"]
+    L -.-> D
+    L -.-> B
+```
+
+#### F1. Calibrated signal
+
+* Question: when the system says 0.8, is it right 8 times in 10?
+* Concepts: raw confidence is a score, not a probability. Self-reported confidence can collapse to a single value ([one 2026 study][arxiv-frugal] found a fine-tuned model answering 0.95 by default). Calibration (isotonic regression or Platt scaling) on labeled cases turns a score into a probability. Check it with a reliability diagram and expected calibration error. Set the threshold from costs: escalate when (1 - p) x cost of an error exceeds the cost of a review. Judge the router with a risk-coverage curve.
+* Build: on saved C3 runs with grader labels, collect three raw signals (judge score, token log-probability, verbalized confidence). Fit a calibrator on a calibration split. Plot the reliability diagram and the risk-coverage curve. Pick the threshold from an explicit cost ratio.
+* Explain: the reliability diagram before and after calibration, side by side.
+* Done when: at a fixed review budget (for example 15% of cases), the router catches more errors than random routing, with a bootstrap confidence interval.
+* Two notes. This is the same mathematics as the Project 3 judge calibration applied to a different object. It also needs a three-way data split: tune, calibrate, test.
+
+#### F2. Meta-confidence
+
+* Question: can I trust the confidence number on this particular case?
+* Concepts: calibration is an average over the data it was fitted on. It fails quietly on cases unlike that data: a new region, Hinglish, a new product line. Signals of low meta-confidence: embedding distance from the calibration set (Project 2 gives you the tools), few calibration examples behind this score range (a wide interval), high calibration error on this slice, and disagreement between the judge and the agent.
+* Build: measure calibration error per slice on `cases_regional.jsonl` and the Hinglish cases. Add a "far from calibration data" flag from embedding distance. Route flagged cases to a person whatever the confidence says.
+* Explain: a scatter plot of cases in embedding space, colored by whether the confidence number was honest.
+* Done when: a table shows calibration error inside versus outside the calibration distribution, and counts the errors the flag caught that the threshold alone missed.
+
+#### F3. Sketch and divergence
+
+* Question: if I ask for the answer several cheap ways, do the answers agree?
+* Concepts: a sketch is a short structured proposal (intent, action, amount, policy clause), not full prose. Produce several sketches from varied samples, prompts, or a second model, and measure divergence field by field. High divergence exposes uncertainty that self-reported confidence hides. [Agreement-based routing][arxiv-frugal] and [reasoning-trace disagreement][arxiv-disagreement] are the research versions of this idea. A second use: when the executed run drifts from its own opening sketch, stop and ask.
+* Build: five sketches per case on the local model. Compute a divergence score. Add it to the F1 calibrator as a fourth signal. Measure the lift on the risk-coverage curve and the extra tokens per case.
+* Explain: three example cases shown as sketch grids, one where all five agree and two where they split.
+* Done when: you can state "divergence adds X points of error capture at a 15% review budget for Y extra tokens per case" with a confidence interval, or you document a null result.
+
+#### F4. Learning loop
+
+* Question: how does every human decision make the next routing decision better?
+* Concepts: each decision is a label with four destinations: recalibrating the threshold, new regression cases in the eval set, recurring fixes promoted into rules or ontology entries, and drift alarms on override and escalation rates. Two traps. Selective labels: you only learn about cases you escalated, so audit a random sample of autonomous actions. Automation bias: reviewers rubber-stamp, so seed known-wrong cases and measure whether they are caught. People need calibrating too; [one 2026 study][arxiv-complementarity] calibrated both AI and human confidence before routing between them.
+* Build: the E3 review log feeds a scheduled recalibration script. Add the audit sampler and a three-number dashboard: escalation rate, override rate, audited error rate.
+* Explain: the loop as one diagram, with last week's numbers on each arrow.
+* Done when: a simulated two-week replay shows the threshold moving after a distribution shift, and one promoted rule removing a recurring escalation.
+
+### Module G: Governance Spine (Projects 4a, 4b, and 6, added 11 November)
+
+Governance answers one question: who may do what, on whose behalf, with what evidence, and who answers when it goes wrong? For an FDE on a six-week clock, it is the difference between a working demo and something a client can sign. Start from five questions and map every product feature and regulation onto them.
+
+```mermaid
+flowchart LR
+    I["1. Identity<br/>who is acting"] --> P["2. Authority<br/>what is allowed"]
+    P --> E["3. Evidence<br/>what happened"]
+    E --> O["4. Oversight<br/>who can stop it"]
+    O --> A["5. Accountability<br/>who owns it"]
+    A -.-> I
+```
+
+| Question                         | First principle                                                   | Where it lives in your build                                                        | Evidence artifact                                      |
+|----------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------|
+| 1. Who is acting?                | Every agent has its own identity, separate from builder and user  | Agent identity (Entra Agent ID blueprint and instance, as in your `governance.md`)  | Identity matrix: agent, owner, sponsor, scopes         |
+| 2. What may it do?               | Least privilege, with policy decided outside the model            | Tool scopes on the MCP server, Cedar or OPA rules, graph edges as decision rights   | Policy files plus BDD scenarios that prove a denial    |
+| 3. What happened?                | Every action can be reconstructed                                 | Durable history, OpenTelemetry traces, provenance hashes                            | An audit replay of one case, end to end                |
+| 4. Who can stop or override it?  | Human oversight in proportion to risk                             | Human nodes, router thresholds, timeouts, a kill switch, rollback triggers in the ADR | Review log, override rate, audited error rate        |
+| 5. Who owns it after you leave?  | Named accountability and controlled change                        | Owner matrix, CI eval gate as change approval, runbook, decommission path           | Handover kit and a shared-responsibility table         |
+
+The graph from Module E is the governance map. Edges are decision rights. Human nodes are oversight. The history is evidence. Router thresholds are risk appetite written as numbers. This is why the three additions belong together.
+
+Supporting topics:
+
+* Risk tiering. Classify each action by reversibility and blast radius, then let the tier set the controls: a read-only answer needs logging; a reversible low-value action can run autonomously with audit sampling; an irreversible or above-cap action needs approval.
+* Data boundaries. Which data may flow to which model and region, where PII is redacted, and how long traces are retained.
+* Shared responsibility. Platform-managed, shared, and customer controls (already in your `governance.md`). The FDE owns making the customer-side list explicit before handover.
+* Regulatory mapping, at awareness level. NIST AI RMF (govern, map, measure, manage) and ISO/IEC 42001 both reduce to the five questions. The EU AI Act's human oversight and record-keeping duties for high-risk systems map to questions 4 and 3. The [Digital Omnibus agreement][eu-omnibus] moves stand-alone high-risk obligations to 2 December 2027; confirm its formal adoption status before quoting dates to a client.
+
+Build and explain:
+
+* G1. Governance ledger: one page listing each control, where it is enforced in the graph or code, its evidence artifact, and its owner.
+* G2. Controls as executable specifications: `pytest-bdd` scenarios for the refund cap, the must-escalate categories, and identity scope. A control without a failing-then-passing test is a claim, not a control.
+* G3. A five-minute "five questions" walkthrough, headline first, using your Impromptu structure.
+* G4. A week-one security intake checklist for the six-week engagement, so the client's review starts on day 3 and not in week 5.
+* Done when: your buddy, playing the client CISO, picks any refund from the run log and you show the acting identity, the policy decision, the trace, the approver, and the owner in under two minutes.
 
 ---
 
@@ -197,10 +393,11 @@ Hours are calculated using the curriculum baseline formula and should be recompu
 |---------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------|
 | 1       | Measure before you believe (Finish)                  | Inspect C3 v3 failures · isolate C3 gain by cause across model, grader, and design (Day 10) · write the evidence-backed ADR (Day 11) · author and verify technical article (Day 12)                                                                                             | 7     | Published ADR and article on `rajc.work` with statistically sound attribution table across runs A, B, C, C2, and C3.                   |
 | 2       | Grounding: meaning as numbers and enterprise context | Vectors, dot product, and cosine similarity (Days 13-14 merged) · production embeddings · NumPy vector search · `recall@k` · chunking strategies · vector DB vs. NumPy · RAG in Version B · ablation: ontology glossary vs. vector RAG vs. hybrid · article                     | 20    | Benchmark report running B and C3 without oracle context, proving `recall@k` and end-to-end resolution lift from hybrid ontology RAG.  |
-| 3       | Evals that run without you                           | Calibrate LLM judge against human labels (confusion matrix, Cohen's kappa) · paired statistical comparisons · simulated multi-turn users · fault injection on broken tools · OpenTelemetry trace grading · `pytest-bdd` CI gate · drift alerts · vendor eval parity             | 19    | Automated GitHub Actions CI pipeline with a calibrated LLM judge (kappa >= 0.80) that fails the build on accuracy or policy regression. |
-| 4       | A production-shaped full-stack agent                 | Expose Acme tools as an MCP server · package grader as an Agent Skill · port C3 to Azure AI Foundry or Bedrock AgentCore · React/TypeScript HITL approval UI for `issue_refund` · agent identity and Cedar policy as code · prompt injection red-team · capped frontier run     | 20    | Cloud-deployed agent with MCP tools, streaming React operator UI, Cedar policy guardrails, and 100% block rate on seeded injections.   |
+| 3       | Evals that run without you                           | Calibrate LLM judge against human labels (confusion matrix, Cohen's kappa) · paired statistical comparisons · simulated multi-turn users · fault injection on broken tools · OpenTelemetry trace grading · `pytest-bdd` CI gate · drift alerts · routing signals offline: calibrated confidence, meta-confidence, sketch divergence, risk-coverage curve (Module F1 to F3) | 22    | Automated GitHub Actions CI pipeline with a calibrated LLM judge (kappa >= 0.80) that fails the build on accuracy or policy regression, plus a routing report showing error capture at a fixed review budget against random routing. |
+| 4a      | Graph engineering: a durable workflow with a human in it | Redraw C3 as an explicit graph · control flow in Agent Framework workflows · durability by hand (event log and replay), then framework checkpoints and a Durable Task backend · kill test with idempotent `issue_refund` · durable human approval with timeout · agent-native ablation (coded edge vs. model decides) · declarative YAML and generated diagram (Module E1 to E5) | 14    | C3 as a graph that survives a kill at every step boundary with zero duplicate refunds, resumes a human approval after a restart, and passes the Project 3 eval gate. |
+| 4b      | A production-shaped agent platform                   | Expose Acme tools as an MCP server with idempotency keys · live router and learning loop wired into the graph (Module F4) · thin approval UI over the durable request · Azure-native hosting on Foundry with parity benchmark and primitive map (Module E6) · agent identity and Cedar policy as code · prompt injection red-team | 14    | Cloud-deployed graph with MCP tools, an approval queue, Cedar policy guardrails, a recalibrating router, and 100% block rate on seeded injections. |
 | 5       | Inside the model: mechanics that change decisions    | Tokenization economics and multilingual/Hinglish cost (Day 48) · softmax, temperature, and consistency data (Days 46, 57) · attention scaling and long-context degradation (Day 51) · hallucination mechanisms (Day 55) · 1-notebook training overview · RAG vs. FT vs. prompt | 11    | Six executive architecture diagrams and a quantitative cost/latency calculator guiding customer build-vs-tune-vs-retrieve decisions.   |
-| 6       | The 6-week enterprise engagement rehearsal           | Customer discovery and use-case scoping · threat model and enterprise security review pack · final system ADR (Day 64) · headline-first executive readout (Day 65) · operational handover runbook, SLO dashboard, and owner matrix · recorded live rehearsal                     | 13    | Recorded 45-minute live customer simulation (discovery, security sign-off, exec readout, handover) plus production deployment template. |
+| 6       | The 6-week enterprise engagement rehearsal           | Customer discovery and use-case scoping · week-one security intake · threat model and enterprise security review pack · governance ledger and controls as BDD specifications (Module G) · final system ADR (Day 64) · headline-first executive readout (Day 65) · operational handover runbook, SLO dashboard, and owner matrix · recorded live rehearsal | 15    | Recorded 45-minute live customer simulation (discovery, security sign-off, exec readout, handover), a governance ledger that passes the two-minute audit drill, and a production deployment template. |
 
 ---
 
@@ -212,7 +409,7 @@ Hours are calculated using the curriculum baseline formula and should be recompu
 |----------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | Forward-Deployed Engineer  | Projects 1, 2, 4, 6         | 6-week engagement pack, customer discovery rubric, ontology envelope, security review pack, recorded executive readout | Python, TypeScript, MCP, Azure AI Foundry / Bedrock AgentCore, hybrid RAG, executive communication  |
 | AI Application Engineer    | Projects 1, 2, 3, 4, 5      | Calibrated LLM-as-a-Judge harness, hybrid ontology + vector RAG pipeline, latency/cost tradeoff model                  | LLM APIs, embeddings, vector databases, prompt engineering, evaluation frameworks, structured output |
-| Full-Stack Engineer (AI)   | Projects 3, 4, 6            | Streaming React/TypeScript operator console, asynchronous HITL approval workflow for `issue_refund`, MCP API server     | TypeScript, React/Next.js, Python FastAPI, MCP, REST/SSE streaming, idempotent state management     |
+| Full-Stack Engineer (AI)   | Projects 3, 4, 6            | React/TypeScript approval queue over a durable request for `issue_refund`, crash-safe workflow graph, MCP API server     | TypeScript, React/Next.js, Python FastAPI, MCP, REST/SSE streaming, idempotent state management     |
 | AI Agent Developer         | Projects 1, 3, 4            | Hexagonal C3 agent vs. managed runtime benchmark, portable Agent Skills, `AGENTS.md`, multi-turn user simulator        | Agentic workflows, MCP, Agent Skills, tool-use fault recovery, deterministic routing                |
 | Platform Engineer (AI/ML)  | Projects 3, 4               | OpenTelemetry GenAI trace pipeline, `pytest-bdd` CI/CD regression gates, drift alerting, provenance hash enforcement   | OpenTelemetry, GitHub Actions CI/CD, Docker/containers, observability dashboards, shadow replay     |
 | Cloud / DevSecOps Engineer | Projects 4, 6               | Non-human agent identity config, Cedar/OPA policy-as-code engine, prompt injection red-team suite, security review pack | Azure / AWS IAM, Cedar policy language, secret/PII governance, threat modeling, compliance auditing |
@@ -235,25 +432,26 @@ Complete Project 1 by Monday 16 November, synchronize after Microsoft Ignite, an
 
 * [ ] Mon 9 Nov: Ship Day 10 at minimum viable scope before Tuesday's 05:00 deadline. Inspect C3 v3's 11 failures, populate the category-by-version matrix, and report v1 to v3 as the controlled before-and-after comparison.
 * [ ] Tue 10 Nov: Re-grade saved runs A, B, C, and C2 with the current grader. Produce the three-way attribution table (model, grader, design) as primary evidence for the Day 11 ADR.
-* [ ] Wed 11 Nov: Validate C3 on an uncontaminated evaluation split (either a fresh sample or `cases_regional.jsonl` if untouched during tuning). Automate runtime logging of grader, prompt, model, and dataset SHA hashes across all run metadata.
+* [ ] Wed 11 Nov: Validate C3 on an uncontaminated evaluation split (either a fresh sample or `cases_regional.jsonl` if untouched during tuning). Automate runtime logging of grader, prompt, model, and dataset SHA hashes across all run metadata. Cut the clean set three ways (tune, calibrate, test) so Module F has a calibration slice the test set never touches.
 * [ ] Thu 12 Nov: Complete Day 11 ADR. Document the architectural decision, operating conditions, and rollback triggers using the attribution table.
 * [ ] Fri 13 Nov: Draft Day 12 article (first 300 words from memory to test conceptual clarity, followed by strict verification of every metric against run files).
 * [ ] Sat 14 Nov: Expand Day 12 article to 800-1,200 words incorporating the attribution chart and ADR recommendation.
 * [ ] Mon 16 Nov: Edit and publish the Project 1 article on `rajc.work`. Mark Project 1 complete.
-* [ ] Tue 17 Nov: Commit the revised 90-hour plan into `learning_path.json` and regenerate trackers via `build_curriculum.py`. Review the Microsoft Ignite keynote and update the 2026 vendor table.
+* [ ] Tue 17 Nov: Commit the revised 103-hour plan into `learning_path.json` and regenerate trackers via `build_curriculum.py`. Review the Microsoft Ignite keynote and update the 2026 vendor table, watching Agent Framework workflows, Foundry workflows, Durable Task, and Agent 365 for changes that affect Module E.
 * [ ] Wed 18 to Thu 19 Nov: Execute Project 2 Topic 1 (vectors, dot product, and cosine similarity merged module).
 * [ ] Fri 20 to Sat 21 Nov: Execute Project 2 Topic 2 (production embeddings and dimensionality tradeoffs).
 
-### Phase 2: 90-Day Execution Plan (Nov 2026 to Jan 2027)
+### Phase 2: Execution Plan (Nov 2026 to Feb 2027)
 
 | Phase   | Target Window            | Focus Area                                                 | Milestone Exit Criteria                                                                                     |
 |---------|--------------------------|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Phase 1 | Weeks 1-2 (Nov 9-21)     | Close Project 1 and launch Project 2 foundations           | Project 1 article live on `rajc.work`; `learning_path.json` updated; embeddings lab complete.               |
 | Phase 2 | Weeks 3-4 (Nov 23-Dec 5) | Complete Project 2 (Hybrid RAG and Ontology Grounding)     | Controlled benchmark published comparing vector RAG, ontology glossary, and hybrid grounding on C3.         |
-| Phase 3 | Weeks 5-7 (Dec 7-Dec 26) | Complete Project 3 (Automated Evals, OTel, and CI Gates)   | Calibrated LLM judge (kappa >= 0.80), OpenTelemetry trace grading, and GitHub Actions CI gate active.       |
-| Phase 4 | Weeks 8-9 (Dec 28-Jan 9) | Complete Project 4 (Managed Runtime, MCP, HITL UI, Policy) | C3 running on Azure AI Foundry or Bedrock AgentCore with MCP server, React HITL UI, and Cedar policies.     |
-| Phase 5 | Week 10 (Jan 11-Jan 16)  | Complete Project 5 (Model Internals for Decision Makers)   | Six customer-ready architecture diagrams and token/latency/cost calculator published.                       |
-| Phase 6 | Weeks 11-12 (Jan 18-30)  | Complete Project 6 (6-Week Engagement Rehearsal)           | Recorded live client simulation (discovery, security review, readout, handover) and final capstone article. |
+| Phase 3 | Weeks 5-7 (Dec 7-Dec 26) | Complete Project 3 (Automated Evals, OTel, CI Gates, Routing Signals) | Calibrated LLM judge (kappa >= 0.80), OpenTelemetry trace grading, GitHub Actions CI gate active, and risk-coverage curve for the router committed. |
+| Phase 4a | Weeks 8-9 (Dec 28-Jan 9) | Complete Project 4a (Graph Engineering)                    | C3 graph passes the kill test at every step boundary and resumes a human approval after a restart.         |
+| Phase 4b | Weeks 10-11 (Jan 11-Jan 23) | Complete Project 4b (MCP, Router, Hosting, Policy)      | Graph running on Azure AI Foundry with MCP server, approval queue, recalibrating router, and Cedar policies. |
+| Phase 5 | Week 12 (Jan 25-Jan 30)  | Complete Project 5 (Model Internals for Decision Makers)   | Six customer-ready architecture diagrams and token/latency/cost calculator published.                       |
+| Phase 6 | Weeks 13-14 (Feb 1-Feb 13) | Complete Project 6 (6-Week Engagement Rehearsal)         | Recorded live client simulation (discovery, security review, readout, handover), governance ledger, and final capstone article. |
 
 ---
 
@@ -263,9 +461,9 @@ Complete Project 1 by Monday 16 November, synchronize after Microsoft Ignite, an
 
 | Priority Tier | Curriculum Items and Capabilities                                                                                                                                                              | Delivery Window | Hiring Signal Impact                                                                                  |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|-------------------------------------------------------------------------------------------------------|
-| Must Have     | Cause-by-cause attribution (Day 10-12) · Hybrid RAG + Ontology benchmark (Proj 2) · Calibrated LLM judge and `pytest-bdd` CI gate (Proj 3) · MCP server + Managed Runtime + Cedar policy (Proj 4) | Weeks 1 to 9    | Directly matches 80%+ of U.S. FDE, AI Application Engineer, and Full-Stack AI screening requirements. |
-| Should Have   | React/TypeScript HITL approval UI for `issue_refund` · OpenTelemetry GenAI trace grading · Multi-turn simulated customers · Enterprise security review pack and handover runbook (Proj 6)      | Weeks 6 to 12   | Differentiates Senior/Principal candidates in system design, DevSecOps reviews, and client readiness. |
-| Nice to Have  | Long-running procedural memory diagrams · Multi-cloud runtime portability beyond primary cloud · Optional weekend track (`micrograd` and Tiny GPT for video channel content)                   | Post-Jan 2027   | Useful for content creation and specialized research loops, but non-blocking for immediate U.S. roles. |
+| Must Have     | Cause-by-cause attribution (Day 10-12) · Hybrid RAG + Ontology benchmark (Proj 2) · Calibrated LLM judge and `pytest-bdd` CI gate (Proj 3) · Durable C3 graph with kill test and durable human approval (Proj 4a) · Calibrated routing threshold with risk-coverage evidence (Proj 3, 4b) · MCP server + Managed Runtime + Cedar policy (Proj 4b) · Governance ledger (Proj 6) | Weeks 1 to 11   | Directly matches 80%+ of U.S. FDE, AI Application Engineer, and Full-Stack AI screening requirements. |
+| Should Have   | Meta-confidence and sketch divergence signals · Learning-loop dashboard and audit sampling · Declarative YAML and visual authoring · Streaming operator console beyond the thin approval queue · OpenTelemetry GenAI trace grading · Multi-turn simulated customers · Enterprise security review pack and handover runbook (Proj 6) | Weeks 6 to 14   | Differentiates Senior/Principal candidates in system design, DevSecOps reviews, and client readiness. |
+| Nice to Have  | Long-running procedural memory diagrams · Second graph runtime (LangGraph or ADK port of the same graph) · Agent Skill packaging of the grader · Multi-cloud runtime portability beyond primary cloud · Optional weekend track (`micrograd` and Tiny GPT for video channel content) | Post-Feb 2027   | Useful for content creation and specialized research loops, but non-blocking for immediate U.S. roles. |
 
 ### Architectural Risk Mitigation
 
@@ -273,6 +471,39 @@ Two structural risks apply regardless of cloud vendor selection:
 
 * Rapid API churn across cloud providers. AWS deprecated original Bedrock Agents for new customers in 2026, and Google consolidated Vertex AI components into the Gemini Enterprise Agent Platform. Mitigate churn by keeping C3 domain logic strictly behind hexagonal ports and adapters, learning one primary managed runtime deeply (such as Microsoft Foundry), and mapping competing clouds by architectural primitive.
 * Recruiter and vendor bias in job-market aggregates. Treat headline hiring growth percentages as directional indicators rather than exact quotas, and anchor portfolio proof in reproducible code, calibrated evaluations, and live deployment artifacts.
+
+---
+
+## 10. Review Notes and Revision (11 November 2026)
+
+### What the review found
+
+1. Project 4 was overloaded. Seven deliverables in 20 hours, mixing Must Have and Should Have items. It is now split into 4a (the graph) and 4b (the platform around it).
+2. The plan had no home for the workflow graph. Section 5 replaces free-form loops with "deterministic workflow state machines," and the vendor table notes Google's graph-based ADK, but no topic taught control flow, durability, or replay. Module E fills that gap.
+3. Human-in-the-loop appeared only as a React UI. The hard parts are the durable pause, what evidence reaches the reviewer, and what happens to the decision afterward. The UI is now a thin approval queue over a durable request.
+4. Escalation was rules only. Rules cover the cases you anticipated. A calibrated signal covers the rest, and Project 3 already teaches the mathematics. Module F starts in Project 3 and goes live in Project 4b.
+5. Governance topics existed without an organizing model. Cedar, identity, provenance hashes, and the security pack sat in different projects. Module G adds almost no new tooling; it adds the five questions and one ledger that tie them together.
+6. Calibration needs its own data. When you draw the clean held-out set (Day 10, item 2), cut it three ways: tune, calibrate, test. Reusing the test split to fit a calibrator repeats the `c79` and `c80` leak in a new form.
+7. One stale source. The Agent 365 row cited the Ignite 2025 announcement. Agent 365 has been generally available since 1 May 2026, and the row now says so.
+
+### What pays for the additions
+
+| Change                                                              | Hours |
+|---------------------------------------------------------------------|-------|
+| New Project 4a, graph engineering (Module E1 to E5)                 | +14   |
+| Project 3 gains routing signals offline (Module F1 to F3)           | +5    |
+| Project 3 loses vendor eval parity (now measured in 4b hosting)     | -2    |
+| Old Project 4 becomes 4b: Agent Skill packaging moves to Nice to Have, the streaming console thins to an approval queue, the frontier run folds into the parity benchmark, and the live router (F4) and Azure-native hosting (E6) are added | -6    |
+| Project 6 gains the governance ledger and audit drill (Module G)    | +2    |
+| Net                                                                 | +13   |
+
+Total remaining work is about 103 hours, and completion moves from late January to mid-February 2027 at 8 hours a week. These are estimates; recompute them with `build_curriculum.py`. If Full-Stack roles are a real target, keep the streaming operator console and accept about 3 more hours.
+
+### Open questions
+
+* Three terms are interpreted, not sourced: "agent native" (agents as first-class runtime nodes), "meta-confidence" (confidence in the confidence number), and "sketch and divergence" (agreement across several cheap structured proposals). If they come from a specific article or framework, adjust the labs to its definitions.
+* Confirm that durable graph workflows on the Durable Task backend are available for Python. If they are not, run the E2 durability lab on the Durable Task Python SDK directly and keep the graph in Agent Framework.
+* Microsoft Ignite (17 to 20 November) is likely to change details of Agent Framework, Foundry workflows, and Agent 365. Do facets E5 and E6 after the radar check.
 
 ---
 
@@ -290,6 +521,14 @@ Two structural risks apply regardless of cloud vendor selection:
 * Google: [Gemini Enterprise Agent Platform][gcp-agent] · [Agent Evaluations GA][gcp-evals] · [Gemini agent for work][gcp-work]
 * OpenAI: [DevDay 2026 for developers][oai-devday]
 * Anthropic: [Claude Managed Agents update][ant-managed] · [Agent Skills donated to the Agentic AI Foundation][aaif-skills] · [Claude Frontier Academy][ant-academy]
+
+### Graph Engineering, Routing, and Governance (Added 11 November 2026)
+
+* Microsoft: [Durable Task for AI agents and the comparison of agentic workflow options][dt-agents] · [Durable workflows in Agent Framework][maf-durable] · [Durable extension][maf-durable-ext] · [Foundry workflows][foundry-workflows] · [Declarative workflows][maf-declarative] · [Agent 365 general availability][ms-agent365-ga]
+* LangGraph: [Durable execution][lg-durable] · [Time travel][lg-timetravel]
+* Durability critique: [Still Not Durable, Diagrid][diagrid-durable]
+* Routing research: [Toward Human-AI Complementarity Across Diverse Tasks][arxiv-complementarity] · [Self-consistency, agreement routing, and the self-reported confidence result][arxiv-frugal] · [Reasoning-trace disagreement as a routing signal][arxiv-disagreement]
+* Regulation: [EU AI Act Omnibus agreement, Gibson Dunn][eu-omnibus]
 
 ### U.S. Market and FDE Hiring Signals
 
@@ -315,4 +554,16 @@ Two structural risks apply regardless of cloud vendor selection:
 [stateofai-fde]: https://www.thestateofai.com/news/amazon-bets-one-billion-on-forward-deployed-engineers
 [pulse2-aws]: https://pulse2.com/amazon-aws-invests-1-billion-to-embed-ai-forward-deployed-engineers-with-customers/
 [ant-academy]: https://anthropic.com/news/claude-frontier-academy
-
+[dt-agents]: https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+[maf-durable]: https://devblogs.microsoft.com/dotnet/durable-workflows-in-microsoft-agent-framework/
+[maf-durable-ext]: https://learn.microsoft.com/en-us/agent-framework/hosting/azure-functions
+[foundry-workflows]: https://learn.microsoft.com/azure/foundry/agents/concepts/workflow
+[maf-declarative]: https://learn.microsoft.com/agent-framework/workflows/declarative
+[ms-agent365-ga]: https://www.itelio.com/en/microsoft-message-center/MC1296867
+[lg-durable]: https://docs.langchain.com/oss/python/langgraph/durable-execution
+[lg-timetravel]: https://docs.langchain.com/oss/python/langgraph/use-time-travel.md
+[diagrid-durable]: https://www.diagrid.io/blog/still-not-durable-how-microsoft-agent-framework-and-strands-agents-repeat-the-same-mistake
+[arxiv-complementarity]: https://arxiv.org/pdf/2605.04070
+[arxiv-frugal]: https://arxiv.org/pdf/2604.11104
+[arxiv-disagreement]: https://arxiv.org/pdf/2606.04223
+[eu-omnibus]: https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines/
