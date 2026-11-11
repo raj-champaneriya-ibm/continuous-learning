@@ -17,7 +17,9 @@ keywords:
   - durable execution
   - human in the loop
   - ai governance
-estimated_reading_time: 22
+  - semantic layer
+  - entity resolution
+estimated_reading_time: 28
 ---
 
 ## 1. Executive Summary
@@ -26,6 +28,8 @@ Nov 9, 2026 · @Raj Champaneriya
 
 > [!NOTE]
 > Revised 11 November 2026. Adds graph engineering (Module E), hybrid routing to a human (Module F), and a governance spine (Module G). Project 4 splits into 4a and 4b, and remaining work moves from 90 to about 103 hours. Section 10 holds the review notes behind the revision.
+>
+> A second pass the same day (Section 11) tests the plan against the enterprise goal: help a client adopt AI and build meaning from data fragmented across the organization. It rebuilds Project 2 around cross-system meaning (Module H), trims Project 5, and extends Project 6. The total stays at 103 hours.
 
 Keep the spine, move the hours. About half of the original plan (66 of 128 hours, projects 3 to 5) teaches how models are trained from scratch. Nothing the major cloud and AI vendors shipped since May 2026, and nothing in U.S. Forward-Deployed Engineer (FDE) or Full-Stack Development Engineer job postings, pays for pretraining mechanics. Employers pay for what Project 1 already does well: measuring systems rigorously, grounding them in enterprise context, building production full-stack and agentic interfaces, governing them with policy as code, and delivering them into customer environments within weeks.
 
@@ -34,13 +38,13 @@ Across the U.S. market, the boundary between Forward-Deployed Engineer, Full-Sta
 | Decision     | Curriculum Part                         | Strategic Rationale                                                                                                                         |
 |--------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | Keep         | Project 1, Measure before you believe   | AWS, Microsoft, Google, OpenAI, and Anthropic all shipped managed evaluation services in 2026. Rigorous measurement remains your asset.     |
-| Keep, widen  | Project 2, Meaning as numbers           | Combine vector retrieval with ontology work. The enterprise context layer is where Microsoft IQ, AWS, and Google now compete.               |
+| Reshape (11 Nov) | Project 2, Meaning across fragmented data | Vector similarity is one of seven questions about a fact. Rebuild the project around identity, definitions, relationships, authority, freshness, and permission across three source systems (Module H). |
 | Add          | Evals that run without you              | Calibrated LLM judges against human labels, simulated multi-turn users, OpenTelemetry trace grading, CI gates, and drift monitoring.        |
 | Add          | A production-shaped full-stack agent    | Managed agent runtime, MCP servers, Agent Skills, streaming React/Next.js agent UI, identity, Cedar policy as code, and HITL approvals.     |
 | Add (11 Nov) | Graph engineering                       | The plan swaps free-form loops for workflow state machines but never teaches the graph. Add control flow, durability and replay, and durable human waits as Project 4a. |
 | Add (11 Nov) | Hybrid routing to a human               | Escalation today is rules only. Add a calibrated signal, a check on when that signal can be trusted, a divergence signal, and a loop that learns from reviewer decisions. |
 | Add (11 Nov) | A governance spine                      | Identity, policy, audit, and handover sit in separate projects. Organize them under five first-principles questions and one evidence ledger. |
-| Compress     | Projects 3 to 5 (from 66h to 11h)       | Retain 6 decision-driving topics: tokens/cost, temperature, context degradation, hallucination origins, training basics, and RAG vs FT.     |
+| Compress     | Projects 3 to 5 (from 66h to 11h)       | Now 6h after the 11 November review. Retain 6 decision-driving topics: tokens/cost, temperature, context degradation, hallucination origins, training basics, and RAG vs FT.     |
 | Rebuild      | Project 6, Back to the customer         | Rehearse a 6-week enterprise engagement: technical discovery, threat modeling and security review, executive readout, and handover.         |
 | Deprioritize | Scratch micrograd and tiny GPT          | Retain only as an optional weekend track for personal curiosity or video channel content; remove from the core 90-day hiring critical path. |
 
@@ -115,6 +119,7 @@ quadrantChart
     Full-Stack Agent UI and HITL Approvals: [0.15, 0.84]
     Security Review and Client Handover: [0.20, 0.89]
     Durable Graph Workflows and HITL Waits: [0.25, 0.86]
+    Cross-System Identity and Semantic Layer: [0.12, 0.93]
     Calibrated Routing to a Human: [0.28, 0.78]
     Governance Spine and Evidence Ledger: [0.32, 0.82]
     Inference Economics and Context Limits: [0.35, 0.76]
@@ -128,7 +133,7 @@ quadrantChart
 
 ### Structural Reallocation of Hours
 
-Remaining curriculum work drops from 110 hours to about 103 hours (90 before the 11 November revision), with completion in mid-February 2027 at an 8-hour weekly pace. Model training mechanics drop from 66 hours to 11 hours, while automated evaluations, graph and production engineering, governance, and customer delivery expand from 17 hours to 65 hours.
+Remaining curriculum work drops from 110 hours to about 103 hours (90 before the 11 November revision), with completion in mid-February 2027 at an 8-hour weekly pace. Model training mechanics drop from 66 hours to 6 hours, while automated evaluations, graph and production engineering, governance, and customer delivery expand from 17 hours to 66 hours. Grounding grows from 20 to 24 hours, with 18 of them moved from vector mechanics to cross-system meaning.
 
 1. Shift from model building to platform integration and full-stack delivery. Replace scratch neural network construction with deploying C3 onto a managed cloud runtime (Azure AI Foundry or AWS Bedrock AgentCore), exposing domain tools over MCP, and wiring a lightweight TypeScript/React streaming interface for human-in-the-loop (HITL) refund approvals.
 2. Elevate AI-assisted software engineering to a first-class workflow. Standardize all repository labs around `AGENTS.md`, reusable Agent Skills, and GitHub Copilot multi-file edit and test-generation workflows to match modern enterprise engineering velocity.
@@ -168,14 +173,14 @@ The stall on Day 10 occurred because high-value engineering happened outside the
 * Model Context Protocol (MCP) server engineering: wrapping Acme order, policy, and refund APIs in a standardized MCP server with strict JSON Schema validation and idempotency keys.
 * Portable Agent Skills and `AGENTS.md`: packaging the evaluation grader and repository conventions into reusable skills compliant with Agentic AI Foundation specifications. Moved to Nice to Have in the 11 November revision.
 * Managed cloud runtime migration: deploying the Project 4a graph onto Azure AI Foundry Agent Service (or AWS Bedrock AgentCore) and running parity benchmarks against the hand-built hexagonal loop. Now part of Module E6.
-* Thin approval UI over a durable request: a small TypeScript/React approval queue for high-value `issue_refund` actions that shows the evidence, the router signals, and approve, edit, or reject with a reason. The durable pause and resume behind it are built in Module E3. The full streaming operator console is a Should Have extension.
+* Thin approval UI over a durable request: a small approval queue for high-value `issue_refund` actions (built in the fastest tool available; Shiny is fine, and TypeScript/React only if a full-stack role is the target) that shows the evidence, the router signals, and approve, edit, or reject with a reason. The durable pause and resume behind it are built in Module E3. The full streaming operator console is a Should Have extension.
 * Non-human identity and Policy as Code: assigning scoped managed identities to agents and encoding deterministic refund caps and escalation rules in Cedar or Open Policy Agent (OPA).
 * Adversarial security and prompt injection defense: executing indirect prompt injection attacks via poisoned customer tickets and verifying deterministic policy barriers (from old Day 61).
 
 ### Module C: Hybrid Semantic Grounding and Inference Economics (Added to Projects 2 and 5)
 
-* Controlled grounding ablation: quantitative benchmark comparing vector retrieval alone, ontology glossary/envelope alone, and hybrid retrieval + ontology across identical regional and edge-case datasets.
-* Inference economics and latency engineering: analyzing tokenization overhead across languages (including Hinglish), Time to First Token (TTFT), KV-cache memory scaling, context rot in long prompts, and the ROI decision matrix between prompting, hybrid RAG, and fine-tuning.
+* Superseded by Module H7 on the cross-system question set (11 November). Original scope: controlled grounding ablation: quantitative benchmark comparing vector retrieval alone, ontology glossary/envelope alone, and hybrid retrieval + ontology across identical regional and edge-case datasets.
+* Trimmed to the decision topics in the 11 November review (Project 5 is now 6 hours). Inference economics and latency engineering: analyzing tokenization overhead across languages (including Hinglish), Time to First Token (TTFT), KV-cache memory scaling, context rot in long prompts, and the ROI decision matrix between prompting, hybrid RAG, and fine-tuning.
 
 ### Module D: Enterprise Engagement Lifecycle and DevSecOps Handover (Added to Project 6)
 
@@ -363,6 +368,96 @@ Build and explain:
 * G4. A week-one security intake checklist for the six-week engagement, so the client's review starts on day 3 and not in week 5.
 * Done when: your buddy, playing the client CISO, picks any refund from the run log and you show the acting identity, the policy decision, the trace, the approver, and the owner in under two minutes.
 
+### Module H: Meaning Across Fragmented Data (Reshapes Project 2, added 11 November)
+
+Meaning does not live in the model, and it does not live in any one system. For any fact an agent uses, six questions need an answer. Each one is a skill a client pays for.
+
+| # | Question about a fact                        | Capability                                            |
+|---|----------------------------------------------|-------------------------------------------------------|
+| 1 | Which real-world thing is this about?        | Identity resolution across systems                    |
+| 2 | What does this term mean, and who says so?   | Definitions with an owner (glossary, metric definitions) |
+| 3 | How is it connected to other things?         | Relationships (ontology, knowledge graph)             |
+| 4 | Which source wins when systems disagree?     | Authority: a system of record per attribute           |
+| 5 | How old is it?                               | Freshness carried with the fact                       |
+| 6 | Who may see it?                              | Permission enforced at retrieval                      |
+
+Similarity search answers a seventh, narrower question: which text resembles this question? It is the right tool for unstructured content and it cannot answer questions 1 to 6. The original Project 2 spent most of its hours there.
+
+```mermaid
+flowchart TD
+    CRM["CRM<br/>customer C-1042"] --> ID
+    BILL["Billing<br/>account 88-A-17"] --> ID
+    TIX["Ticketing<br/>email and phone only"] --> ID
+    DOCS["Policy and help articles"] --> RET["Retrieval<br/>lexical + vector"]
+    ID["1. Identity resolution<br/>one customer, three keys"] --> SEM["2-3. Semantic layer<br/>definitions, relationships, owners"]
+    SEM --> AUTH["4-5. Authority and freshness<br/>which source wins, how old"]
+    AUTH --> PERM["6. Permission filter<br/>who may see what"]
+    RET --> PERM
+    PERM --> AG["Agent answer<br/>with source and timestamp"]
+```
+
+| Lab | Topic                                             | Hours |
+|-----|---------------------------------------------------|-------|
+| H0  | Fragmented Acme estate and cross-system question set | 3   |
+| H1  | Identity resolution                               | 3     |
+| H2  | Definitions, relationships, and owners            | 4     |
+| H3  | Structured questions through the semantic layer   | 3     |
+| H4  | Unstructured retrieval (the compressed vector track) | 6  |
+| H5  | Authority and freshness                           | 2     |
+| H6  | Permission-aware retrieval                        | 1.5   |
+| H7  | Ablation and article                              | 1.5   |
+
+#### H0. Fragmented estate and question set (test set first)
+
+* Question: what does the business need answered that no single system can answer?
+* Build: split Acme into three synthetic systems (CRM, billing, ticketing) with different customer keys and different owners. Seed the conflicts a real client has: two definitions of "active customer," a stale address, one customer entered twice, a refund recorded in billing and missing in ticketing. Then write about 30 business questions that span systems, each with its expected answer and the systems it needs. Write them before any retrieval code.
+* Explain: a map of the estate with every seeded conflict marked.
+* Done when: today's C3 is scored on the question set. Expect it to fail many. That measured gap is the reason for the rest of the module.
+
+#### H1. Identity resolution
+
+* Question: is customer C-1042 in the CRM the same person as account 88-A-17 in billing?
+* Concepts: deterministic keys, fuzzy matching, match precision and recall, and unequal error costs. A false split loses context. A false merge shows one customer's data to another, which is a privacy incident. Uncertain matches go to a person (Module F applies here too).
+* Build: a resolver that uses rules first and similarity second. Label 100 candidate pairs and measure it.
+* Explain: three example pairs (clear match, clear non-match, uncertain) with the evidence for each.
+* Done when: precision and recall are reported with confidence intervals, the false-merge rate is stated, and uncertain matches route to review.
+
+#### H2. Definitions, relationships, and owners
+
+* Question: when two teams use the same word differently, which meaning does the agent use, and who decided?
+* Build: extend `ontology.ttl` with the contested terms and metrics. Give each one an owner, a source of truth, and an effective date. Start with the five most disputed terms, not a full taxonomy. Resolve the drift your semantic explorer already found between `business_rules.json` and `ontology.ttl`.
+* Explain: one concept page per disputed term in the Meaning tab of Acme Review Studio.
+* Done when: `validate_ontology_ops()` catches a seeded cross-system disagreement, and your buddy playing the client SME signs off the five definitions.
+
+#### H3. Structured questions through the semantic layer
+
+* Question: most enterprise facts sit in tables, so how should an agent query them?
+* Build: answer the numeric questions two ways. First the model writes SQL against the raw schemas. Then the model picks governed metrics and dimensions from the semantic layer, and code generates the query. Compare accuracy, and consistency across repeated runs.
+* Evidence to test against: the [dbt Labs 2026 benchmark][dbt-bench] reports semantic-layer grounding lifting one frontier model from 90.0% to 98.2% and another from 84.1% to 100% on modeled questions, as [summarized by Atlan][atlan-t2s].
+* Done when: an accuracy table with confidence intervals exists, plus a list of the question types the semantic layer cannot express.
+
+#### H4. Unstructured retrieval
+
+* Scope: the original vector track, compressed. One notebook for embedding and cosine intuition. Then chunking, `recall@k`, and hybrid lexical plus vector search over policy and help articles. NumPy versus a vector database becomes a one-page decision note, not a build.
+* Done when: `recall@k` is reported on the document questions and the decision note is committed.
+
+#### H5. Authority and freshness
+
+* Question: billing and CRM disagree about a customer's plan. Which one does the agent believe, and does it say how old the fact is?
+* Build: a system-of-record table per attribute. Every fact travels with its source and timestamp. A conflict rule picks the authoritative source. Stale facts are stated as stale or escalated.
+* Done when: on the seeded conflicts, the agent cites the authoritative source every time and flags every stale fact.
+
+#### H6. Permission-aware retrieval
+
+* Question: can the agent leak something its caller is not allowed to see?
+* Build: filter at retrieval by the caller's identity, never by instruction in the prompt. Write the access rules as `pytest-bdd` scenarios: a support role cannot retrieve payment details or another region's customers.
+* Done when: zero leaks on a seeded access test set. This is evidence for governance question 2 in Module G.
+
+#### H7. Ablation and article
+
+* Build: on the cross-system question set, compare vector RAG alone, the semantic layer alone, and the full meaning layer (identity, definitions, authority, permission, retrieval).
+* Done when: the benchmark is published with one sentence per layer stating what it bought.
+
 ---
 
 ## 5. Topics to Remove or Deprioritize
@@ -392,12 +487,12 @@ Hours are calculated using the curriculum baseline formula and should be recompu
 | Project | Module Title                                         | Core Topics and Practical Labs (In Order)                                                                                                                                                                                                                                       | Hours | Capstone Deliverable and Measurable Outcome                                                                                            |
 |---------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------|
 | 1       | Measure before you believe (Finish)                  | Inspect C3 v3 failures · isolate C3 gain by cause across model, grader, and design (Day 10) · write the evidence-backed ADR (Day 11) · author and verify technical article (Day 12)                                                                                             | 7     | Published ADR and article on `rajc.work` with statistically sound attribution table across runs A, B, C, C2, and C3.                   |
-| 2       | Grounding: meaning as numbers and enterprise context | Vectors, dot product, and cosine similarity (Days 13-14 merged) · production embeddings · NumPy vector search · `recall@k` · chunking strategies · vector DB vs. NumPy · RAG in Version B · ablation: ontology glossary vs. vector RAG vs. hybrid · article                     | 20    | Benchmark report running B and C3 without oracle context, proving `recall@k` and end-to-end resolution lift from hybrid ontology RAG.  |
+| 2       | Meaning across fragmented data                       | Fragmented Acme estate and cross-system question set, written first · identity resolution · definitions, relationships, and owners in the semantic layer · structured questions through the semantic layer vs. raw schema · unstructured retrieval (embeddings, chunking, `recall@k`, hybrid lexical + vector) · authority and freshness · permission-aware retrieval · ablation and article (Module H) | 24    | Benchmark on questions that span three source systems, comparing vector RAG alone, the semantic layer alone, and the full meaning layer, with identity-match precision and recall and zero leaks on the access test. |
 | 3       | Evals that run without you                           | Calibrate LLM judge against human labels (confusion matrix, Cohen's kappa) · paired statistical comparisons · simulated multi-turn users · fault injection on broken tools · OpenTelemetry trace grading · `pytest-bdd` CI gate · drift alerts · routing signals offline: calibrated confidence, meta-confidence, sketch divergence, risk-coverage curve (Module F1 to F3) | 22    | Automated GitHub Actions CI pipeline with a calibrated LLM judge (kappa >= 0.80) that fails the build on accuracy or policy regression, plus a routing report showing error capture at a fixed review budget against random routing. |
-| 4a      | Graph engineering: a durable workflow with a human in it | Redraw C3 as an explicit graph · control flow in Agent Framework workflows · durability by hand (event log and replay), then framework checkpoints and a Durable Task backend · kill test with idempotent `issue_refund` · durable human approval with timeout · agent-native ablation (coded edge vs. model decides) · declarative YAML and generated diagram (Module E1 to E5) | 14    | C3 as a graph that survives a kill at every step boundary with zero duplicate refunds, resumes a human approval after a restart, and passes the Project 3 eval gate. |
-| 4b      | A production-shaped agent platform                   | Expose Acme tools as an MCP server with idempotency keys · live router and learning loop wired into the graph (Module F4) · thin approval UI over the durable request · Azure-native hosting on Foundry with parity benchmark and primitive map (Module E6) · agent identity and Cedar policy as code · prompt injection red-team | 14    | Cloud-deployed graph with MCP tools, an approval queue, Cedar policy guardrails, a recalibrating router, and 100% block rate on seeded injections. |
-| 5       | Inside the model: mechanics that change decisions    | Tokenization economics and multilingual/Hinglish cost (Day 48) · softmax, temperature, and consistency data (Days 46, 57) · attention scaling and long-context degradation (Day 51) · hallucination mechanisms (Day 55) · 1-notebook training overview · RAG vs. FT vs. prompt | 11    | Six executive architecture diagrams and a quantitative cost/latency calculator guiding customer build-vs-tune-vs-retrieve decisions.   |
-| 6       | The 6-week enterprise engagement rehearsal           | Customer discovery and use-case scoping · week-one security intake · threat model and enterprise security review pack · governance ledger and controls as BDD specifications (Module G) · final system ADR (Day 64) · headline-first executive readout (Day 65) · operational handover runbook, SLO dashboard, and owner matrix · recorded live rehearsal | 15    | Recorded 45-minute live customer simulation (discovery, security sign-off, exec readout, handover), a governance ledger that passes the two-minute audit drill, and a production deployment template. |
+| 4a      | Graph engineering: a durable workflow with a human in it | Redraw C3 as an explicit graph · control flow in Agent Framework workflows · durability by hand (event log and replay), then framework checkpoints and a Durable Task backend · kill test with idempotent `issue_refund` · durable human approval with timeout · agent-native ablation (coded edge vs. model decides) · generated diagram, with declarative YAML and visual authoring at awareness level (Module E1 to E5) | 13    | C3 as a graph that survives a kill at every step boundary with zero duplicate refunds, resumes a human approval after a restart, and passes the Project 3 eval gate. |
+| 4b      | A production-shaped agent platform                   | Expose Acme tools as an MCP server with idempotency keys · live router and learning loop wired into the graph (Module F4) · thin approval queue over the durable request, in the fastest tool available · Azure-native hosting on Foundry with parity benchmark and primitive map (Module E6) · agent identity and Cedar policy as code · prompt injection red-team | 13    | Cloud-deployed graph with MCP tools, an approval queue, Cedar policy guardrails, a recalibrating router, and 100% block rate on seeded injections. |
+| 5       | Inside the model: mechanics that change decisions    | Tokenization economics and multilingual/Hinglish cost (Day 48) · context limits and long-context degradation (Day 51) · where hallucination comes from (Day 55) · build vs. tune vs. retrieve decision · softmax, temperature, attention, and training as one diagram each | 6     | A cost, latency, and context calculator plus three executive diagrams that guide a customer's build-vs-tune-vs-retrieve decision. |
+| 6       | The 6-week enterprise engagement rehearsal           | Customer discovery and use-case scoping · data readiness assessment against the six questions of Module H · value hypothesis with a measured baseline · week-one security intake · threat model and enterprise security review pack · governance ledger and controls as BDD specifications (Module G) · final system ADR (Day 64) · headline-first executive readout (Day 65) · operational handover runbook, SLO dashboard, owner matrix, and a stewardship model for definitions · recorded live rehearsal | 18    | Recorded 45-minute live customer simulation (discovery, security sign-off, exec readout, handover), a data readiness scorecard and value baseline, a governance ledger that passes the two-minute audit drill, and a production deployment template. |
 
 ---
 
@@ -438,20 +533,20 @@ Complete Project 1 by Monday 16 November, synchronize after Microsoft Ignite, an
 * [ ] Sat 14 Nov: Expand Day 12 article to 800-1,200 words incorporating the attribution chart and ADR recommendation.
 * [ ] Mon 16 Nov: Edit and publish the Project 1 article on `rajc.work`. Mark Project 1 complete.
 * [ ] Tue 17 Nov: Commit the revised 103-hour plan into `learning_path.json` and regenerate trackers via `build_curriculum.py`. Review the Microsoft Ignite keynote and update the 2026 vendor table, watching Agent Framework workflows, Foundry workflows, Durable Task, and Agent 365 for changes that affect Module E.
-* [ ] Wed 18 to Thu 19 Nov: Execute Project 2 Topic 1 (vectors, dot product, and cosine similarity merged module).
-* [ ] Fri 20 to Sat 21 Nov: Execute Project 2 Topic 2 (production embeddings and dimensionality tradeoffs).
+* [ ] Wed 18 to Thu 19 Nov: Execute Project 2 Topic 1 (Module H0: build the fragmented Acme estate and write the cross-system question set before any retrieval code).
+* [ ] Fri 20 to Sat 21 Nov: Execute Project 2 Topic 2 (Module H1: identity resolution across CRM, billing, and ticketing).
 
 ### Phase 2: Execution Plan (Nov 2026 to Feb 2027)
 
 | Phase   | Target Window            | Focus Area                                                 | Milestone Exit Criteria                                                                                     |
 |---------|--------------------------|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| Phase 1 | Weeks 1-2 (Nov 9-21)     | Close Project 1 and launch Project 2 foundations           | Project 1 article live on `rajc.work`; `learning_path.json` updated; embeddings lab complete.               |
-| Phase 2 | Weeks 3-4 (Nov 23-Dec 5) | Complete Project 2 (Hybrid RAG and Ontology Grounding)     | Controlled benchmark published comparing vector RAG, ontology glossary, and hybrid grounding on C3.         |
-| Phase 3 | Weeks 5-7 (Dec 7-Dec 26) | Complete Project 3 (Automated Evals, OTel, CI Gates, Routing Signals) | Calibrated LLM judge (kappa >= 0.80), OpenTelemetry trace grading, GitHub Actions CI gate active, and risk-coverage curve for the router committed. |
-| Phase 4a | Weeks 8-9 (Dec 28-Jan 9) | Complete Project 4a (Graph Engineering)                    | C3 graph passes the kill test at every step boundary and resumes a human approval after a restart.         |
-| Phase 4b | Weeks 10-11 (Jan 11-Jan 23) | Complete Project 4b (MCP, Router, Hosting, Policy)      | Graph running on Azure AI Foundry with MCP server, approval queue, recalibrating router, and Cedar policies. |
-| Phase 5 | Week 12 (Jan 25-Jan 30)  | Complete Project 5 (Model Internals for Decision Makers)   | Six customer-ready architecture diagrams and token/latency/cost calculator published.                       |
-| Phase 6 | Weeks 13-14 (Feb 1-Feb 13) | Complete Project 6 (6-Week Engagement Rehearsal)         | Recorded live client simulation (discovery, security review, readout, handover), governance ledger, and final capstone article. |
+| Phase 1 | Weeks 1-2 (Nov 9-21)     | Close Project 1 and launch Project 2 foundations           | Project 1 article live on `rajc.work`; `learning_path.json` updated; fragmented Acme estate and identity resolution lab complete.               |
+| Phase 2 | Weeks 3-5 (Nov 23-Dec 8) | Complete Project 2 (Meaning Across Fragmented Data)        | Cross-system benchmark published comparing vector RAG, the semantic layer, and the full meaning layer.      |
+| Phase 3 | Weeks 5-7 (Dec 9-Dec 26) | Complete Project 3 (Automated Evals, OTel, CI Gates, Routing Signals) | Calibrated LLM judge (kappa >= 0.80), OpenTelemetry trace grading, GitHub Actions CI gate active, and risk-coverage curve for the router committed. |
+| Phase 4a | Weeks 8-9 (Dec 28-Jan 7) | Complete Project 4a (Graph Engineering)                    | C3 graph passes the kill test at every step boundary and resumes a human approval after a restart.         |
+| Phase 4b | Weeks 9-11 (Jan 8-Jan 19) | Complete Project 4b (MCP, Router, Hosting, Policy)      | Graph running on Azure AI Foundry with MCP server, approval queue, recalibrating router, and Cedar policies. |
+| Phase 5 | Weeks 11-12 (Jan 20-Jan 25) | Complete Project 5 (Model Internals for Decision Makers)   | Cost, latency, and context calculator and three decision diagrams published.                       |
+| Phase 6 | Weeks 12-14 (Jan 26-Feb 13) | Complete Project 6 (6-Week Engagement Rehearsal)         | Recorded live client simulation (discovery, security review, readout, handover), data readiness scorecard, governance ledger, and final capstone article. |
 
 ---
 
@@ -461,9 +556,9 @@ Complete Project 1 by Monday 16 November, synchronize after Microsoft Ignite, an
 
 | Priority Tier | Curriculum Items and Capabilities                                                                                                                                                              | Delivery Window | Hiring Signal Impact                                                                                  |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|-------------------------------------------------------------------------------------------------------|
-| Must Have     | Cause-by-cause attribution (Day 10-12) · Hybrid RAG + Ontology benchmark (Proj 2) · Calibrated LLM judge and `pytest-bdd` CI gate (Proj 3) · Durable C3 graph with kill test and durable human approval (Proj 4a) · Calibrated routing threshold with risk-coverage evidence (Proj 3, 4b) · MCP server + Managed Runtime + Cedar policy (Proj 4b) · Governance ledger (Proj 6) | Weeks 1 to 11   | Directly matches 80%+ of U.S. FDE, AI Application Engineer, and Full-Stack AI screening requirements. |
-| Should Have   | Meta-confidence and sketch divergence signals · Learning-loop dashboard and audit sampling · Declarative YAML and visual authoring · Streaming operator console beyond the thin approval queue · OpenTelemetry GenAI trace grading · Multi-turn simulated customers · Enterprise security review pack and handover runbook (Proj 6) | Weeks 6 to 14   | Differentiates Senior/Principal candidates in system design, DevSecOps reviews, and client readiness. |
-| Nice to Have  | Long-running procedural memory diagrams · Second graph runtime (LangGraph or ADK port of the same graph) · Agent Skill packaging of the grader · Multi-cloud runtime portability beyond primary cloud · Optional weekend track (`micrograd` and Tiny GPT for video channel content) | Post-Feb 2027   | Useful for content creation and specialized research loops, but non-blocking for immediate U.S. roles. |
+| Must Have     | Cause-by-cause attribution (Day 10-12) · Cross-system meaning benchmark with identity resolution, semantic layer, and permission-aware retrieval (Proj 2) · Calibrated LLM judge and `pytest-bdd` CI gate (Proj 3) · Durable C3 graph with kill test and durable human approval (Proj 4a) · Calibrated routing threshold with risk-coverage evidence (Proj 3, 4b) · MCP server + Managed Runtime + Cedar policy (Proj 4b) · Data readiness assessment, value baseline, and governance ledger (Proj 6) | Weeks 1 to 11   | Directly matches 80%+ of U.S. FDE, AI Application Engineer, and Full-Stack AI screening requirements. |
+| Should Have   | Meta-confidence signal · Learning-loop dashboard and audit sampling · Sketch divergence only if the calibrated signal leaves errors uncaught · Streaming operator console beyond the thin approval queue · OpenTelemetry GenAI trace grading · Multi-turn simulated customers · Enterprise security review pack and handover runbook (Proj 6) | Weeks 6 to 14   | Differentiates Senior/Principal candidates in system design, DevSecOps reviews, and client readiness. |
+| Nice to Have  | Long-running procedural memory diagrams · Second graph runtime (LangGraph or ADK port of the same graph) · Agent Skill packaging of the grader · Declarative YAML and visual authoring beyond awareness · Multi-cloud runtime portability beyond primary cloud · Optional weekend track (`micrograd` and Tiny GPT for video channel content) | Post-Feb 2027   | Useful for content creation and specialized research loops, but non-blocking for immediate U.S. roles. |
 
 ### Architectural Risk Mitigation
 
@@ -507,6 +602,61 @@ Total remaining work is about 103 hours, and completion moves from late January 
 
 ---
 
+## 11. Principal Engineer Review Against the Enterprise Goal (11 November 2026)
+
+### The goal and the test
+
+The goal: help an enterprise adopt AI and build meaning from data that is fragmented across the organization.
+
+An enterprise adopts AI when five conditions hold. Every hour in the plan should strengthen one of them.
+
+| Condition          | What it means                                                                 |
+|--------------------|-------------------------------------------------------------------------------|
+| 1. Meaning         | The system knows what the organization's data means, across systems           |
+| 2. Trust           | Someone can measure whether it works                                          |
+| 3. Permission      | Risk owners can say yes                                                       |
+| 4. Fit             | It sits inside real work: systems of record, workflows, and people            |
+| 5. Value and ownership | Someone can show the gain and run it after you leave                      |
+
+Three questions were asked of each topic. Which condition does this skill strengthen? Would a client pay for it inside a six-week engagement? Will it still matter when the vendor names change?
+
+### Findings
+
+1. The plan optimizes for a proxy. Its stated objective is alignment with job postings at 11 employers. The goal above is different. The two agree on trust, fit, and permission, and they diverge in Project 2.
+2. Project 2 taught similarity, not meaning. By my reading of its topic list, about 3 of its 20 hours touched business meaning and none crossed a system boundary. Vector search answers "which text resembles this question." A fragmented estate asks other things: which customer is this, what does "active" mean and who says so, which system wins, how old is this, who may see it. Module H rebuilds Project 2 around those questions.
+3. The Acme lab has one clean source. Your semantic explorer already found drift across four files of one small model. A client has the same drift across CRM, billing, and ticketing, each with its own keys and owner. Until Acme is fragmented on purpose, the evals, the router, and the governance ledger are all tested on an easier problem than the real one.
+4. Project 5 over-invested in mechanics no client asks about. The cost and latency calculator, context limits, hallucination origins, and the build-versus-tune-versus-retrieve decision earn their place. Softmax, attention, and training shrink to one diagram each.
+5. Discovery lacked the two questions that decide an engagement: is the data ready, and what is the value hypothesis with a baseline? Project 6 now includes both, plus an operating model that names who stewards the definitions after handover. Definitions with no steward drift, as your four-file model already shows.
+6. Three tool choices served the résumé more than the client: React specifically (the approval queue can be built in whatever is fastest), visual authoring (awareness is enough), and second-vendor parity.
+7. Depth should be gated by evidence. Run the sketch-divergence lab (F3) only if the calibrated signal (F1) leaves errors uncaught. Apply the same rule to any second runtime or second cloud.
+8. What holds up unchanged: Project 1, Project 3, durability and human waits (E2, E3), the calibrated router (F1, F4), and the governance spine (Module G).
+
+Market evidence agrees with finding 2, though every survey below is vendor-sponsored and should be read as directional. In a [Teradata study][teradata-stall] of 1,000 technology and data leaders, 77% said that 20% or less of their enterprise data is ready for agents to act on. In a [Modern Data Company survey][mdc-survey], 75.9% named data quality and trust among the top three barriers to production. [Verdantix][verdantix-ready] frames the requirement as information that is authoritative, contextualized, permitted, and traceable, which is Module H's list.
+
+### Reallocation (total unchanged at 103 hours)
+
+| Project | Before | After | Change                                                                                         |
+|---------|--------|-------|------------------------------------------------------------------------------------------------|
+| 1       | 7      | 7     | None                                                                                           |
+| 2       | 20     | 24    | Rebuilt as Module H. Vector mechanics shrink to 6 hours; 18 hours go to cross-system meaning   |
+| 3       | 22     | 22    | None                                                                                           |
+| 4a      | 14     | 13    | Visual authoring drops to awareness                                                            |
+| 4b      | 14     | 13    | Approval queue built in the fastest tool available                                             |
+| 5       | 11     | 6     | Keep the four decision topics; one diagram each for the rest                                   |
+| 6       | 15     | 18    | Add data readiness assessment, value baseline, and stewardship operating model                 |
+| Total   | 103    | 103   |                                                                                                |
+
+### A rule for future additions
+
+Write each new topic as a capability sentence that survives a vendor rename, then name the vendor as the instance. "Resume a workflow after a crash without repeating a side effect" is a skill. "Use the Durable Task Scheduler" is where you practice it this quarter.
+
+### Open questions
+
+* Which stack do your actual engagements run on? The plan leans on Azure. If your clients are on a hybrid estate, keep the capability sentences and swap the instance.
+* Can a real, anonymized schema from a past engagement shape the H0 fixture? Three invented systems teach the pattern. A real schema teaches the mess.
+
+---
+
 ## Sources
 
 ### Repository Baseline (Inspected 9 November 2026)
@@ -529,6 +679,11 @@ Total remaining work is about 103 hours, and completion moves from late January 
 * Durability critique: [Still Not Durable, Diagrid][diagrid-durable]
 * Routing research: [Toward Human-AI Complementarity Across Diverse Tasks][arxiv-complementarity] · [Self-consistency, agreement routing, and the self-reported confidence result][arxiv-frugal] · [Reasoning-trace disagreement as a routing signal][arxiv-disagreement]
 * Regulation: [EU AI Act Omnibus agreement, Gibson Dunn][eu-omnibus]
+
+### Data Meaning and Enterprise Readiness (Added 11 November 2026)
+
+* Readiness surveys (vendor-sponsored, directional): [Teradata, why enterprise AI stalls][teradata-stall] · [Modern Data Company survey, via IT Brief][mdc-survey] · [Verdantix, data readiness for AI agents][verdantix-ready]
+* Semantic layer evidence: [dbt Labs, semantic layer vs. text-to-SQL 2026 benchmark][dbt-bench] · [Atlan summary of the benchmark][atlan-t2s]
 
 ### U.S. Market and FDE Hiring Signals
 
@@ -567,3 +722,8 @@ Total remaining work is about 103 hours, and completion moves from late January 
 [arxiv-frugal]: https://arxiv.org/pdf/2604.11104
 [arxiv-disagreement]: https://arxiv.org/pdf/2606.04223
 [eu-omnibus]: https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines/
+[teradata-stall]: https://www.teradata.com/insights/ai-and-machine-learning/why-enterprise-ai-stalls-before-it-scales
+[mdc-survey]: https://itbrief.co.uk/story/ai-agents-outpace-trust-in-enterprise-data-survey-finds
+[verdantix-ready]: https://www.verdantix.com/insights/report/market-trends--data-readiness-for-ai-agents
+[dbt-bench]: https://docs.getdbt.com/blog/semantic-layer-vs-text-to-sql-2026
+[atlan-t2s]: https://atlan.com/know/ai-agent/data-for-ai/text-to-sql-for-enterprise/
