@@ -40,7 +40,8 @@ The daily drop, deadlines and this table are managed by
 | 10 | 2026-11-09 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 8) |  | ❌ missed |
 | 10 | 2026-11-10 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 9) |  | ❌ missed |
 | 10 | 2026-11-11 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 10) |  | ❌ missed |
-| 10 | 2026-11-12 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 11) |  | ⏳ open |
+| 10 | 2026-11-12 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 11) |  | ❌ missed |
+| 10 | 2026-11-13 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 12) |  | ⏳ open |
 
 **9 of 66 topics shipped.**
 <!-- /learn:progress -->
