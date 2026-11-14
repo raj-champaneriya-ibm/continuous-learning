@@ -1,14 +1,21 @@
 # FDE First Principles
 
-A public learning log. Every morning one topic drops at 06:00 (IST). Within 24 hours I learn it, build it
-(a notebook, code or an Excalidraw diagram) and explain it on video. The goal: understand AI systems from first
-principles, the way a Forward Deployed Engineer needs to: measure before believing, know what is inside the
-model, and recommend the simplest design the evidence supports.
+A public learning log. A topic drops in the morning at 06:00 (IST) and gets one to three mornings, depending on
+its size. I learn it, build it (a notebook, code or an Excalidraw diagram) and explain it on video. Each project
+ends with an article on my site. The goal: build and ship AI systems the way a Forward Deployed Engineer needs
+to: measure before believing, ground agents in the customer's context, make the evals run without me, ship a
+production-shaped agent, know what inside the model changes a decision, and hand it over.
 
-Six projects, 59 daily topics: 1. Measure before you believe, 2. Meaning as numbers, 3. Learn a formula from data, 4. Backprop by hand (micrograd), 5. Tiny GPT, 6. Back to the customer.
+Six projects, 53 topics: 1. Measure before you believe, 2. Grounding: meaning as numbers and enterprise context,
+3. Evals that run without you, 4. A production-shaped full-stack agent, 5. Inside the model: mechanics that
+change decisions, 6. The 6-week enterprise engagement rehearsal.
 
-Maths shows up only on the day a project needs it. Everything runs on my own Mac (Ollama), so it costs nothing.
-The daily drop, deadlines and this table are managed by
+The plan follows the FDE curriculum review of November 2026.
+The from-scratch builds (micrograd, makemore and a tiny GPT) moved to an optional, unscheduled track.
+
+Maths shows up only on the day a project needs it. Most work runs on my own Mac (Ollama) for free; from project 3
+each project may use one capped cloud budget (a managed runtime, a cloud evaluator, a frontier model run). The
+drops, deadlines and this table are managed by
 [fde-coach learn](https://github.com/rajchampaneriya/fde-impromptu-coach).
 
 ## Progress
@@ -44,5 +51,5 @@ The daily drop, deadlines and this table are managed by
 | 10 | 2026-11-13 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 12) |  | ❌ missed |
 | 10 | 2026-11-14 | [Read the failures, not the averages](1-measure-before-you-believe/10-read-the-failures/README.md) (attempt 13) |  | ⏳ open |
 
-**9 of 66 topics shipped.**
+**9 of 53 topics shipped.**
 <!-- /learn:progress -->
