@@ -20,6 +20,21 @@ Feature: The area outage is in scope only when the customer reports that their s
       | AC1008   | Hadapsar mein kal raat se net band hai. Paisa wapas milega?                                | in scope     | shows         | OUT-HADA-0417 | p16h: Hinglish                        |
       | AC1001   | सकाळपासून इंटरनेट बंद आहे.                                                                  | in scope     | shows         | OUT-KOTH-1021 | r01: Marathi                          |
 
+  # Round 3 (v4 c13, c15): a dead line with no outage in the area is the customer's own line. The labels
+  # (c13, c15, r45, p15a) want the first checks and an offer of a technician, without a hand-off.
+  Scenario Outline: A dead line with no outage in the area points C3 to the first checks
+    Given customer <customer> writes "<message>"
+    When the envelope is built
+    Then the outage is in scope
+    And the envelope shows "KB07"
+    And the envelope shows "KB08"
+    And the envelope doesn't show "OUT-"
+
+    Examples:
+      | customer | message                                                                                                                | why                     |
+      | AC1009   | My internet stopped working about an hour ago and I have to submit an assignment tonight. Is there an outage in Kharadi? | c13: no Kharadi outage  |
+      | AC1006   | Internet dead since morning. Ye kya bakwas hai, Pro plan ke paise leke service zero!!                                  | c15: no Baner outage    |
+
   Scenario: The customer-record tools withhold the outage when it is out of scope
     Given customer AC1008 writes "The technician who came about my slow speed was rude and asked for ₹500 cash. Is that allowed?"
     And the model looks up the customer, then replies "Hi Imran, technician visits are free, and a colleague will follow up."

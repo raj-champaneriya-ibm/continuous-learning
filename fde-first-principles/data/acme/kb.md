@@ -16,11 +16,11 @@ When an area has an outage, share the outage ticket ID and the current status. N
 # KB06 · Outage credit
 If an outage lasts more than 24 hours, a credit of one day's charge for every day without service is added to the next bill automatically. The customer does not need to ask for it.
 
-# KB07 · Slow speed: first checks
-Ask the customer to restart the router (switch it off for 30 seconds), then test the speed on a cable connection at fast.com. For Wi-Fi, move closer to the router. Evening speeds on Wi-Fi can be lower when many devices are connected.
+# KB07 · Slow speed or no internet: first checks
+If the internet is slow, or down with no outage on record in the customer's area, ask the customer to restart the router (switch it off for 30 seconds) and check that the cables are firmly plugged in. For slow speed, then test the speed on a cable connection at fast.com. For Wi-Fi, move closer to the router. Evening speeds on Wi-Fi can be lower when many devices are connected.
 
 # KB08 · Technician visits
-If the speed on a cable connection is below half of the plan speed after a restart, book a technician visit. Visits are free and happen within 2 working days.
+If the speed on a cable connection is below half of the plan speed after a restart, book a technician visit. If the internet is still down after a restart and there is no outage in the area, offer one: the customer replies and a visit is booked. Visits are free and happen within 2 working days.
 
 # KB09 · Plan upgrades and downgrades
 Plans: Basic 100 Mbps for ₹699 per month, Plus 300 Mbps for ₹999 per month, Pro 1 Gbps for ₹1,499 per month. Upgrades are active within 1 hour and the difference is charged pro-rata on the next bill. Downgrades start from the next billing cycle.
